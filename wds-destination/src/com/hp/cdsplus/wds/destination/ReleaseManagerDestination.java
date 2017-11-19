@@ -322,7 +322,6 @@ public class ReleaseManagerDestination implements IDestination {
 
 	public boolean remove(String location, Templates sTemplates)
 			throws DestinationException {
-		// TODO Auto-generated method stub
 		return false;
 	}
 }
