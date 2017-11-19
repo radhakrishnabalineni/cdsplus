@@ -1,0 +1,514 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" xmlns:proj="http://www.hp.com/cdsplus" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <xs:import namespace="http://www.hp.com/cdsplus" schemaLocation="productsetup_proj.xsd"/>
+  <xs:import namespace="http://www.w3.org/1999/xlink" schemaLocation="common_xlink.xsd"/>
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="common_xml.xsd"/>
+  <xs:element name="result">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="proj:ref" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:attribute name="considered" use="required" type="xs:integer"/>
+      <xs:attribute name="count" use="required" type="xs:integer"/>
+      <xs:attribute ref="xml:base" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="content">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="document"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="projectref">
+    <xs:complexType>
+      <xs:attribute ref="xlink:type" use="required"/>
+      <xs:attribute ref="xlink:href" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="document">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="action"/>
+		<xs:element ref="company_info"/>
+        <xs:element ref="r_object_id"/>
+        <xs:element ref="priority"/>
+        <xs:element ref="products"/>
+        <xs:element ref="product_types"/>
+        <xs:element ref="product_series"/>
+        <xs:element ref="product_big_series"/>
+        <xs:element ref="support_name_oids"/>        
+        <xs:element ref="product_support_categories"/>
+        <xs:element ref="product_support_subcategories"/>
+        <xs:element ref="product_names"/>
+        <xs:element ref="product_number_names"/>
+	    <xs:element ref="product_numbers"/>
+        <xs:element ref="product_lines"/>
+        <xs:element ref="product_marketing_categories"/>
+        <xs:element ref="product_marketing_subcategories"/>
+        <xs:element ref="product_levels"/>
+        <xs:element ref="document_type"/>
+        <xs:element ref="version_label"/>
+        <xs:element ref="regions"/>
+        <xs:element ref="countries"/>
+        <xs:element ref="authors"/>
+        <xs:element ref="search_keywords"/>
+        <xs:element ref="content_type"/>
+        <xs:element ref="language_codes"/>
+        <xs:element ref="language_label"/>
+        <xs:element ref="full_title"/>
+        <xs:element ref="property_update_date"/>
+        <xs:element ref="content_update_date"/>
+        <xs:element ref="orientation"/>
+        <xs:element ref="cmg_acronym"/>
+        <xs:element ref="planned_public_date"/>
+        <xs:element ref="master_object_name"/>
+        <xs:element ref="cmg_feedback_address"/>
+        <xs:element ref="document_type_details"/>
+        <xs:element ref="audiences"/>
+        <xs:element ref="extra_properties"/>
+        <xs:element ref="components"/>
+        <xs:element ref="marketing_teams"/>
+        <xs:element ref="origin_countries"/>
+        <xs:element ref="product_markets"/>
+        <xs:element ref="associations"/>
+        <xs:element ref="has_valid_products"/>
+        <xs:element ref="bundle_dimensions_text"/>
+        <xs:element ref="collection_valid_flag"/>
+        <xs:element ref="color_page_yield_count"/>
+        <xs:element ref="information_source"/>
+        <xs:element ref="key_selling_points"/>
+        <xs:element ref="master_carton_inch_depth"/>
+        <xs:element ref="master_carton_inch_height"/>
+        <xs:element ref="master_carton_inch_width"/>
+        <xs:element ref="master_carton_pound_weight"/>
+        <xs:element ref="master_carton_product_count"/>
+        <xs:element ref="monochrome_page_yield_count"/>
+        <xs:element ref="packaged_inch_depth"/>
+        <xs:element ref="packaged_inch_height"/>
+        <xs:element ref="packaged_inch_width"/>
+        <xs:element ref="packaged_pound_weight"/>
+        <xs:element ref="pallet_cartons_per_layer"/>
+        <xs:element ref="pallet_inch_depth"/>
+        <xs:element ref="pallet_inch_height"/>
+        <xs:element ref="pallet_inch_width"/>
+        <xs:element ref="pallet_layer_count"/>
+        <xs:element ref="pallet_pound_weight"/>
+        <xs:element ref="pallet_product_count"/>
+        <xs:element ref="pallet_products_per_layer"/>
+        <xs:element ref="product_compatibility"/>
+        <xs:element ref="technology_type"/>
+        <xs:element ref="unpackaged_inch_depth"/>
+        <xs:element ref="unpackaged_inch_height"/>
+        <xs:element ref="unpackaged_inch_width"/>
+        <xs:element ref="unpackaged_pound_weight"/>
+        <xs:element ref="ad_embargo_date"/>
+        <xs:element ref="col_id"/>
+        <xs:element ref="confidential_comment"/>
+        <xs:element ref="content_history"/>
+        <xs:element ref="cpl_date"/>
+        <xs:element ref="creation_date"/>
+        <xs:element ref="currency"/>
+        <xs:element ref="description"/>
+        <xs:element ref="disclosure_level"/>
+        <xs:element ref="content_version"/>
+        <xs:element ref="inner_pack_number"/>
+        <xs:element ref="document_class"/>
+        <xs:element ref="language_code"/>
+        <xs:element ref="master_carton_discount"/>
+        <xs:element ref="master_carton_list_price"/>
+        <xs:element ref="master_carton_net_price"/>
+        <xs:element ref="master_carton_number"/>
+        <xs:element ref="miscellaneous_comment"/>
+        <xs:element ref="object_name"/>
+        <xs:element ref="order_date"/>
+        <xs:element ref="original_docid"/>
+        <xs:element ref="original_filename"/>
+        <xs:element ref="original_system"/>
+        <xs:element ref="package_content"/>
+        <xs:element ref="pallet_discount"/>
+        <xs:element ref="pallet_list_price"/>
+        <xs:element ref="pallet_net_price"/>
+        <xs:element ref="pallet_number"/>
+        <xs:element ref="pr_embargo_date"/>
+        <xs:element ref="product_discount_1"/>
+        <xs:element ref="product_discount_2"/>
+        <xs:element ref="product_discount_quantity"/>
+        <xs:element ref="product_est_street_price"/>
+        <xs:element ref="product_list_price"/>
+        <xs:element ref="product_map_flag"/>
+        <xs:element ref="product_map_price"/>
+        <xs:element ref="product_min_order_quantity"/>
+        <xs:element ref="product_net_price_1"/>
+        <xs:element ref="product_net_price_2"/>
+        <xs:element ref="product_option"/>
+        <xs:element ref="product_shelf_life"/>
+        <xs:element ref="product_tariff_code"/>
+        <xs:element ref="product_warranty_summary"/>
+        <xs:element ref="replaced_product"/>
+        <xs:element ref="review_date"/>
+        <xs:element ref="ship_date"/>
+        <xs:element ref="show_as_new_duration"/>
+        <xs:element ref="upc_number"/>
+        <xs:element ref="valid_flag"/>
+        <xs:element ref="accounts"/>
+      </xs:sequence>
+      <xs:attribute ref="xml:base" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="action" type="xs:string"/>
+  <xs:element name="r_object_id" type="xs:NMTOKEN"/>
+  <xs:element name="company_info" type="xs:string"/>
+  <xs:element name="priority" type="xs:integer"/>
+  <xs:element name="products">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="product"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+ <xs:element name="product_types">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="product"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="product_series">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="product"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="product_big_series">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="product"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="support_name_oids">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="product"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="product_support_categories">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="product"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="product_support_subcategories">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="product"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="product_names">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="product"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="product_number_names">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="product"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="product_numbers">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="product"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="product_lines">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="product"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="product_marketing_categories">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="product"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="product_marketing_subcategories">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="product"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="product">
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="projectref"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+<xs:element name="product_levels">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="product_level"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="product_level" type="xs:string"/>
+
+  <xs:element name="document_type" type="xs:string"/>
+  <xs:element name="version_label" type="xs:string"/>
+  <xs:element name="regions">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="region"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="region" type="xs:string"/>
+<xs:element name="countries">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="country"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="country" type="xs:string"/>
+  <xs:element name="authors">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="author"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="author" type="xs:string"/>
+  <xs:element name="search_keywords">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="search_keyword"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="search_keyword" type="xs:NCName"/>
+  <xs:element name="content_type" type="xs:string"/>
+ <xs:element name="language_codes">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="language_code" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+  
+	<!-- <xs:element name="language_code">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="language_label" use="required" type="xs:string"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element> -->
+  
+  <xs:element name="language_label" type="xs:string"/>
+  <xs:element name="full_title">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:NCName">
+          <xs:attribute name="language_code" use="required" type="xs:NCName"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="property_update_date" type="xs:dateTime" nillable="true"/>
+  <xs:element name="content_update_date" type="xs:dateTime" nillable="true"/>
+  <xs:element name="orientation" type="xs:string"/>
+  <xs:element name="cmg_acronym" type="xs:string"/>
+  <xs:element name="planned_public_date" type="xs:dateTime" nillable="true"/>
+  <xs:element name="master_object_name" type="xs:NCName"/>
+  <xs:element name="cmg_feedback_address" type="xs:string"/>
+  <xs:element name="document_type_details">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="audiences">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="audience"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="audience">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="audience_name"/>
+        <xs:element ref="audience_release_date"/>
+        <xs:element ref="audience_expiry_date"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="audience_name" type="xs:string"/>
+  <xs:element name="audience_release_date" type="xs:dateTime" nillable="true"/>
+  <xs:element name="audience_expiry_date" type="xs:dateTime" nillable="true"/>
+  <xs:element name="extra_properties">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="extra_property" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="extra_property">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="extra_property_name"/>
+        <xs:element ref="extra_property_values"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="extra_property_values">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="extra_property_value"  maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="extra_property_value" type="xs:string"/>
+  <xs:element name="extra_property_name" type="xs:string"/>
+    <xs:element name="components">
+      <xs:complexType>
+        <xs:sequence>
+          <xs:element ref="component" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="component" type="xs:string"/>
+    <xs:element name="file_name">
+      <xs:complexType mixed="true">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" ref="projectref"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:element>
+   <xs:element name="marketing_teams">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="marketing_team"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="marketing_team" type="xs:string"/>
+  <xs:element name="product_markets">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="product_market"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="product_market" type="xs:NCName"/>
+  <xs:element name="associations">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="has_valid_products" type="xs:boolean"/>
+  <xs:element name="bundle_dimensions_text" type="xs:NCName"/>
+  <xs:element name="collection_valid_flag" type="xs:boolean"/>
+  <xs:element name="color_page_yield_count" type="xs:string"/>
+  <xs:element name="information_source" type="xs:NCName"/>
+  <xs:element name="key_selling_points" type="xs:NCName"/>
+  <xs:element name="master_carton_inch_depth" type="xs:string"/>
+  <xs:element name="master_carton_inch_height" type="xs:string"/>
+  <xs:element name="master_carton_inch_width" type="xs:string"/>
+  <xs:element name="master_carton_pound_weight" type="xs:string"/>
+  <xs:element name="master_carton_product_count" type="xs:string"/>
+  <xs:element name="monochrome_page_yield_count" type="xs:string"/>
+  <xs:element name="packaged_inch_depth" type="xs:string"/>
+  <xs:element name="packaged_inch_height" type="xs:string"/>
+  <xs:element name="packaged_inch_width" type="xs:string"/>
+  <xs:element name="packaged_pound_weight" type="xs:string"/>
+  <xs:element name="pallet_cartons_per_layer" type="xs:string"/>
+  <xs:element name="pallet_inch_depth" type="xs:string"/>
+  <xs:element name="pallet_inch_height" type="xs:string"/>
+  <xs:element name="pallet_inch_width" type="xs:string"/>
+  <xs:element name="pallet_layer_count" type="xs:string"/>
+  <xs:element name="pallet_pound_weight" type="xs:string"/>
+  <xs:element name="pallet_product_count" type="xs:string"/>
+  <xs:element name="pallet_products_per_layer" type="xs:string"/>
+  <xs:element name="product_compatibility" type="xs:NCName"/>
+  <xs:element name="technology_type" type="xs:NCName"/>
+  <xs:element name="unpackaged_inch_depth" type="xs:string"/>
+  <xs:element name="unpackaged_inch_height" type="xs:string"/>
+  <xs:element name="unpackaged_inch_width" type="xs:string"/>
+  <xs:element name="unpackaged_pound_weight" type="xs:string"/>
+  <xs:element name="ad_embargo_date" type="xs:dateTime" nillable="true"/>
+  <xs:element name="col_id" type="xs:NMTOKEN"/>
+  <xs:element name="confidential_comment" type="xs:NCName"/>
+  <xs:element name="content_history" type="xs:NCName"/>
+  <xs:element name="cpl_date" type="xs:dateTime" nillable="true"/>
+  <xs:element name="creation_date" type="xs:dateTime" nillable="true"/>
+  <xs:element name="currency" type="xs:NCName"/>
+  <xs:element name="description" type="xs:NCName"/>
+  <xs:element name="disclosure_level" type="xs:string"/>
+  <xs:element name="content_version" type="xs:string"/>
+  <xs:element name="inner_pack_number" type="xs:integer"/>
+  <xs:element name="document_class" type="xs:NCName"/>
+  <xs:element name="language_code" type="xs:NCName"/>
+  <xs:element name="master_carton_discount" type="xs:string"/>
+  <xs:element name="master_carton_list_price" type="xs:integer"/>
+  <xs:element name="master_carton_net_price" type="xs:string"/>
+  <xs:element name="master_carton_number" type="xs:integer"/>
+  <xs:element name="miscellaneous_comment" type="xs:NCName"/>
+  <xs:element name="object_name" type="xs:NCName"/>
+  <xs:element name="order_date" type="xs:dateTime" nillable="true"/>
+  <xs:element name="original_docid" type="xs:NCName"/>
+  <xs:element name="original_filename" type="xs:NCName"/>
+  <xs:element name="original_system" type="xs:string"/>
+  <xs:element name="package_content" type="xs:NCName"/>
+  <xs:element name="pallet_discount" type="xs:string"/>
+  <xs:element name="pallet_list_price" type="xs:string"/>
+  <xs:element name="pallet_net_price" type="xs:string"/>
+  <xs:element name="pallet_number" type="xs:string"/>
+  <xs:element name="pr_embargo_date" type="xs:dateTime" nillable="true"/>
+  <xs:element name="product_discount_1" type="xs:string"/>
+  <xs:element name="product_discount_2" type="xs:string"/>
+  <xs:element name="product_discount_quantity" type="xs:string"/>
+  <xs:element name="product_est_street_price" type="xs:string"/>
+  <xs:element name="product_list_price" type="xs:string"/>
+  <xs:element name="product_map_flag" type="xs:boolean"/>
+  <xs:element name="product_map_price" type="xs:string"/>
+  <xs:element name="product_min_order_quantity" type="xs:string"/>
+  <xs:element name="product_net_price_1" type="xs:string"/>
+  <xs:element name="product_net_price_2" type="xs:string"/>
+  <xs:element name="product_option" type="xs:NCName"/>
+  <xs:element name="product_shelf_life" type="xs:NCName"/>
+  <xs:element name="product_tariff_code" type="xs:NCName"/>
+  <xs:element name="product_warranty_summary" type="xs:NCName"/>
+  <xs:element name="replaced_product" type="xs:NCName"/>
+  <xs:element name="review_date" type="xs:dateTime" nillable="true"/>
+  <xs:element name="ship_date" type="xs:dateTime" nillable="true"/>
+  <xs:element name="show_as_new_duration" type="xs:string"/>
+  <xs:element name="upc_number" type="xs:string"/>
+  <xs:element name="valid_flag" type="xs:boolean"/>
+  <xs:element name="origin_countries">
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="origin_countries"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="accounts">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="account" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="account" type="xs:string"/>
+</xs:schema>

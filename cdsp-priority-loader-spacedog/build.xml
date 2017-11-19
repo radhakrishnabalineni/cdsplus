@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+====================================================================== 
+	Sep 13, 2012 2:22:33 PM castor description kashyaks 
+======================================================================
+-->
+<project name="cdsp-priority-loader-spacedog" default="all" basedir=".">
+    <property environment="env" />
+	
+	<property name="src.dir" value="${basedir}/src" />
+	<property name="conf.dir" value="${basedir}/config" />
+
+	<property name="build.dir" value="${basedir}/build" />
+	<property name="build.class.dir" value="${build.dir}/classes" />
+
+	<property name="scripts.dir" value="${basedir}/scripts" />
+
+	<property name="logs.dir" value="${basedir}/logs" />
+	<property name="dist.dir" value="${env.DIST_DIR}" />
+
+	<path id="java.class.path">		
+		<fileset dir="${dist.dir}">
+			<include name="log4j-1.2.14.jar" />
+			<include name="mail.jar" />
+		</fileset>	
+	</path>
+	
+	<!-- ================================= 
+          target: all              
+         ================================= -->
+    <target name="all" depends="clean, init, compile" description="default target to do a clean build"/>
+        
+	<!-- ================================= 
+          target: clean              
+         ================================= -->
+	<target name="clean" description="deletes the build and dist directories">
+		<delete file="${dist.dir}/cdsp-priority-loader.jar" />
+		<delete dir="${build.dir}" />
+	</target>
+
+	<!-- ================================= 
+          target: init              
+         ================================= -->
+	<target name="init" description="creates dist and build dir">
+		<mkdir dir="${build.class.dir}" />		
+	</target>
+
+	<!-- ================================= 
+		  target: compile
+		 ================================= -->
+
+	<target name="compile" description="description">
+
+		<javac includeantruntime="true" srcdir="${src.dir}" destdir="${build.class.dir}">
+			<classpath refid="java.class.path" />
+		</javac>
+		<jar destfile="${dist.dir}/cdsp-priority-loader.jar">
+			<fileset dir="${build.class.dir}">
+				<include name="com/hp/loader/**/*.*" />
+			</fileset>
+		</jar>
+	</target>	
+</project>

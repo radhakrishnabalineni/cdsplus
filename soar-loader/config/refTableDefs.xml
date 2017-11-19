@@ -1,0 +1,610 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refTableDefs>
+	<refFile fileElemName="soar-reference-data-feed" schema="soar-reference-data-feed-vB3.xsd">
+		<refTable tableType="SimpleReferenceTable" tableName="soar_compression_utilities"
+			tableElemName="compression-utilities" sortColumnName="compression_utility_oid">
+			<refList listName="compression_utilties" valueColumnName="compression_utility_oid"
+				labelColumnName="compression_utility" />
+			<element name="compression-utility" fieldValueName="compression_utility">
+				<attribute name="oid" fieldValueName="compression_utility_oid" />
+			</element>
+		</refTable>
+
+		<refTable tableType="SimpleReferenceTable" tableName="soar_currencies"
+			tableElemName="currencies" sortColumnName="currency_code">
+			<refList listName="currencies" valueColumnName="currency_code"
+				labelColumnName="currency_description" />
+			<element name="currency">
+				<element name="currency-code" fieldValueName="currency_code" />
+				<element name="currency-description" fieldValueName="currency_description" />
+			</element>
+		</refTable>
+
+		<refTable tableType="SimpleReferenceTable" tableName="soar_project_names"
+			tableElemName="project-names" sortColumnName="project_oid">
+			<refList listName="projects" valueColumnName="project_oid"
+				labelColumnName="project_name" />
+			<element name="project-name" fieldValueName="project_name">
+				<attribute name="oid" fieldValueName="project_oid" />
+				<attribute name="description" fieldValueName="project_description" />
+			</element>
+		</refTable>
+
+		<refTable tableType="SimpleReferenceTable" tableName="soar_order_links"
+			tableElemName="order-links" sortColumnName="order_link_oid">
+			<refList listName="order_links" valueColumnName="order_link_oid"
+				labelColumnName="order_link_url" />
+			<element name="order-link" fieldValueName="order_link_url">
+				<attribute name="oid" fieldValueName="order_link_oid" />
+				<attribute name="name" fieldValueName="order_link_name" />
+			</element>
+		</refTable>
+
+		<refTable tableType="SimpleReferenceTable" tableName="soar_bom_checksums"
+			tableElemName="bom-checksum-types" sortColumnName="checksum_type_oid">
+			<refList listName="bom_checksums" valueColumnName="checksum_type_oid"
+				labelColumnName="checksum_type" />
+			<element name="bom-checksum-type" fieldValueName="checksum_type">
+				<attribute name="oid" fieldValueName="checksum_type_oid" />
+			</element>
+		</refTable>
+
+		<refTable tableType="SimpleReferenceTable" tableName="soar_bom_levels"
+			tableElemName="bom-levels" sortColumnName="level_oid">
+			<refList listName="bom_levels" valueColumnName="level_oid"
+				labelColumnName="level_name" />
+			<element name="bom-level" fieldValueName="level_name">
+				<attribute name="oid" fieldValueName="level_oid" />
+				<attribute name="description" fieldValueName="level_description" />
+			</element>
+		</refTable>
+
+		<refTable tableType="DisclosureLevelReferenceTable"
+			tableName="soar_disclosure_levels" tableElemName="disclosure-levels"
+			sortColumnName="disclosure_level_oid">
+			<dependants tables="soar_document_types" />
+			<refList listName="disclosure_levels" valueColumnName="disclosure_level_oid"
+				labelColumnName="disclosure_level" />
+			<element name="disclosure-level" fieldValueName="disclosure_level">
+				<attribute name="oid" fieldValueName="disclosure_level_oid" />
+			</element>
+		</refTable>
+
+		<refTable tableType="NonSavedReferenceTable" tableName="soar_doctype_disclosurelevel"
+			sortColumnName="document_type_oid">
+			<dependants tables="soar_document_types" />
+		</refTable>
+
+    <refTable tableType="NonSavedReferenceTable" tableName="soar_document_types_tran"
+      sortColumnName="tran_language_oid">
+      <dependants tables="soar_document_types" />
+    </refTable>
+
+		<refTable tableType="DocumentTypesReferenceTable" tableName="soar_document_types"
+			tableElemName="document-types" sortColumnName="document_type_oid">
+			<refList listName="document_types" valueColumnName="document_type_oid"
+				labelColumnName="document_type" />
+      <element name="document-type">
+        <attribute name="oid" fieldValueName="document_type_oid"/>
+        <element name="doc-type" fieldValueName="document_type"/>
+        <element name="doc-type-definition" fieldValueName="document_type_definition"/>
+        <element type="nonEmpty" name="doc-type-translations">
+         <tableRef tableName="soar_document_types_tran" primaryKey="document_type_oid">
+           <fieldAs fieldName="document_type" asValue="document_type_tran" />
+         </tableRef>           
+         <tableRef tableName="soar_languages" primaryKey="language_oid" foreignKey="tran_language_oid"/>
+         <element name="doc-type-translation" fieldValueName="document_type_tran">
+           <attribute name="tran-lang-oid" fieldValueName="tran_language_oid" />
+           <attribute name="tran-lang-iso-code"	fieldValueName="language_iso" />
+           <attribute type="nonNil" name="tran-character-set" fieldValueName="character_set" />
+         </element>
+        </element>
+        <element type="nonEmpty" name="doc-type-disclosure-levels">
+          <tableRef tableName="soar_doctype_disclosurelevel" primaryKey="document_type_oid" />
+          <tableRef tableName="soar_disclosure_levels" primaryKey="disclosure_level_oid" foreignKey="disclosure_level_oid" />
+          <element name="doc-type-disclosure-level" fieldValueName="disclosure_level">
+            <attribute name="oid" fieldValueName="disclosure_level_oid"/>             
+          </element>
+        </element>
+      </element>
+		</refTable>
+    
+    <refTable tableType="NonSavedReferenceTable" tableName="soar_environments_tran"
+      sortColumnName="environments_details_oid">
+      <dependants tables="soar_environments" />
+    </refTable>
+
+    <refTable tableType="NonSavedReferenceTable" tableName="soar_min_service_releases"
+      sortColumnName="minimum_service_release_oid">
+      <refList listName="min_service_releases" valueColumnName="minimum_service_release_oid"
+        labelColumnName="minimum_service_release" />
+      <dependants tables="soar_environments"/>
+    </refTable>
+
+    <refTable tableType="NonSavedReferenceTable" tableName="soar_min_service_releases_tran"
+      sortColumnName="min_service_release_oid">
+      <dependants tables="soar_environments" />
+    </refTable>
+
+    <refTable tableType="NonSavedReferenceTable" tableName="soar_env_min_service_releases"
+      sortColumnName="minimum_service_release_oid">
+      <dependants tables="soar_environments" />
+    </refTable>
+
+    <refTable tableType="SimpleReferenceTable" tableName="soar_environments"
+      tableElemName="environments" sortColumnName="environments, date_available DESC" where="usage like '%SOAR%'">
+      <refList listName="environments" valueColumnName="environments_details_oid"
+        labelColumnName="environments" />
+      <refList listName="environments_details" valueColumnName="environments_details_oid"
+        labelColumnName="environments_details" />
+      <refList listName="environments_details_short" valueColumnName="environments_details_oid"
+        labelColumnName="environments_details_short" />
+      <refList listName="environments_mappings" valueColumnName="environments_details_oid"
+        labelColumnName="pm_oid" />
+      <fieldAs fieldName="environments_details_oid" asValue="environment_detail_oid"/>
+      <element name="environment">
+        <element name="environment-detail" fieldValueName="environments_details">
+          <attribute name="oid" fieldValueName="environment_detail_oid"/>
+          <attribute name="environment-base" fieldValueName="environments"/>
+          <attribute type="date" name="date-available" fieldValueName="date_available"/>
+          <attribute name="toolset" fieldValueName="toolset"/>
+          <attribute type="boolean" name="active" fieldValueName="active" />     
+          <element type="nonEmpty" name="env-detl-translations">
+            <tableRef tableName="soar_environments_tran" primaryKey="environments_details_oid">
+              <fieldAs fieldName="environments_details_oid" asValue="environment_detail_oid"/>
+            </tableRef>
+            <tableRef tableName="soar_languages" primaryKey="language_oid" foreignKey="tran_language_oid"/>
+            <element name="env-detl-translation" fieldValueName="environments_details">
+              <attribute name="tran-lang-oid" fieldValueName="tran_language_oid" />
+              <attribute name="tran-lang-iso-code" fieldValueName="language_iso" />
+              <attribute type="nonNil" name="tran-character-set" fieldValueName="chararacter_set" />
+            </element>
+          </element>       
+        </element>
+        <element type="nonEmpty" name="minimum-service-releases">
+          <tableRef tableName="soar_env_min_service_releases" primaryKey="environment_detail_oid"/>
+          <tableRef tableName="soar_min_service_releases" primaryKey="minimum_service_release_oid" foreignKey="minimum_service_release_oid" reportMissing="false"/>
+          <element type="nonEmpty" name="minimum-service-release">
+            <element type="nonEmpty" name="min-service-release" fieldValueName="minimum_service_release">
+              <attribute type="nonNil" name="oid" fieldValueName="minimum_service_release_oid" />                
+            </element>
+            <element type="nonEmpty" name="min-service-release-translations">
+              <tableRef tableName="soar_min_service_releases_tran" primaryKey="min_service_release_oid"/>
+              <tableRef tableName="soar_languages" primaryKey="language_oid" foreignKey="tran_language_oid"/>
+              <element name="min-service-release-translation" fieldValueName="minimum_service_release">
+                <attribute name="tran-lang-oid" fieldValueName="tran_language_oid" />
+                <attribute name="tran-lang-iso-code" fieldValueName="language_iso" />
+                <attribute type="nonNil" name="tran-character-set" fieldValueName="chararacter_set" />
+              </element>
+            </element>
+          </element>
+        </element>       
+		  </element>
+		</refTable>
+
+		<refTable tableType="SimpleReferenceTable" tableName="soar_feedback_types"
+			tableElemName="feedback-types" sortColumnName="feedback_type_oid">
+			<element name="feedback-type" fieldValueName="feedback_type">
+				<attribute name="oid" fieldValueName="feedback_type_oid" />
+			</element>
+		</refTable>
+
+		<refTable tableType="SimpleReferenceTable" tableName="soar_file_types"
+			tableElemName="file-types" sortColumnName="file_type_oid">
+			<refList listName="file_types" valueColumnName="file_type_oid"
+				labelColumnName="file_type" />
+			<element name="file-type" fieldValueName="file_type">
+				<attribute name="oid" fieldValueName="file_type_oid" />
+			</element>
+		</refTable>
+
+		<refTable tableType="SimpleReferenceTable" tableName="soar_fulfillment_methods"
+			tableElemName="fulfillment-methods" sortColumnName="fulfillment_method_oid">
+			<refList listName="fulfillment_methods" valueColumnName="fulfillment_method_oid"
+				labelColumnName="fulfillment_method" />
+			<element name="fulfillment-method" fieldValueName="fulfillment_method">
+				<attribute name="oid" fieldValueName="fulfillment_method_oid" />
+			</element>
+		</refTable>
+
+		<refTable tableType="SimpleReferenceTable" tableName="soar_flags"
+			tableElemName="flags" sortColumnName="flag_oid">
+			<element name="flag" fieldValueName="name">
+				<attribute name="oid" fieldValueName="flag_oid" />
+				<attribute name="applicability" fieldValueName="applicability" />
+				<attribute name="description" fieldValueName="description" />
+				<attribute type="boolean" name="active" fieldValueName="active" />
+			</element>
+		</refTable>
+
+		<refTable tableType="NonSavedReferenceTable" tableName="soar_languages_tran"
+			sortColumnName="tran_language_oid">
+      <dependants tables="soar_languages" />
+		</refTable>
+
+		<refTable tableType="SimpleReferenceTable" tableName="soar_languages"
+			tableElemName="languages" sortColumnName="language_oid">
+			<dependants tables="soar_software_types,soar_country_language,soar_server_feeds.cp,soar_severities,soar_software_types,soar_environments,soar_document_types" />
+			<refList listName="language_char_sets" valueColumnName="language_oid"
+				labelColumnName="character_set" />
+			<refList listName="language_iso_codes" valueColumnName="language_oid"
+				labelColumnName="language_iso" />
+			<refList listName="language" valueColumnName="language_oid"
+				labelColumnName="soar_language" />
+			<refList listName="local_language_char_sets" valueColumnName="language_oid"
+				labelColumnName="local_character_set" />
+			<refList listName="local_language" valueColumnName="language_oid"
+				labelColumnName="local_language" />
+			<element name="language">
+				<attribute name="oid" fieldValueName="language_oid" />
+				<attribute name="language-iso-code" fieldValueName="language_iso" />
+				<element name="language-in-English" fieldValueName="soar_language" />
+				<element type="nilEmpty" name="character-set-in-English" fieldValueName="character_set" />
+				<element type="nonEmpty" name="language-translations">
+					<tableRef tableName="soar_languages_tran" primaryKey="language_oid">
+            <fieldAs fieldName="character_set" asValue="tran_char_set" />
+					</tableRef>
+					<tableRef tableName="soar_languages" primaryKey="language_oid" foreignKey="tran_language_oid">
+            <fieldAs fieldName="language_oid" asValue="tran_language_oid"/>
+            <fieldAs fieldName="soar_language" asValue="tran_lan_soar_language"/>
+            <fieldAs fieldName="character_set" asValue="tran_lan_character_set"/>
+            <fieldAs fieldName="local_language" asValue="tran_lan_local_language"/>
+            <fieldAs fieldName="local_character_set" asValue="tran_lan_local_character_set"/>
+            <fieldAs fieldName="language_iso" asValue="tran_lan_language_iso"/>
+            <fieldAs fieldName="country_iso_code" asValue="tran_lan_country_iso_code"/>
+          </tableRef>
+					<element name="language-translation">
+						<attribute name="tran-lang-oid" fieldValueName="tran_language_oid" />
+						<attribute name="tran-lang-iso-code" fieldValueName="tran_lan_language_iso" />
+						<attribute type="nonNil" name="tran-character-set" fieldValueName="tran_lan_character_set" />
+						<element name="language-tran" fieldValueName="soar_language" />
+						<element type="nilEmpty" name="character-set-tran" fieldValueName="tran_char_set" />
+					</element>
+				</element>
+			</element>
+		</refTable>
+
+		<refTable tableType="SimpleReferenceTable" tableName="soar_media_types"
+			tableElemName="media-types" sortColumnName="media_type_oid">
+			<refList listName="media_types" valueColumnName="media_type_oid"
+				labelColumnName="media_type" />
+			<element name="media-type" fieldValueName="media_type">
+				<attribute name="oid" fieldValueName="media_type_oid" />
+				<attribute name="submittal-type-oid" fieldValueName="submittal_type_oid" />
+			</element>
+		</refTable>
+
+		<refTable tableType="NonSavedReferenceTable" tableName="soar_notification_types"
+			sortColumnName="notification_type_oid">
+			<refList listName="notification_types" valueColumnName="notification_type_oid"
+				labelColumnName="notification_type" />
+		</refTable>
+
+		<refTable tableType="NonSavedReferenceTable" tableName="product_master_view"
+			sortColumnName="product_number_name">
+			<refList listName="product_family_oids" valueColumnName="product_number_name"
+				labelColumnName="support_subcategory_oid" />
+			<refList listName="product_name_families" valueColumnName="product_number_name"
+				labelColumnName="support_subcategory_name" />
+			<refList listName="product_name_names" valueColumnName="product_number_name"
+				labelColumnName="product_name_name" />
+			<refList listName="product_name_oids" valueColumnName="product_number_name"
+				labelColumnName="product_name_oid" />
+		</refTable>
+
+		<refTable tableType="NonSavedReferenceTable" tableName="soar_software_install_types"
+			sortColumnName="software_install_type">
+			<refList listName="software_install_types" valueColumnName="software_install_type_oid"
+				labelColumnName="software_install_type" />
+		</refTable>
+
+		<refTable tableType="SimpleReferenceTable" tableName="soar_price_types"
+			tableElemName="price-types" sortColumnName="price_type_oid">
+			<refList listName="price_types" valueColumnName="price_type_oid"
+				labelColumnName="price_type" />
+			<element name="price-type" fieldValueName="price_type">
+				<attribute name="oid" fieldValueName="price_type_oid" />
+			</element>
+		</refTable>
+
+		<refTable tableType="SimpleReferenceTable" tableName="soar_regions"
+			tableElemName="regions" sortColumnName="region_oid">
+			<refList listName="regions" valueColumnName="region_oid"
+				labelColumnName="region_description" />
+			<element name="region" fieldValueName="region_description">
+				<attribute name="oid" fieldValueName="region_oid" />
+			</element>
+		</refTable>
+
+		<refTable tableType="SimpleReferenceTable" tableName="soar_relationship_types"
+			tableElemName="relationship-types" sortColumnName="relationship_type_oid">
+			<refList listName="relationship_types" valueColumnName="relationship_type_oid"
+				labelColumnName="relationship_type" />
+			<element name="relationship-type" fieldValueName="relationship_type">
+				<attribute name="oid" fieldValueName="relationship_type_oid" />
+			</element>
+		</refTable>
+
+		<refTable tableType="SimpleReferenceTable" tableName="soar_server_feeds"
+			tableElemName="server-feeds" sortColumnName="server_feed_oid">
+			<dependants tables="soar_server_feeds.cp"/>
+			<refList listName="server_feeds" valueColumnName="server_feed_oid"
+				labelColumnName="server_name" />
+			<refList listName="server_protocols" valueColumnName="server_feed_oid"
+				labelColumnName="protocol" />
+			<element name="server-feed">
+				<attribute name="oid" fieldValueName="server_feed_oid" />
+				<element name="protocol" fieldValueName="protocol" />
+				<element name="server-name" fieldValueName="server_name" />
+				<element type="nilEmpty" name="description" fieldValueName="description" />
+			</element>
+		</refTable>
+
+		<refTable tableType="NonSavedReferenceTable" tableName="soar_software_types_tran"
+			sortColumnName="tran_language_oid">
+			<dependants tables="soar_software_types"/>
+		</refTable>
+
+    <refTable tableType="NonSavedReferenceTable" tableName="soar_sw_type_subtype"
+      sortColumnName="software_type_oid">
+      <dependants tables="soar_software_types" />
+    </refTable>
+
+    <refTable tableType="NonSavedReferenceTable" tableName="soar_software_subtypes"
+      sortColumnName="software_subtype">
+      <dependants tables="soar_software_type" />
+      <refList listName="software_sub_types" valueColumnName="software_subtype_oid"
+        labelColumnName="software_subtype" />
+    </refTable>
+
+    <refTable tableType="NonSavedReferenceTable" tableName="soar_software_subtypes_tran"
+      sortColumnName="tran_language_oid">
+      <dependants tables="soar_software_types" />
+    </refTable>
+
+		<refTable tableType="SimpleReferenceTable" tableName="soar_software_types"
+			tableElemName="software-types" sortColumnName="software_type_oid">
+			<refList listName="software_types" valueColumnName="software_type_oid"
+				labelColumnName="software_type" />
+      <element name="software-type">
+        <element name="sw-type" fieldValueName="software_type">
+          <attribute name="oid" fieldValueName="software_type_oid" />
+          <attribute name="hovertext" fieldValueName="software_type_hovertext" />          
+        </element>
+        <element type="nonEmpty" name="sw-type-translations">
+          <tableRef tableName="soar_software_types_tran" primaryKey="software_type_oid">
+            <fieldAs fieldName="software_type_hovertext" asValue="tran_software_type_hovertext"/>
+            <fieldAs fieldName="software_type" asValue="tran_software_type"/>
+          </tableRef>
+          <tableRef tableName="soar_languages" primaryKey="language_oid" foreignKey="tran_language_oid">
+            <fieldAs fieldName="language_oid" asValue="tran_language_oid"/>
+            <fieldAs fieldName="soar_language" asValue="tran_lan_soar_language"/>
+            <fieldAs fieldName="character_set" asValue="tran_lan_character_set"/>
+            <fieldAs fieldName="local_language" asValue="tran_lan_local_language"/>
+            <fieldAs fieldName="local_character_set" asValue="tran_lan_local_character_set"/>
+            <fieldAs fieldName="language_iso" asValue="tran_lan_language_iso"/>
+            <fieldAs fieldName="country_iso_code" asValue="tran_lan_country_iso_code"/>
+          </tableRef>          
+          <element type="nonEmpty" name="sw-type-translation" fieldValueName="tran_software_type">
+            <attribute name="tran-lang-oid" fieldValueName="tran_language_oid" />
+            <attribute name="tran-lang-iso-code" fieldValueName="tran_lan_language_iso" />
+            <attribute name="hovertext" fieldValueName="tran_software_type_hovertext" />
+          </element>
+        </element>
+        <element type="nonEmpty" name="software-sub-types">
+          <tableRef tableName="soar_sw_type_subtype"  primaryKey="software_type_oid" />
+          <tableRef tableName="soar_software_subtypes" primaryKey="software_subtype_oid" foreignKey="software_subtype_oid" reportMissing="false"/>
+          <element type="nonEmpty" name="software-sub-type">
+            <element type="nonEmpty" name="sw-sub-type" fieldValueName="software_subtype">
+              <attribute type="nonNil" name="oid" fieldValueName="software_subtype_oid" />
+              <attribute type="nonNil" name="hovertext" fieldValueName="software_subtype_hovertext" />                
+            </element>
+            <element type="nonEmpty" name="sw-sub-type-translations">                                              
+              <tableRef tableName="soar_software_subtypes_tran" primaryKey="software_subtype_oid" reportMissing="false">
+                <fieldAs fieldName="software_subtype" asValue="tran_software_subtype"/>
+                <fieldAs fieldName="software_subtype_hovertext" asValue="tran_software_subtype_hovertext"/>
+              </tableRef>
+              <tableRef tableName="soar_languages" primaryKey="language_oid" foreignKey="tran_language_oid">
+                <fieldAs fieldName="language_oid" asValue="sub_tran_language_oid"/>
+                <fieldAs fieldName="soar_language" asValue="sub_tran_lan_soar_language" />
+                <fieldAs fieldName="character_set" asValue="sub_tran_lan_character_set"/>
+                <fieldAs fieldName="local_language" asValue="sub_tran_lan_local_language"/>
+                <fieldAs fieldName="local_character_set" asValue="sub_tran_lan_local_character_set"/>
+                <fieldAs fieldName="language_iso" asValue="sub_tran_lan_language_iso"/>
+                <fieldAs fieldName="country_iso_code" asValue="sub_tran_lan_country_iso_code"/>
+              </tableRef>
+              <element type="nonEmpty" name="sw-sub-type-translation" fieldValueName="tran_software_subtype">
+                <attribute name="tran-lang-oid" fieldValueName="sub_tran_language_oid" />
+                <attribute name="tran-lang-iso-code" fieldValueName="sub_tran_lan_language_iso" />
+                <attribute name="hovertext" fieldValueName="tran_software_subtype_hovertext" />                
+              </element>
+            </element>
+          </element>
+        </element>
+      </element>
+		</refTable>
+
+		<refTable tableType="SimpleReferenceTable" tableName="soar_submittal_groups"
+			tableElemName="submittal-groups" sortColumnName="group_name">
+			<refList listName="contact_names" valueColumnName="group_name"
+				labelColumnName="contact_name" />
+			<refList listName="contact_names2" valueColumnName="group_name"
+				labelColumnName="contact_name_2" />
+			<refList listName="contact_phones" valueColumnName="group_name"
+				labelColumnName="contact_phone" />
+			<refList listName="contact_phones2" valueColumnName="group_name"
+				labelColumnName="contact_phone_2" />
+			<refList listName="contact_emails" valueColumnName="group_name"
+				labelColumnName="contact_email" />
+			<refList listName="contact_emails2" valueColumnName="group_name"
+				labelColumnName="contact_email_2" />
+			<refList listName="submittal_groups" valueColumnName="group_name"
+				labelColumnName="group_description" />
+			<refList listName="product_line_code" valueColumnName="group_name"
+				labelColumnName="product_line_code" />
+			<element name="submittal-group">
+				<attribute name="group-name" fieldValueName="group_name" />
+				<element name="group-code" fieldValueName="group_code" />
+				<element name="group-sub-code" fieldValueName="group_sub_code" />
+				<element name="group-description" fieldValueName="group_description" />
+				<element name="product-line-code" fieldValueName="product_line_code" />
+			</element>
+		</refTable>
+
+		<refTable tableType="SimpleReferenceTable" tableName="soar_submittal_priorities"
+			tableElemName="submittal-priorities" sortColumnName="priority_oid">
+			<refList listName="submittal_priorities" valueColumnName="priority_oid"
+				labelColumnName="priority_label" />
+			<element name="submittal-priority" fieldValueName="priority_label">
+				<attribute name="oid" fieldValueName="priority_oid" />
+			</element>
+		</refTable>
+
+		<refTable tableType="SimpleReferenceTable" tableName="soar_submittal_types"
+			tableElemName="submittal-types" sortColumnName="submittal_type_oid">
+			<refList listName="submittal_types" valueColumnName="submittal_type_oid"
+				labelColumnName="submittal_type" />
+			<element name="submittal-type" fieldValueName="submittal_type">
+				<attribute name="oid" fieldValueName="submittal_type_oid" />
+			</element>
+		</refTable>
+
+		<refTable tableType="SimpleReferenceTable" tableName="soar_update_types"
+			tableElemName="update-types" sortColumnName="update_type_oid">
+			<refList listName="update_types" valueColumnName="update_type_oid"
+				labelColumnName="update_type" />
+			<element name="update-type" fieldValueName="update_type">
+				<attribute name="oid" fieldValueName="update_type_oid" />
+			</element>
+		</refTable>
+
+		<refTable tableType="SimpleReferenceTable" tableName="soar_driver_models"
+			tableElemName="driver-models" sortColumnName="driver_model_oid">
+			<refList listName="driver_model" valueColumnName="driver_model_oid"
+				labelColumnName="driver_model_name" />
+			<element name="driver-model" fieldValueName="driver_model_name">
+				<attribute name="oid" fieldValueName="driver_model_oid" />
+        <attribute type="boolean" name="is-active" fieldValueName="is_active" />
+			</element>
+		</refTable>
+
+		<refTable tableType="SimpleReferenceTable" tableName="soar_install_methods"
+			tableElemName="install-methods" sortColumnName="install_method_oid">
+			<refList listName="driver_installation_method"
+				valueColumnName="install_method_oid" labelColumnName="install_method" />
+			<element name="install-method" fieldValueName="install_method">
+				<attribute name="oid" fieldValueName="install_method_oid" />
+				<attribute type="boolean" name="is-active" fieldValueName="is_active" />
+			</element>
+		</refTable>
+
+		<refTable tableType="SimpleReferenceTable" tableName="soar_install_formats"
+			tableElemName="install-formats" sortColumnName="install_format_oid">
+			<refList listName="install_format" valueColumnName="install_format_oid"
+				labelColumnName="install_format" />
+			<element name="install-format" fieldValueName="install_format">
+				<attribute name="oid" fieldValueName="install_format_oid" />
+				<attribute name="description" fieldValueName="description" />
+				<attribute type="boolean" name="active" fieldValueName="is_active" />
+			</element>
+		</refTable>
+
+		<refTable tableType="NonSavedReferenceTable" tableName="soar_severities_tran"
+			sortColumnName="tran_language_oid">
+			<dependants tables="soar_severities" />
+		</refTable>
+
+		<refTable tableType="SimpleReferenceTable" tableName="soar_severities"
+			tableElemName="severities" sortColumnName="severity_oid">
+			<refList listName="severities" valueColumnName="severity_oid"
+				labelColumnName="severity" />
+			<element name="severity">
+				<element name="severity-in-English" fieldValueName="severity">
+					<attribute name="oid" fieldValueName="severity_oid" />
+					<attribute name="description" fieldValueName="description" />
+					<attribute type="boolean" name="active"	fieldValueName="is_active" />
+				</element>
+				<element type="nonEmpty" name="severity-translations">
+				  <tableRef tableName="soar_severities_tran" primaryKey="severity_oid"/>
+				  <tableRef tableName="soar_languages" primaryKey="language_oid" foreignKey="tran_language_oid"/>
+          <element name="severity-translation" fieldValueName="severity">
+            <attribute name="tran-lang-oid" fieldValueName="tran_language_oid" />
+            <attribute name="tran-lang-iso-code" fieldValueName="language_iso" />
+            <attribute type="nonNil" name="tran-character-set" fieldValueName="character_set" />
+          </element>
+				</element>
+			</element>
+		</refTable>
+
+		<refTable tableType="SimpleReferenceTable" tableName="soar_country"
+			tableElemName="countries" sortColumnName="country_oid" where="active_flag = 1">
+		  <dependants tables="soar_country_language,soar_server_feeds.cp"/>
+			<element name="country" fieldValueName="country_name">
+				<attribute name="oid" fieldValueName="country_oid" />
+				<attribute name="iso-country-code" fieldValueName="iso_country_code" />
+			</element>
+		</refTable>
+
+		<refTable tableType="LanguageCountryReferenceTable"
+	tableName="soar_country_language" tableElemName="language-countries-mapping"
+	sortColumnName="language_oid, country_oid">
+	    <dependants tables="soar_server_feeds.cp" />
+      <element type="nonStored" name="lang-country">
+        <tableRef tableName="soar_languages" primaryKey="language_oid" />
+  	    <element type="nonEmpty" name="language-countries">
+  	      <attribute name="language-oid" fieldValueName="language_oid"/>
+	        <attribute name="language-name" fieldValueName="soar_language"/>
+	        <attribute name="language-iso-code" fieldValueName="language_iso"/>
+          <tableRef tableName="soar_country_language" primaryKey="language_oid" foreignKey="language_oid"/>
+          <tableRef tableName="soar_country" primaryKey="country_oid" foreignKey="country_oid" reportMissing="false"/>
+	        <element type="nonEmpty" name="country" fieldValueName="country_name">
+	          <attribute type="nonNil" name="oid" fieldValueName="country_oid"/>
+	          <attribute type="nonNil" name="iso-country-code" fieldValueName="iso_country_code"/>
+	        </element>
+	      </element>
+	    </element>
+		</refTable>
+	</refFile>
+
+	<refFile fileElemName="soar-product-environments" schema="soar-product-environment-vA3.xsd">
+    <refTable tableType="NonSavedReferenceTable" tableName="product_env_relationships"
+	sortColumnName="environment_detail_oid">
+      <dependants tables="product_env_control"/>
+    </refTable>
+
+    <refTable tableType="ProductEnvironmentReferenceTable"
+	tableName="product_env_control" tableElemName="soar-product-environments"
+	sortColumnName="group_id">
+      <element name="soar-product-environment">
+        <element name="product" fieldValueName="product">
+          <attribute name="type" fieldValueName="type"/>
+        </element>
+        <element name="environments">
+          <tableRef tableName="product_env_relationships" primaryKey="group_id"
+            foreignKey="environment_detail_oid">
+          </tableRef>
+          <element name="environment-oid" fieldValueName="environment_detail_oid"/>
+        </element>
+      </element>
+    </refTable>
+	</refFile>
+	
+  <refFile fileElemName="soar-country-preferences-feed" schema="soar-country-preferences-feed-vA1.xsd">
+
+    <refTable tableType="CountryPreferenceReferenceTable"
+	tableName="soar_server_feeds.cp" tableElemName="country-preferences"
+	sortColumnName="server_feed_oid">
+	    <element type="nonStored" name="country-preferences">
+        <tableRef tableName="soar_country_language" primaryKey="language_oid"/>
+        <tableRef tableName="soar_country" primaryKey="country_oid" foreignKey="country_oid"/>
+        <tableRef tableName="soar_languages" primaryKey="language_oid" foreignKey="language_oid"/>
+        <element name="country-preference">
+          <attribute name="iso-country-code" fieldValueName="iso_country_code"/>
+          <attribute name="iso-language-code" fieldValueName="language_iso"/>
+          <attribute name="protocol" fieldValueName="protocol"/>
+          <attribute name="server" fieldValueName="server_name"/>
+        </element>
+      </element>
+    </refTable>
+  </refFile>	
+</refTableDefs>

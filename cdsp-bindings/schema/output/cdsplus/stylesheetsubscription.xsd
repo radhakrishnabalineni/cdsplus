@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" xmlns:proj="http://www.hp.com/cdsplus" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="stylesheetsubscription_xml.xsd"/>
+
+  <xs:element name="stylesheet">
+    <xs:complexType>
+      <xs:sequence>
+      
+      	<xs:element ref="subscriptionName"/>
+      	<xs:element ref="type"/>
+      	<xs:element ref="output"/>
+      	<xs:element ref="imported-styles"/>
+      	<xs:element ref="proj_path_seperator"/>
+     	<xs:element ref="proj_path_parts"/>
+     	<xs:element ref="proj_namespace_types"/>
+     	<xs:element ref="proj_is_smartfolder"/>
+     	
+      	<!-- For General Subscriptions Elements   -->
+      	<xs:element ref="embedded_criteria_filter"/>
+        <xs:element ref="filter"/>
+        <xs:element ref="delivery"/>
+        <xs:element ref="smartfolder"/>
+        <xs:element ref="hierarchyExpansions"/>
+        <xs:element ref="stylesheet_name"/>
+     	<xs:element ref="FastRepeatingValueSeparator"/>
+     	<xs:element ref="currentProjNamespace"/>
+     	<xs:element ref="exclude_software-items_by_disclosure-level"/>
+     	<xs:element ref="disclosure-level_whitelist"/>
+     	<xs:element ref="TaxonomyKeyValueSeperator"/>
+     	<xs:element ref="TaxonomyRepeatingValueSeparator"/>
+     	
+       </xs:sequence>
+      <xs:attribute ref="xml:base" use="required"/>
+    </xs:complexType>
+   </xs:element>
+    
+  <xs:element name="subscriptionName" type="xs:string"/>
+  <xs:element name="type" type="xs:string"/>
+  <xs:element name="embedded_criteria_filter" type="xs:string"/>
+  <xs:element name="filter" type="xs:string"/>
+  <xs:element name="smartfolder" type="xs:string"/>
+   <xs:element name="hierarchyExpansions">
+     <xs:complexType>
+      	<xs:sequence>
+        	<xs:element ref="product_names"/>
+        	<xs:element ref="product_types"/>
+        	<xs:element ref="product_numbers"/>
+        	<xs:element ref="product_number_names"/>
+        	<xs:element ref="product_lines"/>
+			<xs:element ref="product_series"/>		
+			<xs:element ref="product_big_series"/>
+			<xs:element ref="product_support_categories"/>
+			<xs:element ref="product_support_subcategories"/>
+			<xs:element ref="product_marketing_categories"/>
+			<xs:element ref="product_marketing_subcategories"/>
+			<xs:element ref="support_name_oids"/> 
+			<xs:element ref="faq_product_names"/>
+        	<xs:element ref="faq_product_types"/>
+        	<xs:element ref="faq_product_numbers"/>
+        	<xs:element ref="faq_product_number_names"/>
+        	<xs:element ref="faq_product_lines"/>
+			<xs:element ref="faq_product_series"/>		
+			<xs:element ref="faq_product_big_series"/>
+			<xs:element ref="faq_product_support_categories"/>
+			<xs:element ref="faq_product_support_subcategories"/>
+			<xs:element ref="faq_product_marketing_categories"/>
+			<xs:element ref="faq_product_marketing_subcategories"/>      
+			<xs:element ref="concentra_internal_id"/>
+			<xs:element ref="original_products"/>
+			<xs:element ref="product_number_list"/>
+			<xs:element ref="proj_is_smartfolder"/>
+			<xs:element ref="product_name_proj_ref"/>
+        </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="product_names" type="xs:string"/>
+  <xs:element name="product_types" type="xs:string"/>
+  <xs:element name="product_numbers" type="xs:string"/>
+  <xs:element name="product_number_names" type="xs:string"/>
+  <xs:element name="product_lines" type="xs:string"/>
+  <xs:element name="product_series" type="xs:string"/>
+  <xs:element name="product_big_series" type="xs:string"/>
+  <xs:element name="product_support_categories" type="xs:string"/>
+  <xs:element name="product_support_subcategories" type="xs:string"/>
+  <xs:element name="product_marketing_categories" type="xs:string"/>
+  <xs:element name="product_marketing_subcategories" type="xs:string"/>
+  <xs:element name="support_name_oids" type="xs:string"/>
+  <xs:element name="faq_product_names" type="xs:string"/>
+  <xs:element name="faq_product_types" type="xs:string"/>
+  <xs:element name="faq_product_numbers" type="xs:string"/>
+  <xs:element name="faq_product_number_names" type="xs:string"/>
+  <xs:element name="faq_product_lines" type="xs:string"/>
+  <xs:element name="faq_product_series" type="xs:string"/>
+  <xs:element name="faq_product_big_series" type="xs:string"/>
+  <xs:element name="faq_product_support_categories" type="xs:string"/>
+  <xs:element name="faq_product_support_subcategories" type="xs:string"/>
+  <xs:element name="faq_product_marketing_categories" type="xs:string"/>
+  <xs:element name="faq_product_marketing_subcategories" type="xs:string"/>
+  <xs:element name="concentra_internal_id" type="xs:string"/>
+  <xs:element name="original_products" type="xs:string"/>
+  <xs:element name="product_number_list" type="xs:string"/>
+     
+  <xs:element name="output" type="xs:string"/>  
+  <xs:element name="proj_path_seperator" type="xs:string"/>
+  <xs:element name="proj_path_parts" type="xs:string"/>
+  <xs:element name="proj_is_smartfolder" type="xs:string"/>
+  <xs:element name="product_name_proj_ref" type="xs:string"/>
+  <xs:element name="delivery" type="xs:string"/>
+  <xs:element name="stylesheet_name" type="xs:string"/>
+  <xs:element name="FastRepeatingValueSeparator" type="xs:string"/>
+  <xs:element name="currentProjNamespace" type="xs:string"/>
+  <xs:element name="exclude_software-items_by_disclosure-level" type="xs:string"/>
+  <xs:element name="TaxonomyKeyValueSeperator" type="xs:string"/>
+  <xs:element name="TaxonomyRepeatingValueSeparator" type="xs:string"/> 
+  
+  <xs:element name="imported-styles">
+	<xs:complexType>
+		<xs:sequence>
+			<xs:element ref="imported" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+  </xs:element>
+  <xs:element name="imported" type="xs:string"/>
+  
+  <xs:element name="proj_namespace_types">
+  <xs:complexType>
+		<xs:sequence>
+			<xs:element ref="value-of" maxOccurs="unbounded"/>
+		</xs:sequence>
+  </xs:complexType>
+  </xs:element>
+  <xs:element name="value-of" type="xs:string"/>
+ 
+ <xs:element name="disclosure-level_whitelist">
+   <xs:complexType>
+		<xs:sequence>
+			<xs:element ref="value" maxOccurs="unbounded"/>
+		</xs:sequence>
+  </xs:complexType>
+  </xs:element>
+  <xs:element name="value" type="xs:string"/>
+  
+</xs:schema>

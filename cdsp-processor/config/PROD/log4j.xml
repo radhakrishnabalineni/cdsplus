@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="warn" name="MyApp" packages="">
+  <Appenders>
+     <RollingFile name="RootAppender" fileName="logs/ProcessorRoot.log"
+                 filePattern="logs/$${date:yyyy-MM}/ProcessorRoot-%d{MM-dd-yyyy}-%i.log.gz">
+      <PatternLayout>
+        <Pattern>%d %p [%t] %m%n</Pattern>
+      </PatternLayout>
+      <Policies>
+        <TimeBasedTriggeringPolicy />
+        <SizeBasedTriggeringPolicy size="1 GB"/>
+      </Policies>
+      <DefaultRolloverStrategy max="20"/>
+    </RollingFile>
+     <RollingFile name="ThreadsAppender" fileName="logs/ProcessorThreads.log"
+                 filePattern="logs/$${date:yyyy-MM}/ProcessorThreads-%d{MM-dd-yyyy}-%i.log.gz">
+      <PatternLayout>
+        <Pattern>%d %p [%t] %m%n</Pattern>
+      </PatternLayout>
+      <Policies>
+        <TimeBasedTriggeringPolicy />
+        <SizeBasedTriggeringPolicy size="1 GB"/>
+      </Policies>
+      <DefaultRolloverStrategy max="20"/>
+    </RollingFile>
+    <RollingFile name="CGSAppender" fileName="logs/Cgs.log"
+                 filePattern="logs/$${date:yyyy-MM}/Cgs-%d{MM-dd-yyyy}-%i.log.gz">
+      <PatternLayout>
+        <Pattern>%d %p [%t] %m%n</Pattern>
+      </PatternLayout>
+      <Policies>
+        <TimeBasedTriggeringPolicy />
+        <SizeBasedTriggeringPolicy size="1 GB"/>
+      </Policies>
+      <DefaultRolloverStrategy max="20"/>
+    </RollingFile>
+  </Appenders>
+  <Loggers>
+      <Root level="DEBUG" additivity="false">
+      <AppenderRef ref="RootAppender"/>
+    </Root>
+    <logger name="com.hp.cdsplus.processor.threads" level="DEBUG" additivity="false">
+	   <AppenderRef ref="ThreadsAppender"/>
+	</logger>
+	<!--  NEVER SET THIS LOGGER TO DEBUG UNLESS ABSOLUTELY NECESSARY - Sunil Kashyap  -->
+	<logger name="com.hp.seeker" level="INFO" additivity="false">
+	   <AppenderRef ref="CGSAppender"/>
+	</logger>
+  </Loggers>
+</Configuration>

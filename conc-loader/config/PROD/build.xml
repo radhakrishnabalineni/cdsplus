@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<project name="Concentra-PL-New" default="run" basedir=".">
+	<property name="concentra.lib.dir"     value="${basedir}/lib"/>
+	<property name="conf.dir"    value="${basedir}/conf"/>
+	<property name="logs.dir"    value="${basedir}/logs"/>
+	<property name="dfc.home.dir" value = "/opt/ais/app/installations/documentum/shared"/>
+	<property name="dfc.lib.dir" value = "${dfc.home.dir}/dfc"/>
+	<property name="log4j.file"  value="${conf.dir}/log4j.xml"/>
+	
+	<!-- get ENV VARs: can reference ${env.VARIABLE} -->
+	<property environment="env"/>
+	
+	<path id="loader.lib.path">
+		<fileset dir="${dfc.lib.dir}">
+			<include name="*.jar"/>
+		</fileset>
+		<fileset dir="${dfc.home.dir}">
+			<include name="dctm.jar"/>
+		</fileset>
+		<fileset dir="${concentra.lib.dir}">
+			<include name="**/*.jar"/>
+			<include name="**/*.zip"/>
+			<include name="**/*.xml"/>
+			<include name="**/*.properties"/>
+		</fileset>
+		
+	</path>
+	<target name="run" description="Run concentra priority loader to push documents CDS+">
+		<java classname="com.hp.loader.priorityLoader.PriorityLoader"
+			maxmemory="2560m"
+			fork="true"
+			output="${logs.dir}/concentraPLSysout.log" classpathref="loader.lib.path" >
+			<jvmarg line="-XX:MaxPermSize=768m"/>
+			<arg value="concentra" />
+			<classpath>
+				<pathelement location="${concentra.lib.dir}"/>
+				<pathelement location="${dfc.lib.dir}"/>
+				<pathelement location="${dfc.home.dir}/dctm.jar" />
+			</classpath>
+			<sysproperty key="lock.file.path" value="${basedir}/lock" />
+			<sysproperty key="log4j.configuration" value="${conf.dir}/log4j.xml" />
+			<sysproperty key="log4j.log.location" value="${logs.dir}" />
+			<sysproperty key="log4j.loader_type" value="concentra" />
+			<sysproperty key="log4j.loaderLevel" value="INFO" />
+			<sysproperty key="log4j.extractorLevel" value="INFO" />
+			<sysproperty key="app" value="concentraloader" />
+			<sysproperty key="mongo.configuration" value="${concentra.lib.dir}/mongo.properties" />
+			<sysproperty key="concentra.props.path" value="${concentra.lib.dir}" />
+		</java>
+
+	</target>
+
+</project>
+

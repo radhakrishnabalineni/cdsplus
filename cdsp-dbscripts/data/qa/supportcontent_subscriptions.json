@@ -1,0 +1,12 @@
+{"_id" : "bscxml", "filter" : {}, "isGroomer":true}
+{"_id" : "html", "filter" : {}, "isGroomer":true}
+{"_id" : "xml_supportcontent_properties", "filter" : {}, "hierarchyExpansions" :{ "document.product_types" : true , "document.product_support_subcategories" : false , "document.product_series" : true , "document.product_names" : true , "document.product_numbers" : false , "document.product_lines" : false , "document.product_support_categories" : false , "document.product_big_series" : false , "document.product_marketing_categories" : false , "document.product_marketing_subcategories" : false , "document.support_name_oids": false , "document.product_number_names" : false}, "isGroomer":true}
+{"_id" : "bschtml", "filter" : {}, "isGroomer":true}
+{"_id" : "xml", "filter" : {}, "isGroomer":true}
+{"_id" : "bsc_202", "filter" : { "document.document_type" : { "$in" : [ "Product Change Notification" , "Advisory" , "Work Instruction documents" , "Service Program Announcement" , "Notice" , "Bulletin" , "Security Bulletin"]}} , "hierarchyExpansions" :{ "document.product_types" : false , "document.product_support_subcategories" : false , "document.product_series" : true , "document.product_names" : false , "document.product_numbers" : false , "document.product_lines" : true , "document.product_support_categories" : false , "document.product_big_series" : false , "document.product_marketing_categories" : false , "document.product_marketing_subcategories" : false , "document.support_name_oids": false, "document.product_number_names" : false}}
+{"_id" : "astro2", "filter" : {}}
+{"_id" : "hpgtxml", "filter" : {}, "isGroomer":true}
+{"_id" : "odsxml", "filter" : {}, "isGroomer":true}
+{"_id":"hpicontent", "filter":{} , "hierarchyExpansions" :{"document.company_info":false}}
+{"_id":"hpecontent", "filter":{} , "hierarchyExpansions" :{"document.company_info":false }}
+

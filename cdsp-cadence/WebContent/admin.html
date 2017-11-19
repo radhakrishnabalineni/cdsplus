@@ -1,0 +1,792 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript">
+
+	// var submitButton = document.createElement("input");
+	//submitButton.setAttribute("type", "button");
+	//submitButton.setAttribute("value", "Submit");
+	// submitButton.addEventListener("click", submit, false);
+
+	var addRowButton = document.createElement("input");
+	addRowButton.setAttribute("type", "button");
+	addRowButton.setAttribute("value", "Add Row");
+	addRowButton.addEventListener("click", addCondition, false);
+	
+	var jsonStr = "";
+	var contentTypeArr ;
+	var contentTypesJson;
+	var xmlhttp = new XMLHttpRequest();
+
+	var mainString = "";
+	var tempString = "";
+	var mainKeys, mainValues, mainOperators;
+	var mainCounter = 0;
+	
+	var operatorList = document.createElement("select");
+	var logicalOperatorList = document.createElement("select");
+	
+	function getContentTypeList() {
+		var parentDiv = document.getElementById("main");
+		var contentTypeList = document.createElement("select");
+		contentTypeList.setAttribute("id", "contentTypeList");
+		contentTypeList.addEventListener("change", getSubscriptionList, false);
+		
+		
+		/*var option = new Option();
+		option.text = "Select";
+		option.value = "Select"; */
+		var default_option = new Option("Select","Select");
+		contentTypeList.options[contentTypeList.options.length] = default_option;
+		/*contentTypeList.options[contentTypeList.options.length] = option;
+		parentDiv.appendChild(contentTypeList); */
+		parentDiv.appendChild(contentTypeList);
+		
+		var url = "admin/contentTypes";
+		xmlhttp.open('GET', url, true);
+		xmlhttp.send(null);
+		xmlhttp.onreadystatechange = function() {
+			if (xmlhttp.readyState == 4) {
+				if (xmlhttp.status == 200) {
+					contentTypesJson = eval("(" + xmlhttp.responseText + ")");
+					contentTypeArr = contentTypesJson.contentTypes;
+					for(i = 0; i < contentTypeArr.length ; i ++){
+						var option = new Option(contentTypeArr[i], contentTypeArr[i]);
+						contentTypeList.options[contentTypeList.options.length] = option;
+					}
+				}
+			}
+		};
+	}
+	
+	function getSubscriptionList(){
+		var parentDiv = document.getElementById("main");
+		
+		var selectedObj = document.getElementById("contentTypeList");		
+		var contentType = selectedObj.options[selectedObj.selectedIndex].text;
+		var subscriptionList = document.getElementById("subscriptionList");			
+		var refreshSubButton = document.getElementById("refreshSubButton");
+		//var editButton = document.getElementById("editButton");
+		//var deleteButton = document.getElementById("deleteButton");
+		var reloadPageButton = document.getElementById("reloadButton");		
+		 if(contentType == "Select"){
+			jsonSpan.innerHTML = "";
+			subscriptionList.options.length = 0;
+			var default_option = new Option("Select","Select");
+			subscriptionList.options[subscriptionList.options.length] = default_option;
+			parentDiv.removeChild(refreshSubButton);
+			//parentDiv.removeChild(editButton);
+			//parentDiv.removeChild(deleteButton);
+			parentDiv.removeChild(reloadPageButton);
+			
+		}else{
+		var subscriptionList = document.getElementById("subscriptionList");	
+		var url = "admin/subscriptions?contentType="+contentType;
+		xmlhttp.open('GET', url, true);
+		xmlhttp.send(null);
+		xmlhttp.onreadystatechange = function() {
+			if (xmlhttp.readyState == 4) {
+				if (xmlhttp.status == 200) {
+					var subscriptionListJson = eval("(" + xmlhttp.responseText + ")");
+					var subscriptionListArr = subscriptionListJson.subscriptions;
+					subscriptionList.options.length = 0;
+					var default_option = new Option("Select","Select");
+					subscriptionList.options[subscriptionList.options.length] = default_option;
+					///document.getElementById('default_option').options.length = 0;
+					for(i = 0; i < subscriptionListArr.length ; i ++){
+						var option = new Option(subscriptionListArr[i], subscriptionListArr[i]);
+						subscriptionList.options[subscriptionList.options.length] = option;
+					}
+				}
+			}
+		};
+		}	
+	}
+	
+	function getOperatorList(){
+		operatorList.setAttribute("id", "operatorList");
+		logicalOperatorList.setAttribute("id", "logicalOperatorList");
+		
+		var option = new Option();
+		option.text = "EQUALS";
+		option.value = ":";
+		operatorList.options[operatorList.options.length] = option;
+		
+		var option = new Option();
+		option.text = "Select";
+		option.value = "Select";
+		logicalOperatorList.options[logicalOperatorList.options.length] = option;
+		
+		var option = new Option();
+		option.text = "ADD CONDITION";
+		option.value = "";
+		logicalOperatorList.options[logicalOperatorList.options.length] = option;
+		
+		var url = "admin/operators";
+		xmlhttp.open('GET', url, true);
+		xmlhttp.send(null);
+		xmlhttp.onreadystatechange = function() {
+			if (xmlhttp.readyState == 4) {
+				if (xmlhttp.status == 200) {
+					var operatorsJson = eval("(" + xmlhttp.responseText + ")");
+					var operatorsObj = operatorsJson.operators;
+					
+					for(var k in operatorsObj){
+						var option = new Option(k, operatorsObj[k]);
+						operatorList.options[operatorList.options.length] = option;
+					}
+					
+					var logicalOperatorObj =  operatorsJson.logicalOperators;
+					for(var k in logicalOperatorObj){
+						if(k == "AND" || k == "OR" || k == "NAND"){
+							var option = new Option("START "+k, logicalOperatorObj[k]+":[");
+							logicalOperatorList.options[logicalOperatorList.options.length] = option;
+							
+							var option = new Option("CLOSE "+k, "]");
+							logicalOperatorList.options[logicalOperatorList.options.length] = option;
+						}else if(k== "NOT" ){
+							var option = new Option("START "+k, logicalOperatorObj[k]+":{");
+							logicalOperatorList.options[logicalOperatorList.options.length] = option;
+							
+							var option = new Option("CLOSE "+k, "}");
+							logicalOperatorList.options[logicalOperatorList.options.length] = option;
+							
+						}
+					}
+				}
+			}
+		};
+	}
+	
+	function init() {
+		getContentTypeList();
+		
+		var parentDiv = document.getElementById("main");
+		var subscriptionList = document.createElement("select");
+		subscriptionList.setAttribute("id", "subscriptionList");
+		subscriptionList.addEventListener("change", subCheck, false);
+		
+
+		var defaultOption = new Option("Select","Select");
+		subscriptionList.options[subscriptionList.options.length] = defaultOption;
+		
+		/* var option = new Option("Create New","Create New");
+		subscriptionList.options[subscriptionList.options.length] = option;*/
+		parentDiv.appendChild(subscriptionList); 
+		
+		parentDiv.appendChild(document.createElement("br"));
+		parentDiv.appendChild(document.createElement("br"));
+		parentDiv.appendChild(document.createElement("br"));
+		var jsonSpan = document.createElement('span');
+		jsonSpan.setAttribute("id", "jsonSpan");
+		parentDiv.appendChild(jsonSpan);
+		
+	}
+	function subCheck() {
+		var parentDiv = document.getElementById("main");
+		var selectedObj = document.getElementById("contentTypeList");
+		var contentType = selectedObj.options[selectedObj.selectedIndex].text;
+		
+		var selectedSubObj = document.getElementById("subscriptionList");
+		var selectedSub = selectedSubObj.options[selectedSubObj.selectedIndex].text;
+
+		var refreshSubButton = document.getElementById("refreshSubButton");
+		//var editButton = document.getElementById("editButton");
+		//var deleteButton = document.getElementById("deleteButton");
+		var reloadPageButton = document.getElementById("reloadButton");
+		if(selectedSub == "Create New" ){
+			jsonSpan.innerHTML = "";
+			createTable();
+		}else if(selectedSub == "Select"){
+			jsonSpan.innerHTML = "";
+			parentDiv.removeChild(refreshSubButton);
+			//parentDiv.removeChild(editButton);
+			//parentDiv.removeChild(deleteButton);
+			parentDiv.removeChild(reloadPageButton);
+		}else{
+			var url = "admin/subscription?contentType="+contentType+"&subscriptionName="+selectedSub;
+			xmlhttp.open('GET', url, true);
+			xmlhttp.send(null);
+			xmlhttp.onreadystatechange = function() {
+				if (xmlhttp.readyState == 4) {
+					if (xmlhttp.status == 200) {
+						responseObj = eval( "(" +  xmlhttp.responseText + ")");
+						var jsonStr = printJSON(responseObj);
+						jsonSpan.innerHTML =  jsonStr;
+						//alert("finally:"+jsonStr);
+						var refreshSubButton = document.getElementById("refreshSubButton");
+						//var editButton = document.getElementById("editButton");
+					//	var deleteButton = document.getElementById("deleteButton");
+						var reloadPageButton = document.getElementById("reloadButton");
+												
+						if(typeof(refreshSubButton) == 'undefined' || refreshSubButton == null)
+						{
+							refreshSubButton = document.createElement("input");
+							refreshSubButton.setAttribute("id", "refreshSubButton");
+							refreshSubButton.setAttribute("type", "button");
+							refreshSubButton.setAttribute("value", "Revaluate");
+							refreshSubButton.addEventListener("click", revalSubscription, false);
+						 	parentDiv.appendChild(document.createElement("br"));
+							parentDiv.appendChild(document.createElement("br"));
+							parentDiv.appendChild(refreshSubButton); 
+						}
+
+					/*	if(typeof(editButton) == 'undefined' || editButton == null)
+						{
+							editButton = document.createElement("input");
+							editButton.type = "button"
+							editButton.id = "editButton"
+							editButton.value = "UpdateSubscription"
+							editButton.addEventListener('click', function(){
+								editSubscription();
+								this.disabled=true;
+							});
+							editButton = document.createElement("input");
+							editButton.setAttribute("id", "editButton");
+							editButton.setAttribute("type", "button");
+							editButton.setAttribute("value", "Edit");
+							editButton.addEventListener("click", editSubscription, false);
+						    //parentDiv.appendChild(document.createElement("br"));
+							//parentDiv.appendChild(document.createElement("br"));
+							parentDiv.appendChild(editButton);
+						}
+					*/
+						 /*if(typeof(deleteButton) == 'undefined' || deleteButton == null)
+						{
+							deleteButton = document.createElement("input");
+							deleteButton.type = "button"
+							deleteButton.id = "deleteButton"
+							deleteButton.value = "DeleteSubscription"
+								deleteButton.addEventListener('click', function(){
+								deleteSubscription();
+								this.disabled=true;
+						});
+						    parentDiv.appendChild(document.createElement("br"));
+							parentDiv.appendChild(document.createElement("br"));
+							parentDiv.appendChild(deleteButton);
+						}*/
+
+						if(typeof(reloadPageButton) == 'undefined' || reloadPageButton == null)
+						{
+							reloadPageButton = document.createElement("input");
+							reloadPageButton.type = "button"
+							reloadPageButton.id = "reloadButton"
+							reloadPageButton.value = "Click here to reload the page"
+							reloadPageButton.addEventListener('click', function(){
+								window.location.reload();
+							});
+							parentDiv.appendChild(reloadPageButton);
+						}
+						
+						var revalSpan = document.getElementById("revalSpan");
+						if(typeof(revalSpan) == 'undefined' || revalSpan == null)
+						{
+							revalSpan = document.createElement("span");
+							revalSpan.setAttribute("id", "revalSpan");
+							parentDiv.appendChild(document.createElement("br"));
+							parentDiv.appendChild(document.createElement("br"));
+							parentDiv.appendChild(revalSpan);
+						}else{
+							revalSpan.innerHTML =  "";
+						}
+						var editSpan = document.getElementById("editSpan");
+						if(typeof(editSpan) == 'undefined' || editSpan == null)
+						{
+							editSpan = document.createElement("span");
+							editSpan.setAttribute("id", "editSpan");
+							parentDiv.appendChild(editSpan);
+						}else{
+							editSpan.innerHTML =  "";
+						}
+				  }
+				}
+			};
+	
+		}
+		
+	}
+//deleteSubscription is disabled as of now 
+	 /* function deleteSubscription(){
+	 var parentDiv = document.getElementById("main");
+		var selectedObj = document.getElementById("contentTypeList");
+		var contentType = selectedObj.options[selectedObj.selectedIndex].text;
+		
+		var selectedSubObj = document.getElementById("subscriptionList");
+		var selectedSub = selectedSubObj.options[selectedSubObj.selectedIndex].text;
+		var url = "admin/delete?contentType="+contentType+"&subscriptionName="+selectedSub;
+		xmlhttp.open('GET', url, true);
+		xmlhttp.send(null);
+		xmlhttp.onreadystatechange = function() {
+			if (xmlhttp.readyState == 4) {
+				if (xmlhttp.status == 200) {									
+					var queryVal = JSON.parse(xmlhttp.responseText);
+					 var insertVal = queryVal.insertresult;	
+					 alert(insertVal);
+																						
+				}
+			}
+		};
+	} */
+	
+	
+	function revalSubscription(){
+		var parentDiv = document.getElementById("main");
+		var selectedObj = document.getElementById("contentTypeList");
+		var contentType = selectedObj.options[selectedObj.selectedIndex].text;
+		
+		var selectedSubObj = document.getElementById("subscriptionList");
+		var selectedSub = selectedSubObj.options[selectedSubObj.selectedIndex].text;
+	
+		revalSpan.innerHTML = "Revaluating "+contentType+"/"+selectedSub+" subscription"+"<br/>"+"<br/>";
+		
+		var url = "admin/republish?contentType="+contentType+"&subscription="+selectedSub;
+		xmlhttp.open('GET', url, true);
+		xmlhttp.send(null);
+		xmlhttp.onreadystatechange = function() {
+			if (xmlhttp.readyState == 4) {
+				if (xmlhttp.status == 200) {	
+					revalSpan.innerHTML =  xmlhttp.responseText+"<br/>"+"<br/>";
+				}
+			}
+		};
+	}
+	function editSubscription(){
+		var parentDiv = document.getElementById("main");
+		var selectedObj = document.getElementById("contentTypeList");
+		var contentType = selectedObj.options[selectedObj.selectedIndex].text;
+		
+		var selectedSubObj = document.getElementById("subscriptionList");
+		var selectedSub = selectedSubObj.options[selectedSubObj.selectedIndex].text;
+		var filterMapSpan = document.createElement("span");
+		filterMapSpan.setAttribute("id", "filterMapSpan");
+		 
+	
+		var url = "admin/edit?contentType="+contentType+"&subscriptionName="+selectedSub;
+		xmlhttp.open('GET', url, true);
+		xmlhttp.send(null);
+		xmlhttp.onreadystatechange = function() {
+			if (xmlhttp.readyState == 4) {
+				if (xmlhttp.status == 200) {									
+					var mapData = JSON.parse(xmlhttp.responseText);			
+					 mainKeys = mapData.getFilterKeys;
+					 mainValues = mapData.getFilterValues;
+					 mainOperators = mapData.getOperators;
+					 var len=mainKeys.length;
+					 
+					 for (var i = mainKeys.length-1; i >=0; i--) {
+						 if(mainOperators[i] == "")
+							filterMapSpan.innerHTML="<span id='dummySpan"+i+"'>"+"<input type='button' id='"+i+"' value='+' onclick='updateQuery(this.id);'/>" +mainKeys[i]+" : "+mainValues[i]+"<br/>"+"</span>"+"<br/>"+filterMapSpan.innerHTML;
+						 else
+							 filterMapSpan.innerHTML="<span id='dummySpan"+i+"'>"+"<input type='button' id='"+i+"' value='+' onclick='updateQuery(this.id);'/>" +mainKeys[i]+" "+mainOperators[i]+" "+mainValues[i]+"<br/>"+"</span>"+"<br/>"+filterMapSpan.innerHTML; 
+					}
+					editSpan.appendChild(filterMapSpan);
+					editSpan.appendChild(document.createElement("br"));
+					editSpan.appendChild(document.createElement("br"));
+					editSpan.appendChild(document.createTextNode('Update the hierarchy keys:'));
+					editSpan.appendChild(document.createElement("br"));
+					
+					var hierarchykeys_select = document.createElement("select");
+					hierarchykeys_select.id = "hierarchykeys_select";
+					var hierarchykeydefaultOption = new Option("Select","Select");
+					hierarchykeys_select.options[hierarchykeys_select.options.length] = hierarchykeydefaultOption;
+					  var hierarchyjsonData = JSON.parse(xmlhttp.responseText);
+					  for (var s in hierarchyjsonData.hierarchykeys) {
+					      var hierarchykeyscounter = hierarchyjsonData.hierarchykeys[s];
+					      hierarchykeys_select.options[hierarchykeys_select.options.length] = new Option(hierarchykeyscounter, s+1);
+					  }  
+					editSpan.appendChild(hierarchykeys_select);
+					var hierarchyvalues_select = document.createElement("select");
+					hierarchyvalues_select.id = "hierarchyvalues_select";
+					var hierarchyvalues = ["true", "false"];
+					var hierarchydefaultOption = new Option("Select","Select");
+					hierarchyvalues_select.options[hierarchyvalues_select.options.length] = hierarchydefaultOption;
+					for (var l=0; l<hierarchyvalues.length; l++) {
+						hierarchyvalues_select.options[hierarchyvalues_select.options.length] = new Option(hierarchyvalues[l], l+1);
+					  } 
+					editSpan.appendChild(hierarchyvalues_select);
+					editSpan.appendChild(document.createElement("br"));
+					
+					var queryButton = document.createElement('button');
+					queryButton.innerHTML = 'Click here to enter filter value';
+					queryButton.onclick = function(){
+					    editTextBox.disabled  = false;
+					  };
+					  editSpan.appendChild(queryButton);
+					
+					var editTextBox = document.createElement("textarea");					
+					editTextBox.name = "post";
+					editTextBox.id = "queryBox";
+					editTextBox.maxLength = "2000";
+					editTextBox.cols = "50";
+					editTextBox.rows = "30";
+					editTextBox.disabled  = true;
+					editSpan.appendChild(document.createElement("br"));
+					editSpan.appendChild(editTextBox);
+					
+					
+					var submitButton = document.createElement("input");
+					submitButton.type = "button"
+					submitButton.id = "submitButton"
+					submitButton.value = "Submit"
+					submitButton.addEventListener('click', function(){
+						submitSubscription(len);
+						//this.disabled=true;
+					});
+					editSpan.appendChild(document.createElement("br"));
+					editSpan.appendChild(submitButton);
+																							
+				}
+			}
+		};
+	}
+	function submitSubscription(len){
+		var parentDiv = document.getElementById("main");
+		var selectedObj = document.getElementById("contentTypeList");
+		var editSpan = document.getElementById("editSpan");
+		
+		var filterMapSpan = document.getElementById("filterMapSpan").innerHTML;
+		var contentType = selectedObj.options[selectedObj.selectedIndex].text;
+		
+		
+		var selectedSubObj = document.getElementById("subscriptionList");
+		var selectedSub = selectedSubObj.options[selectedSubObj.selectedIndex].text;
+		for(var i=0;i<mainCounter;i++){
+			var e = document.getElementById("operator_select"+i);
+			if (typeof(e) != 'undefined' && e != null)
+			{
+				var operatorElement = document.getElementById("operator_select"+i);
+				var operatorElementVal = operatorElement.options[operatorElement.selectedIndex].text;
+				var logicalOperatorElement = document.getElementById("logical_operator_select"+i);
+				var logicalOperatorElementVal = logicalOperatorElement.options[logicalOperatorElement.selectedIndex].text;
+				var newKey = document.getElementById("key"+i).value;
+				var newValue = document.getElementById("value"+i).value;	
+				var refDummySpanId = operatorElement.parentNode.getAttribute("id");
+				refDummySpanId = refDummySpanId.replace("dummySpan","");
+				var spanId = parseInt(refDummySpanId);
+				if( newKey == '' || newValue == ''){
+					alert('Please enter the values before you submit');
+					return false;
+				}
+				createNewQuery(mainKeys[spanId], mainValues[spanId], document.getElementById("key"+i).value, document.getElementById("value"+i).value, 
+						mainOperators[spanId], operatorElementVal, logicalOperatorElementVal);
+			}
+		}
+
+		var hkey_select = document.getElementById("hierarchykeys_select");
+		var hierarchy_key = hkey_select.options[hkey_select.selectedIndex].text;		
+		var hvalue_select = document.getElementById("hierarchyvalues_select");
+		var hierarchy_value = hvalue_select.options[hvalue_select.selectedIndex].text;
+		var editTextBoxValue = document.getElementById("queryBox").value;
+		var newMainString = "";
+		if(tempString!= mainString || (hierarchy_key!='Select' && hierarchy_value!='Select') || editTextBoxValue != ""){
+		if(tempString==mainString){
+			if(editTextBoxValue!=""){
+				newMainString = editTextBoxValue;
+				newMainString = newMainString.replaceAll("{","%7B");
+				newMainString = newMainString.replaceAll("#","%23");
+				newMainString = newMainString.replaceAll("&","%26");
+			}
+			else
+				newMainString = "NoChange";
+		}else{
+		newMainString = mainString.replaceAll("{","%7B");
+		newMainString = newMainString.replaceAll("#","%23");
+		newMainString = newMainString.replaceAll("&","%26");
+		}
+		//newMainString = newMainString.replace(/\\/g, '');
+		
+		var submitUrl = "admin/submit?contentType="+contentType+"&subscriptionName="+selectedSub+"&newQuery="+newMainString+"&hierarchyKeyChange="+hierarchy_key+"&hierarchyValueChange="+hierarchy_value;
+		xmlhttp.open('GET', submitUrl, true);
+		xmlhttp.send(null);	
+		xmlhttp.onreadystatechange = function() {
+		if (xmlhttp.readyState == 4) {
+			if (xmlhttp.status == 200) {
+				var response = JSON.parse(xmlhttp.responseText);	
+				var resultfilter = response.resultfilter;
+				var resulthierarchy = response.resulthierarchy;
+				if(resultfilter!=null)
+				alert(resultfilter);
+				if(resulthierarchy!=null)
+				alert(resulthierarchy);	
+			}
+		}
+		
+	}; 
+}	
+}
+
+	String.prototype.replaceAll = function(str1, str2, ignore) 
+	{
+		return this.replace(new RegExp(str1.replace(/([\/\,\!\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/g,"\\$&"),(ignore?"gi":"g")),(typeof(str2)=="string")?str2.replace(/\$/g,"$$$$"):str2);
+	}
+	
+	    
+	function createNewQuery(oldKey, oldValue, newKey, newValue, oldOperator, newOperator, newLogicalOperator){
+		oldValue = formatValue(oldValue);
+		newValue = formatValue(newValue);
+		if((oldOperator == "$in" || oldOperator == "$nin")&& oldOperator != ""){
+			var oldString = "\""+oldKey+"\""+":"+"{"+"\""+oldOperator+"\""+":"+"["+oldValue+"]"+"}";
+		} else if(oldOperator == ""){
+			var oldString = "\""+oldKey+"\""+":"+oldValue;
+				}else{
+			var oldString = "\""+oldKey+"\""+":"+"{"+"\""+oldOperator+"\""+":"+oldValue+"}";
+		}
+		var oldKeyValueString = "{"+oldString+"}";
+		if((newOperator == "$in" || newOperator == "$nin")&& newOperator != ""){
+			var newKeyValueString = "{"+"\""+newKey+"\""+":"+"{"+"\""+newOperator+"\""+":"+"["+newValue+"]"+"}"+"}";			
+		}else if(newOperator == ":" && newOperator != ""){
+			var newKeyValueString = "{\""+newKey+"\""+":"+newValue+"}";			
+		}else{
+			var newKeyValueString = "{"+"\""+newKey+"\""+":"+"{"+"\""+newOperator+"\""+":"+newValue+"}"+"}";			
+		}
+		var newString = "\"$"+newLogicalOperator+"\":["+oldKeyValueString+","+newKeyValueString+"]";
+		mainString = mainString.replace(oldString, newString);
+	}
+
+	function formatValue(str){
+		var newString = "";
+		if(str instanceof Array){
+			if(isNaN(str[0]))
+			{
+				for(var i=0;i<str.length;i++){
+					newString = newString + "\""+str[i]+"\"";
+					if(i != str.length-1)
+						newString = newString + ",";
+				}
+			}else{
+				for(var i=0;i<str.length;i++){
+					newString = newString + str[i];
+					if(i != str.length-1)
+						newString = newString + ",";
+				}
+			}
+			return newString;
+		}else{
+			if(isNaN(str))
+			{
+				newString = "\""+str+"\"";
+			}else{
+				newString = str;
+			}
+			return newString;
+		}
+	}
+	
+	function updateQuery(i){
+		var dummySpan = document.getElementById("dummySpan"+i); 
+		
+		var logical_operator_select = document.createElement("select");
+		logical_operator_select.setAttribute("id", "logical_operator_select"+mainCounter);
+		var logical_operators = ["or", "and", "nor", "nand"];
+		for (var j=0; j<logical_operators.length; j++) {
+			logical_operator_select.options[logical_operator_select.options.length] = new Option(logical_operators[j], j+1);	 	
+		}	
+		dummySpan.appendChild(logical_operator_select);
+		
+	    var key = document.createElement("input");	
+		key.setAttribute("id", "key"+mainCounter);
+		key.setAttribute("type", "text");
+		dummySpan.appendChild(key);
+		
+		var operators_select = document.createElement("select");
+		operators_select.setAttribute("id", "operator_select"+mainCounter);
+		var operators = [":","$gt", "$gte","$lt","$lte","$ne","$exists","$type","$in","$nin","$all","$elemMatch","$size","$mod","$regex","$where"];
+		for (var k=0; k<operators.length; k++) {
+			operators_select.options[operators_select.options.length] = new Option(operators[k], k+1);
+		  } 
+		dummySpan.appendChild(operators_select);
+
+		var value = document.createElement("input");	
+		value.setAttribute("id", "value"+mainCounter);
+		value.setAttribute("type", "text");						
+		dummySpan.appendChild(value);
+		dummySpan.appendChild(document.createElement("br"));
+		mainCounter++;
+	}
+
+	function printJSON(jsonObj){
+		var jsonStr = "";
+		var filterStr="";
+		var idStr = "";
+		var heirarchyStr = "";		
+		for(var k in jsonObj){			
+			if(k == "filter"){
+				filterObj = jsonObj[k];
+			    filterStr=filterStr + "<br>";
+				for(var fkey in filterObj){
+					filterStr = filterStr + "<br>"+ JSON.stringify(fkey) + " : " + JSON.stringify(filterObj[fkey]);	
+					mainString = JSON.stringify(fkey) + ":" + JSON.stringify(filterObj[fkey]);
+					tempString = mainString;
+			  }				  
+			}else if(k == "hierarchyExpansions"){
+				hierarchyObj = jsonObj[k];
+				heirarchyStr=heirarchyStr + "<br>";
+				for(hkey in hierarchyObj){
+					heirarchyStr = heirarchyStr + "<br>"+ hkey + " : " + hierarchyObj[hkey];
+				}				
+			}else if(k =="_id"){
+				idStr = idStr + k + " : " + jsonObj[k];				
+			}
+			else if(k == "javafilter"){
+			  var filterObjNew = jsonObj[k];
+			  filterStr = "";
+			  var temp = "";
+			  filterStr=filterStr + "<br>";			 
+			  filterObjNew = filterObjNew.toString();
+			  //alert(filterObjNew);
+			  filterObjNew = filterObjNew.replaceAll("#","$");
+			  filterObjNew = filterObjNew.replaceAll("/",".");
+			  filterStr = filterStr + "<br>" + filterObjNew.toString();
+			 // alert("in javafilter:"+filterStr);
+			  mainString = filterObjNew.toString();
+			  tempString = mainString;			  
+			} 			
+			jsonStr = idStr + "<br>"+ filterStr + "<br>" + heirarchyStr;
+		}
+		return jsonStr;
+	}
+
+	function createTable() {
+		getOperatorList();
+		var parentDiv = document.getElementById("main");
+		var table1 = document.createElement("table");
+
+		var jsonSpan = document.getElementById('jsonSpan');
+
+		table1.setAttribute("width", "350px");
+		table1.setAttribute("border", "0");
+		table1.setAttribute("id", "headerTable");
+		
+		var row1 = table1.insertRow(table1.rows.length);
+		var cell1 = row1.insertCell(0);
+		cell1.appendChild(logicalOperatorList);
+		logicalOperatorList.addEventListener("change", addRow, false);
+		
+		parentDiv.insertBefore(document.createElement("br"),jsonSpan);
+		parentDiv.insertBefore(document.createElement("br"),jsonSpan);
+		
+		parentDiv.insertBefore(table1,jsonSpan);
+		
+		var table2 = document.createElement("table");
+		table2.setAttribute("width", "350px");
+		table2.setAttribute("id", "queryTable");
+		
+		parentDiv.insertBefore(document.createElement("br"),jsonSpan);
+		parentDiv.insertBefore(document.createElement("br"),jsonSpan);
+		parentDiv.insertBefore(table2,jsonSpan);
+	
+		parentDiv.appendChild(submitButton);
+	}
+
+	function addRow() {
+		var selectedObj = document.getElementById("logicalOperatorList");
+		var logicalOperatorText = selectedObj.options[selectedObj.selectedIndex].text;
+		if (logicalOperatorText == "START AND"
+				|| logicalOperatorText == "CLOSE AND"
+				|| logicalOperatorText == "START OR"
+				|| logicalOperatorText == "CLOSE OR") {
+			var jsonSpan = document.getElementById("jsonSpan");
+			var logicalOperatorValue = selectedObj.options[selectedObj.selectedIndex].value;
+			if (logicalOperatorText == "START AND"
+					|| logicalOperatorText == "START OR") {
+				if (jsonStr == "") {
+					jsonStr = logicalOperatorValue;
+				} else {
+					jsonStr = jsonStr + "," + logicalOperatorValue;
+				}
+
+			} else if (logicalOperatorText == "CLOSE AND"
+					|| logicalOperatorText == "CLOSE OR") {
+				if (jsonStr[jsonStr.length - 1] == "]") {
+					jsonStr = jsonStr + logicalOperatorValue;
+				} else {
+					jsonStr = jsonStr.substring(0, jsonStr.length - 1)
+							+ logicalOperatorValue;
+				}
+			}
+			
+			jsonSpan.innerHTML = jsonStr;
+			return;
+		}
+
+		var table1 = document.getElementById("headerTable");
+		var row2 = table1.insertRow(table1.rows.length);
+		var cell2 = row2.insertCell(0);
+		var filter_key_column = document.createElement("input");
+
+		filter_key_column.setAttribute("name", "filter_key");
+		filter_key_column.setAttribute("type", "text");
+		filter_key_column.setAttribute("id", "filter_key");
+
+		cell2.appendChild(filter_key_column);
+
+		var cell3 = row2.insertCell(1);
+		cell3.appendChild(operatorList);
+
+		var cell4 = row2.insertCell(2);
+		var filter_value_column = document.createElement("input");
+		filter_value_column.setAttribute("name", "filter_value");
+		filter_value_column.setAttribute("type", "text");
+		filter_value_column.setAttribute("id", "filter_value");
+		cell4.appendChild(filter_value_column);
+
+		var cell5 = row2.insertCell(3);
+		cell5.appendChild(addRowButton);
+	}
+	
+	function addCondition() {
+		var field_key = document.getElementById("filter_key");
+		var field_value = document.getElementById("filter_value");
+
+		var selectedObj = document.getElementById("operatorList");
+		var operator = selectedObj.options[selectedObj.selectedIndex].value;
+		var operatorText = selectedObj.options[selectedObj.selectedIndex].text;
+		selectedObj.selectedIndex = 0;
+
+		var selectedObj = document.getElementById("logicalOperatorList");
+		var logicalOperatorText = selectedObj.options[selectedObj.selectedIndex].text;
+		var logicalOperator = selectedObj.options[selectedObj.selectedIndex].value;
+
+		selectedObj.selectedIndex = 0;
+
+		if (operatorText == "EQUALS") {
+			jsonStr = jsonStr + field_key.value + operator + field_value.value + ",";
+		} else
+			jsonStr = jsonStr + field_key.value + ":{" + operator + ":"
+					+ field_value.value + "},";
+
+		var jsonSpan = document.getElementById("jsonSpan");
+		jsonSpan.innerHTML = jsonStr;
+	}
+
+	function submit() {
+		
+		jsonSpan.innerHTML = "Query Filter - { " + jsonStr + " }";
+	}
+	
+/*	function add(text){
+	    var TheTextBox;
+	    TheTextBox.value = TheTextBox.value + text;
+	    alert(TheTextBox.value);
+	}*/
+/*	function getKeys(text){
+		var patt1=new RegExp("\"([^\"]*)\"");
+		var arr = patt1.exec(text);
+		alert(arr);
+		alert(arr.length); 
+		 for(var i=0;i<arr.length;i++){
+			if(arr[i].indexOf("document") != -1){
+				alert(arr[i]);}
+			} 
+	}*/
+</script>
+</head>
+<body onload="init()">
+	<h1 align="center">CDS+ Subscription Management</h1>
+	<br>
+	<div id="main"></div>
+
+</body>
+</html>

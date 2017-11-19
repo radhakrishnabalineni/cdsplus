@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:app1="http://www.w3.org/1999/xlink" xmlns:app2="http://www.hp.com/cdsplus" >
+  <xs:import namespace="http://www.w3.org/1999/xlink" schemaLocation="cadence_app1.xsd" />
+  <xs:import namespace="http://www.hp.com/cdsplus" schemaLocation="cadence_app2.xsd" />
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd" />
+
+  <xs:element name="request">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="app2:ref" maxOccurs="unbounded" />
+      </xs:sequence>
+      <xs:attribute name="buffercount" type="xs:string" />
+      <xs:attribute name="count" type="xs:string" />
+      <xs:attribute ref="xml:base" />
+    </xs:complexType>
+  </xs:element>
+  
+</xs:schema>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== 
+	Sep 13, 2012 2:22:33 PM castor description kashyaks ====================================================================== -->
+<project name="cdsp-pmloader-bin" default="execute" basedir=".">
+
+	<property name="lib.dir" value="${basedir}/lib" />
+
+	<property name="src.dir" value="${basedir}/src" />
+	<property name="conf.dir" value="${basedir}/config" />
+
+	<property name="build.dir" value="${basedir}/build" />
+	<property name="dist.dir" value="${basedir}/dist" />
+
+	<property name="build.class.dir" value="${build.dir}/classes" />
+	<property name="logs.dir" value="${basedir}/logs" />
+
+	<path id="java.class.path">
+		<fileset dir="${lib.dir}">
+			<include name="activation.jar" />
+			<include name="pmloader.jar" />
+			<include name="cdsp-dao.jar" />
+			<include name="cdsp-mongo-api.jar" />
+			<include name="log4j-1.2.14.jar" />
+			<include name="mail.jar" />
+			<include name="mongo-java-driver-2.11.2.jar" />
+			<include name="commons-lang-2.3.jar" />
+			<include name="ojdbc6.jar" />
+		</fileset>
+	</path>
+
+	<target name="validate"
+		description="used to compare and validate data between pmaster and cdsp db">
+		<java classname="com.hp.cdsplus.pmloader.PMDataValidator"
+			maxmemory="2048m" fork="true" output="${logs.dir}/validator.log"
+			classpathref="java.class.path">
+			<jvmarg line="-XX:MaxPermSize=512m" />
+			<classpath>
+				<pathelement location="${lib.dir}" />
+			</classpath>
+
+			<sysproperty key="log.file.location" value="${logs.dir}" />
+			<sysproperty key="root.logger.level" value="DEBUG" />
+			<sysproperty key="thread.logger.level" value="DEBUG" />
+			<sysproperty key="extractor.logger.level" value="DEBUG" />
+
+			<sysproperty key="LOG4J_LOCATION" value="${conf.dir}/log4j.xml" />
+			<!-- CONFIG_LOCATION -->
+			<sysproperty key="CONFIG_LOCATION" value="${conf.dir}/pmloader.properties" />
+		</java>
+	</target>
+	
+	
+
+	<target name="execute" description="used to execute the pmloader job">
+		<java classname="com.hp.cdsplus.pmloader.PMasterLoader"
+			maxmemory="2048m" fork="true" output="${logs.dir}/pmasterSysout.log"
+			classpathref="java.class.path">
+			<jvmarg line="-XX:MaxPermSize=512m" />
+			<classpath>
+				<pathelement location="${lib.dir}" />
+			</classpath>
+
+			<sysproperty key="log.file.location" value="${logs.dir}" />
+			<sysproperty key="root.logger.level" value="DEBUG" />
+			<sysproperty key="thread.logger.level" value="DEBUG" />
+			<sysproperty key="extractor.logger.level" value="DEBUG" />
+
+			<sysproperty key="LOG4J_LOCATION" value="${conf.dir}/log4j.xml" />
+			<!-- CONFIG_LOCATION -->
+			<sysproperty key="CONFIG_LOCATION" value="${conf.dir}/pmloader.properties" />
+			<sysproperty key="instance_name" value="DefaultPmaster" />
+		</java>
+	</target>
+</project>

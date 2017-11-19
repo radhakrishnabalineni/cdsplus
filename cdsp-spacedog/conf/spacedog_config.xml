@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:proj="http://www.hp.com/cdsplus" xmlns:sel="java:com.hp.cdsplus.wds.workItem.CDSPSelection" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sub="java:com.hp.cdsplus.wds.workItem.CDSPSubscription" xmlns:xutils="com.hp.cdsplus.util.xml.XMLUtils">
+	
+	<sub limit="100"
+		server="http://cdsplus-itg.austin.hp.com/cadence/app/" subscription="library/content"
+		workingDir="/opt/sasuapps/cdsplus/data/wds/" revisit="(/document/audiences/audience/audience_release_date)"
+		includeDeletes="false">
+
+		<namedDestination name="PackageDestination"
+			class="com.hp.cdsplus.wds.destination.PackageDestination"
+			maxSize="100" maxCount="5" outputDir="/Spacedog_3.0/packages" subName="library_content"/>
+		<selection destination="concat($originDocName,'.xml')" transform="/Spacedog_3.0/conf/test.xsl">
+			<destination name="PackageDestination" />
+		</selection>
+		<selection destination="concat($identifier,'/', $originDocName)"
+		select="/document/file_name/proj:ref"
+		source="concat(/node()/@*:base, @xlink:href)" contentType="/document/content_type">
+		<destination name="PackageDestination" />
+   		</selection>
+	</sub>
+</config>

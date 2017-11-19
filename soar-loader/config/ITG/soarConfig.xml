@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+  <soar project_server="http://cdsplus-itg.austin.hp.com/cadence/app/"
+        project_file_separator="/"
+        ssl_key_store="/opt/ais/app/security/cdsplus_prod_keystore.jks"
+        ssl_key_password="CDS+secret#1"
+        ssl_trust_store="/opt/ais/app/security/cdsplus_truststore.jks"
+        ssl_trust_password="CDS+secret#1"
+        filters="/opt/ais/app/applications/loaders/soar/conf/"
+        history_file_name="/opt/ais/app/applications/loaders/soar/conf/soar_PL_history.txt"
+		revisit_file_name="/opt/ais/app/applications/loaders/soar/conf/soar_revisit.txt"
+        reflist_history_file_name="/opt/ais/app/applications/loaders/soar/conf/soar_reflist_history.txt"
+        reflist_disk_path="/opt/ais/app/applications/loaders/soar/publish/public/"
+        reflist_content_type="soar_ref_data"
+        soar_event_xml_file="/opt/ais/app/applications/loaders/soar/conf/soar_event_priority_mapping.xml"
+        content_path="/opt/ais/app/applications/loaders/soar/data/extractor/"
+        content_type="soar"
+        num_worker_threads="4" work_order_wait_time="60" num_priorities="6"
+        support_msg_interval="10" logging="true"
+        log4jConfig="/opt/ais/app/applications/loaders/soar/conf/log4j.xml"
+        docbase_properties_file="/opt/ais/app/applications/loaders/soar/conf/soar_server-qa.properties"
+        docbase_property="SOAR_DOCBASE" source_class="com.hp.soar.priorityLoader.soarSource.SoarSource"
+        reference_table_definitions="/opt/ais/app/applications/loaders/soar/conf/refTableDefs.xml"
+        soar_dns_name="http://www.w3.org/2001/XMLSchema-instance"
+        soar_schema_file="soar-software-feed-vE4.xsd"
+        SOAR_DNS_NAME_XMLProcessor="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"
+        SOAR_DNS_NAME_XMLProcessor2="http://www.w3.org/1999/xhtml"
+        events_are_sequential="true" docbroker_host="g1u2348c.austin.hp.com"
+        legacy="false"
+        pushFTPtoo="true"
+        primary_loader="true"
+        deleteDelayInMinutes="10" workitems_query_file="/opt/ais/app/applications/loaders/soar/conf/loadWorkItemsQuery.properties">
+
+  <virusScan scan="off"
+    installDir="/usr/local/uvscan/"
+    configFiles="avvclean.dat|avvnames.dat|avvscan.dat|config.dat|license.dat"
+    versionCommand="/usr/local/uvscan/uvscan --version"
+    scanCommand="/usr/local/uvscan/uvscan --recursive --verbose "/>
+
+   <sendMail>
+    <smtp_host>smtp3.hp.com</smtp_host>
+    <smtp_port>25</smtp_port>
+    <from_addr>soar-loader-g2t3886@hp.com</from_addr>
+    <to_addrs>
+        <to_addr>mcad_gadsc_dev@groups.hp.com</to_addr>
+    </to_addrs>
+  </sendMail>
+ <remoteDestination class="com.hp.soar.priorityLoader.workItem.SFTPDestination"
+     username="cdsplusi"
+     password=""
+     zeroByteDelete="false"
+     passphrase="cdspsoarloader"
+     serverOid="1"
+     server="sftp://g9t3887.houston.hp.com"
+     prefix="/opt/ais/app/applications/ftplocation"
+     sshkey="/opt/ais/app/applications/loaders/soar/conf/id_rsa">
+                                                                
+   
+ <filter>
+        <collection>
+           <not>
+              <property name="submittal_group_oid" type="String">
+                 <value>submittal group 83</value>
+              </property>
+           </not>
+        </collection>
+        <item>
+            <and>
+                <property name="media_type_oids" type="String"
+                    propertyType="Repeating">
+                    <value>
+                        <lookup listName="media_types" value="Electronic" />
+                    </value>
+                </property>
+                <or>
+                    <property name="disclosure_level_oid" type="String">
+                        <value>
+                            <lookup listName="disclosure_levels" value="For HP and Channel Partner Internal Use" />
+                        </value>
+                    </property>
+                    <property name="disclosure_level_oid" type="String">
+                        <value>
+                            <lookup listName="disclosure_levels" value="HP Restricted" />
+                        </value>
+                    </property>
+                    <property name="disclosure_level_oid" type="String">
+                        <value>
+                            <lookup listName="disclosure_levels" value="Public - FTP Only" />
+                        </value>
+                    </property>
+                    <property name="disclosure_level_oid" type="String">
+                        <value>
+                            <lookup listName="disclosure_levels" value="Public" />
+                        </value>
+                    </property>
+                </or>
+            </and>
+        </item>
+    </filter>
+  </remoteDestination>
+  <icmDestination 
+    class="com.hp.soar.priorityLoader.workItem.ICMDestination" 
+    icm_base_https_url="http://c1t01769.itcs.hp.com:8080/secure-upload-service" 
+    server="ftp.hp.com" 
+    prefix="/opt/ais/app/applications/ftplocation" 
+    serverOid="22" 
+    username="cdsplus" 
+    password="4cdsplus2use" 
+    soar_icm_integration_on="b" 
+    email_smtp_host = "smtp-americas.hp.com" 
+    email_smtp_port = "25" 
+    email_from_addr = "soarLoader-itg@hp.com" 
+    email_to_addr = "ssit-dcam@hp.com" >
+  </icmDestination>
+</soar>

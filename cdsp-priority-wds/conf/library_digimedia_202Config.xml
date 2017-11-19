@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config
+	ssl_key_store="/opt/ais/app/applications/reference_client/wds/conf/cdsplus_prod_keystore.jks"
+	ssl_key_password="CDS+secret#1"
+	ssl_trust_store="/opt/ais/app/applications/reference_client/wds/conf/cdsplus_truststore.jks"
+	ssl_trust_password="CDS+secret#1" logging="true"
+	log4jConfig="/opt/ais/app/applications/reference_client/wds/conf/log4j.xml"
+	source_class="com.hp.cdsplus.wds.cdspsource.CDSPSource"
+	num_worker_threads="4" work_order_wait_time="60" num_priorities="6"
+	max_session_reuse="50"
+	history_file_name="/opt/ais/app/applications/reference_client/wds/conf/library_digimedia_202/wds_history.txt"
+	events_are_sequential="false"
+	wdsClient="/opt/ais/app/applications/reference_client/wds/conf/library_digimedia_202/wds_config.xml"
+	retryOnError="false" dbAccess="false">
+
+	<sendMail>
+		<smtp_host>smtp3.hp.com</smtp_host>
+		<smtp_port>25</smtp_port>
+		<to_addrs>
+			<to_addr>nitin.jaiswal@hp.com</to_addr>
+			<to_addr>nitin.jaiswal@hp.com</to_addr>
+		</to_addrs>
+		<from_addr>CDS+-DIGLIB-WDSClient@hp.com</from_addr>
+	</sendMail>
+</config>

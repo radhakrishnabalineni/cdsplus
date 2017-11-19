@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<saxpipe project_namespace="http://15.5.189.101/project/">
+  <data_handles>
+    <filter handler="loader.saxpipe.reference.GeneralReference" 
+      pattern="/soar-software-feed/collection/@collection-ID" 
+      name="collectionName" />
+  </data_handles>
+  <replacements>
+    <filter handler="loader.saxpipe.replace.SoarBinaryFileNameReplace" 
+      pattern="attachments/attachment/filename" content_type="soar" />
+    <filter handler="loader.saxpipe.replace.GeneralReplace" 
+      pattern="products-supported/product/@oid" 
+      content_type="productmaster" />
+  </replacements>
+</saxpipe>
+

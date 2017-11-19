@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- As part of Certificate Renewal RFC-C11059131, Path and Password has changed for both jks -->
+<concentra project_server="http://cdsplus-itg.austin.hp.com/cadence/app/"
+        project_file_separator="/"
+        ssl_key_store="/opt/ais/app/security/cdsplus_prod_keystore.jks"
+        ssl_key_password="CDS+secret#1"
+        ssl_trust_store="/opt/ais/app/security/cdsplus_truststore.jks"
+        ssl_trust_password="CDS+secret#1"
+        filters="/opt/ais/app/applications/loaders/concentra/conf/"
+        history_file_name="/opt/ais/app/applications/loaders/concentra/conf/concentra_PL_history.txt"
+        revisit_file_name="/opt/ais/app/applications/loaders/concentra/conf/concentra_revisit.txt"
+        concentra_event_xml_file="/opt/ais/app/applications/loaders/concentra/conf/event_priority_mapping.xml"
+        content_path="/opt/ais/app/applications/loaders/concentra/extractor"
+        log4jConfig="/opt/ais/app/applications/loaders/concentra/conf/log4j.xml"
+        num_worker_threads="8"
+        min_seconds_between_work_orders="60"
+        num_priorities="6"
+        max_session_reuse="50"
+        support_msg_interval="10"
+        logging="true"
+        docbase_properties_file="/opt/ais/app/applications/loaders/concentra/conf/dfc.properties"
+        workitems_query_file= "/opt/ais/app/applications/loaders/concentra/conf/loadWorkItemsQuery.properties"
+        docbase_property="XDMS"
+        legacy="false"
+        source_class="com.hp.concentra.extractor.concentraSource.ConcentraSource"
+	events_are_sequential="false" > 
+  <sendMail>
+    <smtp_host>smtp3.hp.com</smtp_host>
+    <smtp_port>25</smtp_port>
+    <from_addr>concentra-loader-g2t3886@hp.com</from_addr>
+    <to_addrs>
+        <to_addr>mcad_gadsc_dev@groups.hp.com</to_addr>
+    </to_addrs>
+  </sendMail>
+
+  <content class="c_support_doc" type="support"></content>
+  <content class="c_library_doc" type="library"></content>
+  <content class="c_standard_marketing_doc" type="marketingstandard" />
+  <content class="c_product_setup_doc" type="productsetup" />
+  <content class="c_marketing_doc" type="marketingnaconsumer" />
+  <content class="c_manual_doc" type="manual" />
+  <content class="c_hho_marketing_doc" type="marketinghho" />
+  <content class="c_content_feedback_doc" type="contentfeedback" />
+  <content class="c_general_purpose_doc" type="generalpurpose" />
+
+</concentra>
+

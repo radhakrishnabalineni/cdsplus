@@ -1,0 +1,13 @@
+<ns0:XmlBody xmlns:ns0="http://Hp.Sx.Email.XmlEmailv2">
+  <HpitHpsmCase>
+    <CallerEmail>#CallerEmail#</CallerEmail>
+    <ConfigurationItem>#ConfigurationItem#</ConfigurationItem>
+    <Service>#Service#</Service>
+    <Description>#Description#</Description>
+    <Information>#Information#</Information>
+    <Impact>#Impact#</Impact>
+    <AssignedToWorkgroup>#AssignedToWorkgroup#</AssignedToWorkgroup>
+    <Category>#Area#</Category>
+    <SubCategory>#Subarea#</SubCategory>
+  </HpitHpsmCase>
+</ns0:XmlBody>

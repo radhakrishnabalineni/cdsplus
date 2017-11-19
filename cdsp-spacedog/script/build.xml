@@ -1,0 +1,140 @@
+<?xml version="1.0"?>
+<project name="SpaceDog" default="runSpaceDog" basedir=".">
+  <property environment="env"/>
+  <property name="wds_client" value="priorityLoader" />
+  <property name="lib.dir"     value="${basedir}/lib"/>
+  <property name="conf.dir"    value="${basedir}/conf"/> 
+  <property name="logs.dir"    value="${basedir}/logs"/> 
+  <property name="packages.dir"    value="${basedir}/packages"/> 
+  <property name="log4j.file"  value="${conf.dir}/log4j.xml"/>
+
+  <property name="debug.switch"        value="on"   />
+  <property name="otimize.switch"      value="off"  />
+  <property name="deprecation.switch"  value="off"  />
+
+ <path id="lib.class.path">
+   <fileset dir="${lib.dir}">
+      <include name="**/*.jar"/>
+      <include name="**/*.zip"/>
+	  <include name="**/*.xml"/>
+	</fileset>
+</path>
+
+<!--Check for Stop File
+<target name="-check-stop-file">
+    <available property="file.exists" file="${wds_client}.stop"/>
+</target>-->
+<!--Delete Stop File if it exists
+<target name="remove-stop-file" depends="-check-stop-file" if="file.exists">
+   <delete file="${wds_client}.stop"/>
+</target>-->
+
+<target name="runSpaceDog" description="Run SpaceDog to retrieve documents from CDS+">
+	<java classname="com.hp.loader.priorityLoader.PriorityLoader"
+      maxmemory="1024m"
+      fork="true"
+	  output="${logs.dir}/sysout.log"
+      dir="${basedir}"
+      >
+     <classpath>
+	     <pathelement location="${conf.dir}"/>
+		 <path refid="lib.class.path"/>
+    </classpath>
+	  <arg value="${wds_client}"/>
+      <arg value="${log4j.log.location}" />
+      <sysproperty key="log4j.wds_type" value="Spacedog"/>
+      <sysproperty key="log4j.log.location" value="${logs.dir}" />
+      <sysproperty key="log4j.loaderLevel" value="DEBUG" />
+	  <sysproperty key="log4j.threadLogLevel" value="DEBUG" />
+    </java>
+  </target>
+	
+<target name="SpaceDogEnableEmail" description="Add JavaMail JARs to Ant setup to allow mail task">
+    <copy todir="${env.ANT_HOME}/lib"
+          overwrite="true"
+          flatten="false">
+      <fileset dir="${lib.dir}/">
+        <include name="activation.jar"/>
+        <include name="mail.jar"/>
+      </fileset>
+    </copy>
+  </target>
+
+  <target name="clean">
+    <delete>
+      <fileset dir="${logs.dir}">
+        <include name="*.log"/>
+      </fileset>
+    </delete>
+  </target>
+
+  <target name="purge">
+    <delete>
+      <fileset dir="${packages.dir}">
+        <include name="*"/>
+      </fileset>
+      <fileset dir="${logs.dir}">
+        <include name="*"/>
+      </fileset>
+    </delete>
+  </target>
+
+  <target name="SpaceDogDiag">
+    <exec executable="cmd" failonerror="false" osfamily="windows">
+      <arg line="/c dir conf &gt; conf_dir.txt"/>
+    </exec>
+    <exec executable="cmd" failonerror="false" osfamily="windows">
+      <arg line="/c dir lib &gt; lib_dir.txt"/>
+    </exec>
+    <exec executable="cmd" failonerror="false" osfamily="windows">
+      <arg line="/c dir packages &gt; packages_dir.txt"/>
+    </exec>
+    <exec executable="cmd" failonerror="false" osfamily="windows">
+      <arg line="/c ${env.ANT_HOME}/bin/ant -diagnostics &gt; ant_diag.txt"/>
+    </exec>
+    <exec executable="sh" failonerror="false" osfamily="unix">
+      <arg line="ls -al conf &gt; conf_dir.txt"/>
+    </exec>
+    <exec executable="sh" failonerror="false" osfamily="unix">
+      <arg line="ls -al lib &gt; lib_dir.txt"/>
+    </exec>
+    <exec executable="sh" failonerror="false" osfamily="unix">
+      <arg line="ls -al content &gt; packages_dir.txt"/>
+    </exec>
+    <exec executable="sh" failonerror="false" osfamily="unix">
+      <arg line="${env.ANT_HOME}/bin/ant -diagnostics &gt; ant_diag.txt"/>
+    </exec>
+    <zip destfile="spacedog-report-attachment.zip">
+      <fileset dir="logs">
+        <include name="*.log"/>
+      </fileset>
+      <fileset dir=".">
+        <include name="conf_dir.txt"/>
+        <include name="lib_dir.txt"/>
+        <include name="content_dir.txt"/>
+        <include name="ant_diag.txt"/>
+      </fileset>
+      <fileset dir="conf">
+        <include name="spacedog_config.xml"/>
+        <include name="spacedog_history.txt"/>
+      </fileset>
+    </zip>
+    <mail mailhost="smtp1.hp.com" mailport="25" subject="SpaceDog Environment Report">
+      <from address="niharika.srivastava@hp.com"/>
+      <to address="sanil@hp.com"/>
+      <message>Here is the SpaceDog Environment Report</message>
+        <fileset dir=".">
+          <include name="spacedog-report-attachment.zip"/>
+        </fileset>
+    </mail>
+    <delete>
+      <fileset dir=".">
+        <include name="spacedog-report-attachment.zip"/>
+        <include name="conf_dir.txt"/>
+        <include name="lib_dir.txt"/>
+        <include name="packages_dir.txt"/>
+        <include name="ant_diag.txt"/>
+      </fileset>
+    </delete>
+  </target>
+</project>

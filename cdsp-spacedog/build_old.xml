@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="cdsp-priority-wds" default="build" basedir=".">
+	<property environment="env"/>
+	<property name="ext.lib.dir" value="${env.EXT_LIB_DIR}"/>
+	<property name="project.dir" value="${basedir}"/>
+	<property name="lib.dir" value="${project.dir}/lib"/>
+	<property name="src.dir" value="${project.dir}/src"/>
+	<property name="build.dir" value="${project.dir}/build"/>
+	<property name="dir.dist" value="${env.CURRENT_BUILD_DIR}" />
+	<property name="config.dir" value="${project.dir}/config"/>
+	<property name="build.classes.dir" value="${build.dir}/classes"/>
+
+	<property environment="env"/>
+
+	<property name="jar.file" value="priority_wds-${env.RELEASE_VERSION}.jar"/>
+	
+	<path id="lib.class.path">
+		<fileset dir="${ext.lib.dir}">
+			<include name="log4j-1.2.14.jar"/>
+			<include name="mail.jar"/>
+			<include name="saxon8.jar"/>
+			<include name="saxon8-dom.jar"/>
+			<include name="saxon8-xpath.jar"/>
+		</fileset>
+		<fileset dir="${env.CURRENT_BUILD_DIR}">
+			<include name="PriorityLoader-${env.RELEASE_VERSION}.jar"/>
+			<include name="cdsp-commons-utils-${env.RELEASE_VERSION}.jar"/>
+			<include name="wds-destination-${env.RELEASE_VERSION}.jar"/>
+		</fileset>
+	</path>
+
+	<!--  Default Target which calls all the necessary targets  -->
+	<target name="build" depends="clean,init,compile,jar" description="Default Target"/>
+
+	<!-- creates the required folders for build. -->
+	<target name="clean" description="Deletes Build directory and JAR File">
+		<delete dir="${build.dir}"/>
+	</target>
+
+	<!-- creates the required folders for build. -->
+	<target name="init" description="Creates Build directory" >
+		<mkdir dir="${build.dir}"/>
+		<mkdir dir="${build.classes.dir}"/>
+	</target>
+
+	<!-- compiles the java source code.  -->
+	<target name="compile" description="Compiling Java Classes">
+		<javac 
+			srcdir="${src.dir}"
+         	destdir="${build.classes.dir}"
+        	debug="on"
+    	 	fork="true" 
+		>
+			<classpath refid="lib.class.path" />
+		</javac>
+		
+	</target>
+
+	<!-- Generates the deployable target -->
+	<target name="jar" description="Creating jar File">
+		<jar jarfile="${dir.dist}/${jar.file}" basedir="${build.classes.dir}" ></jar>
+		<copy file="${dir.dist}/${jar.file}" todir="${env.CDSPLUS_SHARED_LIB}"/>
+	</target>
+	
+	
+</project>

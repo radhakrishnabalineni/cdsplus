@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<psf version="2.0">
+<provider id="org.eclipse.team.svn.core.svnnature">
+<project reference="1.0.1,https://svn02.atlanta.hp.com/local/hpit116439/CDSPTechRefresh/cdsp-bindings/branches/1.0,cdsp-bindings,302e29f33a2e001316649e60f73a49d0;https://svn02.atlanta.hp.com/local/hpit116439/CDSPTechRefresh/cdsp-bindings/branches/1.0;https://svn02.atlanta.hp.com/local/hpit116439/CDSPTechRefresh/cdsp-bindings/branches/1.0;branches;tags;trunk;true;f5aa1f96-cad2-4282-ae45-80f58ee505e9;https://svn02.atlanta.hp.com/local/hpit116439;;false;;;0"/>
+</provider>
+</psf>

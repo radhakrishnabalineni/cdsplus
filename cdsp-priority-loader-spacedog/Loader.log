@@ -1,0 +1,27 @@
+2016-02-18T22:40:13IST INFO  Loading ssl configuration
+2016-02-18T22:40:13IST INFO  sslStoreParam: /opt/ais/app/security/cdsplus_prod_keystore.jks
+2016-02-18T22:40:13IST INFO  sslPasswordParam: CDS+secret#1
+2016-02-18T22:40:13IST INFO  sslTrustParam: /opt/ais/app/security/cdsplus_truststore.jks
+2016-02-18T22:40:13IST INFO  sslTrustPasswordParam: CDS+secret#1
+2016-02-18T22:40:13IST INFO  Loading sendMail configuration
+2016-02-18T22:40:13IST INFO  num_worker_threadsexceeds maximum limit4. Using default of 4
+2016-02-18T22:40:13IST INFO  Creating history Handler: /opt/ais/app/applications/loaders/concentra/conf/concentra_PL_history.txt
+2016-02-18T22:40:16IST FATAL History file </opt/ais/app/applications/loaders/concentra/conf/concentra_PL_history.txt> does not exist or is not readable | com.hp.loader.history.HistoryHandler.<init>(HistoryHandler.java:74)
+2016-02-18T22:44:27IST INFO  Loading ssl configuration
+2016-02-18T22:44:27IST INFO  sslStoreParam: /opt/ais/app/security/cdsplus_prod_keystore.jks
+2016-02-18T22:44:27IST INFO  sslPasswordParam: CDS+secret#1
+2016-02-18T22:44:27IST INFO  sslTrustParam: /opt/ais/app/security/cdsplus_truststore.jks
+2016-02-18T22:44:27IST INFO  sslTrustPasswordParam: CDS+secret#1
+2016-02-18T22:44:27IST INFO  Loading sendMail configuration
+2016-02-18T22:44:28IST INFO  num_worker_threadsexceeds maximum limit4. Using default of 4
+2016-02-18T22:44:28IST INFO  Creating history Handler: /opt/ais/app/applications/loaders/concentra/conf/concentra_PL_history.txt
+2016-02-18T22:44:29IST FATAL No initial token in the history file | com.hp.loader.history.TokenHistoryHandler.<init>(TokenHistoryHandler.java:90)
+2016-02-18T22:47:28IST INFO  Loading ssl configuration
+2016-02-18T22:47:29IST INFO  sslStoreParam: /opt/ais/app/security/cdsplus_prod_keystore.jks
+2016-02-18T22:47:29IST INFO  sslPasswordParam: CDS+secret#1
+2016-02-18T22:47:29IST INFO  sslTrustParam: /opt/ais/app/security/cdsplus_truststore.jks
+2016-02-18T22:47:29IST INFO  sslTrustPasswordParam: CDS+secret#1
+2016-02-18T22:47:31IST INFO  Loading sendMail configuration
+2016-02-18T22:48:00IST INFO  num_worker_threadsexceeds maximum limit4. Using default of 4
+2016-02-18T22:50:56IST INFO  Creating history Handler: /opt/ais/app/applications/loaders/concentra/conf/concentra_PL_history.txt
+2016-02-18T22:52:14IST FATAL No initial token in the history file | com.hp.loader.history.TokenHistoryHandler.<init>(TokenHistoryHandler.java:90)

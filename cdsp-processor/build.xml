@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+====================================================================== 
+	Sep 13, 2012 2:22:33 PM castor description kashyaks 
+======================================================================
+-->
+<project name="cdsp-processor" default="all" basedir=".">
+    <property environment="env" />
+	<property name="lib.dir" value="${basedir}/lib" />
+
+	<property name="src.dir" value="${basedir}/src" />
+	<property name="conf.dir" value="${basedir}/config/${env.ENVIRONMENT}" />
+
+	<property name="build.dir" value="${basedir}/build" />
+	<property name="build.class.dir" value="${build.dir}/classes" />
+
+	<property name="scripts.dir" value="${basedir}/scripts" />
+
+	<property name="logs.dir" value="${basedir}/logs" />
+	<property name="dist.dir" value="${env.DIST_DIR}" />
+
+	<path id="java.class.path">
+		<fileset dir="${lib.dir}">
+			<include name="activation.jar"/>
+			<include name="cglib-nodep-2.2.jar"/>
+			<include name="commons-beanutils-1.3.jar"/>
+			<include name="commons-collections-3.2.1-javadoc.jar"/>
+			<include name="commons-collections-3.2.1-sources.jar"/>
+			<include name="commons-collections-3.2.1.jar"/>
+			<include name="commons-io-2.0.jar"/>
+			<include name="commons-lang-2.3.jar"/>
+			<include name="commons-logging-1.1.jar"/>
+			<include name="jaxb-api.jar"/>
+			<include name="jaxb-impl-2.0.1.jar"/>
+			<include name="jaxb-xjc-2.0.1.jar"/>
+			<include name="jdom.jar"/>
+			<include name="jettison-1.3.3.jar"/>
+			<include name="json-lib-2.4-jdk15.jar"/>
+			<include name="jsr173_api.jar"/>
+			<include name="log4j-api-2.0-beta9.jar" />				
+			<include name="log4j-core-2.0-beta9.jar" />
+			<include name="mongo-java-driver-2.11.2.jar"/>
+			<include name="ods.jar"/>
+			<include name="dom4j-1.6.1.jar"/>
+			<include name="swingx-all-1.6.3.jar"/>
+			<include name="xom-1.2.9.jar"/>		
+		</fileset>	
+		<fileset dir="${dist.dir}">
+			<include name="cdsp-mongo-api.jar" />
+			<include name="cdsp-dao.jar" />
+			<include name="concentra-input-schema-bindings.jar"/>
+			<include name="concentra-output-schema-bindings.jar"/>
+			<include name="cdsp-conversion-utils.jar"/>
+			<include name="log4j-1.2.14.jar"/>
+		</fileset>	
+	</path>
+	
+	<!-- ================================= 
+          target: all              
+         ================================= -->
+    <target name="all" depends="clean, init, compile, package" description="default target to do a clean build"/>
+        
+	<!-- ================================= 
+          target: clean              
+         ================================= -->
+	<target name="clean" description="deletes the build and dist directories">
+		<delete file="${dist.dir}/cdsp-processor.jar" />
+		<delete dir="${build.dir}" />
+	</target>
+
+	<!-- ================================= 
+          target: init              
+         ================================= -->
+	<target name="init" description="creates dist and build dir">
+		<mkdir dir="${build.class.dir}" />		
+	</target>
+
+	<!-- ================================= 
+		  target: compile
+		 ================================= -->
+
+	<target name="compile" description="description">
+
+		<javac includeantruntime="true" srcdir="${src.dir}" destdir="${build.class.dir}">
+			<classpath refid="java.class.path" />
+		</javac>
+		<jar destfile="${dist.dir}/cdsp-processor.jar">
+			<fileset dir="${build.class.dir}">
+				<include name="com/hp/**/*.*" />
+			</fileset>
+		</jar>
+	</target>
+
+	<target name="package" description="Packaging the application for execution">
+		<zip destfile="${dist.dir}/Processor.zip">
+			<zipfileset dir="${lib.dir}" prefix="cdsp-processor/lib"
+			     includes="activation.jar,
+			      cglib-nodep-2.2.jar, 
+			      commons-beanutils-1.3.jar, 
+			      commons-collections-3.2.1-javadoc.jar, 
+			      commons-collections-3.2.1-sources.jar, 
+			      commons-collections-3.2.1.jar, 
+			      commons-io-2.0.jar, 
+			      commons-lang-2.3.jar, 
+			      commons-logging-1.1.jar, 
+				  jaxb-api.jar, jaxb-impl-2.0.1.jar,
+				  jaxb-xjc-2.0.1.jar, jdom.jar,
+				  jettison-1.3.3.jar, 
+				  json-lib-2.4-jdk15.jar, 
+				  jsr173_api.jar, 
+				  log4j-api-2.0-beta9.jar,				
+				  log4j-core-2.0-beta9.jar,
+				  mongo-java-driver-2.11.2.jar,
+				  ods.jar, 
+				  dom4j-1.6.1.jar,
+				  swingx-all-1.6.3.jar"/>
+			<zipfileset file="${dist.dir}/cdsp-processor.jar" prefix="cdsp-processor/lib"/>
+			<zipfileset file="${dist.dir}/cdsp-mongo-api.jar" prefix="cdsp-processor/lib"/>
+			<zipfileset file="${dist.dir}/cdsp-dao.jar" prefix="cdsp-processor/lib"/>
+			<zipfileset file="${dist.dir}/concentra-input-schema-bindings.jar" prefix="cdsp-processor/lib"/>
+			<zipfileset file="${dist.dir}/concentra-output-schema-bindings.jar" prefix="cdsp-processor/lib"/>
+			<zipfileset file="${dist.dir}/cdsp-conversion-utils.jar" prefix="cdsp-processor/lib"/>
+			<zipfileset file="${dist.dir}/log4j-1.2.14.jar" prefix="cdsp-processor/lib"/>
+			<zipfileset file="${dist.dir}/jsoup-1.8.2.jar" prefix="cdsp-processor/lib"/>
+			<zipfileset file="${dist.dir}/org.apache.commons.io.jar" prefix="cdsp-processor/lib"/>
+			<zipfileset dir="${conf.dir}" prefix="cdsp-processor/config/"/>
+			
+			<zipfileset dir="${scripts.dir}" prefix="cdsp-processor/"/>
+		</zip>
+	</target>
+</project>

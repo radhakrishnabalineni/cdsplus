@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" xmlns:proj="http://www.hp.com/cdsplus" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <xs:import namespace="http://www.hp.com/cdsplus" schemaLocation="regions_proj.xsd"/>
+  <xs:import namespace="http://www.w3.org/1999/xlink" schemaLocation="common_xlink.xsd"/>
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="common_xml.xsd"/>
+  <xs:element name="result">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="proj:ref"/>
+      </xs:sequence>
+      <xs:attribute name="considered" use="required" type="xs:integer"/>
+      <xs:attribute name="count" use="required" type="xs:integer"/>
+      <xs:attribute ref="xml:base" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="content">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="region"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="region">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="name"/>
+        <xs:element ref="countries"/>
+      </xs:sequence>
+      <xs:attribute ref="xml:base" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="name" type="xs:NCName"/>
+  <xs:element name="countries">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="country"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="country" type="xs:NCName"/>
+</xs:schema>

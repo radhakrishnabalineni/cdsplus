@@ -1,0 +1,78 @@
+{"groomName":"wc-astro_grooms","negativeregex":".*((\\.)|(@))((hpconnected)|(hp))\\.\\b((\\b\\w{2}\\b)|(\\bcom\\b))\\b.*","replacement":"#{#EXT $1#}#"}
+{"groomName":"wc-astro_grooms","regex":"http://www\\.hp\\.com/cposupport/software\\.html$","replacement":"#{#SOFTWARE#}#"}
+{"groomName":"wc-astro_grooms","searchpattern":"http://www\\.hp\\.com/cposupport/software\\.html.*switem=.*","regex":"http://www\\.hp\\.com/cposupport/software\\.html.*switem=(.*)","replacement":"#{#SOFTWARE $1#}#"}
+{"groomName":"wc-astro_grooms","regex":"http://www\\.hp\\.com/cposupport/prodhome/([a-zA-Z0-9]+)\\.html","replacement":"#{#PRH $1#}#"}
+{"groomName":"wc-astro_grooms","regex":"http://www\\.hp\\.com/cposupport/([a-z_]+)/support_doc/([a-z][a-z0-9][a-z0-9][0-9]+)\\.html","replacement":"#{#DOC $2#}#"}
+{"groomName":"wc-astro_grooms","regex":"http://www\\.hp\\.com/cposupport/([a-z][a-z])/docs/([a-z][a-z0-9][a-z0-9][0-9]+)\\.html","replacement":"#{#DOC $2#}#"}
+{"groomName":"wc-astro_grooms","regex":"http://www\\.hp\\.com/cposupport/manual_set/([a-z][a-z0-9]+)\\.pdf","replacement":"#{#MAN $1.pdf#}#"}
+{"groomName":"wc-astro_grooms","regex":"http://www\\.hp\\.com/cposupport/eschome.html","replacement":"#{#SITEHOME#}#"}
+{"groomName":"wc-astro_grooms","searchpattern":"([a-z0-9]+_[a-zA-Z0-9]+)","regex":"([a-z0-9]+)_([a-zA-Z0-9]+)","replacement":"#{#DOC $1#$1_$2#}#"}
+{"groomName":"wc-astro_grooms","regex":"pen.map","replacement":"#{#PEN#}#"}
+{"groomName":"wc-astro_grooms","regex":"([a-z0-9]+)","replacement":"#{#DOC $1#}#"}
+{"groomName":"wc-astro_grooms","regex":"http://productfinder\\.support\\.hp\\.com/tps/Hub?([^\"]+)","replacement":"http://h20180.www2.hp.com/apps/Nav$1&h_cc=#{#CC#}#"}
+{"groomName":"wc-astro_grooms","regex":"http://www\\.hp\\.com/cposupport/docindex/([a-zA-Z0-9]+)_([a-zA-Z0-9_]+)\\.html","replacement":"#{#DCI $1#}#"}
+{"groomName":"wc-astro_grooms","regex":"http://www\\.hp\\.com/cgi-bin/cposupport/docindex\\.pl[\\?]sni=([a-zA-z0-9]+)[&]pid=([0-9])[&]t=([a-zA-Z]+)[&]p=C","replacement":"#{#DCI $1#}#"}
+{"groomName":"wc-astro_grooms","regex":"http://www\\.hp\\.com/cgi-bin/cposupport/docindex\\.pl[\\?]sni=([a-zA-z0-9]+)[&]pid=([0-9])[&]t=(faqs)[&]p=C","replacement":"#{#DCI $1#}#"}
+{"groomName":"wc-astro_grooms","regex":"http://www\\.hp\\.com/cposupport/([a-zA-Z0-9_]+)/manuals/([a-z][a-z0-9]+)\\.pdf","replacement":"#{#MAN $1.pdf#}#"}
+{"groomName":"wc-astro_grooms","regex":"http://www\\.hp\\.com/cposupport/[a-z][a-z]/.*?/([^/]+)/manuals\\.html","replacement":"#{#MDX $1#}#"}
+{"groomName":"wc-astro_grooms","regex":"http://www\\.hp\\.com/cposupport/swindexes/([a-zA-Z0-9]+)_sw([a-z][a-z])\\.html","replacement":"#{#SWX $1#}#"}
+{"groomName":"wc-astro_grooms","regex":"http://www\\.hp\\.com/cposupport/[non]*jsnav/([a-zA-Z0-9]+)\\.html","replacement":"#{#PRN $1#}#"}
+{"groomName":"wc-astro_grooms","regex":"http://www\\.hp\\.com/cposupport/[a-z][a-z]/.*?jsnav/[^/]+(Xd*)?\\.html","replacement":"#{#PRN $1#}#"}
+{"groomName":"wc-astro_grooms","regex":"http://www\\.hp\\.com/cposupport/([a-z][a-z])/.*?docs/(.*?)\\.html","replacement":"#{#DOC $2#}#"}
+{"groomName":"wc-astro_grooms","regex":"http://www\\.hp\\.com/cgi-bin/cposupport/get_doc\\.pl[\\?]SNI=([a-zA-Z0-9]+)[&map;]LC=([a-z_]+)[&]Tfile=([a-z][a-z][a-z][a-z0-9][0-9][0-9][0-9][0-9])","replacement":"#{#DOC $3#}#"}
+{"groomName":"wc-astro_grooms","regex":"http://www\\.hp\\.com/cgi-bin/cposupport/get_doc\\.pl[\\?]SNI=([a-zA-Z0-9]+)[&]LC=([a-z_]+)[&]Tfile=(c[0-9]{8})","replacement":"#{#DOC $3#}#"}
+{"groomName":"wc-astro_grooms","regex":"http://www\\.hp\\.com/cposupport/([a-z][a-z])/([^a-zA-Z0-9_]+?)","replacement":"#{#SITEHOME#}#"}
+{"groomName":"wc-astro_grooms","regex":"http://www\\.hp\\.com/cposupport/([a-z][a-z])([^/][^a-zA-Z0-9_]+?)","replacement":"#{#SITEHOME#}#"}
+{"groomName":"wc-astro_grooms","regex":"http://www\\.hp\\.com/cposupport/([a-z][a-z])/home\\.html","replacement":"#{#SITEHOME#}#"}
+{"groomName":"wc-astro_grooms","regex":"http://www\\.hp\\.com/cposupport/([a-z][a-z])/prodfind\\.html","replacement":"#{#SITEHOME#}#"}
+{"groomName":"wc-astro_grooms","regex":"http://www\\.hp\\.com/cposupport/([a-z][a-z])/[\\?]CTRYcod=DE&cc=([a-z][a-z])","replacement":"#{#SITEHOME#}#"}
+{"groomName":"wc-astro_grooms","regex":"http://www\\.hp\\.com/cposupport/([a-z][a-z])/(products/[-0-9a-z_]+)/([0-9a-z]+)/home\\.html","replacement":"#{#PRH $3#}#"}
+{"groomName":"wc-astro_grooms","regex":"http://www\\.hp\\.com/cposupport/([a-z][a-z])/(products/[-0-9a-z_]+)/([0-9_a-z]+)/([^a-zA-Z0-9_]+?)","replacement":"#{#PRH $1#}#"}
+{"groomName":"bsc_grooms","regex":" *www\\.","replacement":"http://www."}
+{"groomName":"bsc_grooms","regex":" *([a-zA-Z][a-zA-Z][a-zA-Z][0-9]{4,7})[#_]([^ ]*)*","replacement":"/bizsupport/TechSupport/Document.jsp?objectID=$1#$2"}
+{"groomName":"bsc_grooms","regex":" *([a-zA-Z][a-zA-Z][a-zA-Z][0-9]{4,7})([^ ]*)","replacement":"/bizsupport/TechSupport/Document.jsp?objectID=$1$2"}
+{"groomName":"bsc_grooms","regex":" *http://www\\.hp\\.com/cposupport/*.*/manual_set/\\.*([a-zA-Z][a-zA-Z][a-zA-Z][0-9]{4,7})\\.pdf*","replacement":"/bc/docs/support/SupportManual/$1/$1.pdf"}
+{"groomName":"bsc_grooms","regex":" *http://www\\.hp\\.com/cposupport/*.*/docs/.*([a-zA-Z][a-zA-Z][a-zA-Z][0-9]{4,7})\\.html*","replacement":"/bizsupport/TechSupport/Document.jsp?objectID=$1"}
+{"groomName":"bsc_grooms","regex":" *http://www\\.hp\\.com/cposupport/*.*/support_doc/\\.*([a-zA-Z][a-zA-Z][a-zA-Z][0-9]{4,7})\\.html*","replacement":"/bizsupport/TechSupport/Document.jsp?objectID=$1"}
+{"groomName":"bsc_grooms","regex":" *([a-zA-Z][0-9a-zA-Z][0-9a-zA-Z][0-9]{4,7})[#_]([^ ]*)*","replacement":"/bizsupport/TechSupport/Document.jsp?objectID=$1#$2"}
+{"groomName":"bsc_grooms","regex":" *([a-zA-Z][0-9a-zA-Z][0-9a-zA-Z][0-9]{4,7})([^ ]*)","replacement":"/bizsupport/TechSupport/Document.jsp?objectID=$1$2"}
+{"groomName":"bsc_grooms","regex":" *http://www\\.hp\\.com/cposupport/*.*/manual_set/\\.*(([a-zA-Z][0-9a-zA-Z][0-9a-zA-Z][0-9]{4,7}))\\.pdf*","replacement":"/bc/docs/support/SupportManual/$1/$2.pdf"}
+{"groomName":"bsc_grooms","regex":" *http://www\\.hp\\.com/cposupport/*.*/docs/\\.*([a-zA-Z][0-9a-zA-Z][0-9a-zA-Z][0-9]{4,7})\\.html*","replacement":"/bizsupport/TechSupport/Document.jsp?objectID=$1"}
+{"groomName":"bsc_grooms","regex":" *http://www\\.hp\\.com/cposupport/*.*/support_doc/\\.*([a-zA-Z][0-9a-zA-Z][0-9a-zA-Z][0-9]{4,7})\\.html*","replacement":"/bizsupport/TechSupport/Document.jsp?objectID=$1"}
+{"groomName":"bsc_grooms","regex":" *http://www\\.hp\\.com/cposupport/software.html([^ ]*)","replacement":"http://welcome.hp.com/country/us/en/support.html?pageDisplay=drivers"}
+{"groomName":"bsc_grooms","regex":"#\\{#HUB s-007#\\}#","replacement":"http://h20180.www2.hp.com/apps/Nav?h_page=hpcom&h_client=S-A-R4155-1&h_pagetype=s-007&h_lang=en&h_cc=us&h_fields=support_name_oid&h_product=top"}
+{"groomName":"ods_grooms","regex":" *http://www\\.hp\\.com/cposupport/eschome\\.html *","replacement":"http://h10025.www1.hp.com/ewfrf/wc/siteHome?lc=en&cc=us"}
+{"groomName":"ods_grooms","regex":" *http://www\\.hp\\.com/cposupport/.*?/(emr_na-)?([a-zA-Z][0-9a-zA-Z][0-9a-zA-Z][0-9][0-9][0-9][0-9]{1,3})\\.(html|pdf|PDF) *","replacement":"$2"}
+{"groomName":"ods_grooms","regex":" *http://www\\.hp\\.com/cposupport/.*?/(emr_na-)?([a-zA-Z][0-9a-zA-Z][0-9a-zA-Z][0-9][0-9][0-9][0-9]{1,3})\\.html[#_]([^ ]*) *","replacement":"$2#$3"}
+{"groomName":"ods_grooms","regex":" *http://www\\.hp\\.com/cposupport/([^/]+/)+ucr_na-CYB([_0-9a-zA-Z]+?)(-1)?\\.(html|pdf|PDF)(-1)? *","replacement":"ucr_na-CYB$2.$4"}
+{"groomName":"ods_grooms","regex":" *http://www\\.hp\\.com/cposupport/([^/]+/)+ucr_na-([a-zABD-Z][_0-9a-zA-Z]+).*","replacement":"ucr_na-$2"}
+{"groomName":"ods_grooms","regex":" *http://[0-9a-zA-Z]+\\.[0-9a-zA-Z]+\\.hp\\.com/km/saw/view\\.do[?]doc[iI]d=ucr_na-CYB([_0-9a-zA-Z]+?)(-1)?\\.(html|pdf|PDF)(-1)? *","replacement":"ucr_na-CYB$1.$3"}
+{"groomName":"ods_grooms","regex":" *http://[0-9a-zA-Z]+\\.[0-9a-zA-Z]+\\.hp\\.com/km/saw/view\\.do[?]doc[iI]d=ucr_na-([a-zABD-Z][_0-9a-zA-Z]+)\\.*","replacement":"ucr_na-$1"}
+{"groomName":"ods_grooms","regex":" *http://[0-9a-zA-Z]+\\.[0-9a-zA-Z]+\\.hp\\.com/km/saw/view\\.do[?]doc[iI]d=emr_na-([a-zA-Z][0-9a-zA-Z][0-9a-zA-Z][0-9][0-9][0-9][0-9]{1,3})(\\.(html|pdf|PDF))? *","replacement":"$1"}
+{"groomName":"ods_grooms","regex":" *http://[0-9a-zA-Z]+\\.[0-9a-zA-Z]+\\.hp\\.com/km/saw/view\\.do[?]doc[iI]d=emr_na-([a-zA-Z][0-9a-zA-Z][0-9a-zA-Z][0-9][0-9][0-9][0-9]{1,3})\\.html[#_]([^ ]*) *","replacement":"$1#$2"}
+{"groomName":"ods_grooms","regex":"#\\{#HUB s-007#\\}#","replacement":"http://h20180.www2.hp.com/apps/Nav?h_page=hpcom&h_client=S-A-R4155-1&h_pagetype=s-007&h_lang=en&h_cc=us&h_fields=support_name_oid&h_product=top"}
+{"groomName":"ods_grooms","searchpattern":" *ftp://ftp\\.hp\\.com/pub/softlib/software3/[0-9a-zA-Z]+/[0-9a-zA-Z_-]+","regex":" *ftp://ftp\\.hp\\.com/","replacement":"http://ftp.hp.com/"}
+{"groomName":"ods_grooms","regex":" *http://www\\.hp\\.com/cposupport/software\\.html *","replacement":"http://h20564.www2.hp.com/portal/site/hpsc/template.PAGE/public/psi/swdSelector/"}
+{"groomName":"ods_grooms","regex":" *http://www\\.hp\\.com/bizsupport/TechSupport/DriverDownload\\.jsp[?]&lang=en&cc=us&pnameOID=([0-9a-zA-Z]*)&taskId=135&prodTypeId=[0-9a-zA-Z]*&prodSeriesId=[0-9a-zA-Z]*&lang=en&cc=us","replacement":"http://h20564.www2.hp.com/portal/site/hpsc/public/psi/swdHome/?sp4ts.oid=$1"}
+{"groomName":"ods_grooms","regex":" *http://h20000\\.www2\\.hp\\.com/bizsupport/TechSupport/DriverDownload\\.jsp[?]pnameOID=([0-9a-zA-Z]+)[&]locale=en_US[&]taskId=135[&]prodTypeId=[0-9a-zA-Z]+[&]prodSeriesId=[0-9a-zA-Z]+","replacement":"http://h20564.www2.hp.com/portal/site/hpsc/public/psi/swdHome/?sp4ts.oid=$1"}
+{"groomName":"ods_grooms","regex":" *http://bizsupport\\.austin\\.hp\\.com/bizsupport/TechSupport/SoftwareDescription\\.jsp[?]lang=en[&]cc=us[&]prodTypeId=[0-9a-zA-Z]+[&]prodSeriesId=[0-9a-zA-Z]+[&]prodNameId=([0-9a-zA-Z]+)[&]swEnvOID=[0-9]+[&]swLang=[0-9]+[&]mode=[0-9]+[&]taskId=135[&]swItem=([0-9a-zA-Z_-]+)","replacement":"http://h20565.www2.hp.com/portal/site/hpsc/template.PAGE/public/psi/swdDetails/?swItem=$2&sp4ts.oid=$1"}
+{"groomName":"ods_grooms","regex":" *http://h20000\\.www2\\.hp\\.com/bizsupport/TechSupport/Home\\.jsp[?]locale=[0-9a-zA-Z_-]+ *","replacement":"http://h20564.www2.hp.com/portal/site/hpsc"}
+{"groomName":"ods_grooms","searchpattern":" *http://bizsupport\\.austin\\.hp.com/bizsupport/[^/]+[0-9a-zA-Z-_.?:=|/]*","regex":" *http://bizsupport\\.austin\\.hp\\.com/bizsupport","replacement":"http://h20564.www2.hp.com/portal"}
+{"groomName":"ods_grooms","searchpattern":" *http://bizsupport1\\.austin\\.hp\\.com/bizsupport/[^/]+[0-9a-zA-Z-_.?:=|/]*","regex":" *http://bizsupport1\\.austin\\.hp\\.com/bizsupport","replacement":"http://h20564.www2.hp.com/portal"}
+{"groomName":"ods_grooms","searchpattern":" *http://bizsupport2\\.austin\\.hp\\.com/bizsupport/[^/]+[0-9a-zA-Z-_.?:=|/]*","regex":" *http://bizsupport2\\.austin\\.hp\\.com/bizsupport","replacement":"http://h20564.www2.hp.com/portal"}
+{"groomName":"ods_grooms","regex":" *http://h20000\\.www2\\.hp\\.com/bc/docs/support/SupportManual/([0-9a-zA-Z]+)/[0-9a-zA-Z]+\\.pdf","replacement":"http://h20564.www2.hp.com/portal/site/hpsc/public/kb/docDisplay/?docId=emr_na-$1"}
+{"groomName":"ods_grooms","regex":" *http://bizsupport2\\.austin\\.hp\\.com/bc/docs/support/SupportManual/([0-9a-zA-Z]+)/[0-9a-zA-Z]+\\.pdf","replacement":"http://h20564.www2.hp.com/portal/site/hpsc/public/kb/docDisplay/?docId=emr_na-$1"}
+{"groomName":"ods_grooms","regex":" *http://bizsupport\\.austin\\.hp\\.com/bc/docs/support/SupportManual/([0-9a-zA-Z]+)/[0-9a-zA-Z]+\\.pdf","replacement":"http://h20564.www2.hp.com/portal/site/hpsc/public/kb/docDisplay/?docId=emr_na-$1"}
+{"groomName":"ods_grooms","regex":" *http://bizsupport1\\.austin\\.hp\\.com/bc/docs/support/SupportManual/([0-9a-zA-Z]+)/[0-9a-zA-Z]+\\.pdf","replacement":"http://h20564.www2.hp.com/portal/site/hpsc/public/kb/docDisplay/?docId=emr_na-$1"}
+{"groomName":"ods_grooms","searchpattern":" *http://h20000\\.www2\\.hp\\.com/bizsupport/TechSupport/Document\\.jsp[?]lang=en[&]cc=us[&]objectID=[0-9a-zA-Z]+","regex":" *http://h20000\\.www2\\.hp\\.com/bizsupport/TechSupport/Document.jsp[?]lang=en[&]cc=us[&]objectID=","replacement":"http://h20564.www2.hp.com/portal/site/hpsc/public/kb/docDisplay/?docId=emr_na-"}
+{"groomName":"ods_grooms","regex":" *http://h20000\\.www2\\.hp\\.com/bizsupport/TechSupport/Document\\.jsp[?]objectID=([0-9a-zA-Z]+)[&]jumpid=[0-9a-zA-Z_-]+","replacement":"http://h20564.www2.hp.com/portal/site/hpsc/public/kb/docDisplay/?docId=emr_na-$1"}
+{"groomName":"ods_grooms","regex":" *http://us\\.itrc\\.hp\\.com/service/patch/mainPage\\.do[?]LANGUAGE_OPTION=english *","replacement":"http://h20564.www2.hp.com/portal/site/hpsc/patch/home"}
+{"groomName":"ods_grooms","regex":" *http://itrc\\.hp\\.com/service/patch/search\\.do[?][0-9a-zA-Z._-]*","replacement":"http://h20564.www2.hp.com/portal/site/hpsc/patch/home"}
+{"groomName":"ods_grooms","searchpattern":" *http://itrc\\.hp\\.com/service/patch/depotPage\\.do[?]depotId=[0-9a-zA-Z.?:=]*","regex":" *http://itrc\\.hp\\.com","replacement":"http://h20564.www2.hp.com"}
+{"groomName":"ods_grooms","searchpattern":" *http://itrc\\.hp\\.com/service/patch/hpuxPatchBundlePage\\.do[?]bundleId=[0-9a-zA-Z.?:=]*","regex":" *http://itrc\\.hp\\.com","replacement":"http://h20564.www2.hp.com"}
+{"groomName":"ods_grooms","searchpattern":" *http://itrc\\.hp\\.com/service/patch/patchDetail\\.do[?]patchid=[0-9a-zA-Z.?:=]*","regex":" *http://itrc\\.hp\\.com/service/patch/patchDetail\\.do[?]patchid","replacement":"http://h20564.www2.hp.com/service/patch/patchDetail.do?sel=&patchid="}
+{"groomName":"ods_grooms","regex":" *http://www11\\.itrc\\.hp\\.com/service/patch/mainPage\\.do","replacement":"http://h20564.www2.hp.com/portal/site/hpsc/patch/home"}
+{"groomName":"ods_grooms","regex":" *http://www11\\.itrc\\.hp\\.com/service/patch/locateBundles\\.do[0-9a-zA-Z.?:=|]*","replacement":"http://h20564.www2.hp.com/portal/site/hpsc/patch/home"}
+{"groomName":"ods_grooms","regex":" *http://www11\\.itrc\\.hp\\.com/service/patch/assessSystemsPage\\.do[0-9a-zA-Z.?:=|]*","replacement":"http://h20564.www2.hp.com/portal/site/hpsc/patch/home"}
+{"groomName":"ods_grooms","regex":" *http://www11\\.itrc\\.hp\\.com/service/patch/byProductMainPage\\.do[0-9a-zA-Z.?:=|]*","replacement":"http://h20564.www2.hp.com/portal/site/hpsc/patch/home"}
+{"groomName":"ods_grooms","regex":" *http://www11\\.itrc\\.hp\\.com/service/patch/searchHPUXPatchSet\\.do[0-9a-zA-Z.?:=|]*","replacement":"http://h20564.www2.hp.com/portal/site/hpsc/patch/home"}

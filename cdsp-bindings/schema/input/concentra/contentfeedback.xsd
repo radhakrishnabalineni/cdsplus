@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="version_label" type="xs:decimal"/>
+	<xs:element name="regions">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="region" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="region" type="xs:string"/>
+	<xs:element name="r_object_id" type="xs:string"/>
+	<xs:element name="property_update_date" type="xs:dateTime"/>
+	<xs:element name="products">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="product" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="product" type="xs:string"/>
+	<xs:element name="priority" type="xs:byte"/>
+	<xs:element name="original_system" type="xs:string"/>
+	<xs:element name="original_docid" type="xs:string"/>
+	<xs:element name="object_name" type="xs:string"/>
+	<xs:element name="miscellaneous_comment" type="xs:string"/>
+	<xs:element name="language_label" type="xs:string"/>
+	<xs:element name="language_code" type="xs:string"/>
+	<xs:element name="information_source" type="xs:string"/>
+	<xs:element name="full_title">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="language_code" use="required" type="xs:string"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="file_bytes" type="xs:long"/>
+	<xs:element name="feedback_product_lines">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="feedback_product_line" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="feedback_product_line" type="xs:string"/>
+	<xs:element name="feedback_priority" type="xs:string"/>
+	<xs:element name="feedback_content_name" type="xs:string"/>
+	<xs:element name="document_type" type="xs:string"/>
+	<xs:element name="document_class" type="xs:string"/>
+	<xs:element name="company_info" type="xs:string"/>
+	<xs:element name="document">
+		<xs:complexType>
+			<xs:sequence>
+			<xs:element ref="company_info"/>
+				<xs:element ref="r_object_id"/>
+				<xs:element ref="priority"/>
+				<xs:element ref="products"/>
+				<xs:element ref="document_type"/>
+				<xs:element ref="version_label"/>
+				<xs:element ref="feedback_product_lines"/>
+				<xs:element ref="content_type"/>
+				<xs:element ref="regions"/>
+				<xs:element ref="property_update_date"/>
+				<xs:element ref="language_label"/>
+				<xs:element ref="information_source"/>
+				<xs:element ref="full_title"/>
+				<xs:element ref="action_requested"/>
+				<xs:element ref="action_taken"/>
+				<xs:element ref="confidential_comment"/>
+				<xs:element ref="feedback_content_name"/>
+				<xs:element ref="original_system"/>
+				<xs:element ref="feedback_priority"/>
+				<xs:element ref="document_class"/>
+				<xs:element ref="file_bytes"/>
+				<xs:element ref="language_code"/>
+				<xs:element ref="miscellaneous_comment"/>
+				<xs:element ref="object_name"/>
+				<xs:element ref="original_docid"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="content_type" type="xs:string"/>
+	<xs:element name="confidential_comment" type="xs:string"/>
+	<xs:element name="action_taken" type="xs:string"/>
+	<xs:element name="action_requested" type="xs:string"/>
+</xs:schema>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+====================================================================== 
+	Sep 13, 2012 2:22:33 PM castor description kashyaks 
+======================================================================
+-->
+<project name="cdsp-conversion-utils" default="all" basedir=".">
+    <property environment="env" />
+	<property name="lib.dir" value="${basedir}/lib" />
+
+	<property name="src.dir" value="${basedir}/src" />
+	<property name="conf.dir" value="${basedir}/config" />
+
+	<property name="build.dir" value="${basedir}/build" />
+	<property name="build.class.dir" value="${build.dir}/classes" />
+
+	<property name="scripts.dir" value="${basedir}/scripts" />
+
+	<property name="logs.dir" value="${basedir}/logs" />
+	<property name="dist.dir" value="${env.DIST_DIR}" />
+
+	<path id="java.class.path">
+		<fileset dir="${lib.dir}">
+			<include name="jettison-1.3.3.jar" />			
+		</fileset>	
+	</path>
+	
+	<!-- ================================= 
+          target: all              
+         ================================= -->
+    <target name="all" depends="clean, init, compile" description="default target to do a clean build"/>
+        
+	<!-- ================================= 
+          target: clean              
+         ================================= -->
+	<target name="clean" description="deletes the build and dist directories">
+		<delete file="${dist.dir}/cdsp-conversion-utils.jar" />
+		<delete dir="${build.dir}" />
+	</target>
+
+	<!-- ================================= 
+          target: init              
+         ================================= -->
+	<target name="init" description="creates dist and build dir">
+		<mkdir dir="${build.class.dir}" />		
+	</target>
+
+	<!-- ================================= 
+		  target: compile
+		 ================================= -->
+
+	<target name="compile" description="description">
+
+		<javac includeantruntime="true" srcdir="${src.dir}" destdir="${build.class.dir}">
+			<classpath refid="java.class.path" />
+		</javac>
+		<jar destfile="${dist.dir}/cdsp-conversion-utils.jar">
+			<fileset dir="${build.class.dir}">
+				<include name="com/hp/cdsplus/conversion/**" />
+			</fileset>
+		</jar>
+	</target>
+	
+</project>

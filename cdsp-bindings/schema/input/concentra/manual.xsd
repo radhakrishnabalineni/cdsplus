@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="wrapped_component_format" type="xs:string"/>
+	<xs:element name="version_label" type="xs:decimal"/>
+	<xs:element name="valid_flag" type="xs:boolean"/>
+	<xs:element name="search_keywords">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="search_keyword" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="search_keyword" type="xs:string"/>
+	<xs:element name="review_date" type="xs:dateTime"/>
+	<xs:element name="regions">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="region" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="region" type="xs:string"/>
+	<xs:element name="r_object_id" type="xs:string"/>
+	<xs:element name="publication_priority" type="xs:string"/>
+	<xs:element name="publication_destinations">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="publication_destination" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="publication_destination" type="xs:string"/>
+	<xs:element name="publication_code" type="xs:string"/>
+	<xs:element name="property_update_date" type="xs:dateTime"/>
+	<xs:element name="products">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="product" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="product_levels">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="product_level" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="product_level" type="xs:string"/>
+	<xs:element name="product" type="xs:string"/>
+	<xs:element name="priority" type="xs:byte"/>
+	<xs:element name="planned_public_date" type="xs:dateTime"/>
+	<xs:element name="pixel_width" type="xs:integer"/>
+	<xs:element name="pixel_height" type="xs:integer"/>
+	<xs:element name="part_number" type="xs:string"/>
+	<xs:element name="owner_name" type="xs:string"/>
+	<xs:element name="original_system" type="xs:string"/>
+	<xs:element name="original_filename" type="xs:string"/>
+	<xs:element name="original_docid" type="xs:string"/>
+	<xs:element name="object_name" type="xs:string"/>
+	<xs:element name="master_object_name" type="xs:string"/>
+	<xs:element name="language_codes">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="language_code" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="language_code">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="language_label" use="required" type="xs:string"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="joint_product_collections">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="joint_product_collection" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="joint_product_collection" type="xs:string"/>
+	<xs:element name="information_source" type="xs:string"/>
+	<xs:element name="has_valid_products" type="xs:boolean"/>
+	<xs:element name="full_titles">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="full_title" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="full_title">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="language_code" use="required" type="xs:string"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="file_name" type="xs:string"/>
+	<xs:element name="file_bytes" type="xs:long"/>
+	<xs:element name="extra_property_values">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="extra_property_value"  maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="extra_property_value" type="xs:string"/>
+	<xs:element name="extra_property_name" type="xs:string"/>
+	<xs:element name="extra_property">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="extra_property_name"/>
+				<xs:element ref="extra_property_values"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="extra_properties">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="extra_property" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dpi_resolution" type="xs:int"/>
+	<xs:element name="document_type_details">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="document_type_detail" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="document_type_detail" type="xs:string"/>
+	<xs:element name="document_type" type="xs:string"/>
+	<xs:element name="document_class" type="xs:string"/>
+	<xs:element name="company_info" type="xs:string"/>
+	<xs:element name="document">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="company_info"/>
+				<xs:element ref="r_object_id"/>
+				<xs:element ref="priority"/>
+				<xs:element ref="products"/>
+				<xs:element ref="document_type"/>
+				<xs:element ref="version_label"/>
+				<xs:element ref="regions"/>
+				<xs:element ref="authors"/>
+				<xs:element ref="search_keywords"/>
+				<xs:element ref="content_type"/>
+				<xs:element ref="property_update_date"/>
+				<xs:element ref="master_object_name"/>
+				<xs:element ref="full_titles"/>
+				<xs:element ref="product_levels"/>
+				<xs:element ref="publication_destinations"/>
+				<xs:element ref="cmg_acronym"/>
+				<xs:element ref="cmg_feedback_address"/>
+				<xs:element ref="file_name"/>
+				<xs:element ref="document_type_details"/>
+				<xs:element ref="content_update_date"/>
+				<xs:element ref="language_codes"/>
+				<xs:element ref="joint_product_collections"/>
+				<xs:element ref="extra_properties"/>
+				<xs:element ref="planned_public_date"/>
+				<xs:element ref="components"/>
+				<xs:element ref="has_valid_products"/>
+				<xs:element ref="clean_content_flag"/>
+				<xs:element ref="col_id"/>
+				<xs:element ref="description"/>
+				<xs:element ref="valid_flag"/>
+				<xs:element ref="disclosure_level"/>
+				<xs:element ref="content_version"/>
+				<xs:element ref="dpi_resolution"/>
+				<xs:element ref="creation_date"/>
+				<xs:element ref="object_name"/>
+				<xs:element ref="original_docid"/>
+				<xs:element ref="original_filename"/>
+				<xs:element ref="original_system"/>
+				<xs:element ref="owner_name"/>
+				<xs:element ref="part_number"/>
+				<xs:element ref="pixel_height"/>
+				<xs:element ref="pixel_width"/>
+				<xs:element ref="publication_priority"/>
+				<xs:element ref="document_class"/>
+				<xs:element ref="review_date"/>
+				<xs:element ref="wrapped_component_format"/>
+				<xs:element ref="file_bytes"/>
+				<xs:element ref="collection_valid_flag"/>
+				<xs:element ref="information_source"/>
+				<xs:element ref="publication_code"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="disclosure_level" type="xs:string"/>
+	<xs:element name="description" type="xs:string"/>
+	<xs:element name="creation_date" type="xs:dateTime"/>
+	<xs:element name="content_version" type="xs:decimal"/>
+	<xs:element name="content_update_date" type="xs:dateTime"/>
+	<xs:element name="content_type" type="xs:string"/>
+	<xs:element name="components">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="component" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="component" type="xs:string"/>
+	<xs:element name="collection_valid_flag" type="xs:boolean"/>
+	<xs:element name="col_id" type="xs:string"/>
+	<xs:element name="cmg_feedback_address" type="xs:string"/>
+	<xs:element name="cmg_acronym" type="xs:string"/>
+	<xs:element name="clean_content_flag" type="xs:boolean"/>
+	<xs:element name="authors">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="author" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="author" type="xs:string"/>
+</xs:schema>

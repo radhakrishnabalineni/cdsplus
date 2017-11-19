@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:proj="http://www.hp.com/cdsplus" xmlns:sel="java:com.hp.cdsplus.wds.workItem.CDSPSelection" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sub="java:com.hp.cdsplus.wds.workItem.CDSPSubscription" xmlns:xutils="com.hp.cdsplus.util.xml.XMLUtils">
+	
+<sub limit="50"
+                        manualRepub="manual_republish.txt"
+                        server="http://cdsplus.austin.hp.com/cadence/app/"
+                        subscription="soar/rcd_psg_201"                                                     
+                        workingDir="/opt/ais/app/applications/reference_client/data/rcd_psg_201"                             
+                        >
+
+                        <namedDestination name="DOCDATA"
+                                class="com.hp.cdsplus.wds.destination.ReleaseManagerDestination"
+                                contentArea="soar_psg_201"                                                  
+                                username="hp"
+                                dest_path="/"
+                                password="swaBRU7r"
+                                dir="releaseManager"
+                                maxPackageSize="500"
+                                maxPackageCount="1000"
+                                server="sftp://82.201.41.183/data"
+                                prefix="rcd_psg_201"                                                        
+                                verify=""
+                                job="docdata"/>
+
+
+<selection destination="concat($originDocName, '.xml')">
+         <destination name="DOCDATA" />
+      </selection>
+
+      <selection destination="concat($originDocName, '/', $sourceName)" select="/document/file_name/proj:ref
+| /document/components/component/file_name/proj:ref" source="concat(/node()/@*:base, @xlink:href)">
+        <destination name="DOCDATA" />
+      </selection>
+
+
+
+        </sub>
+</config>

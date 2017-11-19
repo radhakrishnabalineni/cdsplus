@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+	<!-- ================================================================ -->
+	<!-- Build file for CADENCE Web Application 					      -->
+	<!-- build.xml,  Sept 30, 2013										  -->
+	<!-- Author: Vijay D												  -->
+	<!-- Url : http://www.hp.com 										  -->
+	<!-- ================================================================ -->
+
+<project name="cdsp-cadence" default="all" basedir=".">
+
+ 	<!-- ================================================================ -->
+    <!--                 Directories for source, build and war            -->
+    <!-- ================================================================ -->
+	<property environment="env" />
+	<property name="project.name" value="cadence"/>
+	<property name="context.name" value="${project.name}"/>
+	
+    <property name="src.dir"    value="${basedir}/src"/>
+    <property name="web.dir"    value="${basedir}/WebContent"/>
+    <property name="webinf.dir" value="${web.dir}/WEB-INF"/>
+	<property name="lib.dir"    value="${webinf.dir}/lib" />
+	
+    <property name="build.dir" 		  value="${basedir}/build"/>
+	<property name="build.class.dir"  value="${build.dir}/classes"/>
+    <property name="build.web.dir"    value="${build.dir}/dist"/>
+    <property name="build.webinf.dir" value="${build.web.dir}/WEB-INF"/>
+	<property name="build.static-resources.dir" value="${build.web.dir}/static-resources"/>
+    <property name="dist.dir" value="${env.DIST_DIR}" />
+	<property name="build.deploy.dir" value="${dist.dir}"/>
+	
+	<path id="lib.class.path">
+		<fileset dir="${lib.dir}">
+			<include name="*.jar" />
+		</fileset>
+		<fileset dir="${dist.dir}">
+					<include name="cdsp-conversion-utils.jar" />
+					<include name="cdsp-dao.jar" />
+					<include name="cdsp-mongo-api.jar" />
+					<include name="cdsplus-output-schema-bindings.jar" />
+					<include name="concentra-input-schema-bindings.jar" />
+					<include name="concentra-output-schema-bindings.jar" />
+					<include name="soar-input-schema-bindings.jar" />
+					<include name="soar-output-schema-bindings.jar" />
+					<include name="msc-input-schema-bindings.jar" />
+					<include name="msc-output-schema-bindings.jar" />
+					<include name="jboss-servlet-api_3.0_spec-1.0.1.Final-redhat-2.jar"/>
+		</fileset>	
+	</path>
+	
+	<!-- ================================================================ -->
+    <!--                 target : clean, compile and war                  -->
+    <!-- ================================================================ -->
+
+	<target name="all" depends="clean, banner, compile, war, package" description="default target to do a clean build"/>	
+
+	<target name="clean" description="Clean project directory of generated files">
+	    	<delete dir="${build.dir}"/>
+		    <delete file="${build.deploy.dir}/${context.name}.war"/>
+			<delete file="${build.deploy.dir}/${context.name}.jar"/>
+			<delete file="${build.deploy.dir}/${context.name}.zip"/>
+		    <delete file="${basedir}/${context.name}.zip"/>
+	</target>
+	
+	<target name="banner">
+			<echo>+-----------------------------------------+</echo>
+			<echo>+   BUILDING CADENCE WEB APPLICATION		+</echo>
+			<echo>+-----------------------------------------+</echo>
+			<tstamp/>
+			<echo message="Started on ${TODAY} at ${TSTAMP}"/>
+	</target>
+	
+	<target name="compile" description="compile">
+		 <mkdir dir="${basedir}/build/classes"/>
+		 <javac srcdir="${src.dir}" destdir="${build.class.dir}">
+			<classpath refid="lib.class.path" />
+		</javac>
+		<jar destfile="${dist.dir}/cadence.jar">
+					<fileset dir="${build.class.dir}">
+						<include name="com/hp/**/*.*" />
+					</fileset>
+		</jar>
+	</target>
+	
+	<target name="war" description="Generate packaged WAR file">
+
+	        <mkdir dir="${build.web.dir}"/>
+			<mkdir dir="${build.webinf.dir}"/>
+		 	<mkdir dir="${build.static-resources.dir}"/>
+			<mkdir dir="${build.webinf.dir}/jsp"/>
+	      	<mkdir dir="${build.webinf.dir}/lib"/>
+			<mkdir dir="${build.webinf.dir}/classes"/>
+			<mkdir dir="${build.web.dir}/config"/> 
+			
+			<!-- Copy web.xml files  -->
+			<copy todir="${build.webinf.dir}">
+	            <fileset dir="${basedir}/WebContent/WEB-INF">
+	                <include name="*.xml"/>
+	            </fileset>
+	        </copy>
+	
+			<!-- Copy jsp folder -->
+			<copy todir="${build.webinf.dir}/jsp">
+	            <fileset dir="${basedir}/WebContent/WEB-INF/jsp">
+	                <include name="*.jsp"/>
+	            </fileset>
+	        </copy>
+		
+			<!-- Copy static-resources folder -->
+			<copy todir="${build.static-resources.dir}">
+	            <fileset dir="${basedir}/WebContent/static-resources">
+	                <include name="*.*"/>
+	            </fileset>
+	        </copy>
+		
+	        <!-- Copy jar files  -->
+	        <copy todir="${build.webinf.dir}/lib">
+	            <fileset dir="${lib.dir}">
+	                <include name="*.*"/>
+	            </fileset>
+	        	<fileset dir="${dist.dir}">
+					<include name="cdsp-conversion-utils.jar" />
+					<include name="cdsp-dao.jar" />
+					<include name="cdsp-mongo-api.jar" />
+					<include name="cdsplus-output-schema-bindings.jar" />
+					<include name="concentra-input-schema-bindings.jar" />
+					<include name="concentra-output-schema-bindings.jar" />
+					<include name="soar-input-schema-bindings.jar" />
+					<include name="soar-output-schema-bindings.jar" />
+					<include name="msc-input-schema-bindings.jar" />
+					<include name="msc-output-schema-bindings.jar" />
+	        	</fileset>	
+	        </copy>
+
+	        <!-- Copy class files -->
+	        <copy todir="${build.webinf.dir}/classes">
+	            <fileset dir="${basedir}/build/classes">
+	                <include name="**"/>
+	            </fileset>
+	        </copy>
+
+			<!-- Copy config property files -->
+			 <copy todir="${build.web.dir}/config">
+	            <fileset dir="${basedir}/config">
+	                <include name="**"/>
+	            </fileset>
+	        </copy>
+		
+			<!-- Copy html files  -->
+			<copy todir="${build.web.dir}">
+	            <fileset dir="${basedir}/WebContent">
+	                <include name="*.html"/>
+	            	<include name="static-resources/**"/>
+	            </fileset>
+	        </copy>
+		
+	        <!-- Create war file by bundling all elements together -->
+	        <war warfile="${build.deploy.dir}/${context.name}.war" webxml="${build.webinf.dir}/web.xml">
+	            <webinf dir="${build.webinf.dir}">
+	                <include name="**"/>
+	            </webinf>
+	        	<fileset dir="${build.web.dir}">
+	        	     <include name="**/*.html"/>
+	        		 <include name="static-resources/**"/>
+	        	</fileset>	        
+	        </war>
+	   </target>
+	    <!-- Create the pacakage which includes war ,config files -->
+	   <target name="package" description="Packaging the application for execution">
+                    <zip destfile="${build.deploy.dir}/Cadence.zip">
+                                <zipfileset dir="${build.deploy.dir}" prefix="deploy">
+                                                <include name="${context.name}.war" />
+                                </zipfileset>
+                                <zipfileset dir="${build.web.dir}/config" prefix="config">
+                                  <include name="**/*.*"/>  
+                                </zipfileset>
+                    </zip>     	        
+        </target>
+</project>

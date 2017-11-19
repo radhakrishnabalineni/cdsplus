@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+====================================================================== 
+	Oct 14, 2013 2:22:33 PM description jaiswaln
+======================================================================
+-->
+<project name="cdsp-priority-wds" default="all" basedir=".">
+	<property environment="env" />
+	<property name="dist.dir" value="${env.DIST_DIR}" />
+	<!--<property name="dist.dir" value="${basedir}/dist" />-->
+	<property name="src.dir" value="${basedir}/src" />
+	<property name="conf.dir" value="${basedir}/conf" />
+	<property name="scripts.dir" value="${basedir}/script" />
+	
+	<property name="build.dir" value="${basedir}/build" />
+	<property name="build.classes.dir" value="${build.dir}/classes" />
+	<property name="logs.dir" value="${basedir}/logs" />
+
+	<path id="lib.class.path">
+		<fileset dir="${dist.dir}">
+			<include name="cdsp-commons-utils-13.4.jar" />
+			<include name="cdsp-priority-loader.jar" />
+			<include name="wds-destination.jar" />
+		</fileset>
+	</path>
+
+	<!-- ================================= 
+	          target: all              
+	         ================================= -->
+	<target name="all" depends="clean, init, compile, package" description="default target to do a clean build"/>
+
+	<!-- ================================= 
+	          target: clean              
+	         ================================= -->
+	<target name="clean" description="deletes the build and dist directories">
+		<delete file="${dist.dir}/priority-wds.jar" />
+		<delete dir="${build.dir}" />
+	</target>
+
+	<!-- ================================= 
+	          target: init              
+	         ================================= -->
+	<target name="init" description="creates dist and build dir">
+		<mkdir dir="${build.classes.dir}" />		
+	</target>
+	<!-- ================================= target: compile ================================= -->
+
+	<target name="compile" description="description">
+		<mkdir dir="${basedir}/build/classes"/>
+		<javac srcdir="${src.dir}" destdir="${build.classes.dir}">
+			<classpath refid="lib.class.path" />
+		</javac>
+		<jar destfile="${dist.dir}/priority-wds.jar">
+			<fileset dir="${build.classes.dir}">
+				<include name="com/hp/cdsplus/wds/**/*.*" />
+			</fileset>
+		</jar>		
+	</target>
+
+	<!-- ================================= 
+          target: package              
+         ================================= -->
+	<target name="package" description="Packaging the application for execution">
+		<zip destfile="${dist.dir}/Spacedog_3.1.zip">
+			<zipfileset dir="${dist.dir}" prefix="spacedog/lib" includes="cdsp-commons-utils-13.4.jar,cdsp-priority-loader.jar,wds-destination.jar" />
+			<zipfileset file="${dist.dir}/priority-wds.jar" prefix="spacedog/lib"/>
+			<zipfileset dir="${conf.dir}" prefix="spacedog/config"/>			
+		</zip>
+	</target>
+</project>

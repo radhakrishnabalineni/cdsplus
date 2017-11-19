@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<!-- ==================================================== -->
+<!-- Build file for Concentra Extractor web application -->
+<!-- Author: GADSC IPG-IT CR -->
+<!-- ==================================================== -->
+
+<project name="Concentra Extractor" default="all" basedir=".">
+
+	<target name="init">
+		<echo message="Initializing environment ... " />
+		<property environment="env"/>
+		<property name="dirs.base" value="${basedir}" />
+    <property name="dir.build" value="${basedir}/build" />    
+    <property name="dir.classes" value="${dir.build}/classes" />
+    <property name="file.jar" value="ConcentraPriorityLoader-${env.BRANCH}.jar" />   
+    <property name="dir.dist" value="${dirs.base}/dist" />
+    <property name="dir.deploy" value="C:/SVN-CODE/Concentra/13.2/Concentra-PL-New" />	
+    <property name="dir.deploy.lib" value="${dir.deploy}/lib" />
+    <property name="dir.deploy.config" value="${dir.deploy}/config" />
+    <property name="dir.deploy.bin" value="${dir.deploy}/bin" />
+    <property name="dir.deploy.log" value="${dir.deploy}/log" />
+    <property name="dir.include.jars" value="${dir.deploy.lib}" />
+    <property name="dir.config" value="${dirs.base}/config" />
+    <property name="src.home" value="${basedir}/src"/>
+    <property name="compile.debug" value="true"/>
+    <property name="compile.deprecation" value="false"/>
+    <property name="compile.optimize" value="true"/>
+    <property name="app.version" value="1.0"/>		
+    <property name="priorityLoader.lib.location" value="C:/SVN-CODE/Concentra/13.2/Concentra-PL-New/lib"/>
+    <property name="concentra.lib.location" value="C:/SVN-CODE/Concentra/13.2/Concentra-PL-New/lib"/>
+    <property name="documentum.lib.location" value="C:/SVN-CODE/Concentra/13.2/Concentra-PL-New/lib"/>
+	</target>
+
+	<!-- Main target -->
+  <target name="all" depends="init,clean,compile,makejar,deployjar" />	
+	
+	<target name="clean" depends="init">
+	  <echo message="Removing distdirectory" />
+	  <delete dir="${dir.dist}" />
+		
+		<echo message="Creating dist directory" />
+		<mkdir dir="${dir.dist}" />
+		
+		<echo message="Removing class directory" />
+		<delete dir="${dir.classes}" />
+		
+		<echo message="Creating class directory" />
+		<mkdir dir="${dir.classes}" />
+	</target>
+	
+	<target name="compile" description="Compile Java sources">		
+		<path id="compile.classpath">
+      <pathelement location="${priorityLoader.lib.location}/PriorityLoader.jar"/>
+      <pathelement location="${priorityLoader.lib.location}/CDSPDestination.jar"/>
+      <pathelement location="${priorityLoader.lib.location}/log4j-1.2.14.jar"/>
+      <pathelement location="${priorityLoader.lib.location}/commons-httpclient-3.1.jar"/>
+      <pathelement location="${concentra.lib.location}/Concentra.jar"/>
+      <pathelement location="${concentra.lib.location}/commons-codec-1.3.jar"/>
+      <pathelement location="${concentra.lib.location}/commons-collections.jar"/>
+      <pathelement location="${concentra.lib.location}/dom4j-1.6.1.jar"/>
+      <pathelement location="${concentra.lib.location}/jdom.jar"/>
+	  <pathelement location="${concentra.lib.location}/log4j-1.2.14.jar"/>  
+	  <pathelement location="${documentum.lib.location}/dfc.jar"/>
+	  <pathelement location="${concentra.lib.location}/cdsp-mongo-api.jar"/>
+	  <pathelement location="${concentra.lib.location}/cdsplus-conversion-utils.jar"/>
+	  <pathelement location="${concentra.lib.location}/jaxb-api.jar"/>
+	  <pathelement location="${concentra.lib.location}/mongo-java-driver-2.10.1.jar"/>
+	  <pathelement location="${concentra.lib.location}/jdom.jar"/>
+
+		</path>
+		
+		<!-- Compile Java classes as necessary -->
+		<echo message="Compiling Java sources" />
+		<javac srcdir="${src.home}" destdir="${dir.classes}" excludes="**/*Test.java" debug="${compile.debug}" deprecation="${compile.deprecation}" optimize="${compile.optimize}">
+			<classpath refid="compile.classpath"/>
+		</javac>
+		
+		<!-- Copy application resources 
+		<copy todir="${dir.classes}">
+			<fileset dir="${src.home}" excludes="**/*.java"/>
+		</copy>
+		-->
+	</target>
+
+	<!-- Create the jar File -->
+	<target name="makejar" depends="compile">
+		<!-- Clean classes dir
+		<delete includeEmptyDirs="true">
+		  <fileset dir="${dir.classes}" includes="**/*" defaultexcludes="no"/>
+		</delete>
+		 -->
+		
+		<!-- Copy classes to dir.classes 
+		<copy todir="${dir.classes}">
+			<fileset dir="${dir.bin}" includes="**/*" excludes="**/test/*,others/*" />
+		</copy>
+     -->
+		
+		<!-- Copy props dir to lib dir 
+		<copy todir="${dir.lib}/props">
+		    <fileset dir="${dir.props}" />
+		</copy>
+		-->
+		
+		<!-- Commented out
+		<copy file="${dfc.prop.file}" todir="${dir.classes}"/>
+		<copy file="${ctgExtractor.props.file}" todir="${dir.classes}"/>
+		 -->
+				
+		<echo message="Creating the jar file" />
+		<jar jarfile="${dir.dist}/${file.jar}" basedir="${dir.classes}"
+      includes="**/*.class" excludes="**/ui/**,jsp_servlet/**">
+      <manifest>
+        <attribute name="Created-By" value="(Hewlett-Packard Co.)"/>
+        <attribute name="Release" value="${app.version}"/>
+      </manifest>			
+		</jar>	
+	</target>
+
+	<!-- Deploy the jar File -->
+	<target name="deployjar" depends="init,makejar">
+		<echo message="Deploying the jar file" />
+		<copy file="${dir.dist}/${file.jar}" todir="${dir.deploy.lib}/" />
+		<copy file="${dir.dist}/${file.jar}" todir="${priorityLoader.lib.location}" />
+	</target>
+
+</project>

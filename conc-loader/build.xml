@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="conc-loader" default="all" basedir=".">
+	<property environment="env" />
+	<property name="dist.dir" value="dist" />
+	<property name="src.dir" value="${basedir}/src" />
+	<property name="file.jar" value="conc-priority-loader.jar" />
+	<property name="conf.dir" value="${basedir}/config" />
+	<property name="build.dir" value="${basedir}/build" />
+	<property name="build.classes.dir" value="${build.dir}/classes" />
+	<property name="logs.dir" value="${basedir}/logs" />
+	<property name="CONC_RELEASE_DIR" value="${basedir}/dist/loader" />
+    <path id="jar.dir">
+	 <!-- dependent jars -->
+	 <fileset dir="${dist.dir}">
+	    <include name="Concentra.jar"/>
+		<include name="cdsp-priority-loader.jar"/>
+	    <include name="cdsp-mongo-api.jar"/>	
+	 	<include name="cdsp-destination.jar"/>	 	
+	 	<include name="mongo-java-driver-2.11.2.jar"/>	
+	 </fileset>
+	 <!-- end of depend jars -->
+	 </path> 
+	 <path id="lib.class.path">
+	    <fileset dir="${dist.dir}">
+		<include name="dfc.jar"/>
+	    <include name="dfcbase.jar"/>
+    	<include name="dom4j-1.6.1.jar"/>
+	    <include name="jdom.jar"/>
+    	<include name="log4j-1.2.14.jar"/>
+	    <include name="commons-collections.jar"/>		    
+	    </fileset>
+	  </path>
+	<!-- ================================= 
+	          target: all              
+	     ================================= -->
+	<target name="all" depends="clean,init,compile,makejar,loader,loader_zip" description="default target to do a clean build"/>
+	<!-- ================================= 
+	          target: clean              
+	         ================================= -->
+	<target name="clean" description="deletes the build and dist directories">
+		<!-- <delete dir="${dist.dir}" /> -->
+		<delete dir="${build.dir}" />
+		<delete dir="${CONC_RELEASE_DIR}" />
+		<delete dir="${dist.dir}/${file.jar}" />
+		<delete dir="${dist.dir}/ConcentraLoader.zip" />
+	</target>
+	<!-- ================================= 
+	          target: init              
+	         ================================= -->
+	<target name="init" description="creates dist and build dir">
+		<mkdir dir="${build.classes.dir}" />
+		<!-- <mkdir dir="${dist.dir}" /> -->
+	</target>
+	<!-- ================================= target: compile ================================= -->
+
+	<target name="compile" description="description">	 
+		<mkdir dir="${basedir}/build/classes"/>
+		<javac srcdir="${src.dir}" destdir="${build.classes.dir}">
+			<classpath refid="lib.class.path" />
+			<classpath refid="jar.dir"/>
+		</javac>
+	</target>
+	<target name="makejar" depends="compile">
+	<echo message="Creating the jar file" />
+	<jar jarfile="${dist.dir}/${file.jar}" basedir="${build.classes.dir}"
+      includes="**/*.class" excludes="**/ui/**,jsp_servlet/**">
+    </jar>  
+  </target>
+  <target name="loader" >
+        <delete dir="${CONC_RELEASE_DIR}" />
+		<mkdir dir="${CONC_RELEASE_DIR}" />
+		<mkdir dir="${CONC_RELEASE_DIR}/lib" />
+		<echo message="Copying ConcentraPriorityLoader related files to ${CONC_RELEASE_DIR}" />
+		<copydir src="${basedir}/config/${env.ENVIRONMENT}" dest="${CONC_RELEASE_DIR}/lib" />
+  	    <move file="${CONC_RELEASE_DIR}/lib/build.xml" todir="${CONC_RELEASE_DIR}" />
+  	    <copydir src="${basedir}/scripts" dest="${CONC_RELEASE_DIR}/" />
+		<echo message="Removing the two history files from config folder" />
+		<!--
+  	    <delete file="${CONC_RELEASE_LOADER}/config/conc_history.txt" />
+		<delete file="${CONC_RELEASE_LOADER}/config/conc_reflist_history.txt" />
+		-->
+  		<copy todir="${CONC_RELEASE_DIR}/lib">
+  	      <fileset dir="${dist.dir}" includes="dfc.jar,dfcbase.jar,dom4j-1.6.1.jar,log4j-1.2.14.jar,cdsp-mongo-api.jar,commons-collections.jar,jdom.jar,commons-codec-1.3.jar,commons-httpclient-3.1.jar,commons-io-1.2.jar,commons-lang.jar,commons-logging.jar,jettison-1.3.3.jar,mail.jar,mongo-java-driver-2.11.2.jar,struts.jar,stax-api-1.0-2.jar,xercesImpl.jar" />
+  		  <fileset dir="${dist.dir}" includes="${file.jar}" />
+  		  <fileset dir="${dist.dir}" includes="cdsp-destination.jar,cdsp-priority-loader.jar,Concentra.jar,concentra-input-schema-bindings.jar,cdsp-conversion-utils.jar"/>
+  		</copy>		
+	</target>
+	<target name="loader_zip" depends="loader">
+	  <delete file="${dist.dir}/ConcentraLoader.zip" />
+	  <zip destfile="${dist.dir}/ConcentraLoader.zip">
+        <zipfileset dir="${CONC_RELEASE_DIR}" prefix="conc-loader"/>
+	  </zip>
+	</target>
+	</project>

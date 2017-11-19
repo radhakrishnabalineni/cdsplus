@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings>
+  <mapping>
+    <soar_event>UICOLAPROVED</soar_event>
+    <extractor_event>update</extractor_event>
+    <priority>1</priority>
+  </mapping>
+  <mapping>
+    <soar_event>UICOLOBSOLETE</soar_event>
+    <extractor_event>update</extractor_event>
+    <priority>1</priority>
+  </mapping>
+  <mapping>
+    <soar_event>UICOLSSGUPDATE</soar_event>
+    <extractor_event>update</extractor_event>
+    <priority>1</priority>
+  </mapping>
+ <mapping>
+    <soar_event>UIITEMAPROVED</soar_event>
+    <extractor_event>update</extractor_event>
+    <priority>1</priority>
+  </mapping>
+<mapping>
+    <soar_event>UICOLPROPUPDATEAPVD</soar_event>
+    <extractor_event>update</extractor_event>
+    <priority>3</priority>
+  </mapping>
+<mapping>
+    <soar_event>UIITEMPROPUPDATE</soar_event>
+    <extractor_event>update</extractor_event>
+    <priority>2</priority>
+  </mapping>
+
+<mapping>
+    <soar_event>UICOLSTAMPUPDATE</soar_event>
+    <extractor_event>update</extractor_event>
+    <priority>1</priority>
+  </mapping>
+  <mapping>
+    <soar_event>UIITEMSTAMPUPDATE</soar_event>
+    <extractor_event>update</extractor_event>
+    <priority>1</priority>
+  </mapping>
+  <mapping>
+    <soar_event>UIITEMOBSOLETE</soar_event>
+    <extractor_event>update</extractor_event>
+    <priority>1</priority>
+  </mapping>
+  <mapping>
+    <soar_event>UIITEMSUSPEND</soar_event>
+    <extractor_event>update</extractor_event>
+    <priority>1</priority>
+  </mapping>
+  <mapping>
+    <soar_event>UIITEMUNSUSPEND</soar_event>
+    <extractor_event>update</extractor_event>
+    <priority>1</priority>
+  </mapping>
+  <mapping>
+    <soar_event>GBLCOLAPROVED</soar_event>
+    <extractor_event>update</extractor_event>
+    <priority>2</priority>
+  </mapping>
+  <mapping>
+    <soar_event>GBLCOLOBSOLETE</soar_event>
+    <extractor_event>update</extractor_event>
+    <priority>2</priority>
+  </mapping>
+   <mapping>
+    <soar_event>GBLCOLDELETE</soar_event>
+    <extractor_event>update</extractor_event>
+    <priority>1</priority>
+  </mapping>
+  <mapping>
+    <soar_event>GBLITEMOBSOLETE</soar_event>
+    <extractor_event>update</extractor_event>
+    <priority>2</priority>
+  </mapping>
+ 
+  
+  <mapping>
+    <soar_event>JOBCOLOBSOLETE</soar_event>
+    <extractor_event>delete</extractor_event>
+    <priority>2</priority>
+  </mapping>
+  <mapping>
+    <soar_event>JOBITEMOBSOLETE</soar_event>
+    <extractor_event>update</extractor_event>
+    <priority>2</priority>
+  </mapping>
+  <mapping>
+    <soar_event>JOBPEUPDATE</soar_event>
+    <extractor_event>update</extractor_event>
+    <priority>2</priority>
+  </mapping>
+<mapping>
+    <soar_event>TIECOLATTCHCOMPLETED</soar_event>
+    <extractor_event>update</extractor_event>
+    <priority>2</priority>
+  </mapping>
+  <mapping>
+    <soar_event>TIEITEMATTCHCOMPLETED</soar_event>
+    <extractor_event>update</extractor_event>
+    <priority>2</priority>
+  </mapping>
+
+<mapping>
+    <soar_event>UIITEMOSENVUPDATE</soar_event>
+    <extractor_event>update</extractor_event>
+    <priority>3</priority>
+  </mapping>
+
+<mapping>
+    <soar_event>JOBFACUPDATE</soar_event>
+    <extractor_event>update</extractor_event>
+    <priority>3</priority>
+ </mapping>
+
+
+  <mapping>
+    <soar_event>PSDMHRCYUPDATE</soar_event>
+    <extractor_event>update</extractor_event>
+    <priority>4</priority>
+  </mapping>
+  <mapping>
+    <soar_event>PSDMCPGUPDATE</soar_event>
+    <extractor_event>update</extractor_event>
+    <priority>4</priority>
+  </mapping>
+  <mapping>
+    <soar_event>PSDMPLFUPDATE</soar_event>
+    <extractor_event>update</extractor_event>
+    <priority>4</priority>
+  </mapping>
+
+
+  <mapping>
+    <soar_event>MANUALUPD</soar_event>
+    <extractor_event>update</extractor_event>
+    <priority>0</priority>
+  </mapping>
+    <mapping>
+    <soar_event>MANUALDEL</soar_event>
+    <extractor_event>delete</extractor_event>
+    <priority>0</priority>
+  </mapping>
+  
+  <mapping>
+    <soar_event>MANUALUPDLOW</soar_event>
+    <extractor_event>update</extractor_event>
+    <priority>5</priority>
+  </mapping>
+    <mapping>
+    <soar_event>MANUALDELLOW</soar_event>
+    <extractor_event>delete</extractor_event>
+    <priority>5</priority>
+  </mapping>
+  <!-- Changes as per ICM SOAR 14.3 Release -->
+  <mapping>
+      <soar_event>ICMITEMUPDATE</soar_event>
+      <extractor_event>update</extractor_event>
+      <priority>2</priority>
+  </mapping>
+  
+  </mappings>
+

@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<extractor>
+		<getWorkOrderSince>
+			<query name="getWOTokensIN">
+				<dql>select a.event_id as e_token, a.object_type as e_document_class, a.object_name as e_document_name, a.event as e_state, a.chronicle_id from dm_dbo.c_extractor_events a where a.event_id > ?  order by 1 enable(RETURN_TOP 1000)</dql>
+			</query>
+			<query name="getWOTokensFor">
+				<dql>select a.event_id as e_token, a.object_type as e_document_class, a.object_name as e_document_name, a.event as e_state, a.chronicle_id from dm_dbo.c_extractor_events a where a.event_id in (select max(event_id) from dm_dbo.c_extractor_events where chronicle_id in (select i_chronicle_id from c_base_object where object_name in ( ? )) group by chronicle_id) order by 1</dql>
+			</query>
+			<query name="getLastToken">
+				<dql>select max(event_id) as token from dm_dbo.c_extractor_events</dql>
+			</query>
+		</getWorkOrderSince>
+		<getDocumentRetrieval>
+			<!-- Taxonomy Changes -->
+			<query name="getTmsCategorizationTopics">
+				<dql>select tms_categorization_topics as tms_categorization_topics from ? where r_object_id = ?</dql>
+			</query>
+			<!-- End of Taxonomy changes -->
+		 	<query name="getDocCommonInfo">
+				<dql>select a.object_id, a.chronicle_id, a.event, b.r_object_type, b.col_id, c.active_flag from dm_dbo.c_extractor_events a, c_base_object (all) b, c_base_col c where a.event_id = ? and a.object_id = b.r_object_id and any b.r_version_label = 'FINAL' and c.r_object_id = b.col_id</dql>
+			</query>
+			<!-- KM3.1 (#BR_0939) - Joint Product Collections -->
+			<query name="getJointProductCollectionIds">
+				<dql>select joint_product_collections as jpc_id from c_base_col where r_object_id = ?</dql>
+			</query>
+			<query name="getProductNumberInfo">
+				<dql>select product_number from dm_dbo.c_product_group_numbers where group_id in(select member_groups from c_jpc_view where r_object_id = ? and member_groups in (select group_id from c_product_group_names where update_flag in ('M', 'C') or update_flag is null) )</dql>
+			</query>
+			<query name="getProductGroups">
+				<dql>select product_groups as product from ? where r_object_id = ? and any product_groups in ( select group_id from c_product_group_names where update_flag in ('M', 'C') or update_flag is null )</dql>
+			</query>
+			<query name="getProductGroupMembers">
+				<dql>select member_group_id as product from c_product_group_members where group_id = ? and member_group_id in ( select group_id from c_product_group_names where update_flag in ('M', 'C') or update_flag is null )</dql>
+			</query>			
+			<query name="getRegions">
+				<dql>select regions as region from ? (all) where r_object_id = ? and ANY r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getAuthors">
+				<dql>select authors as author from ? (all) where r_object_id = ? and ANY r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getDocumentTypeDetails">
+				<dql>select document_type_details as document_type_detail from ? where r_object_id = ?</dql>
+			</query>
+			<query name="getDocumentType">
+				<dql>select b.document_type from ? (all) a, ? b where a.r_object_id = ? and a.col_id = b.r_object_id and ANY a.r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getVersionLabel">
+				<dql>select r_version_label as version_label from ? (all) where r_object_id = ? and ANY r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getEventByIdAndType">	
+				<dql>select event_id, event from c_extractor_events where event_id in(?) and event in (?)</dql>
+			</query>
+			<query name="shouldExtractBasedOnChangeLog">
+				<dql>select MAX(event_id) as event_id from c_extractor_events where chronicle_id = ? and event_id > ? </dql>
+			</query>
+			<query name="shouldExtractBasedOnChronicle">
+				<dql>select r_object_id from c_base_object (all) where i_chronicle_id = ? and any r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getLatestEventDetails">
+				<dql>select event, event_id from c_extractor_events where event_id in (select MAX(event_id) from c_extractor_events where chronicle_id in (select distinct chronicle_id from c_extractor_events where event_id=?)) and event_id > ?</dql>
+			</query>
+			
+			<query name="getFeedbackProductLines">	
+				<dql>select feedback_product_lines as feedback_product_line from ? (all) where r_object_id = ? and ANY r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getInformationSource">	
+				<dql>select b.information_source from ? (all) a, ? b where a.r_object_id = ? and a.col_id = b.r_object_id and ANY a.r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getDosExtension">
+				<dql>select c.dos_extension as content_type from ? (ALL) a, dmr_content b, dm_format c where a.r_object_id = ? and ANY a.r_version_label = 'FINAL' and a.i_contents_id = b.r_object_id and b.format = c.r_object_id</dql>
+			</query>
+			<query name="getContentFeedbackInfo">	
+				<dql>select action_requested, action_taken, confidential_comment, feedback_content_name, original_system, feedback_priority, r_object_type as document_class, r_content_size as file_bytes, language_code, miscellaneous_comment, object_name, original_docid from c_content_feedback_doc (all) where r_object_id = ? and ANY r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getLanguageLabel">
+				<dql>select b.language_label from ? (all) a, c_languages b where a.r_object_id = ? and a.language_code = b.language_code and ANY a.r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getPropertyUpdateDate">	
+				<dql>select a.property_update_date as property_date, a.property_ref_update_date as ref_date, a.lifecycle_state_update_date as state_date, b.collection_update_date as collection_date, b.collection_ref_update_date as ref_col_date from c_base_object (all)a, c_base_col b where r_object_id = ? and ANY r_version_label = 'FINAL' and b.r_object_id = a.col_id</dql>
+			</query>
+			<query name="getFullTitle">
+				<dql>select full_title, language_code from ? (all) where r_object_id = ? and ANY r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getFullTitles">
+				<dql>select full_titles as full_title, language_codes as language_code from ? (all) where r_object_id = ? and ANY r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getHhoMarketingInfo">
+				<dql>select b.activity_difficulty_level,b.activity_duration, b.activity_type, b.go_to_market_window, b.holiday, b.season, a.col_id, a.campaign_association, a.content_version_date, a.description, a.disclosure_level, a.doc_content_version as content_version, a.featured_activity_flag, a.language_code, a.licensing_rights, a.media_size, a.object_name, a.original_system, a.project_id, a.r_object_type as document_class, a.review_date, a.r_content_size as file_bytes from c_hho_marketing_doc (ALL) a, c_hho_marketing_col b where a.r_object_id = ? and a.col_id = b.r_object_id and ANY r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getActivityTypeDetails">
+				<dql>select activity_type_details as activity_type_detail from ? where r_object_id = ?</dql>
+			</query>
+			<query name="getGoToMarketInitiatives">
+				<dql>select go_to_market_initiatives as go_to_market_initiative from ? where r_object_id = ?</dql>
+			</query>
+			<query name="getSubjectTypes">
+				<dql>select subject_types as subject_type from ? where r_object_id = ?</dql>
+			</query>
+			<query name="getContacts">
+				<dql>select contacts as contact from ? (all) where r_object_id = ? and ANY r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getAssociatedProjectPages">
+				<dql>select associated_project_pages as associated_project_page from ? (all) where r_object_id = ? and ANY r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getProductLevels">
+				<dql>select product_levels as product_level from ? where r_object_id = ?</dql>
+			</query>
+			<query name="getPublicationDestination">
+				<dql>select publication_destinations as publication_destination from ? (all) where r_object_id = ? and ANY r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getSearchKeywords">
+				<dql>select search_keywords as search_keyword  from ? (all) where r_object_id = ? and ANY r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getMasterObjectName">
+				<dql>select c.object_name as master_object_name from ? (ALL) a, ? b, c_base_object (ALL) c where a.r_object_id = ? and ANY a.r_version_label = 'FINAL' and a.col_id = b.r_object_id and b.col_master_id = c.i_chronicle_id and ANY c.r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getAudiences">
+				<dql>select audiences as audience_name, audience_release_dates as audience_release_date, audience_expiry_dates as audience_expiry_date from ? (all) where r_object_id = ? and ANY r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getAcronym">
+			    <dql>select b.acronym as cmg_acronym from ? (ALL) a, c_cmg b where a.r_object_id = ? and a.cmg_id = b.r_object_id and ANY a.r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getGeneralPurposeInfo">
+				<dql>select clean_content_flag, col_id, description, valid_flag, doc_content_version as content_version, dpi_resolution, object_create_date as creation_date, object_name, original_docid, original_filename, original_system, owner_name, pixel_height, pixel_width, publication_priority, r_object_type as document_class, review_date, wrapped_component_format, disclosure_level,r_content_size as file_bytes, language_code from c_general_purpose_doc (all) where r_object_id = ? and ANY r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getFeedbackAddress">
+				<dql>select b.feedback_address as cmg_feedback_address from ? (ALL) a, c_cmg b where a.r_object_id = ? and a.cmg_id = b.r_object_id and ANY a.r_version_label = 'FINAL'</dql>
+			</query>
+			<!-- query name="getCollectionValidFlag">
+				<dql>select b.collection_valid_flag as collection_valid_flag from ? (ALL) a, ? b where a.r_object_id = ? and a.col_id = b.r_object_id and ANY a.r_version_label = 'FINAL'</dql>
+			</query>
+			 -->
+			<query name="getManualInfo">
+				<dql>select a.clean_content_flag, a.col_id, a.description, a.valid_flag, a.disclosure_level, a.doc_content_version as content_version, a.dpi_resolution, a.object_create_date as creation_date, a.object_name, a.original_docid,a. original_filename, a.original_system, a.owner_name, a.part_number, a.pixel_height, a.pixel_width, a.publication_priority, a.r_object_type as document_class, a.review_date, a.wrapped_component_format, a.r_content_size as file_bytes, b.collection_valid_flag, b.information_source, b.publication_code from c_manual_doc (all) a, c_manual_col b where a.r_object_id = ? and a.col_id = b.r_object_id and ANY r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getContentUpdateDate">
+				<dql>select content_update_date from ? (all) where r_object_id = ? and ANY r_version_label = 'FINAL' union select content_update_date from ? (all) where i_chronicle_id in (select component_id from dmr_containment where parent_id = ?)</dql>
+			</query>
+			<query name="getContentUpdateUser">
+				<dql>select content_update_user from ? (all) where r_object_id = ? and ANY r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getLanguageCode">
+				<dql>select language_code from ? (all) where r_object_id = ? and ANY r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getLanguageCodesMulti">
+				<dql>select language_code, language_label from c_languages where language_code in ( select language_codes from ? (all) where r_object_id = ? and ANY r_version_label = 'FINAL' )</dql>
+			</query>
+			<query name="getLanguageCodesSingle">
+				<dql>select language_code, language_label from c_languages where language_code = ( select language_code from ? where r_object_id = ? and ANY r_version_label = 'FINAL' )</dql>
+			</query>
+			<query name="getExtraPoperties">
+    			<dql>select extra_property_names as extra_property_name , extra_property_values as extra_property_value from ? (all) where r_object_id = ? and ANY r_version_label = 'FINAL'</dql>
+   			</query>
+   			<query name="getPlannedPublicDate">
+				<dql>select a.disclosure_level, a.future_disclosure_level, a.future_disclosure_mode, a.future_disclosure_date, b.product_release_date, b.product_announcement_date, b.web_release_date from ? (ALL) a, ? b where a.r_object_id = ? and ANY a.r_version_label = 'FINAL' and a.col_id = b.r_object_id union select a.disclosure_level, a.future_disclosure_level, a.future_disclosure_mode, a.future_disclosure_date, a.future_disclosure_date, a.future_disclosure_date, DATE('01/01/1900') from ? (ALL) a where r_object_id = ? and ANY r_version_label = 'FINAL' and not exists(select b.r_object_id from ? b where a.col_id = b.r_object_id)</dql>			
+			</query>
+			<query name="getLibraryDocInfo">
+				<dql>select background as background,valid_flag as valid_flag, clean_content_flag as clean_content_flag, col_id as col_id,description as description, disclosure_level as disclosure_level, doc_content_version as content_version, dpi_resolution as dpi_resolution,object_create_date as creation_date, object_name as object_name,original_docid as original_docid, original_filename as original_filename, original_system as original_system, owner_name as owner_name, pixel_height as pixel_height, pixel_width as pixel_width, r_object_type as document_class, review_date as review_date, wrapped_component_format as wrapped_component_format, r_content_size as file_bytes, full_title from c_library_doc (all) where r_object_id = ? and ANY r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getOrientation">
+				<dql>select orientation from ? (all) where r_object_id = ? and ANY r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getColor">
+				<dql>select b.color from c_base_object(ALL) a, ? b where b.r_object_id = a.col_id AND b.r_object_id = ? and ANY a.r_version_label = 'FINAL'</dql>
+			</query>							
+			<query name="getComponent">
+				<dql>select c.dos_extension as content_type from c_base_object (all) a , dmr_content b, dm_format c where a.r_object_id in ( select r_object_id from c_base_object (all) where i_chronicle_id = ? and ANY r_version_label = 'FINAL') and a.i_contents_id = b.r_object_id and b.format = c.r_object_id</dql>
+			</query>
+			<query name="getProductSetupInfo">
+				<dql>select b.bundle_dimensions_text, b.collection_valid_flag, b.color_page_yield_count, b.information_source, b.key_selling_points, b.master_carton_inch_depth, b.master_carton_inch_height, b.master_carton_inch_width, b.master_carton_pound_weight, b.master_carton_product_count, b.monochrome_page_yield_count, b.packaged_inch_depth, b.packaged_inch_height, b.packaged_inch_width, b.packaged_pound_weight, b.pallet_cartons_per_layer, b.pallet_inch_depth, b.pallet_inch_height, b.pallet_inch_width, b.pallet_layer_count, b.pallet_pound_weight, b.pallet_product_count, b.pallet_products_per_layer, b.product_compatibility, b.technology_type, b.unpackaged_inch_depth, b.unpackaged_inch_height, b.unpackaged_inch_width, b.unpackaged_pound_weight, a.ad_embargo_date, a.col_id, a.confidential_comment, a.content_history, a.cpl_date, a.object_create_date as creation_date, a.currency, a.description, a.disclosure_level, a.doc_content_version as content_version, a.inner_pack_number, a.r_object_type as document_class, a.language_code, a.master_carton_discount, a.master_carton_list_price, a.master_carton_net_price, a.master_carton_number, a.miscellaneous_comment, a.object_name, a.order_date, a.original_docid, a.original_filename, a.original_system, a.package_content, a.pallet_discount, a.pallet_list_price, a.pallet_net_price, a.pallet_number, a.pr_embargo_date, a.product_discount_1, a.product_discount_2, a.product_discount_quantity, a.product_est_street_price, a.product_list_price, a.product_map_flag, a.product_map_price, a.product_min_order_quantity, a.product_net_price_1, a.product_net_price_2, a.product_option, a.product_shelf_life, a.product_tariff_code, a.product_warranty_summary, a.replaced_product, a.review_date, a.ship_date, a.show_as_new_duration, a.upc_number, a.valid_flag from c_product_setup_doc (all) a, c_product_setup_col b where a.r_object_id = ? and a.col_id = b.r_object_id and ANY r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getMarketingInfo">
+				<dql>select col_id as col_id,confidential_comment as confidential_comment,content_history as content_history, description as description, disclosure_level as disclosure_level, doc_content_version as content_version,language_code as language_code, miscellaneous_comment as miscellaneous_comment,object_create_date as creation_date,object_name as object_name,original_docid as original_docid, original_filename as original_filename, original_system as original_system, r_object_type as document_class, review_date as review_date, show_as_new_duration as show_as_new_duration, valid_flag as valid_flag from c_marketing_doc (all) where r_object_id = ? and ANY r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getMarketingKeywords">
+				<dql>select marketing_keywords as marketing_keyword from c_marketing_col where r_object_id in ( select col_id from c_marketing_doc (all) where r_object_id = ? and ANY r_version_label = 'FINAL' )</dql>
+			</query>
+			<query name="getSellingWindows">
+				<dql>select selling_windows as selling_window from c_marketing_doc (all) where r_object_id = ? and ANY r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getAccounts">
+				<dql>select accounts as account from ? (all) where r_object_id = ? and ANY r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getMarketingTeams">
+				<dql>select marketing_teams as marketing_team from ? (all) where r_object_id = ? and ANY r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getOriginCountries">
+				<dql>select origin_countries from c_product_setup_doc (all) where r_object_id = ? and ANY r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getProductMarkets">
+				<dql>select product_markets as product_market from c_product_setup_doc (all) where r_object_id = ? and ANY r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getAssociations">
+				<dql>select asso.product_group, asso.associated_product_group, asso.association_type from c_base_object doc, c_base_col col, dm_dbo.c_product_associations asso where doc.r_object_id = ? and col.r_object_id = doc.col_id and (any col.product_groups = asso.product_group or any col.product_groups = asso.associated_product_group) and  (asso.update_flag &lt;> 'del' or asso.update_flag is null)</dql>
+			</query>
+			<query name="getContentTopicDetails">
+				<dql>select content_topic_details as content_topic_detail from ? where r_object_id = ?</dql>
+			</query>
+			<query name="getEnvironmentDetails">
+				<dql>select environment_details as environment_detail from ? where r_object_id = ?</dql>
+			</query>
+			<query name="getEnvironments">
+				<dql>select environments as environment from ? where r_object_id = ?</dql>
+			</query>
+			<query name="getIssueNumbers">
+				<dql>select issue_numbers as issue_number from ? where r_object_id = ?</dql>
+			</query>
+			<query name="getMainComponentDetails">
+				<dql>select main_component_details as main_component_detail from ? where r_object_id = ?</dql>
+			</query>
+			<query name="getMinorComponent1Details">
+				<dql>select minor_component1_details as minor_component1_detail from ? where r_object_id = ?</dql>
+			</query>								
+			<query name="getMinorComponent2Details">
+				<dql>select minor_component2_details as minor_component2_detail from ? where r_object_id = ?</dql>
+			</query>								
+			<query name="getProductFunctionDetails">
+				<dql>select product_function_details as product_function_detail from ? where r_object_id = ?</dql>
+			</query>								
+			<query name="getSerialNumberBeginnings">
+				<dql>select serial_number_beginnings as serial_number_beginning from ? where r_object_id = ?</dql>
+			</query>								
+			<query name="getSerialNumberEndings">
+				<dql>select serial_number_endings as serial_number_ending from ? where r_object_id = ?</dql>
+			</query>								
+			<query name="getSerialNumberProducts">
+				<dql>select serial_number_products as serial_number_product from ? where r_object_id =?</dql>
+			</query>
+			<query name="getSymptomDetails">
+				<dql>select symptom_details as symptom_detail from ? where r_object_id = ?</dql>
+			</query>
+			<query name="getUserTaskDetails">
+				<dql>select user_task_details as user_task_detail from ? where r_object_id = ?</dql>
+			</query>
+			<query name="getSoftwareGroups">
+				<dql>select software_groups as software_group from ? where r_object_id = ?</dql>
+			</query>												
+			<query name="getOperatingSystemGroups">
+				<dql>select operating_system_groups as operating_system_group from ? where r_object_id = ?</dql>
+			</query>
+			<query name="getRendition">
+				<dql>select a.object_name, f.dos_extension, c.content_size,c.set_time from dm_format f, dmr_content c, c_base_object (all) a where any c.parent_id in (select component_id from dmr_containment where parent_id= ? ) and c.format = f.r_object_id and any c.parent_id = a.r_object_id and any a.r_version_label = 'FINAL' and a.i_chronicle_id in (select component_id from dmr_containment where parent_id= ? )</dql>
+			</query>
+			<query name="getRenditionCountZero">
+				<dql>select a.object_name, f.dos_extension, c.content_size,c.set_time from dm_format f, dmr_content c, c_base_object (all) a where any c.parent_id in (?) and c.format = f.r_object_id and any c.parent_id = a.r_object_id and ANY a.r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getFaqRegions">
+				<dql>select faq_regions as faq_region from ? (all) where r_object_id = ? and ANY r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getEssoRegions">
+				<dql>select esso_regions as esso_region  from c_support_col where r_object_id in ( select col_id from c_support_doc (all) where r_object_id = ? and ANY r_version_label = 'FINAL' )</dql>
+			</query>
+			<query name="getCollectionSearchKeywords">
+				<dql>select collection_search_keywords as collection_search_keyword from c_standard_marketing_col where r_object_id in ( select col_id from c_standard_marketing_doc (all) where r_object_id = ? and ANY r_version_label = 'FINAL' )</dql>
+			</query>
+			<query name="getPubvVendors">
+				<dql>select pubv_vendors as pubv_vendor from c_standard_marketing_doc (all) where r_object_id = ? and ANY r_version_label = 'FINAL'</dql>
+			</query>								
+			<query name="getPubController">
+				<dql>select b.user_address, b.user_name, b.first_name, b.last_name, b.employee_id, b.locationcode, b.business_group, b.business_unit, b.telephone, b.mail_stop, b.hp_post, b.hp_floor, b.building_name, b.addr_street, b.addr_city, b.addr_state, b.addr_postal_code, b.addr_country_code from c_standard_marketing_doc (ALL) a, c_user b where a.r_object_id = ? and ANY a.r_version_label = 'FINAL' and a.pub_controller = b.user_name</dql>
+			</query>
+			<query name="getPubManager">
+				<dql>select b.user_address, b.user_name, b.first_name, b.last_name, b.employee_id, b.locationcode, b.business_group, b.business_unit, b.telephone, b.mail_stop, b.hp_post, b.hp_floor, b.building_name, b.addr_street, b.addr_city, b.addr_state, b.addr_postal_code, b.addr_country_code from c_standard_marketing_doc (ALL) a, c_user b where a.r_object_id = ? and ANY a.r_version_label = 'FINAL' and a.pub_manager = b.user_name</dql>
+			</query>
+			<query name="getManagerBackup">
+				<dql>select b.user_address, b.user_name, b.first_name, b.last_name, b.employee_id, b.locationcode, b.business_group, b.business_unit, b.telephone, b.mail_stop, b.hp_post, b.hp_floor, b.building_name, b.addr_street, b.addr_city, b.addr_state, b.addr_postal_code, b.addr_country_code from c_standard_marketing_doc (ALL) a, c_user b where a.r_object_id = ? and ANY a.r_version_label = 'FINAL' and a.pub_manager_backup = b.user_name</dql>
+			</query>
+			<query name="getStandardMarketingInfo">
+				<dql>select a.col_id, a.content_url, a.content_version_date, a.description, a.disclosure_level, a.doc_content_version as content_version, a.feedback_address, a.r_object_type as document_class, a.language_code, a.r_object_id as concentra_internal_id, a.object_create_date as creation_date, a.object_name, a.original_docid, a.original_filename, a.original_system, a.pub_air_program_flag, a.pub_flag, a.pub_inventory_scrap_count, a.pub_locationcode_override, a.pub_media, a.pub_page_count, a.pub_page_size, a.pub_qa_instruction, a.pub_ref_update_date, a.review_date, b.collection_description, b.corporate_content_flag, b.information_source from c_standard_marketing_doc (all) a, c_standard_marketing_col b where r_object_id = ? and ANY r_version_label = 'FINAL' and a.col_id = b.r_object_id</dql>
+			</query>
+			<query name="getLinkCount">
+				<dql>select r_link_cnt from c_base_object (all) where r_object_id = ?</dql>
+			</query>
+			<query name="getRepeatingStandardMarketing">
+				<dql>select ? from c_standard_marketing_doc (all) where r_object_id = ? and ANY r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getSupportDocInfo">
+				<dql>select content_version_date,valid_flag,clean_content_flag, object_name, col_id, confidential_comment, description, disclosure_level,doc_content_version as content_version, dpi_resolution,issue_status,language_code, manual_action,object_create_date as creation_date,original_docid,original_filename,original_system,owner_name,pixel_height,pixel_width,publication_priority,r_object_type as document_class,recommended_action,review_date,service_program, short_title, top_issue_expiry,top_issue_expiry_date,wrapped_component_format,r_content_size as file_bytes  from c_support_doc (all) where r_object_id = ? and ANY r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getPrivateDocumentFlag">
+				<dql>select b.private_document_flag from c_standard_marketing_doc (ALL) a, c_cmg b where a.r_object_id = ? and ANY a.r_version_label = 'FINAL' and a.cmg_id = b.r_object_id</dql>
+			</query>
+			<query name="getCollectionFullTitle">
+				<dql>select b.collection_full_title, a.language_code from c_standard_marketing_doc (all) a, c_standard_marketing_col b where b.col_master_id = a.i_chronicle_id and b.r_object_id = (select doc1.col_id from c_standard_marketing_doc (all) doc1 where doc1.r_object_id = ? and ANY doc1.r_version_label = 'FINAL') and ANY a.r_version_label='FINAL'</dql>
+			</query>
+			<query name="getDocumentRelations">
+				<dql>select source_name, target_name, relation_type, source_chronicle_id, target_chronicle_id from c_document_relations where source_chronicle_id = ? or target_chronicle_id = ?</dql>
+			</query>
+			<query name="getFaqProductGroups">
+				<dql>select faq_product_groups as product from ? where r_object_id = ? and any faq_product_groups in ( select group_id from c_product_group_names where update_flag in ('M', 'C') or update_flag is null )</dql>
+			</query>
+			<query name="getSupportDocInfoSingleJoins">
+				<dql>select account_code, action_objective, content_topic, cost_per_issue, cost_per_unit, ia_identifier, labor_cost, labor_hours_paid, labor_minutes_paid, labor_rate_per_hour, main_component, material_cost_per_unit, minor_component1, minor_component2, parts_cost, parts_strategy, php_navigation, php_navigation_detail, product_category, product_division, product_function, service_inventory, service_type, software_topic, symptom, travel_cost, used_parts_action, user_task, action_expiry_date, action_start_date, effectivity_date from c_support_col where r_object_id = ?</dql>
+			</query>
+			<query name="getProjectName">
+				<dql>select b.name as project_name from ? (all) a, c_project b where a.r_object_id = ? and a.project_id = b.r_object_id and ANY a.r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getActionRequired">
+				<dql>select 'true' as action_required from ? (all) a, ? b where a.r_object_id = ? and a.col_id = b.r_object_id and b.action_required= 1 and ANY a.r_version_label = 'FINAL' union select 'false' as action_required from ? (all) a, ? b where a.r_object_id = ? and a.col_id = b.r_object_id and b.action_required= 0 and ANY a.r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getEventLogInfo">
+				<dql>select i_chronicle_id, r_object_id, object_name from c_base_object (all) where r_object_id in ( select object_id from c_extractor_events where event_id = ?)</dql>
+			</query>
+			<query name="getLogTokenVersion">
+				<dql>select r_version_label as version_label from c_base_object (all) where r_object_id in ( select object_id from c_extractor_events where event_id = ?) and ANY r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getTestData">
+				<dql>select a.event_id as zippy0 from dm_dbo.c_extractor_events a, c_base_object b WHERE b.r_object_type= ? and a.object_id = b.r_object_id AND rownum &lt; 100 order by a.event_id desc</dql>
+			</query>
+			<query name="getProveTestData">
+				<dql>select chronicle_id as zippy0, MAX(event_id) as zippy1 from dm_dbo.c_extractor_events where chronicle_id = (select chronicle_id from dm_dbo.c_extractor_events where event_id = ?) and (event = 'DOCWFLCMPLTD' or event = 'DOCUNARCHIVD' or event = 'DOCFNLREFUPD' or event = 'DOCFNLDIRUPD' or event = 'DOCFNLINDUPD' or event = 'DOCFNLRBOUND' or event = 'DOCFNLMNLUPD' or event = 'DOCARCHIVED' ) group by chronicle_id</dql>
+			</query>
+			<query name="getToken">
+				<dql>select a.event_id as token from dm_dbo.c_extractor_events a, c_base_object b where b.object_name = ? and a.object_id = b.r_object_id</dql>
+			</query>
+			<query name="getBusinessUnit">
+				<dql>select business_unit from ? (all) where r_object_id = ? and ANY r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getOrganization">
+				<dql>select organization from ? (all) a, c_cmg b where a.r_object_id = ? and a.cmg_id = b.r_object_id and ANY a.r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getContentType">
+				<dql>select content_type from ? (all) where r_object_id = ? and ANY r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getAllPubvs">
+				<dql>select pubv_vendors,pubv_inventory_policies,pubv_order_limits,pubv_restrictions,pubv_strict_hold_flags,pubv_unit_codes,pubv_initial_quantities,pubv_initial_air_quantities,pubv_reorder_quantities,pubv_initial_dates,gsb_application_segment,gsb_content_type,gsb_business_type,stock_unit_price,stock_unit_weight from c_standard_marketing_doc (all) where r_object_id = ? and ANY r_version_label = 'FINAL' order by i_position desc</dql>
+			</query>
+			<query name="getFailureCode">
+				<dql>select b.failure_code from c_support_doc a, c_support_col b where a.r_object_id = ? and a.col_id = b.r_object_id</dql>
+			</query>
+			<query name="getFutureDisclosureDate">
+				<dql>select a.future_disclosure_date from ? (ALL) a where a.r_object_id = ? and ANY a.r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getFutureDisclosureLevel">
+				<dql>select a.future_disclosure_level from ? (ALL) a where a.r_object_id = ? and ANY a.r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getIsTranslationFlag">
+				<dql>select a.is_translation_flag from ? (ALL) a where a.r_object_id = ? and ANY a.r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getLifecycleStateUpdateDate">
+				<dql>select a.lifecycle_state_update_date from ? (ALL) a where a.r_object_id = ? and ANY a.r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getLifecycleStateUpdateUser">
+				<dql>select a.lifecycle_state_update_user from ? (ALL) a where a.r_object_id = ? and ANY a.r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getPropertyUpdateUser">
+				<dql>select a.property_update_user from ? (ALL) a where a.r_object_id = ? and ANY a.r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getIChronicleId">
+				<dql>select a.i_chronicle_id from ? (ALL) a where a.r_object_id = ? and ANY a.r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getCmgName">
+			    <dql>select b.name as cmg_name from ? (ALL) a, c_cmg b where a.r_object_id = ? and a.cmg_id = b.r_object_id and ANY a.r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getPublicationCode">
+				<dql>select b.publication_code as publication_code from ? (ALL) a, ? b where a.r_object_id = ? and a.col_id = b.r_object_id and ANY a.r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getColMasterId">
+				<dql>select b.col_master_id from ? (ALL) a, ? b where a.r_object_id = ? and a.col_id = b.r_object_id and ANY a.r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getWebReleaseDate">
+				<dql>select a.web_release_date from ? a where a.r_object_id = ?</dql>
+			</query>
+			<query name="getCollectionRefUpdateDate">
+				<dql>select a.collection_ref_update_date from ? a where a.r_object_id = ?</dql>
+			</query>
+			<query name="getCollectionUpdateDate">
+				<dql>select a.collection_update_date from ? a where a.r_object_id = ?</dql>
+			</query>
+			<query name="getCollectionUpdateUser">
+				<dql>select a.collection_update_user from ? a where a.r_object_id = ?</dql>
+			</query>
+			<query name="getProductAnnouncementDate">
+				<dql>select a.product_announcement_date from ? a where a.r_object_id = ?</dql>
+			</query>
+			<query name="getProductReleaseDate">
+				<dql>select a.product_release_date from ? a where a.r_object_id = ?</dql>
+			</query>
+			<query name="getAddrCountryCode">
+				<dql>select usr.addr_country_code from ? (ALL) doc, c_user usr where doc.r_object_id = ? and ANY doc.r_version_label = 'FINAL' and doc.owner_name = usr.user_name</dql>
+			</query>
+			<query name="getBusinessGroup">
+				<dql>select usr.business_group from ? (ALL) doc, c_user usr where doc.r_object_id = ? and ANY doc.r_version_label = 'FINAL' and doc.owner_name = usr.user_name</dql>
+			</query>
+			<query name="getBusinessUnits">
+				<dql>select a.business_unit from ? (ALL) a where a.r_object_id = ? and ANY a.r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getCollectionValidFlag">
+				<dql>select a.collection_valid_flag from ? a where a.r_object_id = ?</dql>
+			</query>
+			<query name="getContentClass">
+				<dql>select a.r_object_type as content_class from ? (ALL) a where a.r_object_id = ? and ANY a.r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getObjectCreateDate">
+				<dql>select a.object_create_date from ? (ALL) a where a.r_object_id = ? and ANY a.r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getOwnerName">
+				<dql>select a.owner_name from ? (ALL) a where a.r_object_id = ? and ANY a.r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getPrintManagementProgram">
+				<dql>select a.pubv_vendors as print_management_program from ? (ALL) a where a.r_object_id = ? and ANY a.r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getInventoryManagement">
+				<dql>select a.pub_air_program_flag as inventory_management from ? (ALL) a where a.r_object_id = ? and ANY a.r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getProjectId">
+				<dql>select a.project_id from ? (ALL) a where a.r_object_id = ? and ANY a.r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getRObjectType">
+				<dql>select a.r_object_type from ? (ALL) a where a.r_object_id = ? and ANY a.r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getRVersionLabels">
+				<dql>select a.r_version_label from ? (ALL) a where a.r_object_id = ? and ANY a.r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getTaskDueDate">
+				<dql>select a.wf_task_due_date as task_due_date from ? (ALL) a where a.r_object_id = ? and ANY a.r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getEdsDocumentSingleElements">
+				<dql>select a.eds_document_flag as eds_document, a.client_type as eds_client_type, a.client_quote as eds_client_quote, a.gold_standard_flag as eds_gold_standard_flag from ? (ALL) a where a.r_object_id = ? and ANY a.r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getEdsDocument">
+				<dql>select a.eds_document_flag as eds_document from ? (ALL) a where a.r_object_id = ? and ANY a.r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getEdsClientType">
+				<dql>select a.client_type as eds_client_type from ? (ALL) a where a.r_object_id = ? and ANY a.r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getEdsClientQuote">
+				<dql>select a.client_quote as eds_client_quote from ? (ALL) a where a.r_object_id = ? and ANY a.r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getEdsGoldStandardFlag">
+				<dql>select a.gold_standard_flag as eds_gold_standard_flag from ? (ALL) a where a.r_object_id = ? and ANY a.r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getEdsBusinessIssues">
+				<dql>select a.business_issue from ? (ALL) a where a.r_object_id = ? and ANY a.r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getEdsMarketTechnologyTrends">
+				<dql>select a.market_technology_trend from ? (ALL) a where a.r_object_id = ? and ANY a.r_version_label = 'FINAL'</dql>
+			</query>
+			<query name="getBizDefinedProperties">
+				<dql>select biz_defined_property_names as biz_defined_property_name, biz_defined_property_values as biz_defined_property_value from ? (all) where r_object_id = ? and any r_version_label = 'FINAL' order by biz_defined_property_names</dql>
+			</query>
+			<!-- KM3.1 (#BR_0906) Collection Level BDP -->
+			<query name="getColBizDefinedProperties">
+				<dql>select col_biz_def_property_names as biz_defined_property_name, col_biz_def_property_values as biz_defined_property_value from ? where r_object_id = ? order by col_biz_def_property_names</dql>
+			</query>
+			
+			<query name="getColContentAssociations">
+				<dql>select col_assoc_content_names as col_assoc_content_name, col_assoc_content_values as col_assoc_content_value from c_support_col where r_object_id in (select b.r_object_id from ? a, c_support_col b where a.r_object_id = ? and a.col_id = b.r_object_id)</dql>
+			</query>
+			<query name="getDocContentAssociations">
+				<dql>select doc_assoc_content_names as doc_assoc_content_name, doc_assoc_content_values as doc_assoc_content_value from ? (all) where r_object_id = ? and any r_version_label = 'FINAL' order by doc_assoc_content_names</dql>
+			</query>
+			<query name="getMDOPatentIDs">
+			    <dql>select mdo_parent_ids as mdo_parent_id from ? where r_object_id = ?</dql>
+			</query>
+			<query name="getCrmAssetCode">
+				<dql>select crm_asset_code from ? (all) where r_object_id = ? and ANY r_version_label = 'FINAL'</dql>
+			</query>
+			<!-- SMO : US #7469 get Company info start-->
+			<query name="getCompanyName">
+				<dql>select company_name from company where oid in (select company from c_base_object (all) where r_object_id = ?)</dql>
+			</query>
+			<!-- SMO : US #7469 get Company info end-->
+		</getDocumentRetrieval>
+		<doReference>
+			<query name="getRegionsData">
+				<dql>select region, country from dm_dbo.c_regions order by region, country</dql>
+			</query>
+		</doReference>
+	</extractor>

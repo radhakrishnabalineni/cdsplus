@@ -1,0 +1,175 @@
+<?xml version="1.0"?>
+<!-- ==================================================== -->
+<!-- Build file for CDSPDestination jar          -->
+<!-- Author: Austin DEV team -->
+<!-- ==================================================== -->
+
+<project name="cdsp-destination" default="all" basedir=".">
+
+	<target name="init">
+		<echo message="Initializing environment ... " />
+		<property environment="env"/>
+		<property name="file.jar" value="CDSPDestination-${env.RELEASE_VERSION}.jar" />
+		<property name="dirs.base" value="${basedir}" />
+		<property name="dir.build" value="${basedir}/build" />		
+		<property name="dir.classes" value="${dir.build}/classes" />
+		<property name="dir.dist" value="${basedir}/dist" />
+		<property name="dir.deploy" value="${basedir}/dist" />
+		<property name="dir.props" value="${dirs.base}/props" />
+		<property name="src.home" value="${basedir}/src"/>
+		<property name="compile.debug" value="true"/>
+		<property name="project.dir" value="${basedir}"/>
+		<property name="test.src.dir" value="${project.dir}/test"/>
+		<property name="test.build.dir" value="${test.src.dir}/build"/>
+		<property name="test.reports" value="${project.dir}/reports" /> 
+		<property name="build.dir" value="${project.dir}/build"/>
+		<property name="build.classes.dir" value="${build.dir}/classes"/>
+		<property name="compile.deprecation" value="false"/>
+		<mkdir dir="${build.dir}"/>
+		<mkdir dir="${build.classes.dir}"/>
+		<mkdir dir="${test.build.dir}"/>
+    <property name="compile.optimize" value="true"/>
+    <property name="app.version" value="1.0"/>
+	</target>
+
+	<!-- Main target -->
+	<target name="all" depends="init,clean,compile,makejar,deployjar" />
+
+	<target name="build" depends="init,clean,compile,makejar,runTest,genReports" />
+
+	<target name="buildWithoutTests" depends="init,clean,compile,makejar" />
+	
+	<target name="clean" depends="init">
+	    <echo message="Removing distdirectory" />
+	    <delete dir="${dir.dist}" />
+		
+		<echo message="Creating dist directory" />
+		<mkdir dir="${dir.dist}" />
+		
+		<echo message="Removing class directory" />
+		<delete dir="${dir.classes}" />
+		
+		<echo message="Creating class directory" />
+		<mkdir dir="${dir.classes}" />
+		
+	</target>
+	
+	<target name="compile" depends="init" description="Compile Java sources">		
+		<path id="compile.classpath">
+			<fileset dir="${dir.include.jars}/">
+				<include name="*.jar"/>
+			</fileset>                
+		</path>
+		
+		<!-- Compile Java classes as necessary -->
+		<echo message="Compiling Java sources" />
+		<javac srcdir="${src.home}" destdir="${dir.classes}" excludes="**/*Test.java" debug="${compile.debug}" deprecation="${compile.deprecation}" optimize="${compile.optimize}">
+			<classpath refid="compile.classpath"/>
+		</javac>
+		
+		<!-- Copy application resources 
+		<copy todir="${dir.build}">
+			<fileset dir="${src.home}" excludes="**/*.java"/>
+		</copy>
+		-->
+	</target>
+
+	<!-- Create the jar File -->
+	<target name="makejar" depends="compile">
+		<!-- Clean classes dir 
+		<delete includeEmptyDirs="true">
+		  <fileset dir="${dir.classes}" includes="**/*" defaultexcludes="no"/>
+		</delete>
+		-->
+		
+		<!-- Copy classes to dir.classes 
+		<copy todir="${dir.classes}">
+			<fileset dir="${dir.build}" includes="**/*" excludes="**/test/*,others/*" />
+		</copy>
+    -->
+		
+		<!-- Copy props dir to lib dir 
+		<copy todir="${dir.lib}/props">
+		    <fileset dir="${dir.props}" />
+		</copy>
+		-->
+		<!-- commented out
+		<copy file="${dfc.prop.file}" todir="${dir.classes}"/>
+		<copy file="${ctgExtractor.props.file}" todir="${dir.classes}"/>
+		-->
+				
+		<echo message="Creating the jar file" />
+	  <jar jarfile="${dir.dist}/${file.jar}" basedir="${dir.classes}"></jar>
+	  <copy file="${dir.dist}/${file.jar}" todir="${env.CURRENT_BUILD_DIR}"/>
+	  <copy file="${dir.dist}/${file.jar}" todir="${env.CDSPLUS_SHARED_LIB}"/>
+
+    <!--jar jarfile="${dir.deploy}/${file.jar}" basedir="${dir.classes}"
+         includes="**/*.class" excludes="**/ui/**,jsp_servlet/**">
+         <manifest>
+                  <attribute name="Created-By" value="(Hewlett-Packard Co.)"/>
+                  <attribute name="Release" value="${app.version}"/>
+         </manifest>
+     </jar -->		
+	</target>
+
+	<!-- Deploy the jar File -->
+	<target name="deployjar" depends="init,makejar">
+		<echo message="Deploying the JAR file" />
+		<copy file="${dir.dist}/${file.jar}" todir="${dir.deploy}/" />
+	</target>
+
+
+
+	
+
+	<target name="runTest" description="Compiling JUnit Test Classes" depends="clean,init,compile">
+		<path id="classpath.test">
+			<pathelement location="${build.classes.dir}" />
+			<pathelement location="${test.build.dir}" />
+		</path>
+		<path id="lib.class.path">
+		<fileset dir="${dir.include.jars}/">
+			<include name="*.jar"/>
+		</fileset>
+		</path>
+		<javac 
+				srcdir="${test.src.dir}"
+	         	destdir="${test.build.dir}"
+	        	debug="on"
+	    	 	fork="true" 
+			>
+				<classpath refid="lib.class.path" />
+				<classpath refid="classpath.test" />
+		</javac>
+	</target>
+
+	<target name="genReports" depends="runTest">
+		<path id="classpath.test">
+				<pathelement location="${build.classes.dir}" />
+				<pathelement location="${test.build.dir}" />
+			</path>
+			<path id="lib.class.path">
+			<fileset dir="${dir.include.jars}/">
+				<include name="*.jar"/>
+			</fileset>
+			</path>
+	  	<junit printsummary="true" haltonfailure="false">
+			<sysproperty key="mongo.configuration" value="${dir.include.jars}/mongo.properties"/>
+	  	  	<formatter type="brief" usefile="false"/>
+	  		<formatter type="xml"/>
+	  		<batchtest todir="${test.build.dir}">
+	  			<fileset dir="${test.build.dir}" includes="**/*Test.class"/>
+	  		</batchtest>
+	  		<classpath refid="lib.class.path" />
+	  		<classpath refid="classpath.test" />
+	  	</junit>
+		<mkdir dir="${test.reports}"/>
+		<junitreport todir="${test.reports}">
+			<fileset dir="${test.build.dir}">
+				<include name="TEST-*.xml"/>
+			</fileset>
+			<report format="frames" todir="${test.reports}"/>
+		</junitreport>
+	</target>
+
+</project>

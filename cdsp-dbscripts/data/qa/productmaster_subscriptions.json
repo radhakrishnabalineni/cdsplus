@@ -1,0 +1,2 @@
+{ "_id" : "hpecontent", "filter" : {"document.company_info":false} }
+{ "_id" : "hpicontent", "filter" : {"document.company_info":false} }

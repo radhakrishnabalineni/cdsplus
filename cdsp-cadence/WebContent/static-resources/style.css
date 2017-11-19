@@ -1,0 +1,171 @@
+/* ----------------------------------------------  Layout ----------------------------------------------  */
+
+	
+.container {
+	font-size:16px; font-family:Arial; width:85%; background-color:#fff; 
+	margin-left:2em; padding:1%; line-height:1.6em; 
+}
+
+a {color:#0181bc;}
+p {margin:0 0 1em;}
+h1 {line-height:1.5em;}
+h2{margin:0 0 0.5em; font-size:1.25em;color:#003399}
+h3 {font-size:1em;color:#003399;font-family:"Lucida Sans Unicode", "Lucida Grande", Sans-Serif;text-decoration:underline;margin:0 0 0.25em;}
+
+/*----------------------------------------- CSS for table ----------------------------------------------------- */
+.all-pi{
+	width:90%;
+}
+.assigned-cc{
+	width:60%;
+}
+.unassigned-cc{
+	width:60%;
+}
+.hor-zebra
+{
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	font-size: 12px;	
+	text-align: left;
+	border-collapse: collapse;
+}
+.hor-zebra th
+{
+	font-size: 14px;
+	font-weight: normal;
+	padding: 10px 8px;
+	color: #039;
+}
+.hor-zebra td
+{
+	padding: 8px;
+	color: #669;
+}
+.hor-zebra .odd
+{
+	background: #e8edff; 
+}
+.message-box{
+	margin-top: 0.5em;
+	color:#003399;
+	background-color:#EEE;
+	border:solid 1px #666;
+	padding-top:0.6em;
+	padding-bottom:1em;
+	padding-left:30px;
+}
+.progressbar{
+	float:right;
+	margin-right:18%;
+	margin-top:3px;
+}
+.button-style {
+	-moz-box-shadow:inset 0px 1px 0px 0px #bee2f9;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #bee2f9;
+	box-shadow:inset 0px 1px 0px 0px #bee2f9;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #73c9ff), color-stop(1, #59b2ff) );
+	background:-moz-linear-gradient( center top, #73c9ff 5%, #59b2ff 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#73c9ff', endColorstr='#59b2ff');
+	background-color:#73c9ff;
+	-webkit-border-top-left-radius:0px;
+	-moz-border-radius-topleft:0px;
+	border-top-left-radius:0px;
+	-webkit-border-top-right-radius:0px;
+	-moz-border-radius-topright:0px;
+	border-top-right-radius:0px;
+	-webkit-border-bottom-right-radius:0px;
+	-moz-border-radius-bottomright:0px;
+	border-bottom-right-radius:0px;
+	-webkit-border-bottom-left-radius:0px;
+	-moz-border-radius-bottomleft:0px;
+	border-bottom-left-radius:0px;
+	text-indent:0;
+	border:1px solid #1b56a3;
+	display:inline-block;
+	color:#0c2d59;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	font-style:normal;
+	height:25px;
+	line-height:25px;
+	width:94px;
+	text-decoration:none;
+	text-align:center;
+	text-shadow:1px 1px 0px #a5c6e8;
+}
+.button-style:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #59b2ff), color-stop(1, #73c9ff) );
+	background:-moz-linear-gradient( center top, #59b2ff 5%, #73c9ff 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#59b2ff', endColorstr='#73c9ff');
+	background-color:#59b2ff;
+}.button-style:active {
+	position:relative;
+	top:1px;
+}
+:root .my-dropdown option,
+:root .my-dropdown:after,
+:root .my-dropdown::after,
+:root .my-dropdown select
+{
+    color: #fff;
+}
+ 
+:root .my-dropdown select,
+:root .my-dropdown:after,
+:root .my-dropdown::after
+{
+    display: block;
+    background: #1947a3;
+}
+ 
+:root .my-dropdown select,
+:root .my-dropdown option
+{
+    padding: 3px;
+}
+ 
+:root .my-dropdown
+{
+    position: relative;
+    display: inline-block;
+    border: 0;
+}
+ 
+:root .my-dropdown::after
+{
+    content: "\25bc";
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: block;
+    width: 22px;
+    font-size: 12px;
+    line-height: 24px;
+    text-align: center;
+     
+    -webkit-pointer-events: none;
+    -moz-pointer-events: none;
+    pointer-events: none;
+}
+ 
+:root .my-dropdown select
+{
+   height: 24px;
+   border: 0;
+   vertical-align: middle;
+   font: normal 12px/14px "Segoe UI", Arial, Helvetica, Sans-serif;
+   outline: 0 none;
+}
+ 
+:root .my-dropdown option
+{
+    background: #fff;
+    color: #333;
+}
+:root .my-dropdown-color-2673ec select,
+:root .my-dropdown-color-2673ec:after,
+:root .my-dropdown-color-2673ec::after
+{
+    background: #2673ec;
+}

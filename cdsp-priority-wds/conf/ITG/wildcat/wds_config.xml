@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:proj="http://www.hp.com/cdsplus" xmlns:sel="java:com.hp.cdsplus.wds.workItem.CDSPSelection" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sub="java:com.hp.cdsplus.wds.workItem.CDSPSubscription" xmlns:xutils="com.hp.cdsplus.util.xml.XMLUtils">
+	
+<sub limit="50"
+                manualRepub="manual_republish.txt"
+                server="http://cdsplus-itg.houston.hp.com/cadence/app/"
+                subscription="manual/hpcom_201"
+                workingDir="/opt/ais/app/applications/reference_client/wds/data/">
+                <namedDestination name="ReleaseManager"
+                                        class="com.hp.cdsplus.wds.destination.ReleaseManagerDestination"
+                                        contentArea="ctg"
+                                        dest_path="/opt/sasuapps/cdsplus/data/rlsmgr/ftp-dropoff/wildcat/"
+										maxPackageCount="100"
+										maxPackageSize="100"
+										username="pamujulv" 
+										password="Suri5890" 
+										dir="releaseManager"
+										server="sftp://g1u0971c.austin.hp.com"
+										prefix="prodimg/lowres/" 
+										verify="" 
+										job="UPDATE STAGE" />
+
+                <selection select="/document/file_name/proj:ref"
+                           source="concat( /node()/@*:base, @xlink:href )">
+                  <destination name="ReleaseManager" />
+                </selection>
+        </sub>
+
+</config>

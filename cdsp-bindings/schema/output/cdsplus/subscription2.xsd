@@ -1,0 +1,15 @@
+<?xml version="1.0" standalone="yes"?>
+<xs:schema targetNamespace="http://www.hp.com/cdsplus" xmlns:mstns="http://www.hp.com/cdsplus" xmlns="http://www.hp.com/cdsplus" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" attributeFormDefault="qualified" elementFormDefault="qualified" xmlns:app2="http://www.hp.com/cdsplus" xmlns:app1="http://www.w3.org/1999/xlink">
+  <xs:import namespace="http://www.w3.org/1999/xlink" schemaLocation="subscription1.xsd" />
+  <xs:element name="ref" msdata:Prefix="proj">
+    <xs:complexType>
+      <xs:attribute name="eventType" form="unqualified" type="xs:string" />
+      <xs:attribute name="hasAttachments" form="unqualified" type="xs:string" />
+      <xs:attribute name="lastModified" form="unqualified" type="xs:string" />
+      <xs:attribute name="priority" form="unqualified" type="xs:string" />
+      <xs:attribute name="status" form="unqualified" type="xs:string" />
+      <xs:attribute ref="app1:href" />
+      <xs:attribute ref="app1:type" />
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

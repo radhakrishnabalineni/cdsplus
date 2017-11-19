@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/SOAR_LOADER"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/cdsp-priority-loader-spacedog"/>
+	<classpathentry kind="lib" path="/cdsp-pmloader/lib/log4j-1.2.14.jar"/>
+	<classpathentry kind="lib" path="C:/Users/RADHA/PROJECTS/CDSPLUS/cdsp-shared-lib/lib/dfc.jar"/>
+	<classpathentry kind="lib" path="/cdsp-pmloader/lib/mail.jar"/>
+	<classpathentry kind="lib" path="C:/Users/RADHA/PROJECTS/CDSPLUS/cdsp-shared-lib/lib/commons-vfs.jar"/>
+	<classpathentry kind="lib" path="C:/Users/RADHA/PROJECTS/CDSPLUS/cdsp-shared-lib/lib/jsch.jar"/>
+	<classpathentry kind="lib" path="C:/Users/RADHA/PROJECTS/CDSPLUS/cdsp-shared-lib/lib/dom4j-1.6.1.jar"/>
+	<classpathentry kind="src" path="/cdsp-destination"/>
+	<classpathentry kind="src" path="/cdsp-mongo-utils"/>
+	<classpathentry kind="lib" path="C:/Users/RADHA/PROJECTS/CDSPLUS/cdsp-shared-lib/lib/httpclient-4.3.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/RADHA/PROJECTS/CDSPLUS/cdsp-shared-lib/lib/httpcore-4.3.2.jar"/>
+	<classpathentry kind="lib" path="/cdsp-bindings/lib/commons-lang-2.3.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

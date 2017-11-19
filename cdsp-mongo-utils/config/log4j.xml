@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Log4j Configuration --> 
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="true"> 
+
+
+  <!-- =================Appenders =================--> 
+	
+<appender name="DBLogger" class="com.hp.cdsplus.mongo.utils.MongoAppender"> 
+    <param name="MongoURI" value="${mongoClientURI}"/>
+
+	<param name="DBName" value="diagnostics"/>
+	<param name="CollectionName" value="transactions"/>
+    
+    <layout class="org.apache.log4j.PatternLayout"> 
+      <param name="ConversionPattern" value="{&quot;time&quot;:&quot;%d{yyyy-MM-dd'T'HH:mm:ssz}&quot;,&quot;thread&quot;:&quot;%t&quot;, &quot;category&quot;:&quot;%c&quot;, &quot;message&quot;:&quot;%m&quot; }"/> 
+    </layout>
+     
+  </appender>  
+    <root>
+    <level value="DEBUG"/>
+    <param name="additivity" value="false"/>
+    <appender-ref ref="DBLogger"/>
+  </root>
+  
+</log4j:configuration> 

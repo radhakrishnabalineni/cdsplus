@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<!-- ==================================================== -->
+<!-- Build file for PriorityLoader Framework jar          -->
+<!-- Author: Austin DEV team -->
+<!-- ==================================================== -->
+
+<project name="cdsp-priority-loader" default="all" basedir=".">
+
+	<target name="init">
+		<echo message="Initializing environment ... " />
+		<property environment="env" />
+		<property name="file.jar" value="PriorityLoader-${env.RELEASE_VERSION}.jar" />
+		<property name="ext.lib.dir" value="${env.EXT_LIB_DIR}" />
+		<property name="dirs.base" value="${basedir}" />
+		<property name="dir.bin" value="${basedir}/build" />
+		<property name="dir.classes" value="${dir.bin}/classes" />
+		<property name="dir.include.jars" value="${basedir}" />
+		<property name="dir.dist" value="${env.CURRENT_BUILD_DIR}" />
+		<property name="dir.props" value="${dirs.base}/props" />
+		<property name="src.home" value="${basedir}/src" />
+		<property name="compile.debug" value="true" />
+		<property name="compile.deprecation" value="false" />
+		<property name="compile.optimize" value="true" />
+		<mkdir dir="${dir.bin}" />
+	</target>
+
+	<!-- Main target -->
+	<target name="all" depends="init,clean,compile,jar" />
+
+	<target name="build" depends="init,clean,compile,jar" />
+
+	<target name="clean" depends="init">
+		<echo message="Removing class directory" />
+		<delete dir="${dir.classes}" />
+
+		<echo message="Creating class directory" />
+		<mkdir dir="${dir.classes}" />
+
+	</target>
+
+	<target name="compile" depends="init" description="Compile Java sources">
+		<path id="compile.classpath">
+			<fileset dir="${dir.include.jars}/">
+				<include name="*.jar" />
+			</fileset>
+			<fileset dir="${ext.lib.dir}">
+				<include name="mail.jar" />
+				<include name="log4j-1.2.14.jar" />
+			</fileset>
+		</path>
+
+		<!-- Compile Java classes as necessary -->
+		<echo message="Compiling Java sources" />
+		<javac srcdir="${src.home}" destdir="${dir.classes}" excludes="**/*Test.java" debug="${compile.debug}" deprecation="${compile.deprecation}" optimize="${compile.optimize}">
+			<classpath refid="compile.classpath" />
+		</javac>
+
+	</target>
+
+	<!-- Create the jar File -->
+	<target name="jar" depends="compile">
+		<echo message="Creating the jar file" />
+		<jar jarfile="${dir.dist}/${file.jar}" basedir="${dir.classes}"/>
+		<copy file="${dir.dist}/${file.jar}" todir="${env.CDSPLUS_SHARED_LIB}"/>		
+	</target>
+
+
+</project>

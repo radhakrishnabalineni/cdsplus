@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.hp.com/cdsplus" xmlns:proj="http://www.hp.com/cdsplus" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <xs:import schemaLocation="librarycontent.xsd"/>
+  <xs:import namespace="http://www.w3.org/1999/xlink" schemaLocation="librarycontent_xlink.xsd"/>
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="librarycontent_xml.xsd"/>
+  <xs:element name="ref">
+    <xs:complexType>
+   	 <xs:sequence>
+        <xs:element minOccurs="0" ref="content"/>
+      </xs:sequence>
+      <xs:attribute name="eventType" use="required" type="xs:NCName"/>
+      <xs:attribute name="hasAttachments" type="xs:boolean"/>
+      <xs:attribute name="lastModified" type="xs:integer"/>
+      <xs:attribute name="priority" type="xs:integer"/>
+      <xs:attribute ref="xlink:href" use="required"/>
+      <xs:attribute ref="xlink:type" use="required"/>
+    </xs:complexType>
+  </xs:element>
+ </xs:schema>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+====================================================================== 
+	Oct 11, 2013 2:22:33 PM description jaiswaln 
+======================================================================
+-->
+<project name="cdsp-destination" default="all" basedir=".">
+	<property environment="env" />
+	<property name="dist.dir" value="${env.DIST_DIR}" />
+	<property name="src.dir" value="${basedir}/src" />
+	<property name="conf.dir" value="${basedir}/config" />
+
+	<property name="build.dir" value="${basedir}/build" />
+	<property name="build.class.dir" value="${build.dir}/classes" />
+	<property name="logs.dir" value="${basedir}/logs" />
+
+	<path id="lib.class.path">
+		<fileset dir="${dist.dir}">
+			<include name="cdsp-priority-loader.jar" />
+			<include name="mongo-java-driver-2.11.2.jar" />
+			<include name="commons-httpclient-3.1.jar" />
+			<include name="commons-io-1.2.jar" />
+			<include name="cdsp-mongo-api.jar" />
+			<include name="cdsp-conversion-utils.jar" />
+		</fileset>
+	</path>
+
+	<!-- ================================= 
+	          target: all              
+	         ================================= -->
+	<target name="all" depends="clean, init, compile" description="default target to do a clean build"/>
+
+	<!-- ================================= 
+	          target: clean              
+	         ================================= -->
+	<target name="clean" description="deletes the build and dist directories">
+		<delete file="${dist.dir}/cdsp-destination.jar" />
+		<delete dir="${build.dir}" />
+	</target>
+
+	<!-- ================================= 
+	          target: init              
+	         ================================= -->
+	<target name="init" description="creates dist and build dir">
+		<mkdir dir="${build.class.dir}" />		
+	</target>
+	<!-- ================================= target: compile ================================= -->
+
+	<target name="compile" description="description">
+		<javac includeantruntime="true" srcdir="${src.dir}" destdir="${build.class.dir}">
+					<classpath refid="lib.class.path" />
+		</javac>
+		<jar destfile="${dist.dir}/cdsp-destination.jar">
+		 	<fileset dir="${build.class.dir}">
+						<include name="com/hp/cdspDestination/*.*" />
+			</fileset>
+		</jar>
+	</target>	
+</project>

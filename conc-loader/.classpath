@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/CONCENTRA_LOADER"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/cdsp-priority-loader-spacedog"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/cdsp-mongo-utils"/>
+	<classpathentry kind="lib" path="C:/Users/RADHA/PROJECTS/CDSPLUS/cdsp-shared-lib/lib/dfc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/RADHA/PROJECTS/CDSPLUS/cdsp-shared-lib/lib/Concentra.jar"/>
+	<classpathentry kind="lib" path="C:/Users/RADHA/PROJECTS/CDSPLUS/cdsp-shared-lib/lib/dctm.jar"/>
+	<classpathentry kind="lib" path="C:/Users/RADHA/PROJECTS/CDSPLUS/cdsp-shared-lib/lib/dom4j-1.6.1.jar"/>
+	<classpathentry kind="src" path="/cdsp-destination"/>
+	<classpathentry kind="lib" path="/cdsp-priority-wds/lib/jdom.jar"/>
+	<classpathentry kind="lib" path="/cdsp-pmloader/lib/log4j-1.2.14.jar"/>
+	<classpathentry kind="lib" path="/cdsp-bindings/lib/commons-collections-3.2.1.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

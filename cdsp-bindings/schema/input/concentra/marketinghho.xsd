@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="version_label" type="xs:decimal"/>
+	<xs:element name="subject_types">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="subject_type" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="subject_type" type="xs:string"/>
+	<xs:element name="season" type="xs:string"/>
+	<xs:element name="search_keywords">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="search_keyword" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="search_keyword" type="xs:string"/>
+	<xs:element name="review_date" type="xs:dateTime"/>
+	<xs:element name="regions">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="region" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="region" type="xs:string"/>
+	<xs:element name="r_object_type" type="xs:string"/>
+	<xs:element name="r_object_id" type="xs:string"/>
+	<xs:element name="property_update_date" type="xs:dateTime"/>
+	<xs:element name="project_id" type="xs:string"/>
+	<xs:element name="products">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="product" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="product" type="xs:string"/>
+	<xs:element name="priority" type="xs:byte"/>
+	<xs:element name="original_system" type="xs:string"/>
+	<xs:element name="object_name" type="xs:string"/>
+	<xs:element name="media_size" type="xs:string"/>
+	<xs:element name="master_object_name" type="xs:string"/>
+	<xs:element name="licensing_rights" type="xs:string"/>
+	<xs:element name="language_label" type="xs:string"/>
+	<xs:element name="language_codes">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="language_code"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="language_code">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="language_label" type="xs:string"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="holiday" type="xs:string"/>
+	<xs:element name="has_valid_products" type="xs:boolean"/>
+	<xs:element name="go_to_market_window" type="xs:string"/>
+	<xs:element name="go_to_market_initiatives">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="go_to_market_initiative" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="go_to_market_initiative" type="xs:string"/>
+	<xs:element name="full_title">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="language_code" use="required" type="xs:string"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="file_name" type="xs:string"/>
+	<xs:element name="file_bytes" type="xs:long"/>
+	<xs:element name="featured_activity_flag" type="xs:boolean"/>
+	<xs:element name="document_type_details">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="document_type_detail" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="document_type_detail" type="xs:string"/>
+	<xs:element name="document_type" type="xs:string"/>
+	<xs:element name="document_class" type="xs:string"/>
+	<xs:element name="company_info" type="xs:string"/>
+	<xs:element name="document">
+		<xs:complexType>
+			<xs:sequence>
+			    <xs:element ref="company_info"/>
+				<xs:element ref="r_object_id"/>
+				<xs:element ref="priority"/>
+				<xs:element ref="products"/>
+				<xs:element ref="document_type"/>
+				<xs:element ref="version_label"/>
+				<xs:element ref="property_update_date"/>
+				<xs:element ref="content_update_date"/>
+				<xs:element ref="language_codes"/>
+				<xs:element ref="products"/>
+				<xs:element ref="r_object_type"/>
+				<xs:element ref="full_title"/>
+				<xs:element ref="language_label"/>
+				<xs:element ref="content_type"/>
+				<xs:element ref="authors"/>
+				<xs:element ref="regions"/>
+				<xs:element ref="document_type_details"/>
+				<xs:element ref="activity_type_details"/>
+				<xs:element ref="go_to_market_initiatives"/>
+				<xs:element ref="subject_types"/>
+				<xs:element ref="contacts"/>
+				<xs:element ref="associated_project_pages"/>
+				<xs:element ref="search_keywords"/>
+				<xs:element ref="master_object_name"/>
+				<xs:element ref="audiences"/>
+				<xs:element ref="file_name"/>
+				<xs:element ref="components"/>
+				<xs:element ref="has_valid_products"/>
+				<xs:element ref="activity_difficulty_level"/>
+				<xs:element ref="activity_duration"/>
+				<xs:element ref="activity_type"/>
+				<xs:element ref="go_to_market_window"/>
+				<xs:element ref="holiday"/>
+				<xs:element ref="season"/>
+				<xs:element ref="col_id"/>
+				<xs:element ref="campaign_association"/>
+				<xs:element ref="content_version_date"/>
+				<xs:element ref="description"/>
+				<xs:element ref="disclosure_level"/>
+				<xs:element ref="content_version"/>
+				<xs:element ref="featured_activity_flag"/>
+				<xs:element ref="language_code"/>
+				<xs:element ref="licensing_rights"/>
+				<xs:element ref="media_size"/>
+				<xs:element ref="object_name"/>
+				<xs:element ref="original_system"/>
+				<xs:element ref="project_id"/>
+				<xs:element ref="document_class"/>
+				<xs:element ref="review_date"/>
+				<xs:element ref="file_bytes"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="disclosure_level" type="xs:string"/>
+	<xs:element name="description" type="xs:string"/>
+	<xs:element name="content_version_date" type="xs:dateTime"/>
+	<xs:element name="content_version" type="xs:decimal"/>
+	<xs:element name="content_update_date" type="xs:dateTime"/>
+	<xs:element name="content_type" type="xs:string"/>
+	<xs:element name="contacts">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="contact" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="contact" type="xs:string"/>
+	<xs:element name="components">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="component" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="component_name" type="xs:string"/>
+	<xs:element name="component">
+		<xs:complexType>
+			<xs:choice>
+				<xs:sequence>
+					<xs:element ref="file_name"/>
+					<xs:element ref="file_bytes"/>
+					<xs:element ref="version_label"/>
+				</xs:sequence>
+				<xs:sequence>
+					<xs:element ref="component_name"/>
+					<xs:element ref="regions"/>
+				</xs:sequence>
+			</xs:choice>
+			<xs:attribute name="type" use="required" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="col_id" type="xs:string"/>
+	<xs:element name="campaign_association" type="xs:string"/>
+	<xs:element name="authors">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="author" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="author" type="xs:string"/>
+	<xs:element name="audiences">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="audience" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="audience_release_date" type="xs:dateTime"/>
+	<xs:element name="audience_name" type="xs:string"/>
+	<xs:element name="audience_expiry_date" type="xs:dateTime"/>
+	<xs:element name="audience">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="audience_name"/>
+				<xs:element ref="audience_release_date"/>
+				<xs:element ref="audience_expiry_date"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="associated_project_pages">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="associated_project_page" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="activity_type_details">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="activity_type_detail" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="associated_project_page" type="xs:string"/>
+	<xs:element name="activity_type_detail" type="xs:string"/>
+	<xs:element name="activity_type" type="xs:string"/>
+	<xs:element name="activity_duration" type="xs:string"/>
+	<xs:element name="activity_difficulty_level" type="xs:string"/>
+</xs:schema>

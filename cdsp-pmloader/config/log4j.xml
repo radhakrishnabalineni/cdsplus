@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<!-- Log4j Configuration --> 
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="true"> 
+
+
+  <!-- =================Appenders =================--> 
+	
+<appender name="RootLogger" class="org.apache.log4j.DailyRollingFileAppender"> 
+    <param name="File" value="${log.file.location}/PMLoaderRoot.log"/>
+     <rollingPolicy name="file"  
+                      class="org.apache.log4j.rolling.TimeBasedRollingPolicy">
+        <param name="FileNamePattern" 
+               value="PMLoaderRoot.log.%d{yyyy-MM-dd}"/>
+        <param name="ActiveFileName" value="PMLoaderRoot.log"/>
+     </rollingPolicy>
+    <layout class="org.apache.log4j.PatternLayout"> 
+      <param name="ConversionPattern" value="%d{yyyy-MM-dd'T'HH:mm:ssz} [%t] %-5p %m%n"/> 
+    </layout> 
+  </appender> 
+  
+    <!-- Extractor Logger Log Appender -->
+  <appender name="ExtractorLogger" class="org.apache.log4j.DailyRollingFileAppender"> 
+    <param name="File" value="${log.file.location}/PMExtractor.log"/>
+     <rollingPolicy name="file"  
+                      class="org.apache.log4j.rolling.TimeBasedRollingPolicy">
+        <param name="FileNamePattern" 
+               value="PMExtractor.log.%d{yyyy-MM-dd}"/>
+        <param name="ActiveFileName" value="PMExtractor.log"/>
+     </rollingPolicy>
+    <layout class="org.apache.log4j.PatternLayout"> 
+      <param name="ConversionPattern" value="%d{yyyy-MM-dd'T'HH:mm:ssz} [%t] %-5p %m%n"/> 
+    </layout> 
+  </appender> 
+ 
+  <appender name="WorkerThreadLogger" class="org.apache.log4j.DailyRollingFileAppender"> 
+    <param name="File" value="${log.file.location}/PMLoaderThreads.log"/>
+     <rollingPolicy name="file"  
+                      class="org.apache.log4j.rolling.TimeBasedRollingPolicy">
+        <param name="FileNamePattern" 
+               value="PMLoaderThreads.log.%d{yyyy-MM-dd}"/>
+        <param name="ActiveFileName" value="PMLoaderThreads.log"/>
+     </rollingPolicy>
+    <layout class="org.apache.log4j.PatternLayout"> 
+      <param name="ConversionPattern" value="%d{yyyy-MM-dd'T'HH:mm:ssz} [%t] %-5p %m%n"/> 
+    </layout> 
+  </appender> 
+  
+  <logger name="com.hp.cdsplus.pmloader.extractor">
+    <level value="${extractor.logger.level}"/>
+    <param name="additivity" value="false"/>
+    <appender-ref ref="ExtractorLogger"/>
+  </logger>
+  
+  <logger name="com.hp.cdsplus.pmloader.worker">
+    <level value="${thread.logger.level}"/>
+    <param name="additivity" value="false"/>
+    <appender-ref ref="WorkerThreadLogger"/>
+  </logger>
+  
+    <root>
+    <level value="${root.logger.level}"/>
+    <param name="additivity" value="false"/>
+    <appender-ref ref="RootLogger"/>
+  </root>
+  
+</log4j:configuration> 

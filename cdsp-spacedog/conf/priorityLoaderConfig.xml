@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config
+	ssl_key_store="C:/Spacedog_3.0/conf/cdsplus_prod_keystore.jks"
+	ssl_key_password="CDS+secret#1" 
+	ssl_trust_store="C:/Spacedog_3.0/conf/cdsplus_truststore.jks"
+	ssl_trust_password="CDS+secret#1" 
+	logging="true"
+	log4jConfig="C:/Spacedog_3.0/conf/log4j.xml" 
+	source_class="com.hp.cdsplus.wds.cdspsource.CDSPSource"
+	num_worker_threads="1"
+	work_order_wait_time="-1"
+	num_priorities="6" 
+	max_session_reuse="50"
+	history_file_name="C:/Spacedog_3.0/conf/spacedog_history.txt"
+	events_are_sequential="false"
+	wdsClient="C:/Spacedog_3.0/conf/spacedog_config.xml"
+	retryOnError="false">
+
+	<sendMail>
+		<smtp_host>smtp3.hp.com</smtp_host>
+		<smtp_port>25</smtp_port>
+		<to_addrs>
+			<to_addr>niharika.srivastava@hp.com</to_addr>
+			<to_addr>niharika.srivastava@hp.com</to_addr>
+		</to_addrs>
+		<from_addr>CDS+-DIGLIB-WDSClient@hp.com</from_addr>
+	</sendMail>
+</config>

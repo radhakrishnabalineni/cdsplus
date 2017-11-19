@@ -1,0 +1,246 @@
+{"_id" :"aec","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"AEC","countries":{"country":["AF","BD","BN","BT","KH","LA","LK","MV","NP","PK","TL"]}}}
+{"_id" :"aec_(asia_emerging_countries)","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"AEC (Asia Emerging Countries)","countries":{"country":["AF","BD","BT","BN","KH","LA","MV","NP","PK","LK"]}}}
+{"_id" :"afghanistan","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Afghanistan","countries":{"country":["AF"]}}}
+{"_id" :"africa","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Africa","countries":{"country":["AO","BF","BI","BJ","BW","CD","CF","CG","CI","CM","CV","DJ","DZ","EG","EH","ER","ET","GA","GH","GM","GN","GQ","GW","KE","KM","LR","LS","LY","MA","MG","ML","MR","MU","MW","MZ","NA","NE","NG","RE","RW","SC","SD","SL","SN","SO","ST","SZ","TD","TG","TN","TZ","UG","ZA","ZM","ZW"]}}}
+{"_id" :"albania","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Albania","countries":{"country":["AL"]}}}
+{"_id" :"algeria","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Algeria","countries":{"country":["DZ"]}}}
+{"_id" :"american_samoa","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"American Samoa","countries":{"country":["AS"]}}}
+{"_id" :"americas","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Americas","countries":{"country":["AG","AI","AR","AW","BB","BO","BR","BS","BZ","CA","CL","CO","CR","CU","DM","DO","EC","GD","GF","GP","GT","GY","HN","HT","JM","KN","KY","LC","MQ","MX","NI","PA","PE","PR","PY","SR","SV","TT","US","UY","VE","VG","VI"]}}}
+{"_id" :"andorra","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Andorra","countries":{"country":["AD"]}}}
+{"_id" :"angola","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Angola","countries":{"country":["AO"]}}}
+{"_id" :"anguilla","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Anguilla","countries":{"country":["AI"]}}}
+{"_id" :"antigua_and_barbuda","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Antigua and Barbuda","countries":{"country":["AG"]}}}
+{"_id" :"ap_english","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"AP English","countries":{"country":["AU","ID","IN","MY","NZ","PH","SG","TH","VN"]}}}
+{"_id" :"argentina","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Argentina","countries":{"country":["AR"]}}}
+{"_id" :"armenia","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Armenia","countries":{"country":["AM"]}}}
+{"_id" :"aruba","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Aruba","countries":{"country":["AW"]}}}
+{"_id" :"asia_pacific_(not_japan)","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Asia Pacific (not Japan)","countries":{"country":["AU","CN","HK","ID","IN","KR","MY","NZ","PH","SG","TH","TW","VN"]}}}
+{"_id" :"asia_pacific_and_japan","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Asia Pacific and Japan","countries":{"country":["AU","CN","HK","ID","IN","JP","KR","MY","NZ","PH","SG","TH","TW","VN"]}}}
+{"_id" :"australia","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Australia","countries":{"country":["AU"]}}}
+{"_id" :"austria","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Austria","countries":{"country":["AT"]}}}
+{"_id" :"azerbaijan","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Azerbaijan","countries":{"country":["AZ"]}}}
+{"_id" :"bahamas","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Bahamas","countries":{"country":["BS"]}}}
+{"_id" :"bahrain","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Bahrain","countries":{"country":["BH"]}}}
+{"_id" :"bangladesh","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Bangladesh","countries":{"country":["BD"]}}}
+{"_id" :"barbados","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Barbados","countries":{"country":["BB"]}}}
+{"_id" :"belarus","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Belarus","countries":{"country":["BY"]}}}
+{"_id" :"belgium","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Belgium","countries":{"country":["BE"]}}}
+{"_id" :"belize","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Belize","countries":{"country":["BZ"]}}}
+{"_id" :"benin","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Benin","countries":{"country":["BJ"]}}}
+{"_id" :"bermuda","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Bermuda","countries":{"country":["BM"]}}}
+{"_id" :"bhutan","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Bhutan","countries":{"country":["BT"]}}}
+{"_id" :"bolivia","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Bolivia","countries":{"country":["BO"]}}}
+{"_id" :"bosnia_and_herzegovina","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Bosnia and Herzegovina","countries":{"country":["BA"]}}}
+{"_id" :"botswana","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Botswana","countries":{"country":["BW"]}}}
+{"_id" :"brazil","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Brazil","countries":{"country":["BR"]}}}
+{"_id" :"brunei_darussalam","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Brunei Darussalam","countries":{"country":["BN"]}}}
+{"_id" :"bulgaria","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Bulgaria","countries":{"country":["BG"]}}}
+{"_id" :"burkina_faso","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Burkina Faso","countries":{"country":["BF"]}}}
+{"_id" :"burundi","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Burundi","countries":{"country":["BI"]}}}
+{"_id" :"cambodia","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Cambodia","countries":{"country":["KH"]}}}
+{"_id" :"cameroon","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Cameroon","countries":{"country":["CM"]}}}
+{"_id" :"canada","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Canada","countries":{"country":["CA"]}}}
+{"_id" :"cape_verde","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Cape Verde","countries":{"country":["CV"]}}}
+{"_id" :"caribbean","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Caribbean","countries":{"country":["AG","AI","AW","BB","BS","CU","DM","DO","GD","GP","HT","JM","KN","KY","LC","MQ","TT","VG","VI"]}}}
+{"_id" :"cayman_islands","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Cayman Islands","countries":{"country":["KY"]}}}
+{"_id" :"central_african_republic","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Central African Republic","countries":{"country":["CF"]}}}
+{"_id" :"central_america","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Central America","countries":{"country":["BZ","CR","GT","HN","NI","PA","SV"]}}}
+{"_id" :"chad","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Chad","countries":{"country":["TD"]}}}
+{"_id" :"chile","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Chile","countries":{"country":["CL"]}}}
+{"_id" :"china","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"China","countries":{"country":["CN"]}}}
+{"_id" :"cis_middle_east_africa","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"CIS/Middle East/Africa","countries":{"country":["AD","AL","AT","BA","BE","BG","CH","CY","CZ","DE","DK","EE","ES","FI","FO","FR","GB","GF","GL","GP","GR","GY","HR","HU","IE","IS","IT","LI","LT","LU","LV","MC","MD","ME","MK","MQ","MT","NL","NO","PF","PL","PM","PT","RE","RO","RS","SE","SI","SK","SM","TR","VI","WF","YT"]}}}
+{"_id" :"colombia","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Colombia","countries":{"country":["CO"]}}}
+{"_id" :"comoros","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Comoros","countries":{"country":["KM"]}}}
+{"_id" :"congo","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Congo","countries":{"country":["CD","CG"]}}}
+{"_id" :"costa_rica","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Costa Rica","countries":{"country":["CR"]}}}
+{"_id" :"croatia","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Croatia","countries":{"country":["HR"]}}}
+{"_id" :"cuba","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Cuba","countries":{"country":["CU"]}}}
+{"_id" :"cyprus","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Cyprus","countries":{"country":["CY"]}}}
+{"_id" :"czech_republic","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Czech Republic","countries":{"country":["CZ"]}}}
+{"_id" :"denmark","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Denmark","countries":{"country":["DK"]}}}
+{"_id" :"djibouti","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Djibouti","countries":{"country":["DJ"]}}}
+{"_id" :"dominica","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Dominica","countries":{"country":["DM"]}}}
+{"_id" :"dominican_republic","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Dominican Republic","countries":{"country":["DO"]}}}
+{"_id" :"ecuador","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Ecuador","countries":{"country":["EC"]}}}
+{"_id" :"egypt","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Egypt","countries":{"country":["EG"]}}}
+{"_id" :"el_salvador","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"El Salvador","countries":{"country":["SV"]}}}
+{"_id" :"equatorial_guinea","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Equatorial Guinea","countries":{"country":["GQ"]}}}
+{"_id" :"eritrea","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Eritrea","countries":{"country":["ER"]}}}
+{"_id" :"estonia","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Estonia","countries":{"country":["EE"]}}}
+{"_id" :"ethiopia","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Ethiopia","countries":{"country":["ET"]}}}
+{"_id" :"europe","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Europe","countries":{"country":["AD","AL","AM","AT","AZ","BA","BE","BG","BY","CH","CY","CZ","DE","DK","EE","ES","FI","FR","GB","GE","GR","HR","HU","IE","IS","IT","KZ","LI","LT","LU","LV","MC","MD","ME","MK","MT","NL","NO","PL","PT","RO","RS","RU","SE","SI","SK","SM","TR","UA","UK","VA"]}}}
+{"_id" :"european_union_(plus)","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"European Union (Plus)","countries":{"country":["AE","AM","AO","AZ","BF","BH","BI","BJ","BW","BY","CD","CF","CG","CM","CV","DJ","DZ","EG","ER","ET","GA","GE","GH","GM","GN","GQ","GW","IL","IQ","IR","JO","JP","KE","KG","KM","KW","KZ","LB","LR","LS","LY","MA","MG","ML","MN","MR","MU","MW","MZ","NA","NE","NG","OM","PS","QA","RU","RW","SA","SC","SD","SL","SN","SO","ST","SY","SZ","TD","TG","TJ","TM","TN","TZ","UA","UG","UZ","YE","ZA","ZM","ZW"]}}}
+{"_id" :"europe_middle_east_africa","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Europe/Middle East/Africa","countries":{"country":["AD","AE","AF","AL","AM","AO","AT","AZ","BA","BE","BF","BG","BH","BI","BJ","BW","BY","CF","CG","CH","CI","CM","CV","CY","CZ","DE","DJ","DK","DZ","EE","EG","EH","ER","ES","ET","FI","FR","GA","GB","GE","GH","GM","GN","GQ","GR","GW","HR","HU","IE","IL","IS","IT","JO","KE","KG","KM","KW","KZ","LB","LI","LR","LS","LT","LU","LV","LY","MA","MC","MD","ME","MG","MK","ML","MN","MR","MT","MU","MV","MW","MZ","NA","NE","NG","NL","NO","OM","PA","PL","PS","PT","QA","RE","RO","RS","RU","RW","SA","SC","SE","SI","SK","SL","SM","SN","SO","ST","SZ","TD","TG","TJ","TM","TN","TR","TZ","UA","UG","UK","UZ","VA","YE","ZA","ZM","ZW"]}}}
+{"_id" :"falkland_islands","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Falkland Islands","countries":{"country":["FK"]}}}
+{"_id" :"faroe_islands","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Faroe Islands","countries":{"country":["FO"]}}}
+{"_id" :"fiji","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Fiji","countries":{"country":["FJ"]}}}
+{"_id" :"finland","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Finland","countries":{"country":["FI"]}}}
+{"_id" :"france","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"France","countries":{"country":["FR"]}}}
+{"_id" :"french_guiana","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"French Guiana","countries":{"country":["GF"]}}}
+{"_id" :"french_polynesia","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"French Polynesia","countries":{"country":["PF"]}}}
+{"_id" :"gabon","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Gabon","countries":{"country":["GA"]}}}
+{"_id" :"gambia","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Gambia","countries":{"country":["GM"]}}}
+{"_id" :"georgia","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Georgia","countries":{"country":["GE"]}}}
+{"_id" :"germany","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Germany","countries":{"country":["DE"]}}}
+{"_id" :"ghana","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Ghana","countries":{"country":["GH"]}}}
+{"_id" :"greece","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Greece","countries":{"country":["GR"]}}}
+{"_id" :"greenland","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Greenland","countries":{"country":["GL"]}}}
+{"_id" :"grenada","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Grenada","countries":{"country":["GD"]}}}
+{"_id" :"guadeloupe","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Guadeloupe","countries":{"country":["GP"]}}}
+{"_id" :"guam","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Guam","countries":{"country":["GU"]}}}
+{"_id" :"guatemala","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Guatemala","countries":{"country":["GT"]}}}
+{"_id" :"guinea-bissau","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Guinea-Bissau","countries":{"country":["GW"]}}}
+{"_id" :"guinea","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Guinea","countries":{"country":["GN"]}}}
+{"_id" :"guyana","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Guyana","countries":{"country":["GY"]}}}
+{"_id" :"haiti","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Haiti","countries":{"country":["HT"]}}}
+{"_id" :"honduras","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Honduras","countries":{"country":["HN"]}}}
+{"_id" :"hong_kong","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Hong Kong","countries":{"country":["HK"]}}}
+{"_id" :"hungary","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Hungary","countries":{"country":["HU"]}}}
+{"_id" :"iceland","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Iceland","countries":{"country":["IS"]}}}
+{"_id" :"india","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"India","countries":{"country":["IN"]}}}
+{"_id" :"indonesia","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Indonesia","countries":{"country":["ID"]}}}
+{"_id" :"iran_(islamic_republic_of)","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Iran (Islamic Republic of)","countries":{"country":["IR"]}}}
+{"_id" :"iraq","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Iraq","countries":{"country":["IQ"]}}}
+{"_id" :"ireland","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Ireland","countries":{"country":["IE"]}}}
+{"_id" :"israel","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Israel","countries":{"country":["IL"]}}}
+{"_id" :"italy","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Italy","countries":{"country":["IT"]}}}
+{"_id" :"ivory_coast","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Ivory Coast","countries":{"country":["CI"]}}}
+{"_id" :"jamaica","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Jamaica","countries":{"country":["JM"]}}}
+{"_id" :"japan","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Japan","countries":{"country":["JP"]}}}
+{"_id" :"jordan","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Jordan","countries":{"country":["JO"]}}}
+{"_id" :"kazakhstan","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Kazakhstan","countries":{"country":["KZ"]}}}
+{"_id" :"kenya","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Kenya","countries":{"country":["KE"]}}}
+{"_id" :"kiribati","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Kiribati","countries":{"country":["KI"]}}}
+{"_id" :"korea","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Korea","countries":{"country":["KR"]}}}
+{"_id" :"korea_(dpr)","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Korea (DPR)","countries":{"country":["KP"]}}}
+{"_id" :"kuwait","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Kuwait","countries":{"country":["KW"]}}}
+{"_id" :"kyrgyzstan","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Kyrgyzstan","countries":{"country":["KG"]}}}
+{"_id" :"laos","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Laos","countries":{"country":["LA"]}}}
+{"_id" :"latin_america","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Latin America","countries":{"country":["AG","AI","AN","AR","AW","BB","BM","BO","BR","BS","BZ","CL","CO","CR","CU","DM","DO","EC","FK","GD","GF","GP","GT","GY","HN","HT","JM","KN","KY","LC","MQ","MS","MX","NI","NS","PA","PE","PM","PR","PY","SR","SV","TC","TT","UY","VC","VE","VG","VI"]}}}
+{"_id" :"latin_america_(mca)","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Latin America (MCA)","countries":{"country":["AG","AI","AN","AR","AW","BB","BM","BS","BZ","CL","CO","CR","DM","DO","EC","GD","GF","GP","GT","GY","HN","HT","JM","KN","KY","LC","MQ","MS","NI","PA","PE","PR","SR","SV","TC","TT","VC","VE","VG","VI"]}}}
+{"_id" :"latvia","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Latvia","countries":{"country":["LV"]}}}
+{"_id" :"lebanon","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Lebanon","countries":{"country":["LB"]}}}
+{"_id" :"lesotho","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Lesotho","countries":{"country":["LS"]}}}
+{"_id" :"liberia","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Liberia","countries":{"country":["LR"]}}}
+{"_id" :"libyan_arab_jamahiriya","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Libyan Arab Jamahiriya","countries":{"country":["LY"]}}}
+{"_id" :"liechtenstein","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Liechtenstein","countries":{"country":["LI"]}}}
+{"_id" :"lithuania","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Lithuania","countries":{"country":["LT"]}}}
+{"_id" :"luxembourg","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Luxembourg","countries":{"country":["LU"]}}}
+{"_id" :"macao","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Macao","countries":{"country":["MO"]}}}
+{"_id" :"macedonia","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Macedonia","countries":{"country":["MK"]}}}
+{"_id" :"madagascar","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Madagascar","countries":{"country":["MG"]}}}
+{"_id" :"malawi","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Malawi","countries":{"country":["MW"]}}}
+{"_id" :"malaysia","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Malaysia","countries":{"country":["MY"]}}}
+{"_id" :"maldives","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Maldives","countries":{"country":["MV"]}}}
+{"_id" :"mali","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Mali","countries":{"country":["ML"]}}}
+{"_id" :"malta","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Malta","countries":{"country":["MT"]}}}
+{"_id" :"marshall_islands","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Marshall Islands","countries":{"country":["MH"]}}}
+{"_id" :"martinique","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Martinique","countries":{"country":["MQ"]}}}
+{"_id" :"mauritania","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Mauritania","countries":{"country":["MR"]}}}
+{"_id" :"mauritius","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Mauritius","countries":{"country":["MU"]}}}
+{"_id" :"mayotte","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Mayotte","countries":{"country":["YT"]}}}
+{"_id" :"mexico","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Mexico","countries":{"country":["MX"]}}}
+{"_id" :"micronesia_(federated_states_of)","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Micronesia (Federated States of)","countries":{"country":["FM"]}}}
+{"_id" :"middle_east","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Middle East","countries":{"country":["AE","BH","DZ","EG","IL","IQ","JO","KW","LB","LY","MA","OM","PS","QA","SA","TM","TR","YE"]}}}
+{"_id" :"moldova_(republic_of)","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Moldova (Republic of)","countries":{"country":["MD"]}}}
+{"_id" :"monaco","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Monaco","countries":{"country":["MC"]}}}
+{"_id" :"mongolia","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Mongolia","countries":{"country":["MN"]}}}
+{"_id" :"montenegro","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Montenegro","countries":{"country":["ME"]}}}
+{"_id" :"montserrat","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Montserrat","countries":{"country":["MS"]}}}
+{"_id" :"morocco","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Morocco","countries":{"country":["MA"]}}}
+{"_id" :"mozambique","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Mozambique","countries":{"country":["MZ"]}}}
+{"_id" :"myanmar","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Myanmar","countries":{"country":["MM"]}}}
+{"_id" :"namibia","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Namibia","countries":{"country":["NA"]}}}
+{"_id" :"nepal","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Nepal","countries":{"country":["NP"]}}}
+{"_id" :"netherlands","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Netherlands","countries":{"country":["NL"]}}}
+{"_id" :"netherlands_antilles","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Netherlands Antilles","countries":{"country":["AN"]}}}
+{"_id" :"new_caledonia","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"New Caledonia","countries":{"country":["NC"]}}}
+{"_id" :"new_zealand","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"New Zealand","countries":{"country":["NZ"]}}}
+{"_id" :"nicaragua","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Nicaragua","countries":{"country":["NI"]}}}
+{"_id" :"niger","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Niger","countries":{"country":["NE"]}}}
+{"_id" :"nigeria","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Nigeria","countries":{"country":["NG"]}}}
+{"_id" :"non-u","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Non-U.S. - not localized","countries":{"country":["XX"]}}}
+{"_id" :"northern_mariana_islands","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Northern Mariana Islands","countries":{"country":["MP"]}}}
+{"_id" :"north_korea","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"North Korea","countries":{"country":["KP"]}}}
+{"_id" :"norway","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Norway","countries":{"country":["NO"]}}}
+{"_id" :"ns","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"NS","countries":{"country":["NS"]}}}
+{"_id" :"oman","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Oman","countries":{"country":["OM"]}}}
+{"_id" :"pakistan","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Pakistan","countries":{"country":["PK"]}}}
+{"_id" :"palau","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Palau","countries":{"country":["PW"]}}}
+{"_id" :"palestine","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Palestine","countries":{"country":["PS"]}}}
+{"_id" :"panama","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Panama","countries":{"country":["PA"]}}}
+{"_id" :"papua_new_guinea","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Papua New Guinea","countries":{"country":["PG"]}}}
+{"_id" :"paraguay","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Paraguay","countries":{"country":["PY"]}}}
+{"_id" :"paraquay","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Paraquay","countries":{"country":["PY"]}}}
+{"_id" :"peru","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Peru","countries":{"country":["PE"]}}}
+{"_id" :"philippines","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Philippines","countries":{"country":["PH"]}}}
+{"_id" :"poland","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Poland","countries":{"country":["PL"]}}}
+{"_id" :"portugal","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Portugal","countries":{"country":["PT"]}}}
+{"_id" :"puerto_rico","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Puerto Rico","countries":{"country":["PR"]}}}
+{"_id" :"qatar","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Qatar","countries":{"country":["QA"]}}}
+{"_id" :"reunion","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Reunion","countries":{"country":["RE"]}}}
+{"_id" :"romania","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Romania","countries":{"country":["RO"]}}}
+{"_id" :"russian_federation","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Russian Federation","countries":{"country":["RU"]}}}
+{"_id" :"rwanda","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Rwanda","countries":{"country":["RW"]}}}
+{"_id" :"saint_kitts_and_nevis","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Saint Kitts and Nevis","countries":{"country":["KN"]}}}
+{"_id" :"saint_lucia","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Saint Lucia","countries":{"country":["LC"]}}}
+{"_id" :"saint_pierre_and_miquelon","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Saint Pierre and Miquelon","countries":{"country":["PM"]}}}
+{"_id" :"saint_vincent_and_the_grenadines","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Saint Vincent and the Grenadines","countries":{"country":["VC"]}}}
+{"_id" :"samoa","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Samoa","countries":{"country":["WS"]}}}
+{"_id" :"san_marino","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"San Marino","countries":{"country":["SM"]}}}
+{"_id" :"sao_tome_and_principe","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Sao Tome and Principe","countries":{"country":["ST"]}}}
+{"_id" :"saudi_arabia","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Saudi Arabia","countries":{"country":["SA"]}}}
+{"_id" :"senegal","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Senegal","countries":{"country":["SN"]}}}
+{"_id" :"serbia","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Serbia","countries":{"country":["RS"]}}}
+{"_id" :"seychelles","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Seychelles","countries":{"country":["SC"]}}}
+{"_id" :"sierra_leone","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Sierra Leone","countries":{"country":["SL"]}}}
+{"_id" :"singapore","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Singapore","countries":{"country":["SG"]}}}
+{"_id" :"slovakia","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Slovakia","countries":{"country":["SK"]}}}
+{"_id" :"slovenia","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Slovenia","countries":{"country":["SI"]}}}
+{"_id" :"solomon_islands","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Solomon Islands","countries":{"country":["SB"]}}}
+{"_id" :"somalia","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Somalia","countries":{"country":["SO"]}}}
+{"_id" :"southeast_asia","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Southeast Asia","countries":{"country":["ID","MY","PH","SG","TH","VN"]}}}
+{"_id" :"south_africa","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"South Africa","countries":{"country":["ZA"]}}}
+{"_id" :"south_pacific","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"South Pacific","countries":{"country":["AU","NZ"]}}}
+{"_id" :"spain","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Spain","countries":{"country":["ES"]}}}
+{"_id" :"sri_lanka","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Sri Lanka","countries":{"country":["LK"]}}}
+{"_id" :"sudan","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Sudan","countries":{"country":["SD"]}}}
+{"_id" :"suriname","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Suriname","countries":{"country":["SR"]}}}
+{"_id" :"swaziland","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Swaziland","countries":{"country":["SZ"]}}}
+{"_id" :"sweden","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Sweden","countries":{"country":["SE"]}}}
+{"_id" :"switzerland","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Switzerland","countries":{"country":["CH"]}}}
+{"_id" :"syrian_arab_republic","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Syrian Arab Republic","countries":{"country":["SY"]}}}
+{"_id" :"taiwan","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Taiwan","countries":{"country":["TW"]}}}
+{"_id" :"tajikistan","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Tajikistan","countries":{"country":["TJ"]}}}
+{"_id" :"tanzania_(united_republic_of)","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Tanzania (United Republic of)","countries":{"country":["TZ"]}}}
+{"_id" :"thailand","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Thailand","countries":{"country":["TH"]}}}
+{"_id" :"timor-leste","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Timor-Leste","countries":{"country":["TL"]}}}
+{"_id" :"togo","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Togo","countries":{"country":["TG"]}}}
+{"_id" :"tokelau","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Tokelau","countries":{"country":["TK"]}}}
+{"_id" :"tonga","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Tonga","countries":{"country":["TO"]}}}
+{"_id" :"trinidad_and_tobago","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Trinidad and Tobago","countries":{"country":["TT"]}}}
+{"_id" :"tunisia","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Tunisia","countries":{"country":["TN"]}}}
+{"_id" :"turkey","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Turkey","countries":{"country":["TR"]}}}
+{"_id" :"turkmenistan","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Turkmenistan","countries":{"country":["TM"]}}}
+{"_id" :"turks_and_caicos_islands","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Turks and Caicos Islands","countries":{"country":["TC"]}}}
+{"_id" :"uganda","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Uganda","countries":{"country":["UG"]}}}
+{"_id" :"ukraine","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Ukraine","countries":{"country":["UA"]}}}
+{"_id" :"united_arab_emirates","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"United Arab Emirates","countries":{"country":["AE"]}}}
+{"_id" :"united_kingdom","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"United Kingdom","countries":{"country":["GB","UK"]}}}
+{"_id" :"united_states","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"United States","countries":{"country":["US"]}}}
+{"_id" :"united_states___canada","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"United States & Canada","countries":{"country":["CA","US"]}}}
+{"_id" :"uruguay","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Uruguay","countries":{"country":["UY"]}}}
+{"_id" :"uzbekistan","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Uzbekistan","countries":{"country":["UZ"]}}}
+{"_id" :"vanuatu","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Vanuatu","countries":{"country":["VU"]}}}
+{"_id" :"vatican_city_state","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Vatican City State","countries":{"country":["VA"]}}}
+{"_id" :"venezuela","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Venezuela","countries":{"country":["VE"]}}}
+{"_id" :"vietnam","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Vietnam","countries":{"country":["VN"]}}}
+{"_id" :"virgin_islands_(british)","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Virgin Islands (British)","countries":{"country":["VG"]}}}
+{"_id" :"virgin_islands_(u","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Virgin Islands (U.S.)","countries":{"country":["VI"]}}}
+{"_id" :"wallis_and_futuna","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Wallis and Futuna","countries":{"country":["WF"]}}}
+{"_id" :"western_europe","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Western Europe","countries":{"country":["AT","BE","CH","DE","DK","ES","FI","FR","GB","IE","IT","NL","NO","PT","SE","UK"]}}}
+{"_id" :"western_sahara","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Western Sahara","countries":{"country":["EH"]}}}
+{"_id" :"worldwide","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Worldwide","countries":{"country":["AD","AE","AF","AG","AI","AL","AM","AN","AO","AR","AS","AT","AU","AW","AZ","BA","BB","BD","BE","BF","BG","BH","BI","BJ","BM","BN","BO","BR","BS","BT","BW","BY","BZ","CA","CD","CF","CG","CH","CL","CM","CN","CO","CR","CU","CV","CY","CZ","DE","DJ","DK","DM","DO","DZ","EC","EE","EG","ER","ES","ET","FI","FJ","FK","FM","FO","FR","GA","GD","GE","GF","GH","GL","GM","GN","GP","GQ","GR","GT","GU","GW","GY","HK","HN","HR","HT","HU","ID","IE","IL","IN","IQ","IR","IS","IT","JM","JO","JP","KE","KG","KH","KI","KM","KN","KP","KR","KW","KY","KZ","LA","LB","LC","LI","LK","LR","LS","LT","LU","LV","LY","MA","MC","MD","ME","MG","MH","MK","ML","MM","MN","MO","MP","MQ","MR","MS","MT","MU","MV","MW","MX","MY","MZ","NA","NC","NE","NG","NI","NL","NO","NP","NZ","OM","PA","PE","PF","PG","PH","PK","PL","PM","PR","PS","PT","PW","PY","QA","RE","RO","RS","RU","RW","SA","SB","SC","SD","SE","SG","SI","SK","SL","SM","SN","SO","SR","ST","SV","SY","SZ","TC","TD","TG","TH","TJ","TK","TM","TN","TO","TR","TT","TW","TZ","UA","UG","UK","US","UY","UZ","VC","VE","VG","VI","VN","VU","WF","WS","YE","YT","ZA","ZM","ZW"]}}}
+{"_id" :"yemen","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Yemen","countries":{"country":["YE"]}}}
+{"_id" :"zambia","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Zambia","countries":{"country":["ZM"]}}}
+{"_id" :"zimbabwe","mime" : "text/xml" , "eventType" : "update" , "priority" : 4 , "lastModified" : 1377146147304,"region":{"name":"Zimbabwe","countries":{"country":["ZW"]}}}

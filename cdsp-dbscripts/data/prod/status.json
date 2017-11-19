@@ -1,0 +1,12 @@
+{ "_id" : "cgs", "assigned" : "true", "instance_name" : "ProcessorInstance2", "lastModified" : 0 }
+{ "_id" : "contentfeedback", "assigned" : "true", "instance_name" : "ProcessorInstance1", "lastModified" : 1436093555217 }
+{ "_id" : "generalpurpose", "assigned" : "true", "instance_name" : "ProcessorInstance1", "lastModified" : 1436093555252 }
+{ "_id" : "library", "assigned" : "true", "instance_name" : "ProcessorInstance1", "lastModified" : 1436126524457 }
+{ "_id" : "manual", "assigned" : "true", "instance_name" : "ProcessorInstance2", "lastModified" : 1436173215648 }
+{ "_id" : "marketinghho", "assigned" : "true", "instance_name" : "ProcessorInstance1", "lastModified" : 1402034000454 }
+{ "_id" : "marketingnaconsumer", "assigned" : "true", "instance_name" : "ProcessorInstance1", "lastModified" : 1435988349770 }
+{ "_id" : "marketingstandard", "assigned" : "true", "instance_name" : "ProcessorInstance3", "lastModified" : 1436173941606 }
+{ "_id" : "productsetup", "assigned" : "true", "instance_name" : "ProcessorInstance1", "lastModified" : 1435988349817 }
+{ "_id" : "richmedia", "assigned" : "true", "instance_name" : "ProcessorInstance4", "lastModified" : 1436172510316 }
+{ "_id" : "soar", "assigned" : "true", "instance_name" : "ProcessorInstance4", "lastModified" : 1435905387451 }
+{ "_id" : "support", "assigned" : "true", "instance_name" : "ProcessorInstance2", "lastModified" : 1436173755820 }

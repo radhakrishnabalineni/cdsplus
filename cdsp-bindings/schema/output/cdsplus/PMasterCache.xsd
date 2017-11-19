@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" xmlns:proj="http://www.hp.com/cdsplus" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <xs:import namespace="http://www.hp.com/cdsplus" schemaLocation="productmastercache_proj.xsd"/>
+  <xs:import namespace="http://www.w3.org/1999/xlink" schemaLocation="common_xlink.xsd"/>
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="common_xml.xsd"/>
+  <xs:element name="result">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="proj:ref"/>
+      </xs:sequence>
+      <xs:attribute name="considered" use="required" type="xs:integer"/>
+      <xs:attribute name="count" use="required" type="xs:integer"/>
+      <xs:attribute ref="xml:base" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="content">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="view"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="view">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="proj:source"/>
+        <xs:element ref="marketing_category"/>
+        <xs:element ref="marketing_subcategory"/>
+        <xs:element ref="old_one"/>
+        <xs:element ref="product_big_series"/>
+        <xs:element ref="product_name"/>
+        <xs:element ref="product_number"/>
+        <xs:element ref="product_series"/>
+        <xs:element ref="product_type"/>
+        <xs:element ref="support_category"/>
+        <xs:element ref="support_subcategory"/>
+        <xs:element ref="support_name_oids"/>
+        <xs:element ref="product_lines"/>
+        <xs:element ref="product_numbers"/>
+      </xs:sequence>
+      <xs:attribute name="oid" use="required" type="xs:integer"/>
+      <xs:attribute ref="xml:base" use="required"></xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="marketing_category">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="node" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="marketing_subcategory">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="node" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="old_one">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="node"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="product_big_series">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="node" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="product_name">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="node" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="product_number">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="node"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="product_series">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="node" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="product_type">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="node" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="support_category">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="node" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="support_subcategory">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="node" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="support_name_oids">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="node" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="product_lines">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="node" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="product_numbers">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="node"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="node" type="xs:string"/>
+</xs:schema>

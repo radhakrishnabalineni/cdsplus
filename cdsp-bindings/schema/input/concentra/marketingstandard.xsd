@@ -1,0 +1,635 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="web_newsletter_codes">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="web_newsletter_code" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="web_newsletter_code" type="xs:string"/>
+	<xs:element name="version_label" type="xs:decimal"/>
+	<xs:element name="user_name" type="xs:string"/>
+	<xs:element name="user_address" type="xs:string"/>
+	<xs:element name="telephone" type="xs:string"/>
+	<xs:element name="technicality_level_codes">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="technicality_level_code" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="technicality_level_code" type="xs:string"/>
+	<xs:element name="task_due_date" type="xs:dateTime"/>
+	<xs:element name="smartflow_content_types">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="smartflow_content_type" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="smartflow_content_type" type="xs:string"/>
+	<xs:element name="search_keywords">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="search_keyword" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="search_keyword" type="xs:string"/>
+	<xs:element name="review_date" type="xs:dateTime"/>
+	<xs:element name="renditions">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="rendition" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="rendition">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="size" use="required" type="xs:long"/>
+					<xs:attribute name="last_updated_date" use="required" type="xs:dateTime"/>
+					<xs:attribute name="content_type" use="required" type="xs:string"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="regions">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="region" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="region" type="xs:string"/>
+	<xs:element name="r_version_labels">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="r_version_label" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="r_version_label" type="xs:string"/>
+	<xs:element name="r_object_type" type="xs:string"/>
+	<xs:element name="r_object_id" type="xs:string"/>
+	<xs:element name="pub_vendor_details">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="pub_vendor_detail" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="pub_vendor_detail">
+	    <xs:complexType>
+	      <xs:sequence>
+		<xs:element ref="pubv_vendor"/>
+		<xs:element ref="pubv_inventory_policy"/>
+		<xs:element ref="pubv_order_limit"/>
+		<xs:element ref="pubv_restriction"/>
+		<xs:element ref="pubv_strict_hold_flag"/>
+		<xs:element ref="pubv_unit_code"/>
+		<xs:element ref="pubv_initial_quantity"/>
+		<xs:element ref="pubv_initial_air_quantity"/>
+		<xs:element ref="pubv_reorder_quantity"/>
+		<xs:element ref="pubv_initial_date"/>
+		<xs:element ref="gsb_application_type"/>
+		<xs:element ref="gsb_content_type"/>
+		<xs:element ref="gsb_business_type"/>
+		<xs:element ref="stock_unit_price"/>
+		<xs:element ref="stock_unit_weight"/>
+	      </xs:sequence>
+	    </xs:complexType>
+	  </xs:element>
+	<xs:element name="pubv_vendor" type="xs:string"/>
+	<xs:element name="pubv_inventory_policy" type="xs:string"/>
+	<xs:element name="pubv_order_limit" type="xs:integer"/>
+	<xs:element name="pubv_restriction">
+		 <xs:complexType/>
+	</xs:element>
+	<xs:element name="pubv_strict_hold_flag" type="xs:integer"/>
+	<xs:element name="pubv_unit_code" type="xs:string"/>
+  <xs:element name="pubv_initial_quantity" type="xs:integer"/>
+  <xs:element name="pubv_initial_air_quantity" type="xs:integer"/>
+  <xs:element name="pubv_reorder_quantity" type="xs:integer"/>
+  <xs:element name="pubv_initial_date" type="xs:dateTime"/>
+  <xs:element name="gsb_application_type" type="xs:string"/>
+  <xs:element name="gsb_content_type" type="xs:string"/>
+  <xs:element name="gsb_business_type" type="xs:string"/>
+  <xs:element name="stock_unit_price" type="xs:string"/>
+  <xs:element name="stock_unit_weight" type="xs:string"/>
+	<xs:element name="pub_retail_accounts">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="pub_retail_account" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="pub_retail_account" type="xs:string"/>
+	<xs:element name="pub_ref_update_date" type="xs:dateTime"/>
+	<xs:element name="pub_qa_instruction" type="xs:string"/>
+	<xs:element name="pub_page_size" type="xs:string"/>
+	<xs:element name="pub_page_count" type="xs:string"/>
+	<xs:element name="pub_media" type="xs:string"/>
+	<xs:element name="pub_manager_backup">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="user_address"/>
+				<xs:element ref="user_name"/>
+				<xs:element ref="first_name"/>
+				<xs:element ref="last_name"/>
+				<xs:element ref="employee_id"/>
+				<xs:element ref="locationcode"/>
+				<xs:element ref="business_group"/>
+				<xs:element ref="business_unit"/>
+				<xs:element ref="telephone"/>
+				<xs:element ref="mail_stop"/>
+				<xs:element ref="hp_post"/>
+				<xs:element ref="hp_floor"/>
+				<xs:element ref="building_name"/>
+				<xs:element ref="addr_street"/>
+				<xs:element ref="addr_city"/>
+				<xs:element ref="addr_state"/>
+				<xs:element ref="addr_postal_code"/>
+				<xs:element ref="addr_country_code"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="pub_manager">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="user_address"/>
+				<xs:element ref="user_name"/>
+				<xs:element ref="first_name"/>
+				<xs:element ref="last_name"/>
+				<xs:element ref="employee_id"/>
+				<xs:element ref="locationcode"/>
+				<xs:element ref="business_group"/>
+				<xs:element ref="business_unit"/>
+				<xs:element ref="telephone"/>
+				<xs:element ref="mail_stop"/>
+				<xs:element ref="hp_post"/>
+				<xs:element ref="hp_floor"/>
+				<xs:element ref="building_name"/>
+				<xs:element ref="addr_street"/>
+				<xs:element ref="addr_city"/>
+				<xs:element ref="addr_state"/>
+				<xs:element ref="addr_postal_code"/>
+				<xs:element ref="addr_country_code"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="pub_locationcode_override" type="xs:string"/>
+	<xs:element name="pub_inventory_scrap_count" type="xs:string"/>
+	<xs:element name="pub_flag" type="xs:boolean"/>
+	<xs:element name="pub_controller">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="user_address"/>
+				<xs:element ref="user_name"/>
+				<xs:element ref="first_name"/>
+				<xs:element ref="last_name"/>
+				<xs:element ref="employee_id"/>
+				<xs:element ref="locationcode"/>
+				<xs:element ref="business_group"/>
+				<xs:element ref="business_unit"/>
+				<xs:element ref="telephone"/>
+				<xs:element ref="mail_stop"/>
+				<xs:element ref="hp_post"/>
+				<xs:element ref="hp_floor"/>
+				<xs:element ref="building_name"/>
+				<xs:element ref="addr_street"/>
+				<xs:element ref="addr_city"/>
+				<xs:element ref="addr_state"/>
+				<xs:element ref="addr_postal_code"/>
+				<xs:element ref="addr_country_code"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="pub_air_program_flag" type="xs:boolean"/>
+	<xs:element name="property_update_user" type="xs:string"/>
+	<xs:element name="property_update_date" type="xs:dateTime"/>
+	<xs:element name="project_name" type="xs:string"/>
+	<xs:element name="project_id" type="xs:string"/>
+	<xs:element name="products">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="product" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="product_levels">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="product_level" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="product_level" type="xs:string"/>
+	<xs:element name="product" type="xs:string"/>
+	<xs:element name="private_document_flag" type="xs:boolean"/>
+	<xs:element name="priority" type="xs:string"/>
+	<xs:element name="print_management_programs">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="print_management_program" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="print_management_program" type="xs:string"/>
+	<xs:element name="partner_segment_codes">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="partner_segment_code" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="partner_segment_code" type="xs:string"/>
+	<xs:element name="partner_codes">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="partner_code" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="partner_code" type="xs:string"/>
+	<xs:element name="owner_name" type="xs:string"/>
+	<xs:element name="original_system" type="xs:string"/>
+	<xs:element name="original_filename" type="xs:string"/>
+	<xs:element name="original_docid" type="xs:string"/>
+	<xs:element name="organization" type="xs:string"/>
+	<xs:element name="operating_system_codes">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="operating_system_code" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="operating_system_code" type="xs:string"/>
+	<xs:element name="office_count_codes">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="office_count_code" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="office_count_code" type="xs:string"/>
+	<xs:element name="object_name" type="xs:string"/>
+	<xs:element name="object_create_date" type="xs:dateTime"/>
+	<xs:element name="master_object_name" type="xs:string"/>
+	<xs:element name="marketing_program_codes">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="marketing_program_code" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="marketing_program_code" type="xs:string"/>
+	<xs:element name="mail_stop" type="xs:string"/>
+	<xs:element name="locationcode" type="xs:string"/>
+	<xs:element name="lifecycle_state_update_user" type="xs:string"/>
+	<xs:element name="lifecycle_state_update_date" type="xs:dateTime"/>
+	<xs:element name="last_name" type="xs:string"/>
+	<xs:element name="language_label" type="xs:string"/>
+	<xs:element name="language_code" type="xs:string"/>
+	<xs:element name="job_responsibility_codes">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="job_responsibility_code" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="job_responsibility_code" type="xs:string"/>
+	<xs:element name="it_budget_codes">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="it_budget_code" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="it_budget_code" type="xs:string"/>
+	<xs:element name="inventory_management" type="xs:string"/>
+	<xs:element name="information_source" type="xs:string"/>
+	<xs:element name="industry_vertical_codes">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="industry_vertical_code" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="industry_vertical_code" type="xs:string"/>
+	<xs:element name="industry_segment_codes">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="industry_segment_code" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="industry_segment_code" type="xs:string"/>
+	<xs:element name="i_chronicle_id" type="xs:string"/>
+	<xs:element name="hp_post" type="xs:string"/>
+	<xs:element name="hp_floor" type="xs:string"/>
+	<xs:element name="future_disclosure_date" type="xs:dateTime"/>
+	<xs:element name="full_title">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="language_code" use="required" type="xs:string"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="first_name" type="xs:string"/>
+	<xs:element name="feedback_address" type="xs:string"/>
+	<xs:element name="extra_property_values">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="extra_property_value"  maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="extra_property_value" type="xs:string"/>
+	<xs:element name="extra_property_name" type="xs:string"/>
+	<xs:element name="extra_property">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="extra_property_name"/>
+				<xs:element ref="extra_property_values"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="extra_properties">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="extra_property" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="employee_id" type="xs:string"/>
+	<xs:element name="employee_count_codes">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="employee_count_code" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="employee_count_code" type="xs:string"/>
+	<xs:element name="eds_gold_standard_flag" type="xs:boolean"/>
+	<xs:element name="eds_document" type="xs:string"/>
+	<xs:element name="eds_client_type" type="xs:string"/>
+	<xs:element name="eds_client_quote" type="xs:string"/>
+	<xs:element name="eds_business_topics">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="eds_business_topic" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="eds_business_topic" type="xs:string"/>
+	<xs:element name="document_type_details">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="document_type_detail" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="document_type_detail" type="xs:string"/>
+	<xs:element name="document_type" type="xs:string"/>
+	<xs:element name="document_relations">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="document_relation" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="document_relation" type="xs:string"/>
+	<xs:element name="document_class" type="xs:string"/>
+	<xs:element name="company_info" type="xs:string"/>
+	<xs:element name="document">
+		<xs:complexType>
+			<xs:sequence>
+			<xs:element ref="company_info"/>
+				<xs:element ref="r_object_id"/>
+				<xs:element ref="priority"/>
+				<xs:element ref="products"/>
+				<xs:element ref="document_type"/>
+				<xs:element ref="version_label"/>
+				<xs:element ref="eds_document"/>
+				<xs:element ref="eds_client_type"/>
+				<xs:element ref="eds_client_quote"/>
+				<xs:element ref="eds_gold_standard_flag"/>
+				<xs:element ref="addr_country_code"/>
+				<xs:element ref="business_group"/>
+				<xs:element ref="cmg_name"/>
+				<xs:element ref="col_master_id"/>
+				<xs:element ref="collection_ref_update_date"/>
+				<xs:element ref="collection_update_date"/>
+				<xs:element ref="collection_update_user"/>
+				<xs:element ref="collection_valid_flag"/>
+				<xs:element ref="content_class"/>
+				<xs:element ref="document_type_details"/>
+				<xs:element ref="future_disclosure_date"/>
+				<xs:element ref="i_chronicle_id"/>
+				<xs:element ref="inventory_management"/>
+				<xs:element ref="lifecycle_state_update_date"/>
+				<xs:element ref="lifecycle_state_update_user"/>
+				<xs:element ref="object_create_date"/>
+				<xs:element ref="owner_name"/>
+				<xs:element ref="print_management_programs"/>
+				<xs:element ref="project_id"/>
+				<xs:element ref="project_name"/>
+				<xs:element ref="property_update_user"/>
+				<xs:element ref="r_object_type"/>
+				<xs:element ref="r_version_labels"/>
+				<xs:element ref="task_due_date"/>
+				<xs:element ref="eds_business_topics"/>
+				<xs:element ref="regions"/>
+				<xs:element ref="authors"/>
+				<xs:element ref="search_keywords"/>
+				<xs:element ref="crm_asset_code"/>
+				<xs:element ref="cmg_acronym"/>
+				<xs:element ref="cmg_feedback_address"/>
+				<xs:element ref="private_document_flag"/>
+				<xs:element ref="master_object_name"/>
+				<xs:element ref="language_label"/>
+				<xs:element ref="full_title"/>
+				<xs:element ref="collection_full_title"/>
+				<xs:element ref="property_update_date"/>
+				<xs:element ref="content_update_date"/>
+				<xs:element ref="collection_search_keywords"/>
+				<xs:element ref="product_levels"/>
+				<xs:element ref="audiences"/>
+				<xs:element ref="document_relations"/>
+				<xs:element ref="extra_properties"/>
+				<xs:element ref="pub_controller"/>
+				<xs:element ref="pub_manager"/>
+				<xs:element ref="pub_manager_backup"/>
+				<xs:element ref="business_units"/>
+				<xs:element ref="organization"/>
+				<xs:element ref="smartflow_content_types"/>
+				<xs:element ref="pub_vendor_details"/>
+				<xs:element ref="renditions"/>
+				<xs:element ref="col_id"/>
+				<xs:element ref="content_url"/>
+				<xs:element ref="content_version_date"/>
+				<xs:element ref="description"/>
+				<xs:element ref="disclosure_level"/>
+				<xs:element ref="content_version"/>
+				<xs:element ref="feedback_address"/>
+				<xs:element ref="document_class"/>
+				<xs:element ref="language_code"/>
+				<xs:element ref="concentra_internal_id"/>
+				<xs:element ref="creation_date"/>
+				<xs:element ref="object_name"/>
+				<xs:element ref="original_docid"/>
+				<xs:element ref="original_filename"/>
+				<xs:element ref="original_system"/>
+				<xs:element ref="pub_air_program_flag"/>
+				<xs:element ref="pub_flag"/>
+				<xs:element ref="pub_inventory_scrap_count"/>
+				<xs:element ref="pub_locationcode_override"/>
+				<xs:element ref="pub_media"/>
+				<xs:element ref="pub_page_count"/>
+				<xs:element ref="pub_page_size"/>
+				<xs:element ref="pub_qa_instruction"/>
+				<xs:element ref="pub_ref_update_date"/>
+				<xs:element ref="review_date"/>
+				<xs:element ref="collection_description"/>
+				<xs:element ref="corporate_content_flag"/>
+				<xs:element ref="information_source"/>
+				<xs:element ref="customer_segment_codes"/>
+				<xs:element ref="business_function_codes"/>
+				<xs:element ref="buyer_role_codes"/>
+				<xs:element ref="customer_codes"/>
+				<xs:element ref="employee_count_codes"/>
+				<xs:element ref="industry_segment_codes"/>
+				<xs:element ref="industry_vertical_codes"/>
+				<xs:element ref="it_budget_codes"/>
+				<xs:element ref="job_responsibility_codes"/>
+				<xs:element ref="marketing_program_codes"/>
+				<xs:element ref="office_count_codes"/>
+				<xs:element ref="operating_system_codes"/>
+				<xs:element ref="partner_codes"/>
+				<xs:element ref="pub_retail_accounts"/>
+				<xs:element ref="technicality_level_codes"/>
+				<xs:element ref="web_newsletter_codes"/>
+				<xs:element ref="partner_segment_codes"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="disclosure_level" type="xs:string"/>
+	<xs:element name="description" type="xs:string"/>
+	<xs:element name="customer_segment_codes">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="customer_segment_code" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="customer_segment_code" type="xs:string"/>
+	<xs:element name="customer_codes">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="customer_code" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="customer_code" type="xs:string"/>
+	<xs:element name="crm_asset_code" type="xs:string"/>
+	<xs:element name="creation_date" type="xs:dateTime"/>
+	<xs:element name="corporate_content_flag" type="xs:boolean"/>
+	<xs:element name="content_version_date" type="xs:dateTime"/>
+	<xs:element name="content_version" type="xs:string"/>
+	<xs:element name="content_url" type="xs:string"/>
+	<xs:element name="content_update_date" type="xs:dateTime"/>
+	<xs:element name="content_class" type="xs:string"/>
+	<xs:element name="concentra_internal_id" type="xs:string"/>
+	<xs:element name="collection_valid_flag" type="xs:boolean"/>
+	<xs:element name="collection_update_user" type="xs:string"/>
+	<xs:element name="collection_update_date" type="xs:dateTime"/>
+	<xs:element name="collection_search_keywords">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="collection_search_keyword" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="collection_search_keyword" type="xs:string"/>
+	<xs:element name="collection_ref_update_date" type="xs:dateTime"/>
+	<xs:element name="collection_full_title" type="xs:string"/>
+	<xs:element name="collection_description" type="xs:string"/>
+	<xs:element name="col_master_id" type="xs:string"/>
+	<xs:element name="col_id" type="xs:string"/>
+	<xs:element name="cmg_name" type="xs:string"/>
+	<xs:element name="cmg_feedback_address" type="xs:string"/>
+	<xs:element name="cmg_acronym" type="xs:string"/>
+	<xs:element name="buyer_role_codes">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="buyer_role_code" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="buyer_role_code" type="xs:string"/>
+	
+	<xs:element name="business_unit">
+	<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="type" use="required" type="xs:string"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="business_units">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="business_unit" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:element name="business_group" type="xs:string"/>
+	<xs:element name="business_function_codes">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="business_function_code" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="business_function_code" type="xs:string"/>
+	<xs:element name="building_name" type="xs:string"/>
+	<xs:element name="authors">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="author" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="author" type="xs:string"/>
+	<xs:element name="audiences">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="audience" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="audience_release_date" type="xs:dateTime"/>
+	<xs:element name="audience_name" type="xs:string"/>
+	<xs:element name="audience_expiry_date" type="xs:dateTime"/>
+	<xs:element name="audience">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="audience_name"/>
+				<xs:element ref="audience_release_date"/>
+				<xs:element ref="audience_expiry_date"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="addr_street" type="xs:string"/>
+	<xs:element name="addr_state" type="xs:string"/>
+	<xs:element name="addr_postal_code" type="xs:string"/>
+	<xs:element name="addr_country_code" type="xs:string"/>
+	<xs:element name="addr_city" type="xs:string"/>
+</xs:schema>

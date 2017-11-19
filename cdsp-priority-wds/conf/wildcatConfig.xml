@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config period="5" xmlns:proj="http://www.hp.com/cdsplus" xmlns:xlink="http://www.w3.org/1999/xlink"
+        xmlns:sub="java:com.hp.cdsplus.wds.workItem.CDSPSubscription" xmlns:xutils="com.hp.cdsplus.util.xml.XMLUtils"
+        ssl_key_store="/opt/ais/app/applications/reference_client/wds/conf/cdsplus_prod_keystore.jks"
+        ssl_key_password="CDS+secret#1"
+        ssl_trust_store="/opt/ais/app/applications/reference_client/wds/conf/cdsplus_truststore.jks"
+        ssl_trust_password="CDS+secret#1"
+        logging="true"
+        log4jConfig="/opt/ais/app/applications/reference_client/wds/conf/log4j.xml"
+        source_class="com.hp.cdsplus.wds.cdspsource.CDSPSource"
+        num_worker_threads="4"
+        min_seconds_between_work_orders="60"
+        num_priorities="6"
+        max_session_reuse="50"
+        history_file_name="/opt/sasuapps/cdsplus/data/wds/hp_manuals/hp_manuals_history.txt"
+        events_are_sequential="false">
+
+         <sendMail>
+                <smtp_host>smtp3.hp.com</smtp_host>
+                <smtp_port>25</smtp_port>
+                <from_addr>CDS+-WILDCAT-WDSClient@hp.com</from_addr>
+                <to_addrs>
+                        <to_addr>Support-GDAS-CM-Main@HP.COM</to_addr>
+                       <to_addr>TEAM-CDS-WDS-NOTIFICATIONS@groups.hp.com</to_addr>
+                </to_addrs>
+  </sendMail>
+
+        <sub limit="50"
+                manualRepub="manual_republish.txt"
+                server="http://cdsplus.austin.hp.com/cadence/app/"
+                subscription="manual/hpcom_201"
+                workingDir="/opt/sasuapps/cdsplus/data/wds/hp_manuals/">
+                <namedDestination name="ReleaseManager"
+                                        class="com.hp.cdsplus.wds.destination.ReleaseManagerDestination"
+                                        contentArea="ctg"
+                                        maxPackageCount="100"
+                                        maxPackageSize="100"
+                                        username="ctg3"
+                                        dest_path="/var/opt/web/whp-web/rlsmgr/ftp-dropoff/"
+                                        password="KT1OtRI?"
+                                        dir="releaseManager"
+                                        server="sftp://rlsmgr.corp.hp.com"
+                                        verify="some $x in sub:headers( concat( 'http://h10032.www1.hp.com/ctg/Manual/',$dest ))/headers/header[ @name = 'content-length' ] satisfies $x/text() = $size"
+                                        prefix="Manual/"
+                                        job="UPDATE PROD"/>
+
+                <selection select="/document/file_name/proj:ref"
+                           source="concat( /node()/@*:base, @xlink:href )">
+                  <destination name="ReleaseManager" />
+                </selection>
+        </sub>
+</config>
+

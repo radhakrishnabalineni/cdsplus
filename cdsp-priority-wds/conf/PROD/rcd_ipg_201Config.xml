@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config period="5" xmlns:proj="http://www.hp.com/cdsplus" xmlns:xlink="http://www.w3.org/1999/xlink"
+        xmlns:sub="java:com.hp.cdsplus.wds.workItem.CDSPSubscription" xmlns:xutils="com.hp.cdsplus.util.xml.XMLUtils"
+        ssl_key_store="/opt/ais/app/applications/reference_client/wds/conf/cdsplus_keystore.jks"
+        ssl_key_password="CDS+secret#1"
+        ssl_trust_store="/opt/ais/app/applications/reference_client/wds/conf/cdsplus_truststore.jks"
+        ssl_trust_password="CDS+secret#1"
+        logging="true"
+        log4jConfig="/opt/ais/app/applications/reference_client/wds/conf/log4j.xml"
+        source_class="com.hp.cdsplus.wds.cdspsource.CDSPSource"
+        num_worker_threads="4"
+        min_seconds_between_work_orders="82800"
+        num_priorities="6"
+        max_session_reuse="50"
+        history_file_name="/opt/ais/app/applications/reference_client/wds/conf/rcd_ipg_201/wds_history.txt"
+        events_are_sequential="false"
+        wdsClient="/opt/ais/app/applications/reference_client/wds/conf/rcd_ipg_201/wds_config.xml"
+        retryOnError="true">
+
+        <sendMail>
+                <smtp_host>smtp3.hp.com</smtp_host>
+                <smtp_port>25</smtp_port>
+                <to_addr>cdsplusdevteam@hp.com</to_addr>
+                <from_addr>rcd-ipg-201@hp.com</from_addr>
+
+        </sendMail>
+        
+</config>
+
+

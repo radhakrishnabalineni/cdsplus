@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="cdsp-shared-lib" default="all" basedir=".">
+<property environment="env" />
+<property name="dist.dir" value="${env.DIST_DIR}"/>
+<property name="lib.dir" value="${basedir}/lib"/>	
+
+	
+ <target name="all" depends="manage-libs" description="default target to do a clean build"/>	
+
+ <target name="manage-libs">
+	<copy toDir="${dist.dir}">
+		<fileset dir="${lib.dir}">
+			  <include name="*.*"/>
+		</fileset>
+	</copy>
+ </target>
+	
+</project>

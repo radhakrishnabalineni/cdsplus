@@ -1,0 +1,51 @@
+2016-02-11T19:52:03IST [main] INFO  Log4j initialized
+2016-02-11T19:52:40IST [main] ERROR com.hp.cdsplus.pmloader.exception.LoaderInitializationException: Exception while trying to access file in following location : C:\APPLICATIONS\CDSPLUS\cdsp-pmloader\config\pmloader.properties
+2016-02-11T19:54:01IST [main] INFO  Log4j initialized
+2016-02-11T19:54:28IST [main] INFO  Properties loaded from C:\APPLICATIONS\CDSPLUS\cdsp-pmloader\config\pmloader.properties
+2016-02-11T19:54:38IST [main] INFO  Config items Loaded to system properties
+2016-02-11T19:55:38IST [main] INFO  Properties loaded from config/pmloader-sql.properties
+2016-02-11T19:55:38IST [main] INFO  SQL Queries Loaded to system properties
+2016-02-11T19:55:38IST [main] DEBUG JDBC URL - jdbc:oracle:thin:@gcu12341.austin.hp.com:1526/XMLDMSI
+2016-02-11T19:55:38IST [main] DEBUG JDBC USERNAME - xdmsdoc
+2016-02-11T19:55:38IST [main] DEBUG JDBC PASSWORD - Itg1-Concentra
+2016-02-11T19:55:49IST [main] INFO  JDBC initialized
+2016-02-11T19:55:49IST [main] INFO  Mail Utils initialized
+2016-02-11T19:55:52IST [PMLoader] INFO  QueueManager initialized
+2016-02-11T19:55:52IST [PMLoader] INFO  Delta execution mode set to true
+2016-02-11T19:55:59IST [PMLoader] INFO  Extractor Manager initialized
+2016-02-11T19:55:59IST [PMLoader] INFO  No of worker threads is set to 6
+2016-02-11T19:56:00IST [PMLoader] INFO  Worker Manager initialized
+2016-02-11T19:56:00IST [PMLoader] INFO  Total Items waiting in queue : 0
+2016-02-11T19:56:00IST [PMLoader] INFO  Total Items waiting in queue : 0
+2016-02-11T19:56:00IST [PMLoader] INFO  Total Items waiting in queue : 0
+2016-02-11T19:56:03IST [PRODUCT_NUMBER_Thread] INFO  Finished extraction for level - PRODUCT_NUMBER. Delta count - 0
+2016-02-11T19:56:03IST [PRODUCT_NAME_Thread] INFO  Finished extraction for level - PRODUCT_NAME. Delta count - 0
+2016-02-11T19:56:03IST [MARKETING_SUBCATEGORY_Thread] INFO  Finished extraction for level - MARKETING_SUBCATEGORY. Delta count - 0
+2016-02-11T19:56:03IST [PRODUCT_BIGSERIES_Thread] INFO  Finished extraction for level - PRODUCT_BIGSERIES. Delta count - 0
+2016-02-11T19:56:03IST [PRODUCT_TYPE_Thread] INFO  Finished extraction for level - PRODUCT_TYPE. Delta count - 0
+2016-02-11T19:56:03IST [SUPPORT_SUBCATEGORY_Thread] INFO  Finished extraction for level - SUPPORT_SUBCATEGORY. Delta count - 0
+2016-02-11T19:56:03IST [PRODUCT_SERIES_Thread] INFO  Finished extraction for level - PRODUCT_SERIES. Delta count - 0
+2016-02-11T19:56:03IST [SUPPORT_CATEGORY_Thread] INFO  Finished extraction for level - SUPPORT_CATEGORY. Delta count - 0
+2016-02-11T19:56:03IST [MARKETING_CATEGORY_Thread] INFO  Finished extraction for level - MARKETING_CATEGORY. Delta count - 0
+2016-02-11T19:56:04IST [PMLoader] INFO  Total Items waiting in queue : 0
+2016-02-11T19:56:04IST [PMLoader] WARN  Extractor shutdown - Completed
+2016-02-11T19:56:51IST [main] INFO  Log4j initialized
+2016-02-11T19:56:58IST [main] INFO  Properties loaded from C:\APPLICATIONS\CDSPLUS\cdsp-pmloader\config\pmloader.properties
+2016-02-11T19:57:00IST [main] INFO  Config items Loaded to system properties
+2016-02-11T19:57:12IST [main] INFO  Properties loaded from config/pmloader-sql.properties
+2016-02-11T19:57:14IST [main] INFO  SQL Queries Loaded to system properties
+2016-02-11T19:58:29IST [main] DEBUG JDBC URL - jdbc:oracle:thin:@gcu12341.austin.hp.com:1526/XMLDMSI
+2016-02-11T19:58:30IST [main] DEBUG JDBC USERNAME - xdmsdoc
+2016-02-11T19:58:39IST [main] DEBUG JDBC PASSWORD - Itg1-Concentra
+2016-02-11T19:59:44IST [main] INFO  JDBC initialized
+2016-02-11T20:01:10IST [main] INFO  Mail Utils initialized
+2016-02-11T20:03:28IST [main] INFO  Log4j initialized
+2016-02-11T20:03:31IST [main] INFO  Properties loaded from C:\APPLICATIONS\CDSPLUS\cdsp-pmloader\config\pmloader.properties
+2016-02-11T20:03:32IST [main] INFO  Config items Loaded to system properties
+2016-02-11T20:03:34IST [main] INFO  Properties loaded from config/pmloader-sql.properties
+2016-02-11T20:03:36IST [main] INFO  SQL Queries Loaded to system properties
+2016-02-11T20:03:36IST [main] DEBUG JDBC URL - jdbc:oracle:thin:@gcu12341.austin.hp.com:1526/XMLDMSI
+2016-02-11T20:03:36IST [main] DEBUG JDBC USERNAME - xdmsdoc
+2016-02-11T20:03:36IST [main] DEBUG JDBC PASSWORD - Itg1-Concentra
+2016-02-11T20:03:50IST [main] INFO  JDBC initialized
+2016-02-11T20:03:53IST [main] INFO  Mail Utils initialized

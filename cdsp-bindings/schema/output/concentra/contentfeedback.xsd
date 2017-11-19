@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" 
+  xmlns:proj="http://www.hp.com/cdsplus" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <xs:import namespace="http://www.hp.com/cdsplus" schemaLocation="contentfeedback_proj.xsd"/>
+  <xs:import namespace="http://www.w3.org/1999/xlink" schemaLocation="common_xlink.xsd"/>
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="common_xml.xsd"/>
+  <xs:element name="result">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="proj:ref" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:attribute name="considered" type="xs:integer"/>
+      <xs:attribute name="count" type="xs:integer"/>
+      <xs:attribute ref="xml:base" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="content">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="document"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="projectref">
+    <xs:complexType>
+      <xs:attribute ref="xlink:type" use="required"/>
+      <xs:attribute ref="xlink:href" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="document">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="action"/>
+		<xs:element ref="company_info"/>
+        <xs:element ref="r_object_id"/>
+        <xs:element ref="priority"/>
+        <xs:element ref="products"/>
+        <xs:element ref="product_types" minOccurs="0"/>
+        <xs:element ref="product_big_series" minOccurs="0"/>
+        <xs:element ref="support_name_oids" minOccurs="0"/>        
+        <xs:element ref="product_support_categories" minOccurs="0"/>
+        <xs:element ref="product_support_subcategories" minOccurs="0"/>
+        <xs:element ref="product_series" minOccurs="0"/>
+        <xs:element ref="product_names" minOccurs="0"/>
+        <xs:element ref="product_number_names" minOccurs="0"/>
+        <xs:element ref="product_numbers" minOccurs="0"/>
+        <xs:element ref="product_lines" minOccurs="0"/>
+        <xs:element ref="product_marketing_categories" minOccurs="0"/>
+        <xs:element ref="product_marketing_subcategories" minOccurs="0"/>
+        <xs:element ref="document_type"/>
+        <xs:element ref="version_label"/>
+        <xs:element ref="feedback_product_lines"/>
+        <xs:element ref="content_type"/>
+        <xs:element ref="regions"/>
+        <xs:element ref="property_update_date"/>
+        <xs:element ref="language_label"/>
+        <xs:element ref="information_source"/>
+        <xs:element ref="full_title"/>
+        <xs:element ref="action_requested"/>
+        <xs:element ref="action_taken"/>
+        <xs:element ref="confidential_comment"/>
+        <xs:element ref="feedback_content_name"/>
+        <xs:element ref="original_system"/>
+        <xs:element ref="feedback_priority"/>
+        <xs:element ref="document_class"/>
+        <xs:element ref="file_bytes"/>
+        <xs:element ref="language_code"/>
+        <xs:element ref="miscellaneous_comment"/>
+        <xs:element ref="object_name"/>
+        <xs:element ref="original_docid"/>
+      </xs:sequence>
+      <xs:attribute ref="xml:base" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="action" type="xs:NCName"/>
+  <xs:element name="company_info" type="xs:string"/>
+  <xs:element name="r_object_id" type="xs:NMTOKEN"/>
+  <xs:element name="priority" type="xs:integer"/>
+  <xs:element name="products">
+    <xs:complexType>
+      	<xs:sequence>
+        	<xs:element ref="product" minOccurs="0" maxOccurs="unbounded"/>
+        	<xs:element ref="product_types" minOccurs="0"/>
+	        <xs:element ref="product_series" minOccurs="0"/>
+	        <xs:element ref="product_names" minOccurs="0"/>
+	        <xs:element ref="product_number_names" minOccurs="0"/>
+			<xs:element ref="product_numbers" minOccurs="0"/>
+	        <xs:element ref="product_lines" minOccurs="0"/>
+	        <xs:element ref="product_marketing_categories" minOccurs="0"/>
+	        <xs:element ref="product_marketing_subcategories" minOccurs="0"/>
+	      	<xs:element ref="product_support_categories" minOccurs="0"/>
+			<xs:element ref="product_support_subcategories" minOccurs="0"/>
+		   	<xs:element ref="product_big_series" minOccurs="0"/>
+			<xs:element ref="support_name_oids" minOccurs="0"/>  
+        </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="product">
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="projectref"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="product_type">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="product"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="support_subcategory">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="product"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="product_series">
+   <xs:complexType>
+     <xs:sequence>
+          <xs:element maxOccurs="unbounded" ref="product"/>
+     </xs:sequence>
+   </xs:complexType>
+  </xs:element>
+  <xs:element name="product_name">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="product"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="product_types">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="product"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="product_big_series">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="product"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="support_name_oids">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="product"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="product_support_categories">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="product"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="product_support_subcategories">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="product"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="product_names">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="product"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="product_number_names">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="product"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="product_numbers">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="product"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="product_lines">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="product"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="product_marketing_categories">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="product"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="product_marketing_subcategories">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="product"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="document_type" type="xs:string"/>
+  <xs:element name="version_label" type="xs:string"/>
+  <xs:element name="feedback_product_lines">
+   <xs:complexType>
+	<xs:sequence>
+		<xs:element ref="feedback_product_line" minOccurs="0" maxOccurs="unbounded"/>
+	</xs:sequence>
+   </xs:complexType>
+  </xs:element>
+  <xs:element name="content_type" type="xs:NCName"/>
+  <xs:element name="regions">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="region"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="region" type="xs:string"/>
+  <xs:element name="property_update_date" type="xs:dateTime" nillable="true"/>
+  <xs:element name="language_label" type="xs:string"/>
+  <xs:element name="information_source" type="xs:string"/>
+  <xs:element name="full_title">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:NCName">
+          <xs:attribute name="language_code" use="required" type="xs:NCName"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="action_requested" type="xs:string"/>
+  <xs:element name="action_taken" type="xs:NCName"/>
+  <xs:element name="confidential_comment" type="xs:NCName" />
+  <xs:element name="feedback_content_name" type="xs:NCName" />
+  <xs:element name="original_system" type="xs:NCName" />  
+  <xs:element name="feedback_priority" type="xs:NCName"/>
+  <xs:element name="document_class" type="xs:NCName"/>
+  <xs:element name="file_bytes" type="xs:integer"/>
+  <xs:element name="language_code" type="xs:NCName"/>
+  <xs:element name="miscellaneous_comment" type="xs:NCName"/>
+  <xs:element name="object_name" type="xs:NCName"/>
+  <xs:element name="original_docid" type="xs:string"/>
+  <xs:element name="feedback_product_line" type="xs:string"/>
+  
+</xs:schema>
+  

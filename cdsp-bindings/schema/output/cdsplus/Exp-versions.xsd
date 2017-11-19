@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" xmlns:proj="http://www.hp.com/cdsplus" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <xs:import namespace="http://www.hp.com/cdsplus" schemaLocation="Exp-verions_proj.xsd"/>
+  <xs:import namespace="http://www.w3.org/1999/xlink" schemaLocation="Exp-versions_xlink.xsd"/>
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="Exp-verions_xml.xsd"/>
+  <xs:element name="result">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="proj:ref"/>
+      </xs:sequence>
+      <xs:attribute name="considered" use="required" type="xs:integer"/>
+      <xs:attribute name="count" use="required" type="xs:integer"/>
+      <xs:attribute ref="xml:base" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="versions">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="proj:ref"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

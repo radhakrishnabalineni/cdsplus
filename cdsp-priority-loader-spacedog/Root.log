@@ -1,0 +1,19 @@
+2016-02-18T22:40:18IST [main] ERROR java.io.IOException: History file </opt/ais/app/applications/loaders/concentra/conf/concentra_PL_history.txt> does not exist or is not readable
+	at com.hp.loader.history.HistoryHandler.<init>(HistoryHandler.java:74)
+	at com.hp.loader.history.TokenHistoryHandler.<init>(TokenHistoryHandler.java:68)
+	at com.hp.loader.history.TokenHistoryHandler.getInstance(TokenHistoryHandler.java:280)
+	at com.hp.loader.priorityLoader.PriorityLoader.<init>(PriorityLoader.java:207)
+	at com.hp.loader.priorityLoader.PriorityLoader.getInstance(PriorityLoader.java:663)
+	at com.hp.loader.priorityLoader.PriorityLoader.main(PriorityLoader.java:719)
+2016-02-18T22:44:30IST [main] ERROR com.hp.loader.history.HistoryException: No initial token in the history file
+	at com.hp.loader.history.TokenHistoryHandler.<init>(TokenHistoryHandler.java:90)
+	at com.hp.loader.history.TokenHistoryHandler.getInstance(TokenHistoryHandler.java:280)
+	at com.hp.loader.priorityLoader.PriorityLoader.<init>(PriorityLoader.java:207)
+	at com.hp.loader.priorityLoader.PriorityLoader.getInstance(PriorityLoader.java:663)
+	at com.hp.loader.priorityLoader.PriorityLoader.main(PriorityLoader.java:719)
+2016-02-18T22:52:15IST [main] ERROR com.hp.loader.history.HistoryException: No initial token in the history file
+	at com.hp.loader.history.TokenHistoryHandler.<init>(TokenHistoryHandler.java:90)
+	at com.hp.loader.history.TokenHistoryHandler.getInstance(TokenHistoryHandler.java:280)
+	at com.hp.loader.priorityLoader.PriorityLoader.<init>(PriorityLoader.java:207)
+	at com.hp.loader.priorityLoader.PriorityLoader.getInstance(PriorityLoader.java:663)
+	at com.hp.loader.priorityLoader.PriorityLoader.main(PriorityLoader.java:719)

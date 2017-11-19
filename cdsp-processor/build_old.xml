@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+====================================================================== 
+	Sep 13, 2012 2:22:33 PM castor description kashyaks 
+======================================================================
+-->
+<project name="cdsp-processor" default="all" basedir=".">
+
+	<property name="lib.dir" value="${basedir}/lib" />
+
+	<property name="src.dir" value="${basedir}/src" />
+	<property name="conf.dir" value="${basedir}/config" />
+
+	<property name="build.dir" value="${basedir}/build" />
+	<property name="build.class.dir" value="${build.dir}/classes" />
+
+	<property name="scripts.dir" value="${basedir}/scripts" />
+
+	<property name="logs.dir" value="${basedir}/logs" />
+	<property name="dist.dir" value="${basedir}/dist" />
+
+	<path id="java.class.path">
+		<fileset dir="${lib.dir}">
+			<include name="cdsp-commons-utils-13.4.jar" />
+			<include name="mongo-java-driver-2.11.2.jar" />
+			<include name="log4j-1.2.14.jar" />
+			<include name="cdsp-mongo-api.jar" />
+			<include name="cdsp-dao.jar" />
+		</fileset>
+		<fileset dir="${dist.dir}">
+			<include name="cdsp-processor.jar" /> 
+		</fileset>
+	</path>
+	
+	<!-- ================================= 
+          target: all              
+         ================================= -->
+    <target name="all" depends="clean, init, compile, package" description="default target to do a clean build"/>
+        
+	<!-- ================================= 
+          target: clean              
+         ================================= -->
+	<target name="clean" description="deletes the build and dist directories">
+		<delete dir="${dist.dir}" />
+		<delete dir="${build.dir}" />
+	</target>
+
+	<!-- ================================= 
+          target: init              
+         ================================= -->
+	<target name="init" description="creates dist and build dir">
+		<mkdir dir="${build.class.dir}" />
+		<mkdir dir="${dist.dir}" />
+	</target>
+
+	<!-- ================================= 
+		  target: compile
+		 ================================= -->
+
+	<target name="compile" description="description">
+
+		<javac includeantruntime="true" srcdir="${src.dir}" destdir="${build.class.dir}">
+			<classpath refid="java.class.path" />
+		</javac>
+		<jar destfile="lib/cdsp-processor.jar">
+			<fileset dir="${build.class.dir}">
+				<include name="com/hp/cdsplus/**/*.*" />
+			</fileset>
+		</jar>
+	</target>
+
+	<target name="package" description="Packaging the application for execution">
+		<zip destfile="Processor.zip">
+			<zipfileset dir="${lib.dir}" prefix="cdsp-processor/lib" includes="cdsp-dao.jar,cdsp-mongo-api.jar,cdsp-processor.jar,log4j-1.2.14.jar,mongo-java-driver-2.11.2.jar" />
+			<zipfileset dir="${dist.dir}" prefix="cdsp-processor/lib" includes="cdsp-processor.jar" />
+			<zipfileset dir="${conf.dir}" prefix="cdsp-processor/config"/>
+			<zipfileset dir="${scripts.dir}" prefix="cdsp-processor/"/>
+		</zip>
+	</target>
+</project>

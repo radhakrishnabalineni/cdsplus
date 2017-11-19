@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:proj="http://www.hp.com/cdsplus" xmlns:sel="java:com.hp.cdsplus.wds.workItem.CDSPSelection" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sub="java:com.hp.cdsplus.wds.workItem.CDSPSubscription" xmlns:xutils="com.hp.cdsplus.util.xml.XMLUtils">
+	
+        <sub limit="50"
+                manualRepub="manual_republish.txt"
+                server="http://cdsplus.austin.hp.com/cadence/app/"
+                subscription="library/digimedia_201"
+                workingDir="/opt/ais/app/applications/reference_client/data/digimedia_201"
+                revisit="(/document/audiences/audience/audience_release_date)">
+
+                <namedDestination name="ReleaseManager"
+                                        class="com.hp.cdsplus.wds.destination.ReleaseManagerDestination"
+                                        contentArea="digmedialib"
+                                        maxPackageCount="100"
+                                        maxPackageSize="100"
+                                        username="ctg3"
+                                        dest_path="/var/opt/web/whp-web/rlsmgr/ftp-dropoff/"
+                                        password="8xRiD2J."
+                                        dir="releaseManager"
+                                        server="sftp://rlsmgr.corp.hp.com"
+                                        prefix="prodimg/lowres/"
+                                        verify=""
+                                        job="UPDATE PROD"/>
+
+                <selection select="/document/file_name/proj:ref|/document/components/component/file_name/proj:ref"
+                           source="concat(/node()/@*:base, @xlink:href)"
+                           contentType="/document/content_type"
+                           embeddedElement="/graphic/image/proj:ref">
+                  <destination name="ReleaseManager" />
+                </selection>
+        </sub>
+</config>

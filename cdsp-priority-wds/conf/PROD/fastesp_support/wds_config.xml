@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:proj="http://www.hp.com/cdsplus" xmlns:sel="java:com.hp.cdsplus.wds.workItem.CDSPSelection" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sub="java:com.hp.cdsplus.wds.workItem.CDSPSubscription" xmlns:xutils="com.hp.cdsplus.util.xml.XMLUtils">
+	
+<sub workingDir="/opt/ais/app/applications/reference_client/data/fast_support"
+                        server="http://cdsplus.austin.hp.com/cadence/app/"
+                        subscription="support/fastxml"
+                        limit="500"
+                        manualRepub="manual_republish.txt">
+
+                <namedDestination name="FastSupport_1"
+                                           class="com.hp.cdsplus.wds.destination.FastESPDestination"
+                                           docPrefix="http://cdsplus.austin.hp.com/cadence/app/support/content/"
+                                           collection="concentra"
+                                           url="g6t0206.atlanta.hp.com:16100"
+                                           batchSize="1024"
+                                           maxDocsInBatch="1000"
+                                           activeDocumentLimit="100"
+                                           delayInterval="5000"
+                                           verify="false()"/>
+                <namedDestination name="FastSupport_2"
+                                           class="com.hp.cdsplus.wds.destination.FastESPDestination"
+                                           docPrefix="http://cdsplus.austin.hp.com/cadence/app/support/content/"
+                                           collection="concentra"
+                                           url="g5t0228.atlanta.hp.com:16100"
+                                           batchSize="1024"
+                                           maxDocsInBatch="1000"
+                                           activeDocumentLimit="100"
+                                           delayInterval="5000"
+                                           verify="false()"/>
+
+                <selection metadir="updates">
+                        <destination name="FastSupport_1"/>
+                        <destination name="FastSupport_2"/>
+                </selection>
+        </sub>
+</config>

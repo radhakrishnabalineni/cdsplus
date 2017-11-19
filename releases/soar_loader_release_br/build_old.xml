@@ -1,0 +1,191 @@
+<?xml version="1.0"?>
+<!-- ==================================================== -->
+<!-- Build file for PriorityLoader Framework jar          -->
+<!-- Author: Austin DEV team -->
+<!-- ==================================================== -->
+
+<project name="Soar Loader" default="all" basedir=".">
+
+  <target name="init">
+    <echo message="Initializing environment ... " />
+    <property environment="env"/>
+	<!-- added as part of SOAR12.3,Build Modularization -->
+	<property name="BUILD_DROP_ZONE" value="${env.BUILD_DROP_ZONE}"/>
+    <property name="BUILD_VERSION" value="${env.BUILD_VERSION}"/>
+
+    <property name="file.jar" value="SoarPriorityLoader-${env.BUILD_VERSION}.jar" />
+    <property name="dirs.base" value="${basedir}" />
+    <property name="dir.build" value="${basedir}/build" />    
+    <property name="dir.bin" value="${basedir}/bin" />    
+    <property name="dir.classes" value="${dir.build}/classes" />
+    <property name="dir.dist" value="${dirs.base}/dist" />
+    <property name="dir.filters" value="${basedir}/config/filters" />    
+    <property name="dir.deploy" value="${basedir}/soar/jobs/loader/" />
+    <property name="dir.deploy.lib" value="${dir.deploy}/lib" />
+    <property name="dir.deploy.config" value="${dir.deploy}/config" />
+    <property name="dir.deploy.bin" value="${dir.deploy}/bin" />
+    <property name="dir.deploy.log" value="${dir.deploy}/log" />
+    <property name="dir.include.jars" value="${dir.deploy.lib}" />
+    <property name="dir.config" value="${dirs.base}/config" />
+    <property name="src.home" value="${basedir}/src"/>
+    <property name="compile.debug" value="true"/>
+    <property name="compile.deprecation" value="false"/>
+    <property name="compile.optimize" value="true"/>
+    <property name="app.version" value="11.3"/>
+    <property name="soar.lib.location" value="${basedir}/lib"/>
+    <property name="priorityLoader.lib.location" value="${basedir}/lib"/>
+    <mkdir dir="${dir.build}"/>
+    <!-- Added as part of SOAR12.3,Build modularization -->
+	<property name="SOAR_RELEASE_DIR" value="${basedir}/../../../release" />
+    <property name="SOAR_RELEASE_LOADER" value="${SOAR_RELEASE_DIR}/loader" />
+	<property name="SOAR_LOADER_HOME" value="${basedir}" />
+  </target>
+  
+  <!-- Main target -->
+  <target name="all" depends="init,clean,compile,makejar" />
+  
+  <target name="clean" depends="init">
+  	<echo message ="${priorityLoader.lib.location}"/>
+    <echo message="Removing dist directory" />
+    <delete dir="${dir.dist}" />
+    
+    <echo message="Creating dist directory" />
+    <mkdir dir="${dir.dist}" />
+    
+    <echo message="Removing class directory" />
+    <delete dir="${dir.classes}" />
+    
+    <echo message="Creating class directory" />
+    <mkdir dir="${dir.classes}" />
+    
+  </target>
+  
+  <target name="compile" description="Compile Java sources" depends="init">    
+    <path id="compile.classpath">
+      <pathelement location="${priorityLoader.lib.location}/PriorityLoader.jar"/>
+      <pathelement location="${priorityLoader.lib.location}/CDSPDestination.jar"/>
+	  <pathelement location="${priorityLoader.lib.location}/cdsp-mongo-api.jar"/>
+      <pathelement location="${priorityLoader.lib.location}/log4j-1.2.14.jar"/>
+      <pathelement location="${soar.lib.location}/dom4j-1.6.1.jar"/>
+      <pathelement location="${soar.lib.location}/commons-lang.jar"/>
+      <pathelement location="${soar.lib.location}/dfc.jar"/>        
+	  <!-- Added the below jars as part of build automation 12.2 Release -->
+      <pathelement location="${soar.lib.location}/commons-vfs-1.0.jar"/>
+      <pathelement location="${soar.lib.location}/jsch-0.1.33.jar"/>
+	  <!-- added as part of SOAR12.3,Build Modularization -->
+      <pathelement location="${soar.lib.location}/weblogic.jar" />
+    </path>
+
+    <!-- Compile Java classes as necessary -->
+    <echo message="Compiling Java sources" />
+    <javac srcdir="${src.home}" destdir="${dir.classes}" excludes="**/*Test.java" debug="${compile.debug}" deprecation="${compile.deprecation}" optimize="${compile.optimize}">
+      <classpath refid="compile.classpath"/>
+    </javac>
+    
+    <!-- Copy application resources
+    <copy todir="${dir.build}">
+      <fileset dir="${src.home}" excludes="**/*.java"/>
+    </copy>
+     -->
+  </target>
+
+  <!-- Create the jar File -->
+  <target name="makejar" depends="compile">
+    <!-- Clean classes dir 
+    <delete includeEmptyDirs="true">
+      <fileset dir="${dir.classes}" includes="**/*" defaultexcludes="no"/>
+    </delete>
+    -->
+    <!-- Copy classes to dir.classes 
+    <copy todir="${dir.classes}">
+      <fileset dir="${dir.build}" includes="**/*" excludes="**/test/*,others/*" />
+    </copy>
+    -->
+    
+    <!-- Copy props dir to lib dir 
+    <copy todir="${dir.lib}/props">
+        <fileset dir="${dir.props}" />
+    </copy>
+    -->
+    <!-- commented out
+    <copy file="${dfc.prop.file}" todir="${dir.classes}"/>
+    <copy file="${ctgExtractor.props.file}" todir="${dir.classes}"/>
+    -->
+        
+    <echo message="Creating the jar file" />
+    <jar jarfile="${dir.dist}/${file.jar}" basedir="${dir.classes}"
+      includes="**/*.class" excludes="**/ui/**,jsp_servlet/**">
+      <manifest>
+        <attribute name="Created-By" value="(Hewlett-Packard Co.)"/>
+        <attribute name="Release" value="${app.version}"/>
+      </manifest>
+    </jar>   
+  </target>
+
+  <!-- Deploy the jar File 
+  <target name="deployjar" depends="init,makejar">
+    <echo message="Deploying the JAR file" />
+    <copy todir="${dir.deploy.lib}" file="${dir.dist}/${file.jar}"/>
+    
+    <echo message="Deploying config files" />
+    <copy todir="${dir.deploy.config}" flatten="true">
+      <filelist
+        id="configFiles"
+        dir="${dir.config}">
+        <file name="${env.APP_ENVIRONMENT}/soarConfig.xml"/>
+        <file name="log4j.xml"/>
+        <file name="soar_event_priority_mapping.xml"/>
+      </filelist>
+      <filelist
+        id="refTable"
+        dir="${src.home}/com/hp/soar/priorityLoader/ref/">
+        <file name="refTableDefs.xml"/>
+      </filelist>
+    </copy>
+    <echo message="Deploying scripts" />
+    <copy todir="${dir.deploy.bin}">
+      <fileset dir="${dir.bin}" />
+    </copy>
+    <echo message="Deploying filters" />
+    <copy todir="${dir.deploy.config}/filters">
+      <fileset dir="${dir.filters}" />
+    </copy>
+  </target>
+  -->
+  <!-- Added as part of SOAR 12.3 release,Build modularization -->
+  <target name="loader" depends="all">
+        <delete dir="${SOAR_RELEASE_DIR}/loader" />
+		<mkdir dir="${SOAR_RELEASE_DIR}/loader" />
+		<mkdir dir="${SOAR_RELEASE_DIR}/loader/bin" />
+		<mkdir dir="${SOAR_RELEASE_DIR}/loader/config" />
+		<mkdir dir="${SOAR_RELEASE_DIR}/loader/lib" />
+		<echo message="Copying SoarPriorityLoader related files to ${SOAR_RELEASE_LOADER}" />
+		<copydir src="${SOAR_LOADER_HOME}/bin" dest="${SOAR_RELEASE_LOADER}/bin" />
+		<copydir src="${SOAR_LOADER_HOME}/config" dest="${SOAR_RELEASE_LOADER}/config" />
+		<echo message="Removing the two history files from config folder" />
+		<delete file="${SOAR_RELEASE_LOADER}/config/soar_history.txt" />
+		<delete file="${SOAR_RELEASE_LOADER}/config/soar_reflist_history.txt" />
+
+		<copy todir="${SOAR_RELEASE_LOADER}/lib">
+			<fileset dir="${SOAR_LOADER_HOME}/dist/" includes="SoarPriorityLoader*.jar" />
+			<fileset dir="/mnt/cdsplus/cdspluslib/" includes="CDSPDestination.jar,PriorityLoader.jar"/>
+		</copy>
+	</target>
+
+	<target name="loader_zip" depends="loader">
+	  <delete dir="${SOAR_RELEASE_DIR}/loader.zip" />
+	  <zip destfile="${SOAR_RELEASE_DIR}/loader.zip">
+        <fileset dir="${SOAR_RELEASE_LOADER}" />
+	  </zip>
+	</target>
+
+	<target name="copytobuilddropzone" depends="loader_zip">
+	  <mkdir dir="${BUILD_DROP_ZONE}/${BUILD_VERSION}"/>
+      <echo message="${BUILD_DROP_ZONE}"/>
+      <echo message="${BUILD_VERSION}"/>
+	  <echo message="Copying loader.zip to ${BUILD_DROP_ZONE}/${BUILD_VERSION}" />
+	  <copy file="${SOAR_RELEASE_DIR}/loader.zip" todir="${BUILD_DROP_ZONE}/${BUILD_VERSION}" />
+	</target>
+</project>
+
+

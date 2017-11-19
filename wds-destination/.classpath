@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="lib/ant.jar"/>
+	<classpathentry kind="lib" path="lib/esp-contentapi.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/cdsp-priority-wds/lib/cdsp-commons-utils-13.4.jar"/>
+	<classpathentry kind="lib" path="/cdsp-priority-wds/lib/xercesImpl.jar"/>
+	<classpathentry kind="src" path="/cdsp-priority-loader-spacedog"/>
+	<classpathentry kind="lib" path="C:/Users/RADHA/PROJECTS/CDSPLUS/cdsp-shared-lib/lib/commons-vfs.jar"/>
+	<classpathentry kind="lib" path="C:/Users/RADHA/PROJECTS/CDSPLUS/cdsp-shared-lib/lib/jsch.jar"/>
+	<classpathentry kind="lib" path="/cdsp-pmloader/lib/log4j-1.2.14.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

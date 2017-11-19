@@ -1,0 +1,2462 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:proj="http://www.hp.com/cdsplus"
+  xmlns:xlink="http://www.w3.org/1999/xlink">
+  <xs:import namespace="http://www.hp.com/cdsplus" schemaLocation="soar-software-feed-proj.xsd"/>
+  <xs:import namespace="http://www.w3.org/1999/xlink" schemaLocation="common-xlink.xsd"/>
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="common-xml.xsd"/>
+  <xs:element name="result">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="proj:ref" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:attribute name="considered" use="required" type="xs:integer"/>
+      <xs:attribute name="count" use="required" type="xs:integer"/>
+      <xs:attribute ref="xml:base" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="content">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="soar-software-feed"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+    
+  <xs:element name="soar-software-feed">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="full-extract"/>
+        <xs:element ref="collection" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:attribute name="date" type="xs:dateTime" use="required"/>
+      <xs:attribute ref="xml:base" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="additional-copyright-ack" nillable="true">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:minLength value="1"/>
+        <xs:maxLength value="255"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="alternate-recommendation" nillable="true">
+    
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:minLength value="1"/>
+        <xs:maxLength value="100"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  
+  <xs:element name="attachment">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="attachment-title"/>
+        <xs:element ref="authors"/>
+        <xs:element ref="review-flag"/>
+        <xs:element ref="flags"/>
+        <xs:element ref="disclosure-level"/>
+        <xs:element ref="document-types"/>
+        <xs:element ref="languages"/>
+        <xs:element ref="attachment-source"/>
+        <xs:element ref="format"/>
+        <xs:element ref="filename"/>
+        <xs:element ref="linked-content" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="attachment-source" nillable="true">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:minLength value="1"/>
+        <xs:maxLength value="128"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  
+  <xs:element name="attachment-title">
+    
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:minLength value="1"/>
+        <xs:maxLength value="255"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  
+  <xs:element name="attachments">
+    
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="attachment" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="author" nillable="true">
+      <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:minLength value="1"/>
+        <xs:maxLength value="40"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+
+  <xs:element name="authors">
+    
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="author" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+
+<xs:element name="availability-date" type="xs:date" nillable="true">
+		
+	</xs:element>
+	<!--AVAILABILITY-SCHEDULE-->
+	<xs:element name="availability-schedule">
+		<xs:annotation>
+			<xs:documentation>Information regarding when the software in the Collection may support a specific Environment and Language that is not currently supported.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="environment"/>
+				<xs:element ref="language"/>
+				<xs:element ref="availability-status"/>
+				<xs:element ref="availability-date"/>
+				<xs:element ref="alternate-recommendation"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!--AVAILABILITY-SCHEDULES-->
+	<xs:element name="availability-schedules">
+		<xs:annotation>
+			<xs:documentation>Information regarding when the software in the Collection may support additional Environments and/or Languages that are not currently supported.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="availability-schedule" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!--AVAILABILITY-STATUS-->
+	<xs:element name="availability-status">
+		<xs:annotation>
+			<xs:documentation>Indication of whether the specified Environment and Language will become supported for the Collection.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="unknown"/>
+				<xs:enumeration value="planned"/>
+				<xs:enumeration value="not planned"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<!-- BOM-->
+	<xs:element name="bom">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="bom-value"/>
+				<xs:element ref="level"/>
+				<xs:element ref="checksum-type" minOccurs="0"/>
+				<xs:element ref="checksum-value" minOccurs="0"/>
+				<xs:element ref="image-size" minOccurs="0"/>
+				<!-- Adding new fields for bom sequence,quantity,description-->
+				<xs:element ref="bom-sequence" minOccurs="0"/>
+				<xs:element ref="bom-quantity" minOccurs="0"/>
+				<xs:element ref="bom-description" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- BOMS -->
+	<xs:element name="boms">
+		<xs:annotation>
+			<xs:documentation>Contain Bom records for Physical Media Items.(Bom:- Bill Of Materials)
+                  </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="bom" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!--BOM-VALUE-->
+	<xs:element name="bom-value">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:minLength value="1"/>
+				<xs:maxLength value="25"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<!--BUNDLED-ITEM-->
+	<xs:element name="bundled-item">
+		<xs:annotation>
+			<xs:documentation>A valid Item-ID value.
+
+			</xs:documentation>
+			<xs:documentation>item-ID:  A unique ID assigned to a software item within SOAR.
+
+			</xs:documentation>
+			<xs:documentation>bundled-item-sequence:  An integer to specify the order of this item in relation to the other items in the bundle.  This value is primarily used to indicate the order in which the items within the bundle might be displayed and/or installed.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="item-ID" type="string-length-1-30" use="required"/>
+			<xs:attribute name="bundled-item-sequence" type="integer-min-value-1" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<!--BUNDLED-ITEMS-->
+	<xs:element name="bundled-items">
+		<xs:annotation>
+			<xs:documentation>A listing of Item IDs that make up this specific Item ID.  (Optional)
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="bundled-item" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="total-number-of-items" type="integer-min-value-1"/>
+		</xs:complexType>
+	</xs:element>
+	<!-- CHECKSUM-TYPE-->
+	<xs:element name="checksum-type">
+		<xs:annotation>
+			<xs:documentation>The Compression Utility, if any, that was used to compress the software files.			</xs:documentation>
+			<xs:documentation>oid:  Object ID value assigned to a specific reference data entry.  The OID value remains constant while the actual reference data content may change.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="string-length-1-20">
+					<xs:attribute name="oid" type="string-length-1-10" use="required"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<!-- CHECKSUM-VALUE-->
+	<xs:element name="checksum-value">
+		<xs:annotation>
+			<xs:documentation>Value existing in Bill Of Materials.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:minLength value="1"/>
+				<xs:maxLength value="50"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<!--CD-CHECKVALUE-->
+	<xs:element name="cd-checkvalue">
+		<xs:annotation>
+			<xs:documentation>If the Item is a CD/DVD the CRC (Cyclic Redundancy Check) value for the item; otherwise blank.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:minLength value="1"/>
+				<xs:maxLength value="50"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<!--CD-CHECKVALUES-->
+	<xs:element name="cd-checkvalues">
+		<xs:annotation>
+			<xs:documentation>Multiple cd-checkvalues, in the situation where the item is actually a set of CDs.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="cd-checkvalue" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!--CHARACTER-SET-IN-ENGLISH-->
+	<xs:element name="character-set-in-English" nillable="true">
+		<xs:annotation>
+			<xs:documentation>The name of the character set, written in English.  Character set refers to the specific characters representing a specific language.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:minLength value="1"/>
+				<xs:maxLength value="40"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<!--CHECKVALUE-->
+	<xs:element name="checkvalue">
+		<xs:annotation>
+			<xs:documentation>A unique value for the file generated by a "checksum"-type of program.  The value is input into SOAR by the HP Item manager, but no systematic validation of the value occurs by the SOAR application.  The value is simply passed on to partners for their use.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:minLength value="1"/>
+				<xs:maxLength value="50"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<!--CMDLINE-->
+	<xs:element name="cmdline" nillable="true">
+		<xs:annotation>
+			<xs:documentation>The command line parameters to be used when the file is executed</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:minLength value="1"/>
+				<xs:maxLength value="255"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<!--COLLECTION-->
+	<xs:element name="collection">
+		<xs:annotation>
+			<xs:documentation>A collection is a grouping of related software items and their metadata.  A collection is composed of one or more item(s) of software that provide a basic function for an HP product.[Individual items within a collection are distinguished by operating system and/or language classification.]A typical example is a driver for a LaserJet 6P.  There are several different software items to support the various language and environment options.
+
+			</xs:documentation>
+			<xs:documentation>collection-ID:  A unique ID assigned to a collection within SOAR.  				</xs:documentation>
+			<xs:documentation>state:  The state of a specific version of a Collection within SOAR.
+
+			</xs:documentation>
+			<xs:documentation>partner-update-type:  Indicates why the metadata is being sent to the partner.  The value applies to this Collection.  This element indicates whether anything within this Collection has changed since the last data feed to this partner, and if so, how it has changed.
+
+			</xs:documentation>
+			<xs:documentation>soar-msg-ID:  A unique ID given to this particular communication to facilitate follow-up between HP and a partner as necessary.
+
+			</xs:documentation>
+			<xs:documentation>submittal-type-oid:  A value solely used for SOAR post processing related to legacy, backwards-compatible files.  This OID value corresponds to an indicator of whether or not software file(s) are included with this collection.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+			<xs:element ref="company_info"/>
+				<xs:element ref="collection-title"/>
+				<xs:element ref="collection-description"/>
+				<xs:element ref="update-types"/>
+				<xs:element ref="update-priority"/>
+				<xs:element ref="update-date"/>
+				<xs:element ref="software-type"/>
+				<xs:element ref="product-line"/>
+				<xs:element ref="contacts"/>
+				<xs:element ref="compression-utility"/>
+				<xs:element ref="dms-documents"/>
+				<xs:element ref="copyright"/>
+				<xs:element ref="related-collections"/>
+				<xs:element ref="registration-flag"/>
+				<xs:element ref="notification-flag"/>
+				<xs:element ref="flags"/>
+				<xs:element ref="attachments"/>
+				<xs:element ref="availability-schedules"/>
+				<xs:element ref="software-items"/>
+			</xs:sequence>
+			<xs:attribute name="collection-ID" type="string-length-1-20" use="required"/>
+			<xs:attribute name="state" type="state" use="required"/>
+			<xs:attribute name="partner-update-type" type="partner-update-type" use="required"/>
+			<xs:attribute name="soar-msg-ID" type="string-length-1-30" use="required"/>
+			<xs:attribute name="submittal-type-oid" type="string-length-1-10" use="required"/>
+			<xs:attribute name="submittal-group-oid" type="string-length-1-32" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<!--COLLECTION-DESCRIPTION-->
+	<xs:element name="collection-description">
+		<xs:annotation>
+			<xs:documentation>A textual only Description of this collection.  This Description is generally in English and applies to the entire collection.[Alternate descriptions may also be 'attached' at the collection level.  These 'attached' descriptions are not limited to text-only, and may be in various languages.  Each partner is free to choose which description to use for its specific application.]
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:minLength value="1"/>
+				<xs:maxLength value="300"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<!--COLLECTION-TITLE-->
+	<xs:element name="collection-title">
+		<xs:annotation>
+			<xs:documentation>A textual only Title to briefly describe this collection.  This Title is generally in English and applies to the entire collection.  [Alternate titles may also be 'attached' at the collection level.  These 'attached' titles are not limited to text-only, and may be in various languages.  Each partner is free to choose which title to use for its specific application.]
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:minLength value="1"/>
+				<xs:maxLength value="150"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<!--COMPRESSION-UTILITY-->
+	<xs:element name="compression-utility">
+		<xs:annotation>
+			<xs:documentation>The Compression Utility, if any, that was used to compress the software files.			</xs:documentation>
+			<xs:documentation>oid:  Object ID value assigned to a specific reference data entry.  The OID value remains constant while the actual reference data content may change.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="string-length-1-40">
+					<xs:attribute name="oid" type="string-length-1-10" use="required"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<!--CONTACT-->
+	<xs:element name="contact">
+		<xs:annotation>
+			<xs:documentation>Information regarding a specific contact.
+
+			</xs:documentation>
+			<xs:documentation>contact-type:  Type of contact.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="contact-name"/>
+				<xs:element ref="contact-phone"/>
+				<xs:element ref="contact-email"/>
+			</xs:sequence>
+			<xs:attribute name="contact-type" type="contact-type" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<!--CONTACT-EMAIL-->
+	<xs:element name="contact-email" nillable="true">
+		<xs:annotation>
+			<xs:documentation>The business email address of the contact, if available.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:minLength value="1"/>
+				<xs:maxLength value="100"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<!--CONTACT-NAME-->
+	<xs:element name="contact-name">
+		<xs:annotation>
+			<xs:documentation>The name of the contact.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:minLength value="1"/>
+				<xs:maxLength value="50"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<!--CONTACT-PHONE-->
+	<xs:element name="contact-phone">
+		<xs:annotation>
+			<xs:documentation>The business phone number of the contact, if available.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:minLength value="1"/>
+				<xs:maxLength value="20"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<!--CONTACTS-->
+	<xs:element name="contacts">
+		<xs:annotation>
+			<xs:documentation>Individuals who may be contacted for questions about the Collection.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="contact" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!--COPYRIGHT-->
+	<xs:element name="copyright">
+		<xs:annotation>
+			<xs:documentation>Copyright notice(s) that apply.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="hp-copyright-notice"/>
+				<xs:element ref="additional-copyright-ack"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!--CUSTOMER-AVAILABLE-DATE-->
+	<xs:element name="customer-available-date" type="xs:date">
+		<xs:annotation>
+			<xs:documentation>The date that the software item is authorized to be available for customer order/retrieval; subject to product availability dates.
+
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- CUSTOMS-APPROVED-->
+	<xs:element name="customs-approved" type="string-value-Yes-No">
+		<xs:annotation>
+			<xs:documentation>Whether the orderable-part-id concerned with this item is present in WW-Class Databse or not.
+	</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!--DIRECTORY-->
+	<xs:element name="directory">
+		<xs:annotation>
+			<xs:documentation>Directory location (path) on a server.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:minLength value="1"/>
+				<xs:maxLength value="255"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<!--DISCLOSURE-LEVEL-->
+	<xs:element name="disclosure-level">
+		<xs:annotation>
+			<xs:documentation>The confidentiality of the software outside of HP.
+
+			</xs:documentation>
+			<xs:documentation>oid:  Object ID value assigned to a specific reference data entry.  The OID value remains constant while the actual reference data content may change.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="string-length-1-40">
+					<xs:attribute name="oid" type="string-length-1-10" use="required"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<!--DISTRIBUTION-REGION-->
+	<xs:element name="distribution-region">
+		<xs:annotation>
+			<xs:documentation>A specific region.
+
+			</xs:documentation>
+			<xs:documentation>oid:  Object ID value assigned to a specific reference data entry.  The OID value remains constant while the actual reference data content may change.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="string-length-1-100">
+					<xs:attribute name="oid" type="string-length-1-10" use="required"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<!--DISTRIBUTION-REGIONS-->
+	<xs:element name="distribution-regions">
+		<xs:annotation>
+			<xs:documentation>Physical regions of the world within which software is distributed.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="distribution-region" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!--DMS-DOCUMENT-->
+	<xs:element name="dms-document">
+		<xs:annotation>
+			<xs:documentation>This element contains both the Title of the DMS Document, as recorded in DMS, and the DMS Document ID.
+
+			</xs:documentation>
+			<xs:documentation>dms-doc-ID:  The document ID for the DMS document.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="string-length-1-255">
+					<xs:attribute name="dms-doc-ID" type="string-length-1-40" use="required"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<!--DMS-DOCUMENTS-->
+	<xs:element name="dms-documents">
+		<xs:annotation>
+			<xs:documentation>DMS document(s) that have been identified to have information relevant to the Collection.  The DMS document itself is not included in the data feed.  A partner who wishes to reference any DMS document must establish a separate feed from the DMS.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="dms-document" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!--DOCUMENT-TYPE-->
+	<xs:element name="document-type">
+		<xs:annotation>
+			<xs:documentation>Indication of the type of attachment.
+
+			</xs:documentation>
+			<xs:documentation>oid:  Object ID value assigned to a specific reference data entry.  The OID value remains constant while the actual reference data content may change.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="string-length-1-40">
+					<xs:attribute name="oid" type="string-length-1-10" use="required"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<!--DOCUMENT-TYPES-->
+	<xs:element name="document-types">
+		<xs:annotation>
+			<xs:documentation>Indication of the types of the attachment.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="document-type" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!--ENVIRONMENT-->
+	<xs:element name="environment">
+		<xs:annotation>
+			<xs:documentation>Specific environment value.  (Usually a specific operating system.)			</xs:documentation>
+			<xs:documentation>oid:  Object ID value assigned to a specific reference data entry.  The OID value remains constant while the actual reference data content may change.
+
+			</xs:documentation>
+			<xs:documentation>environment-base:  A higher-level grouping of the Environment values.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="string-length-1-80">
+					<xs:attribute name="oid" type="string-length-1-10" use="required"/>
+					<xs:attribute name="environment-base" type="string-length-1-40" use="required"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<!--ENVIRONMENT-MSR-->
+	<xs:element name="environment-msr">
+		<xs:annotation>
+			<xs:documentation>Operating Systems or other environments, and any minimum service release requirement for the given software item.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="environment"/>
+				<xs:element ref="minimum-service-release" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!--ENVIRONMENTS-->
+	<xs:element name="environments">
+		<xs:annotation>
+			<xs:documentation>Operating Systems or other environments.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="environment-msr" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!--FILE-TYPE-->
+	<xs:element name="file-type">
+		<xs:annotation>
+			<xs:documentation>An indication of the type of file(s) associated with the software set.  Generally the classification is by multiple versus single files in a set, and whether the files automatically extract and install.
+
+			</xs:documentation>
+			<xs:documentation>oid:  Object ID value assigned to a specific reference data entry.  The OID value remains constant while the actual reference data content may change.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="string-length-1-100">
+					<xs:attribute name="oid" type="string-length-1-10" use="required"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<!--FILENAME-->
+	<xs:element name="filename">
+<xs:complexType mixed="true">
+		<xs:annotation>
+			<xs:documentation>The name of the file.  [Filenames should not include special characters or spaces.]
+			</xs:documentation>
+		</xs:annotation>		
+		<xs:sequence>
+		    <xs:element ref="projectref"/>
+		    </xs:sequence>
+		</xs:complexType>		
+	</xs:element>
+	<!--FILESIZE-->
+	<xs:element name="filesize">
+		<xs:annotation>
+			<xs:documentation>Size of the file, in bytes.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:long">
+				<xs:minInclusive value="1"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<!--FLAG-->
+	<xs:element name="flag">
+		<xs:annotation>
+			<xs:documentation>The name of a property that may have a 'yes' or 'no' indicator.
+
+			</xs:documentation>
+			<xs:documentation>oid:  Object ID value assigned to a specific reference data entry.  The OID value remains constant while the actual reference data content may change.
+
+			</xs:documentation>
+			<xs:documentation>flag-value:  A 'Yes' or 'No' value to indicate the setting for the referenced flag.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="string-length-1-40">
+					<xs:attribute name="oid" type="string-length-1-10" use="required"/>
+					<xs:attribute name="flag-value" type="string-value-Yes-No" use="required"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<!--FLAGS-->
+	<xs:element name="flags" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Listing of valid flag (property) entries.  Flags are used to quickly add property values that only require a 'yes' or 'no' value setting.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="flag" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!--FORMAT-->
+	<xs:element name="format" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>The format (e.g., doc, html, xml, txt, zip, pdf, xls, exe) of the content.			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!--FULFILLMENT-DOCK-DATE-->
+	<xs:element name="fulfillment-dock-date" type="xs:date" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Projected date that Fulfillment Partners can expect an initial shipment from HP.  The shipment may be either a drop shipment of product or a Gold Master for Manufacturing.This date is not updated to indicate subsequent shipments, and is not specific to a partner.
+
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!--FULFILLMENT-METHOD-->
+	<xs:element name="fulfillment-method">
+		<xs:annotation>
+			<xs:documentation>Indicates the method by which physical inventory will be managed.
+
+			</xs:documentation>
+			<xs:documentation>oid:  Object ID value assigned to a specific reference data entry.  The OID value remains constant while the actual reference data content may change.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="string-length-1-40">
+					<xs:attribute name="oid" type="string-length-1-10" use="required"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<!--FULL-EXTRACT-->
+	<xs:element name="company_info" type="string-length-1-10"/>
+	<xs:element name="full-extract" type="string-value-Yes-No">
+		<xs:annotation>
+			<xs:documentation>Indication of whether the contents of this XML file represent a full extract of all SOAR content for the partner, or only a content that has changed since the last software feed to the partner.
+
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!--HP-AGENT-NOTE-->
+	<xs:element name="hp-agent-note" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Note provided by a Fulfillment Partner for HP phone/email agents.  These notes can help the agent to know more about the item status, such as when the item may be available to order/ship, etc.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:minLength value="1"/>
+				<xs:maxLength value="2000"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<!--HP-COPYRIGHT-NOTICE-->
+	<xs:element name="hp-copyright-notice" nillable="true">
+		<xs:annotation>
+			<xs:documentation>HP Copyright notice
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:minLength value="38"/>
+				<xs:maxLength value="140"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<!--HP-CUSTOMER-NOTE-->
+	<xs:element name="hp-customer-note" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Note provided by a Fulfillment Partner that may be viewable or communicated directly to an HP customer (via voice, web site, email, etc.) regarding the Item.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:minLength value="1"/>
+				<xs:maxLength value="2000"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="image-size">
+		<xs:annotation>
+			<xs:documentation>Value existing in Bill Of Materials.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:minLength value="1"/>
+				<xs:maxLength value="10"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<!-- Adding new fields for bom sequence,quantity,description-->
+	<!--BOM-SEQUENCE-->
+	<xs:element name="bom-sequence" type="string-length-1-10">
+	</xs:element>
+	
+		<!--BOM-QUANTITY-->
+	<xs:element name="bom-quantity">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:minLength value="1"/>
+				<xs:maxLength value="2"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	
+		<!--BOM-DESCRIPTION-->
+	<xs:element name="bom-description" type="string-length-1-50">
+	</xs:element>
+	<!--INSTALL-FORMAT-->
+	<xs:element name="install-format">
+		<xs:annotation>
+			<xs:documentation>
+
+			</xs:documentation>
+			<xs:documentation>oid:  Object ID value assigned to a specific reference data entry.  The OID value remains constant while the actual reference data content may change.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="string-length-1-50">
+					<xs:attribute name="oid" type="string-length-1-10" use="required"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<!--INSTALL-FORMATS-->
+	<xs:element name="install-formats" nillable="true">
+		<xs:annotation>
+			<xs:documentation>
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="install-format" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!--INSTALLATION-FILENAME-->
+	<xs:element name="installation-filename" nillable="true">
+		<xs:annotation>
+			<xs:documentation>If applicable, identifies the relative location (directory and filename) of the file installation program that the customer needs to run to install the software, after downloading and extracting it onto their system.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:minLength value="1"/>
+				<xs:maxLength value="255"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<!--IS-SUSPENDED-->
+	<xs:element name="is-suspended" type="string-value-Yes-No">
+		<xs:annotation>
+			<xs:documentation>If 'Yes' the software item should be temporarily unavailable to HP customers.
+
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!--ITEM-SUSPENDED-->
+	<xs:element name="item-suspended">
+		<xs:annotation>
+			<xs:documentation>Indication whether an item is temporarily suspended.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="is-suspended"/>
+				<xs:element ref="suspended-reason"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!--ITEM-URL-->
+	<xs:element name="item-url" nillable="true">
+		<xs:annotation>
+			<xs:documentation>An optional property utilized by some web sites to "jump" to a specific hard-coded web page (URL) when this software is selected.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:minLength value="1"/>
+				<xs:maxLength value="500"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<!--LANGUAGE-->
+	<xs:element name="language">
+		<xs:annotation>
+			<xs:documentation>A specific language entry.
+
+			</xs:documentation>
+			<xs:documentation>language-iso-code:  The ISO code corresponding to the LANGUAGE-IN-ENGLISH and LOCAL-LANGUAGE values.
+
+			</xs:documentation>
+			<xs:documentation>oid:  Object ID value assigned to a specific reference data entry.  The OID value remains constant while the actual reference data content may change.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="language-in-English"/>
+				<xs:element ref="character-set-in-English"/>
+				<xs:element ref="local-language"/>
+				<xs:element ref="local-character-set"/>
+			</xs:sequence>
+			<xs:attribute name="oid" type="string-length-1-10" use="required"/>
+			<xs:attribute name="language-iso-code" type="string-length-2-3" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<!--LANGUAGE-IN-ENGLISH-->
+	<xs:element name="language-in-English">
+		<xs:annotation>
+			<xs:documentation>The name of the language, written in English.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:minLength value="1"/>
+				<xs:maxLength value="40"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<!--LANGUAGES-->
+	<xs:element name="languages">
+		<xs:annotation>
+			<xs:documentation>Language information.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="language" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!--LANGUAGES-IN-FILE-->
+	<xs:element name="languages-in-file">
+		<xs:annotation>
+			<xs:documentation>Language information.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="language" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="is-digitally-signed" type="string-value-Yes-No">
+		<xs:annotation>
+			<xs:documentation>If 'Yes' the software file has to be signed.
+
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- LEVEL-->
+	<xs:element name="level">
+		<xs:annotation>
+			<xs:documentation>A Bill Of Materials Level.
+
+			</xs:documentation>
+			<xs:documentation>oid:  Object ID value assigned to a specific reference data entry.  The OID value remains constant while the actual reference data content may change.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="string-length-1-100">
+					<xs:attribute name="oid" type="string-length-1-10" use="required"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<!--LINKED-CONTENT-->
+	<xs:element name="linked-content">
+		<xs:annotation>
+			<xs:documentation>This element indicates the relative directory location for where the software file or attachment is located after the compressed file has been extracted.  The location is relative to where the XML file is located.
+
+			</xs:documentation>
+			<xs:documentation>soar-dto:  Used solely for SOAR internal and post processing for legacy file generation.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="string-length-1-n">
+					<xs:attribute name="soar-dto" type="string-length-1-n"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<!--LOCAL-CHARACTER-SET-->
+	<xs:element name="local-character-set" nillable="true">
+		<xs:annotation>
+			<xs:documentation>The name of the character set, written in the respective language.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:minLength value="1"/>
+				<xs:maxLength value="40"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<!--LOCAL-LANGUAGE-->
+	<xs:element name="local-language">
+		<xs:annotation>
+			<xs:documentation>The name of the language, written in the respective language.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:minLength value="1"/>
+				<xs:maxLength value="40"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<!--MEDIA-TYPE-->
+	<xs:element name="media-type">
+		<xs:annotation>
+			<xs:documentation>A specific media.
+
+			</xs:documentation>
+			<xs:documentation>oid:  Object ID value assigned to a specific reference data entry.  The OID value remains constant while the actual reference data content may change.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="string-length-1-40">
+					<xs:attribute name="oid" type="string-length-1-10" use="required"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<!--MEDIA-TYPES-->
+	<xs:element name="media-types">
+		<xs:annotation>
+			<xs:documentation>Defines the media via which an item may be distributed.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="media-type" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!--MINIMUM-SERVICE-RELEASE-->
+	<xs:element name="minimum-service-release">
+		<xs:annotation>
+			<xs:documentation>A textual value to indicate the minimum service release (if any) that is required for a specific software item to environment relationship.  For example, a specific software item may require that 'support pack 2' is installed if running on a Windows 2000 environment (operating system).  Existence of the minimum-service-release element is entirely optional, and only included if a minimum service release is applicable.
+
+			</xs:documentation>
+			<xs:documentation>oid:  Object ID value assigned to a specific reference data entry.  The OID value remains constant while the actual reference data content may change.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="string-length-1-40">
+					<xs:attribute name="oid" type="string-length-1-10" use="required"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<!--NOTIFICATION-FLAG-->
+	<xs:element name="notification-flag" type="string-value-Yes-No">
+		<xs:annotation>
+			<xs:documentation>Specifies whether the Collection should be part of the HP CeS Subscription Services notification process.
+
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!--OBSOLETE-DATE-->
+	<xs:element name="obsolete-date" type="xs:date" nillable="true">
+		<xs:annotation>
+			<xs:documentation>The date the software collection is scheduled to be, or was, obsolete to all customers.  On this date, the items associated with this collection should no longer be available to customers via the partner channel.
+
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!-- ORDERABLE-PART-ID-->
+	<xs:element name="orderable-part-ID">
+		<xs:annotation>
+			<xs:documentation>The ID used to look up in ww-class database.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:minLength value="1"/>
+				<xs:maxLength value="30"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<!-- ORDER-LINK-->
+	<xs:element name="order-link">
+		<xs:annotation>
+			<xs:documentation>Base Url.
+			</xs:documentation>
+			<xs:documentation>oid:  Object ID value assigned to a specific reference data entry.  The OID value remains constant while the actual reference data content may change.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="string-length-1-n">
+					<xs:attribute name="oid" type="string-length-1-10" use="required"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<!-- ORDER-LINKS-->
+	<xs:element name="order-links">
+		<xs:annotation>
+			<xs:documentation>Physical regions of the world within which software is distributed.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="order-link" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!--PARTNER-AVAILABILITY-->
+	<xs:element name="partner-availability">
+		<xs:annotation>
+			<xs:documentation>Indication of the ability to place an order for a physical item with a specific partner.  Indicates the readiness of the partner.
+
+			<xs:documentation>partner-id:  Unique ID to identify a partner.
+
+			</xs:documentation>
+				<xs:documentation>item-availability:  Indication of whether or not the physical Item is orderable by an HP customer.
+
+			</xs:documentation>
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="hp-agent-note"/>
+				<xs:element ref="hp-customer-note"/>
+			</xs:sequence>
+			<xs:attribute name="partner-id" type="string-length-1-32" use="required"/>
+			<xs:attribute name="item-availability" type="item-availability" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<!--PARTNER-FEEDBACK-->
+	<xs:element name="partner-feedback">
+		<xs:annotation>
+			<xs:documentation>Information received from SOAR partners regarding the Item.  Each feedback record includes a Partner-ID attribute to identify the partner providing the information.  This information is shared with other partners to allow coordination of a united customer experience.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="web-access"/>
+				<xs:element ref="physical-availability"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!--PHYSICAL-AVAILABILITY-->
+	<xs:element name="physical-availability">
+		<xs:annotation>
+			<xs:documentation>Indication of the ability to place an order for a physical item.  Indicates the readiness of the partner.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="partner-availability" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!--PHYSICAL-FULFILLMENT-->
+	<xs:element name="physical-fulfillment">
+		<xs:annotation>
+			<xs:documentation>If applicable, contains information specific to physical fulfillment partners.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="fulfillment-method"/>
+				<xs:element ref="fulfillment-dock-date"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!--PRICE-->
+	<xs:element name="price">
+		<xs:annotation>
+			<xs:documentation>The value and currency.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="price-value"/>
+				<xs:element ref="price-currency"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!--PRICE-COMMENT-->
+	<xs:element name="price-comment" nillable="true">
+		<xs:annotation>
+			<xs:documentation>A comment entered by the HP Item manager regarding the pricing.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:minLength value="1"/>
+				<xs:maxLength value="255"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<!--PRICE-CURRENCY-->
+	<xs:element name="price-currency">
+		<xs:annotation>
+			<xs:documentation>The currency associated with the Price Value.  Typically this is US Dollar.
+
+			</xs:documentation>
+			<xs:documentation>oid:  Object ID value assigned to a specific reference data entry.  The OID value remains constant while the actual reference data content may change.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="string-length-1-30">
+					<xs:attribute name="oid" type="string-length-1-10" use="required"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<!--PRICE-TYPE-->
+	<xs:element name="price-type">
+		<xs:annotation>
+			<xs:documentation>The type of pricing scheme utilized for this Item.
+
+			</xs:documentation>
+			<xs:documentation>oid:  Object ID value assigned to a specific reference data entry.  The OID value remains constant while the actual reference data content may change.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="string-length-1-10">
+					<xs:attribute name="oid" type="string-length-1-10" use="required"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<!--PRICE-VALUE-->
+	<xs:element name="price-value">
+		<xs:annotation>
+			<xs:documentation>The price of the item.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:decimal">
+				<xs:minInclusive value="0"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<!--PRICING-->
+	<xs:element name="pricing">
+		<xs:annotation>
+			<xs:documentation>Pricing information.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="price-type"/>
+				<xs:element ref="price-comment"/>
+				<xs:element ref="price"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!--PRODUCT-->
+	<xs:element name="product">
+		<xs:annotation>
+			<xs:documentation>Indicates the product set to the item.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="string-length-1-300">
+					<xs:attribute name="type" type="product-type" use="required"/>
+					<xs:attribute name="projectoid" type="xs:string" use="required"/>
+					<xs:attribute name="deleted-product" type="string-value-Yes-No" use="optional"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<!-- added 30th july -->
+	<!-- PRODUCT-TYPES -->
+	<xs:element name="product_types">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="product" maxOccurs="unbounded"/>
+			</xs:sequence>
+        	</xs:complexType>
+	</xs:element>
+	<!-- PRODUCT_SUPPORT_SUBCATEGORIES -->
+	<xs:element name="product_support_subcategories">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="product" maxOccurs="unbounded"/>
+			</xs:sequence>
+        	</xs:complexType>
+        </xs:element>
+	<!-- PRODUCT-SERIES -->
+	<xs:element name="product_series">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="product" maxOccurs="unbounded"/>
+			</xs:sequence>
+        	</xs:complexType>
+        </xs:element>
+	<!-- PRODUCT-NAMES -->
+	<xs:element name="product_names">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="product" maxOccurs="unbounded"/>
+			</xs:sequence>
+        	</xs:complexType>
+        </xs:element>
+	<!-- PRODUCT-NUMBER-NAMES -->
+	<xs:element name="product_number_names">
+		<xs:complexType>
+			<xs:sequence>
+				 <xs:element ref="product" maxOccurs="unbounded"/>
+			</xs:sequence>
+        	</xs:complexType>
+        </xs:element>
+	<!-- PRODUCT-NUMBERS -->
+	<xs:element name="product_numbers">
+		<xs:complexType>
+			<xs:sequence>
+				 <xs:element ref="product" maxOccurs="unbounded"/>
+			</xs:sequence>
+        	</xs:complexType>
+        </xs:element>
+	<!-- PRODUCT_LINES -->
+        <xs:element name="product_lines">
+		<xs:complexType>
+			<xs:sequence>
+				 <xs:element ref="product" maxOccurs="unbounded"/>
+			</xs:sequence>
+        	</xs:complexType>
+        </xs:element>
+       <!-- PRODUCT_SUPPORT_CATEGORIES -->
+        <xs:element name="product_support_categories">
+		<xs:complexType>
+			<xs:sequence>
+				 <xs:element ref="product" maxOccurs="unbounded"/>
+			</xs:sequence>
+        	</xs:complexType>
+        </xs:element>
+	<!-- PRODUCT_BIG_SERIES -->
+	<xs:element name="product_big_series">
+		<xs:complexType>
+			<xs:sequence>
+				 <xs:element ref="product" maxOccurs="unbounded"/>
+			</xs:sequence>
+        	</xs:complexType>
+        </xs:element>
+	<!-- PRODUCT_MARKETING_CATEGORIES -->
+	<xs:element name="product_marketing_categories">
+		<xs:complexType>
+			<xs:sequence>
+				 <xs:element ref="product" maxOccurs="unbounded"/>
+			</xs:sequence>
+        	</xs:complexType>
+        </xs:element>
+	<!-- PRODUCT_MARKETING_SUBCATEGORIES -->
+	<xs:element name="product_marketing_subcategories">
+		<xs:complexType>
+			<xs:sequence>
+				 <xs:element ref="product" maxOccurs="unbounded"/>
+			</xs:sequence>
+        	</xs:complexType>
+        </xs:element>
+	<!-- SUPPORT_NAME_OIDS -->
+	<xs:element name="support_name_oids">
+	<xs:complexType>
+		<xs:sequence>
+			<xs:element ref="product" maxOccurs="unbounded"/>
+	      </xs:sequence>
+	</xs:complexType>
+  </xs:element>
+	<!-- PROJECT_REF TAG -->
+	<xs:element name="projectref">
+		<xs:complexType>
+			<xs:attribute ref="xlink:type" use="required"/>
+			<xs:attribute ref="xlink:href" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<!--PRODUCT-OID-->
+	<xs:element name="product-oid">
+		<xs:annotation>
+			<xs:documentation>Indicates the product set to the item.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="string-length-1-300">
+					<xs:attribute name="type" type="product-type" use="required"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<!--PRODUCT-ENVIRONMENTS-RELATION-->
+	<xs:element name="product-environments-relation">
+		<xs:annotation>
+			<xs:documentation>A specific product (product number), and related environment values, that the software item is linked to.  Multiple environment values may exist for each product number.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="product-oid"/>
+				<xs:element ref="environments" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!--PRODUCT-LINE-->
+	<xs:element name="product-line">
+		<xs:annotation>
+			<xs:documentation>The HP Product Line code associated with the HP organization responsible for the collection.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:minLength value="2"/>
+				<xs:maxLength value="2"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<!--PRODUCTS-ENVIRONMENTS-SUPPORTED-->
+	<xs:element name="products-environments-supported">
+		<xs:annotation>
+			<xs:documentation>The products, and related environments, that the software item is applicable to.  Links are to specific Product Number and Environments combinations.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="product-environments-relation" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!--PRODUCTS-SUPPORTED-->
+	<xs:element name="products-supported">
+		<xs:annotation>
+			<xs:documentation>The products, and related environments, that the software item is applicable to.  Links are to specific Product Number and Environments combinations.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="product" minOccurs="0" maxOccurs="unbounded"/>
+				<!-- added 30th july-->
+				<xs:element ref="product_types" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="product_support_subcategories" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="product_series" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="product_names" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="product_numbers" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="product_number_names" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="product_lines" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="product_support_categories" minOccurs="0" maxOccurs="unbounded"/>
+	                        <xs:element ref="product_big_series" minOccurs="0" maxOccurs="unbounded"/>
+	                        <xs:element ref="product_marketing_categories" minOccurs="0" maxOccurs="unbounded"/>
+	                        <xs:element ref="product_marketing_subcategories" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="support_name_oids" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!--PROTOCOL-->
+	<xs:element name="protocol">
+		<xs:annotation>
+			<xs:documentation>Protocol of the server, such as ftp or http.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:minLength value="1"/>
+				<xs:maxLength value="5"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<!--REGISTRATION-FLAG-->
+	<xs:element name="registration-flag" type="string-value-Yes-No">
+		<xs:annotation>
+			<xs:documentation>Specifies whether the Collection should have a registration requirement before a customer can receive the software.
+
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!--RELATED-COLLECTION-->
+	<xs:element name="related-collection">
+		<xs:annotation>
+			<xs:documentation>Identifies a collection that is related to the given collection.
+
+			</xs:documentation>
+			<xs:documentation>collection-ID:  A unique ID assigned to a collection within SOAR.				</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="relationship"/>
+			</xs:sequence>
+			<xs:attribute name="collection-ID" type="string-length-1-20" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<!--RELATED-COLLECTIONS-->
+	<xs:element name="related-collections">
+		<xs:annotation>
+			<xs:documentation>Allows for zero or more collections to be related to the given collection.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="related-collection" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!--RELATIONSHIP-->
+	<xs:element name="relationship">
+		<xs:annotation>
+			<xs:documentation>Indicates the type of relationship the related collection has to the given collection  Examples of a relationship include prerequisite, upsell, etc.
+
+			</xs:documentation>
+			<xs:documentation>oid:  Object ID value assigned to a specific reference data entry.  The OID value remains constant while the actual reference data content may change.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="string-length-1-40">
+					<xs:attribute name="oid" type="string-length-1-10" use="required"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<!--REPLACES-ITEM-ID-->
+	<xs:element name="replaces-item-ID" nillable="true">
+		<xs:annotation>
+			<xs:documentation>The Item ID being replaced by this item.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:minLength value="1"/>
+				<xs:maxLength value="30"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<!--REVIEW-FLAG-->
+	<xs:element name="review-flag" type="string-value-Yes-No">
+		<xs:annotation>
+			<xs:documentation>Indication of whether or not it is recommended that the HP customer review the content of the attachment before retrieving/ordering the software.
+
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!--SERVER-->
+	<xs:element name="server">
+		<xs:annotation>
+			<xs:documentation>The Server information.
+
+			</xs:documentation>
+			<xs:documentation>oid:  Object ID value assigned to a specific reference data entry.  The OID value remains constant while the actual reference data content may change.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="protocol"/>
+				<xs:element ref="server-name"/>
+			</xs:sequence>
+			<xs:attribute name="oid" type="string-length-1-10" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<!--SERVER-DIRECTORY-->
+	<xs:element name="server-directory">
+		<xs:annotation>
+			<xs:documentation>Server and directory definition.
+
+			</xs:documentation>
+			<xs:documentation>file-delivery-confirmation:  Indication of whether the server partner has confirmed that the file is actually at the indicated location.  If the partner does not provide a confirmation service, the value will be "No".  If the partner does provide a confirmation service the value will indicate whether the file is there.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="server"/>
+				<xs:element ref="directory" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="file-delivery-confirmation" type="string-value-Yes-No" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<!--SERVER-LOCATIONS-->
+	<xs:element name="server-locations">
+		<xs:annotation>
+			<xs:documentation>Indication of where the file is located on hp servers.  The file may be retrieved from these location(s) or simply pointed to by the partner application.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="server-directory" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!--SERVER-NAME-->
+	<xs:element name="server-name">
+		<xs:annotation>
+			<xs:documentation>Server identification, such as ftp.hp.com.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:minLength value="1"/>
+				<xs:maxLength value="40"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<!--SEVERITY-->
+	<xs:element name="severity">
+		<xs:annotation>
+			<xs:documentation>
+
+			</xs:documentation>
+			<xs:documentation>oid:  Object ID value assigned to a specific reference data entry.  The OID value remains constant while the actual reference data content may change.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="string-length-1-50">
+					<xs:attribute name="oid" type="string-length-1-10" use="required"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<!--SOAR-ACCESS-URL-->
+	<xs:element name="soar-access-url">
+		<xs:annotation>
+			<xs:documentation>A URL to access the SOAR application directly to retrieve the file.  Specific permission is required for the partner to access SOAR directly.  [Access to SOAR is NOT intended for direct, real-time access by applications utilized by HP customers.]  [Server information must precede the information contained in this element to complete the URL.  Contact the SOAR team for the correct server information.]
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:minLength value="1"/>
+				<xs:maxLength value="2000"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<!--SOFTWARE-FILE-->
+	<xs:element name="software-file">
+		<xs:annotation>
+			<xs:documentation>Information about an individual software file.
+
+			</xs:documentation>
+			<xs:documentation>file-sequence:  The number, in sequence, assigned to each file in a software set.
+
+			</xs:documentation>
+			<xs:documentation>partner-update-type:  Indicates why the metadata is being sent to the partner.  The value applies to this software file.  This element indicates whether this software file has changed since the last data feed to this partner, and if so, how it has changed.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="checkvalue"/>
+				<xs:element ref="cmdline"/>
+				<xs:element ref="filename"/>
+				<xs:element ref="filesize"/>
+				<xs:element ref="server-locations"/>
+				<xs:element ref="soar-access-url"/>
+				<xs:element ref="flags"/>
+				<xs:element ref="languages-in-file"/>
+				<xs:element ref="is-digitally-signed"/>
+				<xs:element ref="linked-content" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="file-sequence" type="integer-min-value-1" use="required"/>
+			<xs:attribute name="partner-update-type" type="partner-update-type" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<!--SOFTWARE-FILES-->
+	<xs:element name="software-files">
+		<xs:annotation>
+			<xs:documentation>Information about a set of software files.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="software-set" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!--SOFTWARE-ITEM-->
+	<xs:element name="software-item">
+		<xs:annotation>
+			<xs:documentation>Defines specific software.
+
+			</xs:documentation>
+			<xs:documentation>item-ID:  A unique ID assigned to a software item within SOAR.  Values may be valid HP product / assembly / part numbers, or may be assigned by SOAR.  An Item is composed of set(s) of software that provide a specific function for an HP product.  [Individual sets within an Item are distinguished by file type.]
+
+			</xs:documentation>
+			<xs:documentation>state:  The state of a specific version of an Item within SOAR.
+
+			</xs:documentation>
+			<xs:documentation>partner-update-type:  Indicates why the metadata is being sent to the partner.  The value applies to this Item.  This element indicates whether this Item has changed since the last data feed to this partner, and if so, how it has changed.
+
+			</xs:documentation>
+			<xs:documentation>from-toad:  A value solely used for SOAR internal and post processing purposes.
+
+			</xs:documentation>
+			<xs:documentation>toad-OID:  The ID assigned by TOAD to a software item that was migrated to SOAR.  This is a temporary value that will only be available until the Subscription Services partner transitions to using the chronicle-ID value.  No partner should start to use this value!
+
+			</xs:documentation>
+			<xs:documentation>chronicle-ID:  An ID assigned to a software item within SOAR.  This value is automatically assigned by the SOAR application, and remains constant for a given item, even as Item-ID is changed.
+
+			</xs:documentation>
+			<xs:documentation>soar-description-overriden:  A value solely used for SOAR internal and post processing purposes.
+
+			</xs:documentation>
+			<xs:documentation>soar-distinct-environments: A text-based field that contains a list of the distinct environment values for the software item; each environment value is comma separated.  This is a temporary solution, that may yield undesirable results (due to implications of using actual text values rather than oid values) and may be discontinued in the future.  Delivery partners should derive this information themselves from the information already in the XML file.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="version"/>
+				<xs:element ref="orderable-part-ID" minOccurs="0"/>
+				<xs:element ref="customs-approved" minOccurs="0"/>
+				<xs:element ref="boms" minOccurs="0"/>
+				<xs:element ref="install-formats"/>
+				<xs:element ref="replaces-item-ID"/>
+				<xs:element ref="supersede-info"/>
+				<xs:element ref="disclosure-level"/>
+				<xs:element ref="media-types"/>
+				<xs:element ref="update-types"/>
+				<xs:element ref="severity"/>
+				<xs:element ref="update-date"/>
+				<xs:element ref="customer-available-date"/>
+				<xs:element ref="obsolete-date"/>
+				<xs:element ref="products-supported"/>
+				<xs:element ref="products-environments-supported"/>
+				<xs:element ref="taxonomy-categorizations"/>
+				<xs:element ref="item-suspended"/>
+				<xs:element ref="flags"/>
+				<xs:element ref="languages"/>
+				<xs:element ref="distribution-regions" minOccurs="0"/>
+				<xs:element ref="pricing"/>
+				<xs:element ref="software-password"/>
+				<xs:element ref="installation-filename"/>
+				<xs:element ref="physical-fulfillment" minOccurs="0"/>
+				<xs:element ref="bundled-items"/>
+				<xs:element ref="cd-checkvalues" minOccurs="0"/>
+				<xs:element ref="order-links" minOccurs="0"/>
+				<xs:element ref="item-url"/>
+				<xs:element ref="partner-feedback"/>
+				<xs:element ref="iadd-properties"/>
+				<xs:element ref="software-files"/>
+				<xs:element ref="attachments"/>
+			</xs:sequence>
+			<xs:attribute name="item-ID" type="string-length-1-30" use="required"/>
+			<xs:attribute name="state" type="state" use="required"/>
+			<xs:attribute name="partner-update-type" type="partner-update-type" use="required"/>
+			<xs:attribute name="from-toad" type="string-value-Yes-No"/>
+			<xs:attribute name="toad-OID" type="string-length-1-11"/>
+			<xs:attribute name="chronicle-ID" type="string-length-1-16" use="required"/>
+			<xs:attribute name="soar-description-overridden" type="string-value-Yes-No"/>
+			<xs:attribute name="languages-at-file-level" type="string-value-Yes-No"/>
+			<xs:attribute name="product-level-sensitive" type="string-value-Yes-No"/>
+			<xs:attribute name="soar-distinct-environments" type="string-length-1-n"/>
+		</xs:complexType>
+	</xs:element>
+	<!--SOFTWARE-ITEMS-->
+	<xs:element name="software-items">
+		<xs:annotation>
+			<xs:documentation>A group of software items.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="software-item" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!--SOFTWARE-PASSWORD-->
+	<xs:element name="software-password" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Password, if any, required for the customer to access/download/operate the software.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:minLength value="1"/>
+				<xs:maxLength value="40"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<!--SOFTWARE-SET-->
+	<xs:element name="software-set">
+		<xs:annotation>
+			<xs:documentation>Grouping of 1 to N files that go together to be complete.
+
+			</xs:documentation>
+			<xs:documentation>total-number-of-files:  The total number of files in a software set.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="file-type"/>
+				<xs:element ref="software-file" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="total-number-of-files" type="integer-min-value-1" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<!--SOFTWARE-SUB-TYPE-->
+	<xs:element name="software-sub-type">
+		<xs:annotation>
+			<xs:documentation>An optional, further clarification regarding the software type.
+
+			</xs:documentation>
+			<xs:documentation>oid:  Object ID value assigned to a specific reference data entry.  The OID value remains constant while the actual reference data content may change.
+
+			</xs:documentation>
+			<xs:documentation>hovertext: Hover text for Software Sub type.
+			</xs:documentation>
+
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+
+				<xs:extension base="string-length-1-256">
+
+					<xs:attribute name="oid" type="string-length-1-10" use="required"/>
+					
+					<xs:attribute name="hovertext" type="string-length-1-250" use="optional"/>
+
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<!--SOFTWARE-TYPE-->
+	<xs:element name="software-type">
+		<xs:annotation>
+			<xs:documentation>The type of software contained in the collection, such as driver, BIOS, firmware, etc.
+
+			</xs:documentation>
+			<xs:documentation>publish-software-type:  An indicator for partners regarding whether the items in the Collection are better classified by Software Type or Environment.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="sw-type"/>
+				<xs:element ref="software-sub-type" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="publish-software-type" type="string-value-Yes-No" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<!--SUPERSEDE-INFO-->
+	<xs:element name="supersede-info">
+		<xs:annotation>
+			<xs:documentation>This element contains information related to whether this item supersedes any other item, or is superseded by any other item.  Supersede indicates simply that a more recent version has been created.  Multiple versions may all be available to a customer.
+
+			</xs:documentation>
+			<xs:documentation>superseded:  A 'Yes"-"No" value to indicate if this item has been superseded by another item.  Superseded means that a newer version of the item is available for the customer, even though this item may still be available also.
+
+			</xs:documentation>
+			<xs:documentation>software-item-group:  This attribute identifies items within the collection that are part of the same versioning sequence; meaning one item superseded another.  A common value in this attribute is how to identify items in the same group.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="supersedes-item-ID" minOccurs="0"/>
+				<xs:element ref="superseded-by-item-ID" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="superseded" type="string-value-Yes-No" use="required"/>
+			<xs:attribute name="software-item-group" type="string-length-1-30" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<!--SUPERSEDED-BY-ITEM-ID-->
+	<xs:element name="superseded-by-item-ID">
+		<xs:annotation>
+			<xs:documentation>The Item ID that superseded this item.
+
+			</xs:documentation>
+			<xs:documentation>superseded-on-date:  The date that this item was superseded by the referenced item-ID.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="string-length-1-30">
+					<xs:attribute name="superseded-on-date" type="xs:date" use="required"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<!--SUPERSEDES-ITEM-ID-->
+	<xs:element name="supersedes-item-ID">
+		<xs:annotation>
+			<xs:documentation>The Item ID that this item superseded.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:minLength value="1"/>
+				<xs:maxLength value="30"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<!--SUSPENDED-REASON-->
+	<xs:element name="suspended-reason" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Textual explanation of why the software item is suspended, if applicable.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:minLength value="1"/>
+				<xs:maxLength value="255"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<!--SW-TYPE-->
+	<xs:element name="sw-type">
+		<xs:annotation>
+			<xs:documentation>A specific software type.
+
+			</xs:documentation>
+			<xs:documentation>oid:  Object ID value assigned to a specific reference data entry.  The OID value remains constant while the actual reference data content may change.
+
+			</xs:documentation>
+			<xs:documentation>hovertext: Hover text for Software Type.
+			</xs:documentation>
+
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+
+				<xs:extension base="string-length-1-256">
+
+					<xs:attribute name="oid" type="string-length-1-10" use="required"/>
+					
+					<xs:attribute name="hovertext" type="string-length-1-250" use="optional"/>
+
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<!--UPDATE-DATE-->
+	<xs:element name="update-date" type="xs:dateTime">
+		<xs:annotation>
+			<xs:documentation>The latest date that changes were made to this Collection / Item.
+
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!--UPDATE-PRIORITY-->
+	<xs:element name="update-priority">
+		<xs:annotation>
+			<xs:documentation>The priority assigned by the HP Collection manager regarding the urgency to get this collection processed and the information available to HP customers.
+
+			</xs:documentation>
+			<xs:documentation>oid:  Object ID value assigned to a specific reference data entry.  The OID value remains constant while the actual reference data content may change.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="string-length-1-40">
+					<xs:attribute name="oid" type="string-length-1-10" use="required"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<!--UPDATE-TYPE-->
+	<xs:element name="update-type" nillable="true">
+		<xs:annotation>
+			<xs:documentation>An indication, provided by the HP Collection manager, regarding why/what has changed about this Collection.
+
+			</xs:documentation>
+			<xs:documentation>oid:  Object ID value assigned to a specific reference data entry.  The OID value remains constant while the actual reference data content may change.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="string-length-1-40">
+					<xs:attribute name="oid" type="string-length-1-10" use="required"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<!--UPDATE-TYPES-->
+	<xs:element name="update-types">
+		<xs:annotation>
+			<xs:documentation>One or more indications, provided by the HP Collection manager, regarding why/what has changed about this Collection.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="update-type" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!--VERSION-->
+	<xs:element name="version">
+		<xs:annotation>
+			<xs:documentation>The software version of the Item as defined by the respective HP software generation organization.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:minLength value="1"/>
+				<xs:maxLength value="25"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<!--WEB-ACCESS-->
+	<xs:element name="web-access">
+		<xs:annotation>
+			<xs:documentation>The URL for a web site containing reference to the Software Item.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="web-access-url" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!--WEB-ACCESS-URL-->
+	<xs:element name="web-access-url">
+		<xs:annotation>
+			<xs:documentation>The URL(s) for web sites containing reference to the Software Item.
+
+			</xs:documentation>
+			<xs:documentation>partner-id:  Unique ID to identify a partner.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="string-length-1-2000">
+					<xs:attribute name="partner-id" type="string-length-1-32" use="required"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<!--IADD-PROPERTIES-->
+	<xs:element name="iadd-properties" nillable="true">
+		<xs:annotation>
+			<xs:documentation>Defines specific iadd Properties.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="driver-name"/>
+				<xs:element ref="driver-models"/>
+				<xs:element ref="driver-release-date"/>
+				<xs:element ref="driver-installation-method"/>
+				<xs:element ref="primary-inf-file"/>
+				<xs:element ref="driver-network-compatible"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!--DRIVER-NAME-->
+	<xs:element name="driver-name">
+		<xs:annotation>
+			<xs:documentation>iADD specific. Driver name taken from primary INF file.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:minLength value="1"/>
+				<xs:maxLength value="50"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<!--DRIVER-MODELS-->
+	<xs:element name="driver-models">
+		<xs:annotation>
+			<xs:documentation>iADD specific. A group of driver models.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="driver-model" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!--DRIVER-MODEL-->
+	<xs:element name="driver-model">
+		<xs:annotation>
+			<xs:documentation>iADD specific. Identification string returned by the printer firmware.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="string-length-1-50">
+					<xs:attribute name="oid" type="string-length-1-10" use="required"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<!--DRIVER-RELEASE-DATE-->
+	<xs:element name="driver-release-date" type="xs:date">
+		<xs:annotation>
+			<xs:documentation>iADD specific. Date that a driver was released by the lab.
+
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!--DRIVER-INSTALLATION-METHOD-->
+	<xs:element name="driver-installation-method">
+		<xs:annotation>
+			<xs:documentation>iADD specific. How the driver will be installed.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="string-length-1-50">
+					<xs:attribute name="oid" type="string-length-1-10" use="required"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<!--PRIMARY-INF-FILE-->
+	<xs:element name="primary-inf-file">
+		<xs:annotation>
+			<xs:documentation>iADD specific. Name of the INF file that should be used to install printer driver software.
+
+			</xs:documentation>
+		</xs:annotation>
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:minLength value="1"/>
+				<xs:maxLength value="50"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<!--DRIVER-NETWORK-COMPATIBLE-->
+	<xs:element name="driver-network-compatible" type="string-value-Yes-No">
+		<xs:annotation>
+			<xs:documentation>Driver installation file/method can be used over a network.
+
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<!--ZZ-simpleTYPE definitions-->
+	<xs:simpleType name="contact-type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Software Generation Contact"/>
+			<xs:enumeration value="SOAR Collection Contact"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="integer-min-value-1">
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="item-availability">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Orderable"/>
+			<xs:enumeration value="Unorderable"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="partner-update-type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="DELETED"/>
+			<xs:enumeration value="MODIFIED"/>
+			<xs:enumeration value="NEW"/>
+			<xs:enumeration value="UPTODATE"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="state">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="APPROVED"/>
+			<xs:enumeration value="OBSOLETE"/>
+			<xs:enumeration value="DRAFT"/>
+			<xs:enumeration value="REVIEW"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string-length-1-10">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string-length-1-11">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="11"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string-length-1-16">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="16"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string-length-1-20">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string-length-1-30">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string-length-1-32">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="32"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string-length-1-40">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="40"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string-length-1-80">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="80"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string-length-1-50">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string-length-1-100">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string-length-1-200">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="200"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string-length-1-255">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="255"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string-length-1-300">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="300"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string-length-1-2000">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="2000"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string-length-1-n">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string-length-2-2">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="2"/>
+			<xs:maxLength value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string-length-2-3">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="2"/>
+			<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string-value-Yes-No">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Yes"/>
+			<xs:enumeration value="No"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="product-type">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="PMSC"/>
+			<xs:enumeration value="PMSF"/>
+			<xs:enumeration value="PMS"/>
+			<xs:enumeration value="PMM"/>
+			<xs:enumeration value="PMN"/>
+			<xs:enumeration value="PMPI"/>
+			<!--Support Product Category-->
+			<!--Support Product Sub-Category (Family)-->
+			<!--Product Series-->
+			<!--Product Name (Model)-->
+			<!--Product Number-->
+			<!--Platform ID-->
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string-length-1-250">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"></xs:minLength>
+			<xs:maxLength value="250"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+		<xs:simpleType name="string-length-1-256">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"></xs:minLength>
+			<xs:maxLength value="256"></xs:maxLength>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- For TAXONOMY -->
+	<xs:element name="categorization-key" type="xs:string"/>
+	<xs:element name="categorization-value" type="xs:string"/>
+	<xs:element name="taxonomy-categorization">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="categorization-key"/>
+				<xs:element ref="categorization-value"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="taxonomy-categorizations">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="taxonomy-categorization" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+</xs:schema>
+
+

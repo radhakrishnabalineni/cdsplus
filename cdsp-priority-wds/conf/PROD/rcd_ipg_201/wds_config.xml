@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:proj="http://www.hp.com/cdsplus" xmlns:sel="java:com.hp.cdsplus.wds.workItem.CDSPSelection" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sub="java:com.hp.cdsplus.wds.workItem.CDSPSubscription" xmlns:xutils="com.hp.cdsplus.util.xml.XMLUtils">
+	
+<sub limit="50"
+			manualRepub="manual_republish.txt"
+			server="http://cdsplus.austin.hp.com/cadence/app/"
+			subscription="soar/rcd_ipg_201"
+			workingDir="/opt/ais/app/applications/reference_client/data/rcd_ipg_201"
+			>
+
+			<namedDestination name="ARVATO"
+				class="com.hp.cdsplus.wds.destination.ReleaseManagerDestination"
+				contentArea="soar_ipg_201"
+				username="hpsoar_test"
+				dest_path="/"
+				password="w1lc0x88"
+				dir="releaseManager"
+                                maxPackageSize="500"
+                                maxPackageCount="1000"
+				server="sftp://ftp.arvatousa.com"
+				prefix="rcd_ipg_201"
+				verify=""
+				job="arvato"/>
+			
+			<namedDestination name="DOCDATA"
+				class="com.hp.cdsplus.wds.destination.ReleaseManagerDestination"
+				contentArea="soar_ipg_201"
+				username="hp"
+				dest_path="/"
+				password="swaBRU7r"
+				dir="releaseManager"
+                                maxPackageSize="500"
+                                maxPackageCount="1000"
+				server="sftp://82.201.41.183/data"
+				prefix="rcd_ipg_201"
+				verify=""
+				job="docdata"/>
+			
+<namedDestination name="HPRECOVERYEMEA"
+                                class="com.hp.cdsplus.wds.destination.ReleaseManagerDestination"
+                                contentArea="soar_ipg_201"
+                                username="HP_EMEA"
+                                dest_path="/HPRecoveryEMEA-IPG/PROD/"
+                                password="DmA8_mPV"
+                                dir="releaseManager"
+                                maxPackageSize="500"
+                                maxPackageCount="1000"
+                                server="sftp://sgftp02.mentormedia.com.sg"
+                                prefix="rcd_ipg_201"
+                                verify=""
+                                job="hprecoveryemea"/>
+<selection destination="concat($originDocName, '.xml')">
+        <destination name="ARVATO" />
+         <destination name="DOCDATA" />
+ <destination name="HPRECOVERYEMEA" />
+     </selection>
+ 
+      <selection destination="concat($originDocName, '/', $sourceName)" select="/document/file_name/proj:ref | /document/components/component/file_name/proj:ref" source="concat(/node()/@*:base, @xlink:href)">
+        <destination name="ARVATO" />
+        <destination name="DOCDATA" />
+<destination name="HPRECOVERYEMEA" />
+      </selection> 
+
+
+
+        </sub>
+</config>

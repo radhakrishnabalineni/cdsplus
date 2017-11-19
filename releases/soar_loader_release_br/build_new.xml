@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="soar-loader" default="all" basedir=".">
+	<property environment="env" />
+	<property name="dist.dir" value="${env.DIST_DIR}" />
+	<property name="lib.dir" value="${basedir}/lib" />
+	<property name="src.dir" value="${basedir}/src" />
+	<property name="conf.dir" value="${basedir}/config" />
+	<property name="build.dir" value="${basedir}/build" />
+	<property name="build.classes.dir" value="${build.dir}/classes" />
+	<property name="logs.dir" value="${basedir}/logs" />
+	<property name="SOAR_RELEASE_DIR" value="${dist.dir}" />
+    <property name="SOAR_RELEASE_LOADER" value="${dist.dir}/loader" />
+	<property name="SOAR_LOADER_HOME" value="${basedir}" />
+	 <path id="jar.dir">
+	 <!-- dependent jars -->
+	 <fileset dir="${dist.dir}">
+	    <include name="PriorityLoader.jar"/>
+		<include name="CDSPDestination.jar"/>
+	    <include name="cdsplus-conversion-utils.jar"/>
+		<include name="cdsp-mongo-api.jar"/>
+		<include name="SoarPriorityLoader.jar"/>
+		<include name="soar-input-schema-bindings.jar"/>
+		<!-- end of depend jars -->
+		</fileset>
+	   </path> 
+	<path id="lib.class.path">
+	    <fileset dir="${dist.dir}">
+	    <include name="PriorityLoader.jar"/>
+		<include name="CDSPDestination.jar"/>
+	    <include name="cdsplus-conversion-utils.jar"/>
+		<include name="cdsp-mongo-api.jar"/>
+		<include name="SoarPriorityLoader.jar"/>
+		<include name="soar-input-schema-bindings.jar"/>
+		<!-- end of depend jars -->
+		</fileset>
+		<fileset dir="${lib.dir}">
+		<include name="activation.jar"/>
+      	<include name="commons-codec-1.3.jar"/>
+    	<include name="commons-collections.jar"/>
+    	<include name="commons-httpclient-3.1.jar"/>
+    	<include name="commons-io-1.2.jar"/>
+    	<include name="commons-lang.jar"/>
+    	<include name="commons-logging.jar"/>
+    	<include name="commons-vfs-1.0.jar"/>
+    	<include name="dfc.jar"/>
+    	<include name="dom4j-1.6.1.jar"/>
+    	<include name="jaxb1-impl.jar"/>
+    	<include name="jaxb1-impl-javadoc.jar"/>
+    	<include name="jaxb-api.jar"/>
+    	<include name="jaxb-impl.jar"/>
+    	<include name="jaxb-xjc.jar"/>
+    	<include name="jdom.jar"/>
+    	<include name="jettison-1.3.3.jar"/>
+    	<include name="jsch-0.1.33.jar"/>
+    	<include name="jsr173_1.0_api.jar"/>
+    	<include name="log4j-1.2.14.jar"/>
+    	<include name="mail.jar"/>
+    	<include name="mongo-java-driver-2.11.2.jar"/>
+    	<include name="stax-api-1.0-2.jar"/>
+	    <include name="weblogic.jar" />
+		</fileset>
+	</path>
+	<!-- ================================= 
+	          target: all              
+	         ================================= -->
+	<target name="all" depends="clean,init,compile,makejar,loader,loader_zip" description="default target to do a clean build"/>
+	<!-- ================================= 
+	          target: clean              
+	         ================================= -->
+	<target name="clean" description="deletes the build and dist directories">
+		<!-- <delete dir="${dist.dir}" /> -->
+		<delete dir="${build.dir}" />
+	</target>
+	<!-- ================================= 
+	          target: init              
+	         ================================= -->
+	<target name="init" description="creates dist and build dir">
+		<mkdir dir="${build.classes.dir}" />
+		<mkdir dir="${dist.dir}" />
+	</target>
+	<!-- ================================= target: compile ================================= -->
+
+	<target name="compile" description="description">	 
+		<mkdir dir="${basedir}/build/classes"/>
+		<javac srcdir="${src.dir}" destdir="${build.classes.dir}">
+			<classpath refid="lib.class.path" />
+			<classpath refid="jar.dir"/>
+		</javac>
+	</target>
+	<target name="makejar" depends="compile">
+	<echo message="Creating the jar file" />
+	<jar jarfile="${dist.dir}/${file.jar}" basedir="${build.classes.dir}"
+      includes="**/*.class" excludes="**/ui/**,jsp_servlet/**">
+    </jar>  
+  </target>
+  <target name="loader" >
+        <delete dir="${SOAR_RELEASE_DIR}/loader" />
+		<mkdir dir="${SOAR_RELEASE_DIR}/loader" />
+		<mkdir dir="${SOAR_RELEASE_DIR}/loader/config" />
+		<mkdir dir="${SOAR_RELEASE_DIR}/loader/lib" />
+		<echo message="Copying SoarPriorityLoader related files to ${SOAR_RELEASE_LOADER}" />
+		<copydir src="${SOAR_LOADER_HOME}/config" dest="${SOAR_RELEASE_LOADER}/config" />
+		<echo message="Removing the two history files from config folder" />
+		<delete file="${SOAR_RELEASE_LOADER}/config/soar_history.txt" />
+		<delete file="${SOAR_RELEASE_LOADER}/config/soar_reflist_history.txt" />
+  		<copy todir="${SOAR_RELEASE_DIR}/loader/lib">
+  	      <fileset dir="${dist.dir}" includes="*.*" />
+  	    </copy>
+		<copy todir="${SOAR_RELEASE_LOADER}/lib">
+			<fileset dir="${SOAR_LOADER_HOME}/dist/" includes="SoarPriorityLoader*.jar" />
+			<fileset dir="/mnt/cdsplus/cdspluslib/" includes="CDSPDestination.jar,PriorityLoader.jar"/>
+		</copy>
+	</target>
+	<target name="loader_zip" depends="loader">
+	  <delete dir="${SOAR_RELEASE_DIR}/SoarLoader.zip" />
+	  <zip destfile="${SOAR_RELEASE_DIR}/SoarLoader.zip">
+        <fileset dir="${SOAR_RELEASE_LOADER}" />
+	  </zip>
+	</target>
+	</project>

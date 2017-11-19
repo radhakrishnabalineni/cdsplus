@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" xmlns:proj="http://www.hp.com/cdsplus" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <xs:import namespace="http://www.hp.com/cdsplus" schemaLocation="librarycontent_proj.xsd"/>
+  <xs:import namespace="http://www.w3.org/1999/xlink" schemaLocation="librarycontent_xlink.xsd"/>
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="librarycontent_xml.xsd"/>
+  <xs:element name="result">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="proj:ref"/>
+      </xs:sequence>
+      <xs:attribute name="considered" use="required" type="xs:integer"/>
+      <xs:attribute name="count" use="required" type="xs:integer"/>
+      <xs:attribute ref="xml:base" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="content">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="graphic"/>
+      </xs:sequence>
+    </xs:complexType>
+   </xs:element>
+    <xs:element name="graphic">
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="callout"/>
+        <xs:element ref="image"/>
+        <xs:element ref="label"/>
+      </xs:choice>
+      <xs:attribute name="component.title" use="required" type="xs:string"/>
+      <xs:attribute name="reuse" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="callout">
+    <xs:complexType mixed="true">
+      <xs:attribute name="label" use="required" type="xs:integer"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="image">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="proj:ref"/>
+      </xs:sequence>
+      <xs:attribute name="component.title" use="required"/>
+      <xs:attribute name="src" use="required" type="xs:NCName"/>
+      </xs:complexType>
+  </xs:element>
+  <xs:element name="label" type="xs:string"/>
+    
+</xs:schema>

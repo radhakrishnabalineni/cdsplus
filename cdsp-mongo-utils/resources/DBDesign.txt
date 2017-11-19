@@ -1,0 +1,7 @@
+DB design for mongo:
+	Each content class in cdsplus will become a DB(i.e library content class will be library DB in mongo).
+	Each DB (content class) will have 3 collections- metadata(to store meta data xml file), subscriptions(to store all the subscriptions related (filters etc)), content(to store binary files).
+
+
+DB:library
+collections:  metadata,subscriptions,content

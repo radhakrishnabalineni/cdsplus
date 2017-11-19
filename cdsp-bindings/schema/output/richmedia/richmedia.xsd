@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="asset_rendition">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="asset_id" type="xs:string" />
+				<xs:element name="company_info" type="xs:string"/>
+				<xs:element name="file_name" type="xs:string" />
+				<xs:element name="file_bytes" type="xs:int" />
+				<xs:element name="title" type="xs:string" />
+				<xs:element name="search_keywords">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="search_keyword" maxOccurs="unbounded"
+								type="xs:string" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="description" type="xs:string" />
+				<xs:element name="headline" type="xs:string" />
+				<xs:element name="format" type="xs:string" />
+				<xs:element name="asset_category" type="xs:string" />
+				<xs:element name="business_units">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="business_unit" maxOccurs="unbounded"
+								type="xs:string" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="language_codes">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="language_code" maxOccurs="unbounded"
+								type="xs:string" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="country_codes">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="country_code" maxOccurs="unbounded"
+								type="xs:string" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="modified_date" type="xs:dateTime" />
+				<xs:element name="inserted_date" type="xs:dateTime" />
+				<xs:element name="checked_in_date" type="xs:dateTime" />
+				<xs:element name="products">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="product" maxOccurs="unbounded" type="xs:string" />
+							<xs:element name="product_types">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="product" maxOccurs="unbounded"
+											type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="product_series">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="product" maxOccurs="unbounded"
+											type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="product_big_series">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="product" maxOccurs="unbounded"
+											type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="support_name_oids">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="product" maxOccurs="unbounded"
+											type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="product_support_categories">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="product" maxOccurs="unbounded"
+											type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="product_support_subcategories">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="product" maxOccurs="unbounded"
+											type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="product_names">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="product" maxOccurs="unbounded"
+											type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="product_number_names">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="product" maxOccurs="unbounded"
+											type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="product_numbers">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="product" maxOccurs="unbounded"
+											type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="product_lines">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="product" maxOccurs="unbounded"
+											type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="product_marketing_categories">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="product" maxOccurs="unbounded"
+											type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="product_marketing_subcategories">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="product" maxOccurs="unbounded"
+											type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="product_levels">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="product_level" maxOccurs="unbounded"
+								type="xs:string" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="disclosure_level" type="xs:string" />
+				<xs:element name="usage_rights">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="usage_right" maxOccurs="unbounded"
+								type="xs:string" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="translation_col_id" type="xs:byte" />
+				<xs:element name="translation_instance_id" type="xs:short" />
+				<xs:element name="background" type="xs:string" />
+				<xs:element name="orientation" type="xs:string" />
+				<xs:element name="image_detail" type="xs:string" />
+				<xs:element name="customer_segments">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="customer_segment" maxOccurs="unbounded"
+								type="xs:string" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="launch_filename" type="xs:string" />
+				<xs:element name="pixel_height" type="xs:byte" />
+				<xs:element name="pixel_width" type="xs:byte" />
+				<xs:element name="media_play_length" type="xs:decimal" />
+				<xs:element name="bc_account_name" type="xs:string" />
+				<xs:element name="bc_account_id" type="xs:long" />
+				<xs:element name="related_link_labels">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="related_link_label" maxOccurs="unbounded"
+								type="xs:string" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="related_link_urls">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="related_link_url" maxOccurs="unbounded"
+								type="xs:anyURI" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="bc_featured" type="xs:boolean" />
+				<xs:element name="bc_starting_time" type="xs:dateTime" />
+				<xs:element name="bc_ending_time" type="xs:dateTime" />
+				<xs:element name="bc_channel" type="xs:string" />
+				<xs:element name="bc_channel_category" type="xs:string" />
+				<xs:element name="bc_channel_subcategory" type="xs:string" />
+				<xs:element name="bc_related_playlists">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="bc_related_playlist" maxOccurs="unbounded"
+								type="xs:string" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="ovp_id" type="xs:byte" />
+				<xs:element name="legacy_asset_id" type="xs:byte" />
+				<xs:element name="brightcove_id" type="xs:long" />
+				<xs:element name="brightcove_ref_id" type="xs:string" />
+				<xs:element name="derivative_id" type="xs:string" />
+				<xs:element name="source_id" type="xs:string" />
+				<xs:element name="source_revision_number" type="xs:byte" />
+				<xs:element name="task_id" type="xs:string" />
+				<xs:element name="task_revision_number" type="xs:byte" />
+				<xs:element name="duration" type="xs:string" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

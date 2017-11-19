@@ -1,0 +1,12 @@
+2016-02-11T19:55:58IST [PMLoader] INFO  Current load : start_time - Thu Feb 11 08:30:00 IST 2016 end_time - Thu Feb 11 19:55:58 IST 2016
+2016-02-11T19:55:59IST [PMLoader] INFO  { "start_time" : { "$date" : "2016-02-11T03:00:00.730Z"} , "end_time" : { "$date" : "2016-02-11T14:25:58.916Z"} , "company_info" : "hpe" , "extraction_status" : "started" , "_id" : { "$oid" : "56bc99f62ff620167d84c9fb"}}
+2016-02-11T19:55:59IST [PMLoader] INFO  Extractor Threads initialized.true
+2016-02-11T19:55:59IST [PRODUCT_NUMBER_Thread] INFO  Date range for delta mode. StartTime - Thu Feb 11 08:30:00 IST 2016 EndTime - Thu Feb 11 19:55:58 IST 2016
+2016-02-11T19:55:59IST [MARKETING_CATEGORY_Thread] INFO  Date range for delta mode. StartTime - Thu Feb 11 08:30:00 IST 2016 EndTime - Thu Feb 11 19:55:58 IST 2016
+2016-02-11T19:55:59IST [PRODUCT_SERIES_Thread] INFO  Date range for delta mode. StartTime - Thu Feb 11 08:30:00 IST 2016 EndTime - Thu Feb 11 19:55:58 IST 2016
+2016-02-11T19:55:59IST [MARKETING_SUBCATEGORY_Thread] INFO  Date range for delta mode. StartTime - Thu Feb 11 08:30:00 IST 2016 EndTime - Thu Feb 11 19:55:58 IST 2016
+2016-02-11T19:55:59IST [PRODUCT_TYPE_Thread] INFO  Date range for delta mode. StartTime - Thu Feb 11 08:30:00 IST 2016 EndTime - Thu Feb 11 19:55:58 IST 2016
+2016-02-11T19:55:59IST [SUPPORT_SUBCATEGORY_Thread] INFO  Date range for delta mode. StartTime - Thu Feb 11 08:30:00 IST 2016 EndTime - Thu Feb 11 19:55:58 IST 2016
+2016-02-11T19:55:59IST [SUPPORT_CATEGORY_Thread] INFO  Date range for delta mode. StartTime - Thu Feb 11 08:30:00 IST 2016 EndTime - Thu Feb 11 19:55:58 IST 2016
+2016-02-11T19:55:59IST [PRODUCT_NAME_Thread] INFO  Date range for delta mode. StartTime - Thu Feb 11 08:30:00 IST 2016 EndTime - Thu Feb 11 19:55:58 IST 2016
+2016-02-11T19:55:59IST [PRODUCT_BIGSERIES_Thread] INFO  Date range for delta mode. StartTime - Thu Feb 11 08:30:00 IST 2016 EndTime - Thu Feb 11 19:55:58 IST 2016

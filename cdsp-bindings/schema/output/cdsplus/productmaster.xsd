@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+  xmlns:proj="http://www.hp.com/cdsplus" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <xs:import namespace="http://www.hp.com/cdsplus" schemaLocation="productmaster_proj.xsd"/>
+  <xs:import namespace="http://www.w3.org/1999/xlink" schemaLocation="common_xlink.xsd"/>
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="common_xml.xsd"/>
+  <xs:element name="result">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="proj:ref"/>
+      </xs:sequence>
+      <xs:attribute name="considered" use="required" type="xs:integer"/>
+      <xs:attribute name="count" use="required" type="xs:integer"/>
+      <xs:attribute ref="xml:base" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="content">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="node"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="node">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="heirarchy_level"/>
+        <xs:element ref="node_type"/>
+        <xs:element ref="Rich_text" minOccurs="0"/>
+        <xs:element ref="company_designation" minOccurs="0"/>
+        <xs:element ref="lifecycle_status_code"/>
+        <xs:element ref="material_type_code"/>
+        <xs:element ref="platform_id"/>
+        <xs:element ref="pn_product_line"/>
+        <xs:element ref="product_classification"/>
+        <xs:element ref="product_number"/>
+        <xs:element ref="product_number_description"/>
+        <xs:element ref="serial_flag"/>
+        <xs:element ref="tangible_flag"/>
+        <xs:element ref="children"/>
+        <xs:element ref="parents"/>
+        <xs:element ref="proj:view"/>
+        <xs:element ref="Unspsc_code"/>
+        <xs:element ref="name" maxOccurs="unbounded"/>
+        <xs:element ref="snf"/>
+        <xs:element ref="sni"/>
+        <xs:element ref="Rich_text"/>
+        <xs:element ref="long_name" maxOccurs="unbounded"/>
+        <xs:element ref="product_line"/>
+        <xs:element ref="cc_bsc_release_date"/>
+        <xs:element ref="hierarchy_status"/>
+        <xs:element ref="product_line_description"/>
+        <xs:element ref="support_name_oid"/>
+        <xs:element ref="support_publishing_flag"/>
+        <xs:element ref="web_destination"/>        
+      </xs:sequence>
+      <xs:attribute name="oid" use="required" type="xs:integer"/>
+      <xs:attribute name="id" type="xs:string"/>
+	  <xs:attribute ref="xml:base" use="required"></xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="heirarchy_level" type="xs:NCName"/>
+  <xs:element name="node_type" type="xs:NCName"/>
+  <xs:element name="Rich_text" type="xs:NCName"/>
+  <xs:element name="company_designation" type="xs:NCName"/>
+  <xs:element name="lifecycle_status_code" type="xs:string"/>
+  <xs:element name="material_type_code" type="xs:NCName"/>
+  <xs:element name="platform_id" type="xs:string"/>
+  <xs:element name="pn_product_line" type="xs:string"/>
+  <xs:element name="product_classification" type="xs:string"/>
+  <xs:element name="product_number" type="xs:NMTOKEN"/>
+  <xs:element name="product_number_description" type="xs:string"/>
+  <xs:element name="serial_flag" type="xs:NCName"/>
+  <xs:element name="tangible_flag" type="xs:NCName"/>
+  <xs:element name="sni" type="xs:string"/>
+  <xs:element name="snf" type="xs:string"/>
+  <xs:element name="Unspsc_code" type="xs:string"/>
+  <xs:attribute name="language" type="xs:string"/>
+  <xs:attribute name="country" type="xs:string"/>
+  <xs:element name="web_destination" type="xs:string"/>
+  <xs:element name="support_publishing_flag" type="xs:string"/>
+  <xs:element name="support_name_oid" type="xs:string"/>
+  <xs:element name="product_line_description" type="xs:string"/>
+  <xs:element name="product_line" type="xs:string"/>
+  <xs:element name="hierarchy_status" type="xs:string"/>
+  <xs:element name="cc_bsc_release_date" type="xs:string"/>
+
+  <xs:element name="parents">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="proj:parent" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="long_name">
+  <xs:complexType >
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute ref="language" use="required"/>
+        <xs:attribute ref="country" use="required"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  </xs:element>
+   
+  <xs:element name="name">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute name="language" type="xs:string" use="required"/>
+          <xs:attribute name="country" type="xs:string" use="required"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="children">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="proj:child"  minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="abbreviation">
+    <xs:complexType/>
+  </xs:element>
+
+</xs:schema>

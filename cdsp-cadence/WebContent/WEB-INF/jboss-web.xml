@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss-web>
+
+ <replication-config>
+  <!--
+   Possible Values:
+    ACCESS
+    SET_AND_GET
+    SET_AND_NON_PRIMITIVE_GET
+    SET
+  -->
+      <replication-trigger>SET_AND_NON_PRIMITIVE_GET</replication-trigger>
+
+  <!--
+   Possible Values:
+    SESSION
+    ATTRIBUTE
+    FIELD
+  -->
+      <replication-granularity>SESSION</replication-granularity>
+   </replication-config>
+</jboss-web>

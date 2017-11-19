@@ -1,0 +1,25 @@
+cdsp-cadence
+
+dependencies 
+	cdsp-bindings
+	cdsp-conversion-utils
+	cdsp-mongo-utils
+
+cdsp-pmloader
+
+dependencies
+	cdsp-mongo-utils
+
+cdsp-processor
+
+dependencies
+	cdsp-mongo-utils
+
+
+conc-loader and soar-loader
+
+dependencies
+	cdsp-mongo-utils
+	cdsp-destination
+	cdsp-conversion-utils
+	priority-loader

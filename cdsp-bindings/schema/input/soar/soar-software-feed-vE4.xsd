@@ -1,0 +1,2625 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v5 rel. 3 U (http://www.xmlspy.com) by Jane Stodola (Hewlett Packard-CO) -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xsd:annotation>
+		<xsd:documentation>Schema file for SOAR Software Feed.
+
+		Update History -
+
+		vA1	Initial draft.
+
+		vA4	Initial version released to partners.
+
+		vA5	Added attributes toad-OID and chronicle-ID for Subscription Services partner.
+
+		vA6	Changed STATE value "IN REVIEW" to "REVIEW" to match SOAR value.
+
+		vA7	Removed/moved 'use=' statements to attribute/element definition rather than on a Ref
+
+				statement.
+
+		vA8	Added attribute soar-description-overridden to meet need in generating legacy files.
+
+		vA9	Changed referenced element linked-content to be optional in the software-file element for
+
+				those cases when the actual software files are not included in the data feed.
+
+		vB1		Modified the structure to conform to W3C Schema definition for Complex Type
+
+				Representation using the "extension" statement.
+
+		vB2		Moved 'use=' statements to be on the Ref statement rather than part of the
+
+				attribute definition, per W3C Schema specification.
+
+		vB3		Replaced the attribute 'ref=' statements with simpleType definitions.
+
+				This has no	functional impact on the schema.  It was done to allow a partner to use the
+
+				Castor library for XML binding (www.castor.org) and this schema to generate a series of
+
+				java files to	parse the soar software feed. (6 Dec 2001)
+
+		vB4		Added attribute file-delivery-confirmation to indicate whether SOAR has received
+
+				confirmation that the software binary file is on the designated server. (7 Dec 2001)
+
+		vB5		Set the 'collection' element in 'soar-software-feed to include minOccurs = 0.  This is
+
+				necessary for the instance in which there are no collections included for a given
+
+				time period.  (8 Jan 2002)
+
+		vB6		Set the 'linked-content' element for an 'attachment' element to minOccurs=0 to have the
+
+				flexibility for when a partner wants information about an attachment, but does not need
+
+				the attachment itself.
+
+				Added the 'partner-update-type' attribute to the 'software-file' element to indicate the
+
+				status of a particular file.  (18 Jan 2002)
+
+		vC1		Numerous changes were made, outlined below (24 Sept 2002):
+
+				a)	Included an OID attribute value with the software-sub-type element.
+
+					software-sub-type element value is no longer free-form content, but rather controlled
+
+					by a reference list.
+
+				b)	installation-filename element increased to 255 characters.
+
+				c)	products-supported element moved to be part of the software-items element
+
+					(from the collection element).
+
+					New element actually called products-environments-supported.
+
+					product-environments-relation element also added in support of this data.
+
+				d)	environments element moved to be part of the new product-environments-relation
+
+					element (from the software-items element).
+
+				e)	Added an attribute 'superseded' to the software-item element.
+
+				f)	Added element superseded-by-item-ID to the software-item element.
+
+				g)	Added element supersedes-item-ID to the software-item element.
+
+				h)	Moved the obsolete-date element to the software-item element
+
+					(from the collection element).
+
+				i)	Added an attribute 'software-item-group' to the software-item element.
+
+		vC2		(26 Sept 2002)
+
+				Added element supersede-info to the software-item element.  Combined numerous
+
+				supersede related elements/attributes into this single element, including:
+
+				- superseded attribute from software-item
+
+				- supersedes-item-ID from software-item
+
+				- superseded-by-item-iIDfrom software-item
+
+				Added new attribute superseded-on-date to element superseded-by-item-ID
+
+		vC3		(30 Sept 2002)
+
+				- Changed elements supersedes-item-ID and superseded-by-item-ID to
+
+				include the clause minOccurs=0.  Removed the ability for these two elements to be null.
+
+				- Moved attribute software-item-group to be part of supersede-info element
+
+				(from software-item).
+
+		vC4		(16 Oct 2002)
+
+				Included minOccurs="0" clause for software-sub-type element in software-type element
+
+				to allow for situations when there is no software-sub-type.  Removed the ability for the
+
+				software-sub-type element to be nillable.  Thus if the software-sub-type element is
+
+				included in the XML, it must contain a value and an OID value.
+
+		vC5		(11 Nov 2002)
+
+				- item-url element increased to 500 characters.
+
+				- Made the product-hierarchy element optional within the product element. (Only those
+
+				partners who actually need product-name and product-family in the XML will receive this
+
+				information.  This can reduce the size of the XML file.)
+
+		vC6		(2 Dec 2002)
+
+				- Replaced element 'product' with element 'product-info-choice'
+
+				This element is used to indicate/control what level of product hierarchy information the
+
+				delivery partner has elected to receive.
+
+				Added the complexType definitions to support the options available with the
+
+				'product-info-choice' element, which include:
+
+				    'product-number-only'
+
+				    'product-number-and-hierarchy'
+
+				    'product-name-oid-only'
+
+		vC7		(10 Jan 2003)
+
+				- Add soar-distinct-environments attribute to the software-item element.
+
+				  (Temporary solution for WWCCS partner.)
+
+		vD1		(21 Jan 2003)
+
+				- Added attribute bundled-item-sequence to the bundled-item element.
+
+				- Added attribute total-number-of-items to the bundled-items element.
+
+				- Added element minimum-service-release and element environment-msr (referenced by
+
+				   the environments element).
+
+				   [This change may require slight adjustment to how a delivery partner references the
+
+				   environment information.]
+
+				- Added elements 'flags' and 'flag';
+
+				   the 'flags' element is referenced by the software-collection element and by the
+
+				   software-item element.
+
+				   Pre-existing elements (registration-flag, notification-flag, is-orderable)  that were
+
+				   yes-no flags will migrate to this new 'flags' element.
+
+				   However, for a time, the pre-existing elements will also continue to exist.  Eventually,
+
+				   the pre-existing elements will be removed.
+
+		vD2		(22 Jan 2003)
+
+				- Set software-sub-type to a maximum of 50 characters.
+
+				- Set language-iso-code to a minimum of 2 characters and a maximum of 3 characters.
+
+				  This allows this attributed to be used to store eithier the 2-char or the 3-char ISO code.
+
+				  Currently SOAR stores only the 2-char code.
+
+		vD3		(24 Jan 2003)
+
+				- Added the 'flags' element to the 'attachment' element and to the 'software-file' element.
+
+		vD4		(22 Apr 2003)
+
+				- Swap flags and linked-content elements for software-file
+
+		vD5		(17 Dec 2003)
+
+				- Expand environment element to 80 characters
+
+		vD5a		(13 Jan 2004)
+
+				- Add submittal-group-oid attribute at the collection level
+
+		vD6		(29 Mar 2004)
+
+				- Add languages-at-file-level attribute in software-item element
+
+				- Add languages-in-file element in sofware-file element (languages-in-file element is mandatory but languages inside this element are optional)
+
+		vD7		(May 29 2004)
+
+				- Add cmdline attribute at file level
+
+		vE1		(August 02 2004)
+
+				- Synergy
+
+		vE2		(November 2004)
+
+				- Add iADD properties
+
+				- Add is-digitally-signed attribute at file level
+
+		vE3		(January 2005)
+
+				- v5.1a release: Add install-formats and severity properties
+
+        vE4     (April 2005)
+
+                - Removed submittal type as an enumeration
+
+
+         SOAR11.1 Release (18 May 2011)
+     
+				 - Updated RCD properties .
+				  New properties added are customs-approved, orderable-part-ID, boms, order-link-oids
+				  "software-sub-type" element length changed to 256 from 50 
+                  Added a new attribute "hovertext" to "software-sub-type
+                  "sw-type" element length changed to 256 from 50 
+                  Added a new attribute hovertext to "sw-type"
+		</xsd:documentation>
+	</xsd:annotation>
+	<!--SOAR-SOFTWARE-FEED-->
+	<xsd:element name="soar-software-feed">
+		<xsd:annotation>
+			<xsd:documentation>Root Element.  This element contains metadata for software generated from the HP SOAR application.  The file may contain a 'full-extract' of all the software for the partner or only software that has changed since the last data feed to the partner.  There may be multiple software collections in this file.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="full-extract"/>
+				<xsd:element ref="collection" minOccurs="0" maxOccurs="unbounded"/>
+				
+				
+			</xsd:sequence>
+			<xsd:attribute name="date" type="xsd:dateTime" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<!--ADDITIONAL-COPYRIGHT-ACK-->
+	<xsd:element name="additional-copyright-ack" nillable="true">
+		<xsd:annotation>
+			<xsd:documentation>Additional Copyright notice.  This may include copyright for non-HP items.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="255"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<!--ALTERNATE-RECOMMENDATION-->
+	<xsd:element name="alternate-recommendation" nillable="true">
+		<xsd:annotation>
+			<xsd:documentation>Used in the Availability Schedule to indicate any alternate software that may be used by the customer.  (Free-form text.)
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="100"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<!--ATTACHMENT-->
+	<xsd:element name="attachment">
+		<xsd:annotation>
+			<xsd:documentation>Additional documentation used to describe software.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+			   
+				<xsd:element ref="attachment-title"/>
+				<xsd:element ref="authors"/>
+				<xsd:element ref="review-flag"/>
+				<xsd:element ref="flags"/>
+				<xsd:element ref="disclosure-level"/>
+				<xsd:element ref="document-types"/>
+				<xsd:element ref="languages"/>
+				<xsd:element ref="attachment-source"/>
+				<xsd:element ref="format"/>
+				<xsd:element ref="filename"/>
+				<xsd:element ref="linked-content" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--ATTACHMENT-SOURCE-->
+	<xsd:element name="attachment-source" nillable="true">
+		<xsd:annotation>
+			<xsd:documentation>The originating source for this attachment content.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="128"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<!--ATTACHMENT-TITLE-->
+	<xsd:element name="attachment-title">
+		<xsd:annotation>
+			<xsd:documentation>The Title assigned to the Attachment.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="255"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<!--ATTACHMENTS-->
+	<xsd:element name="attachments">
+		<xsd:annotation>
+			<xsd:documentation>Additional documentation used to describe software.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="attachment" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--AUTHOR-->
+	<xsd:element name="author" nillable="true">
+		<xsd:annotation>
+			<xsd:documentation>An author's name.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="40"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<!--AUTHORS-->
+	<xsd:element name="authors">
+		<xsd:annotation>
+			<xsd:documentation>The author(s) who created the content of the attachment.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="author" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--AVAILABILITY-DATE-->
+	<xsd:element name="availability-date" type="xsd:date" nillable="true">
+		<xsd:annotation>
+			<xsd:documentation>The date, if 'planned', that the specified Environment and Language is projected to become supported.
+
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<!--AVAILABILITY-SCHEDULE-->
+	<xsd:element name="availability-schedule">
+		<xsd:annotation>
+			<xsd:documentation>Information regarding when the software in the Collection may support a specific Environment and Language that is not currently supported.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="environment"/>
+				<xsd:element ref="language"/>
+				<xsd:element ref="availability-status"/>
+				<xsd:element ref="availability-date"/>
+				<xsd:element ref="alternate-recommendation"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--AVAILABILITY-SCHEDULES-->
+	<xsd:element name="availability-schedules">
+		<xsd:annotation>
+			<xsd:documentation>Information regarding when the software in the Collection may support additional Environments and/or Languages that are not currently supported.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="availability-schedule" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--AVAILABILITY-STATUS-->
+	<xsd:element name="availability-status">
+		<xsd:annotation>
+			<xsd:documentation>Indication of whether the specified Environment and Language will become supported for the Collection.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:enumeration value="unknown"/>
+				<xsd:enumeration value="planned"/>
+				<xsd:enumeration value="not planned"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<!-- BOM-->
+	<xsd:element name="bom">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="bom-value"/>
+				<xsd:element ref="level"/>
+				<xsd:element ref="checksum-type" minOccurs="0"/>
+				<xsd:element ref="checksum-value" minOccurs="0"/>
+				<xsd:element ref="image-size" minOccurs="0"/>
+				<!-- Adding new fields for bom sequence,quantity,description-->
+				<xsd:element ref="bom-sequence" minOccurs="0"/>
+				<xsd:element ref="bom-quantity" minOccurs="0"/>
+				<xsd:element ref="bom-description" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!-- BOMS -->
+	<xsd:element name="boms">
+		<xsd:annotation>
+			<xsd:documentation>Contain Bom records for Physical Media Items.(Bom:- Bill Of Materials)
+                  </xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="bom" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--BOM-VALUE-->
+	<xsd:element name="bom-value">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="25"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<!--BUNDLED-ITEM-->
+	<xsd:element name="bundled-item">
+		<xsd:annotation>
+			<xsd:documentation>A valid Item-ID value.
+
+			</xsd:documentation>
+			<xsd:documentation>item-ID:  A unique ID assigned to a software item within SOAR.
+
+			</xsd:documentation>
+			<xsd:documentation>bundled-item-sequence:  An integer to specify the order of this item in relation to the other items in the bundle.  This value is primarily used to indicate the order in which the items within the bundle might be displayed and/or installed.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="item-ID" type="string-length-1-30" use="required"/>
+			<xsd:attribute name="bundled-item-sequence" type="integer-min-value-1" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<!--BUNDLED-ITEMS-->
+	<xsd:element name="bundled-items">
+		<xsd:annotation>
+			<xsd:documentation>A listing of Item IDs that make up this specific Item ID.  (Optional)
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="bundled-item" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+			<xsd:attribute name="total-number-of-items" type="integer-min-value-1"/>
+		</xsd:complexType>
+	</xsd:element>
+	<!-- CHECKSUM-TYPE-->
+	<xsd:element name="checksum-type">
+		<xsd:annotation>
+			<xsd:documentation>The Compression Utility, if any, that was used to compress the software files.			</xsd:documentation>
+			<xsd:documentation>oid:  Object ID value assigned to a specific reference data entry.  The OID value remains constant while the actual reference data content may change.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="string-length-1-20">
+					<xsd:attribute name="oid" type="string-length-1-10" use="required"/>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<!-- CHECKSUM-VALUE-->
+	<xsd:element name="checksum-value">
+		<xsd:annotation>
+			<xsd:documentation>Value existing in Bill Of Materials.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="50"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<!--CD-CHECKVALUE-->
+	<xsd:element name="cd-checkvalue">
+		<xsd:annotation>
+			<xsd:documentation>If the Item is a CD/DVD the CRC (Cyclic Redundancy Check) value for the item; otherwise blank.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="50"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<!--CD-CHECKVALUES-->
+	<xsd:element name="cd-checkvalues">
+		<xsd:annotation>
+			<xsd:documentation>Multiple cd-checkvalues, in the situation where the item is actually a set of CDs.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="cd-checkvalue" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--CHARACTER-SET-IN-ENGLISH-->
+	<xsd:element name="character-set-in-English" nillable="true">
+		<xsd:annotation>
+			<xsd:documentation>The name of the character set, written in English.  Character set refers to the specific characters representing a specific language.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="40"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<!--CHECKVALUE-->
+	<xsd:element name="checkvalue">
+		<xsd:annotation>
+			<xsd:documentation>A unique value for the file generated by a "checksum"-type of program.  The value is input into SOAR by the HP Item manager, but no systematic validation of the value occurs by the SOAR application.  The value is simply passed on to partners for their use.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="50"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<!--CMDLINE-->
+	<xsd:element name="cmdline" nillable="true">
+		<xsd:annotation>
+			<xsd:documentation>The command line parameters to be used when the file is executed</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="255"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<!--COLLECTION-->
+	<xsd:element name="collection">
+	
+		<xsd:annotation>
+			<xsd:documentation>A collection is a grouping of related software items and their metadata.  A collection is composed of one or more item(s) of software that provide a basic function for an HP product.[Individual items within a collection are distinguished by operating system and/or language classification.]A typical example is a driver for a LaserJet 6P.  There are several different software items to support the various language and environment options.
+
+			</xsd:documentation>
+			<xsd:documentation>collection-ID:  A unique ID assigned to a collection within SOAR.  				</xsd:documentation>
+			<xsd:documentation>state:  The state of a specific version of a Collection within SOAR.
+
+			</xsd:documentation>
+			<xsd:documentation>partner-update-type:  Indicates why the metadata is being sent to the partner.  The value applies to this Collection.  This element indicates whether anything within this Collection has changed since the last data feed to this partner, and if so, how it has changed.
+
+			</xsd:documentation>
+			<xsd:documentation>soar-msg-ID:  A unique ID given to this particular communication to facilitate follow-up between HP and a partner as necessary.
+
+			</xsd:documentation>
+			<xsd:documentation>submittal-type-oid:  A value solely used for SOAR post processing related to legacy, backwards-compatible files.  This OID value corresponds to an indicator of whether or not software file(s) are included with this collection.
+
+		</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+		<xsd:sequence>
+			    <xsd:element ref="company_info"/>
+				<xsd:element ref="collection-title"/>
+				<xsd:element ref="collection-description"/>
+				<xsd:element ref="update-types"/>
+				<xsd:element ref="update-priority"/>
+				<xsd:element ref="update-date"/>
+				<xsd:element ref="software-type"/>
+				<xsd:element ref="product-line"/>
+				<xsd:element ref="contacts"/>
+				<xsd:element ref="compression-utility"/>
+				<xsd:element ref="dms-documents"/>
+				<xsd:element ref="copyright"/>
+				<xsd:element ref="related-collections"/>
+				<xsd:element ref="registration-flag"/>
+				<xsd:element ref="notification-flag"/>
+				<xsd:element ref="flags"/>
+				<xsd:element ref="attachments"/>
+				<xsd:element ref="availability-schedules"/>
+				<xsd:element ref="software-items"/>
+			</xsd:sequence>
+			<xsd:attribute name="collection-ID" type="string-length-1-20" use="required"/>
+			<xsd:attribute name="state" type="state" use="required"/>
+			<xsd:attribute name="partner-update-type" type="partner-update-type" use="required"/>
+			<xsd:attribute name="soar-msg-ID" type="string-length-1-30" use="required"/>
+			<xsd:attribute name="submittal-type-oid" type="string-length-1-10" use="required"/>
+			<xsd:attribute name="submittal-group-oid" type="string-length-1-32" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<!--COLLECTION-DESCRIPTION-->
+	<xsd:element name="collection-description">
+		<xsd:annotation>
+			<xsd:documentation>A textual only Description of this collection.  This Description is generally in English and applies to the entire collection.[Alternate descriptions may also be 'attached' at the collection level.  These 'attached' descriptions are not limited to text-only, and may be in various languages.  Each partner is free to choose which description to use for its specific application.]
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="300"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<!--COLLECTION-TITLE-->
+	<xsd:element name="collection-title">
+		<xsd:annotation>
+			<xsd:documentation>A textual only Title to briefly describe this collection.  This Title is generally in English and applies to the entire collection.  [Alternate titles may also be 'attached' at the collection level.  These 'attached' titles are not limited to text-only, and may be in various languages.  Each partner is free to choose which title to use for its specific application.]
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="150"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<!--COMPRESSION-UTILITY-->
+	<xsd:element name="compression-utility">
+		<xsd:annotation>
+			<xsd:documentation>The Compression Utility, if any, that was used to compress the software files.			</xsd:documentation>
+			<xsd:documentation>oid:  Object ID value assigned to a specific reference data entry.  The OID value remains constant while the actual reference data content may change.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="string-length-1-40">
+					<xsd:attribute name="oid" type="string-length-1-10" use="required"/>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<!--CONTACT-->
+	<xsd:element name="contact">
+		<xsd:annotation>
+			<xsd:documentation>Information regarding a specific contact.
+
+			</xsd:documentation>
+			<xsd:documentation>contact-type:  Type of contact.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="contact-name"/>
+				<xsd:element ref="contact-phone"/>
+				<xsd:element ref="contact-email"/>
+			</xsd:sequence>
+			<xsd:attribute name="contact-type" type="contact-type" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<!--CONTACT-EMAIL-->
+	<xsd:element name="contact-email" nillable="true">
+		<xsd:annotation>
+			<xsd:documentation>The business email address of the contact, if available.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="100"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<!--CONTACT-NAME-->
+	<xsd:element name="contact-name">
+		<xsd:annotation>
+			<xsd:documentation>The name of the contact.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="50"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<!--CONTACT-PHONE-->
+	<xsd:element name="contact-phone">
+		<xsd:annotation>
+			<xsd:documentation>The business phone number of the contact, if available.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="20"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<!--CONTACTS-->
+	<xsd:element name="contacts">
+		<xsd:annotation>
+			<xsd:documentation>Individuals who may be contacted for questions about the Collection.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="contact" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--COPYRIGHT-->
+	<xsd:element name="copyright">
+		<xsd:annotation>
+			<xsd:documentation>Copyright notice(s) that apply.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="hp-copyright-notice"/>
+				<xsd:element ref="additional-copyright-ack"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--CUSTOMER-AVAILABLE-DATE-->
+	<xsd:element name="customer-available-date" type="xsd:date">
+		<xsd:annotation>
+			<xsd:documentation>The date that the software item is authorized to be available for customer order/retrieval; subject to product availability dates.
+
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<!-- CUSTOMS-APPROVED-->
+	<xsd:element name="customs-approved" type="string-value-Yes-No">
+		<xsd:annotation>
+			<xsd:documentation>Whether the orderable-part-id concerned with this item is present in WW-Class Databse or not.
+	</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<!--DIRECTORY-->
+	<xsd:element name="directory">
+		<xsd:annotation>
+			<xsd:documentation>Directory location (path) on a server.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="255"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<!--DISCLOSURE-LEVEL-->
+	<xsd:element name="disclosure-level">
+		<xsd:annotation>
+			<xsd:documentation>The confidentiality of the software outside of HP.
+
+			</xsd:documentation>
+			<xsd:documentation>oid:  Object ID value assigned to a specific reference data entry.  The OID value remains constant while the actual reference data content may change.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="string-length-1-40">
+					<xsd:attribute name="oid" type="string-length-1-10" use="required"/>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<!--DISTRIBUTION-REGION-->
+	<xsd:element name="distribution-region">
+		<xsd:annotation>
+			<xsd:documentation>A specific region.
+
+			</xsd:documentation>
+			<xsd:documentation>oid:  Object ID value assigned to a specific reference data entry.  The OID value remains constant while the actual reference data content may change.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="string-length-1-100">
+					<xsd:attribute name="oid" type="string-length-1-10" use="required"/>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<!--DISTRIBUTION-REGIONS-->
+	<xsd:element name="distribution-regions">
+		<xsd:annotation>
+			<xsd:documentation>Physical regions of the world within which software is distributed.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="distribution-region" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--DMS-DOCUMENT-->
+	<xsd:element name="dms-document">
+		<xsd:annotation>
+			<xsd:documentation>This element contains both the Title of the DMS Document, as recorded in DMS, and the DMS Document ID.
+
+			</xsd:documentation>
+			<xsd:documentation>dms-doc-ID:  The document ID for the DMS document.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="string-length-1-255">
+					<xsd:attribute name="dms-doc-ID" type="string-length-1-40" use="required"/>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<!--DMS-DOCUMENTS-->
+	<xsd:element name="dms-documents">
+		<xsd:annotation>
+			<xsd:documentation>DMS document(s) that have been identified to have information relevant to the Collection.  The DMS document itself is not included in the data feed.  A partner who wishes to reference any DMS document must establish a separate feed from the DMS.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="dms-document" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--DOCUMENT-TYPE-->
+	<xsd:element name="document-type">
+		<xsd:annotation>
+			<xsd:documentation>Indication of the type of attachment.
+
+			</xsd:documentation>
+			<xsd:documentation>oid:  Object ID value assigned to a specific reference data entry.  The OID value remains constant while the actual reference data content may change.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="string-length-1-40">
+					<xsd:attribute name="oid" type="string-length-1-10" use="required"/>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<!--DOCUMENT-TYPES-->
+	<xsd:element name="document-types">
+		<xsd:annotation>
+			<xsd:documentation>Indication of the types of the attachment.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="document-type" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--ENVIRONMENT-->
+	<xsd:element name="environment">
+		<xsd:annotation>
+			<xsd:documentation>Specific environment value.  (Usually a specific operating system.)			</xsd:documentation>
+			<xsd:documentation>oid:  Object ID value assigned to a specific reference data entry.  The OID value remains constant while the actual reference data content may change.
+
+			</xsd:documentation>
+			<xsd:documentation>environment-base:  A higher-level grouping of the Environment values.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="string-length-1-80">
+					<xsd:attribute name="oid" type="string-length-1-10" use="required"/>
+					<xsd:attribute name="environment-base" type="string-length-1-40" use="required"/>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<!--ENVIRONMENT-MSR-->
+	<xsd:element name="environment-msr">
+		<xsd:annotation>
+			<xsd:documentation>Operating Systems or other environments, and any minimum service release requirement for the given software item.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="environment"/>
+				<xsd:element ref="minimum-service-release" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--ENVIRONMENTS-->
+	<xsd:element name="environments">
+		<xsd:annotation>
+			<xsd:documentation>Operating Systems or other environments.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="environment-msr" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--FILE-TYPE-->
+	<xsd:element name="file-type">
+		<xsd:annotation>
+			<xsd:documentation>An indication of the type of file(s) associated with the software set.  Generally the classification is by multiple versus single files in a set, and whether the files automatically extract and install.
+
+			</xsd:documentation>
+			<xsd:documentation>oid:  Object ID value assigned to a specific reference data entry.  The OID value remains constant while the actual reference data content may change.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="string-length-1-100">
+					<xsd:attribute name="oid" type="string-length-1-10" use="required"/>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<!--FILENAME-->
+	<xsd:element name="filename" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>The name of the file.  [Filenames should not include special characters or spaces.]
+
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<!--FILESIZE-->
+	<xsd:element name="filesize">
+		<xsd:annotation>
+			<xsd:documentation>Size of the file, in bytes.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:long">
+				<xsd:minInclusive value="1"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<!--FLAG-->
+	<xsd:element name="flag">
+		<xsd:annotation>
+			<xsd:documentation>The name of a property that may have a 'yes' or 'no' indicator.
+
+			</xsd:documentation>
+			<xsd:documentation>oid:  Object ID value assigned to a specific reference data entry.  The OID value remains constant while the actual reference data content may change.
+
+			</xsd:documentation>
+			<xsd:documentation>flag-value:  A 'Yes' or 'No' value to indicate the setting for the referenced flag.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="string-length-1-40">
+					<xsd:attribute name="oid" type="string-length-1-10" use="required"/>
+					<xsd:attribute name="flag-value" type="string-value-Yes-No" use="required"/>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<!--FLAGS-->
+	<xsd:element name="flags" nillable="true">
+		<xsd:annotation>
+			<xsd:documentation>Listing of valid flag (property) entries.  Flags are used to quickly add property values that only require a 'yes' or 'no' value setting.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="flag" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--FORMAT-->
+	<xsd:element name="format" type="xsd:string">
+		<xsd:annotation>
+			<xsd:documentation>The format (e.g., doc, html, xml, txt, zip, pdf, xls, exe) of the content.			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<!--FULFILLMENT-DOCK-DATE-->
+	<xsd:element name="fulfillment-dock-date" type="xsd:date" nillable="true">
+		<xsd:annotation>
+			<xsd:documentation>Projected date that Fulfillment Partners can expect an initial shipment from HP.  The shipment may be either a drop shipment of product or a Gold Master for Manufacturing.This date is not updated to indicate subsequent shipments, and is not specific to a partner.
+
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<!--FULFILLMENT-METHOD-->
+	<xsd:element name="fulfillment-method">
+		<xsd:annotation>
+			<xsd:documentation>Indicates the method by which physical inventory will be managed.
+
+			</xsd:documentation>
+			<xsd:documentation>oid:  Object ID value assigned to a specific reference data entry.  The OID value remains constant while the actual reference data content may change.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="string-length-1-40">
+					<xsd:attribute name="oid" type="string-length-1-10" use="required"/>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<!--FULL-EXTRACT-->
+	<xsd:element name="company_info" type="string-length-1-10"/>
+		
+	<xsd:element name="full-extract" type="string-value-Yes-No">
+		<xsd:annotation>
+			<xsd:documentation>Indication of whether the contents of this XML file represent a full extract of all SOAR content for the partner, or only a content that has changed since the last software feed to the partner.
+
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<!--HP-AGENT-NOTE-->
+	<xsd:element name="hp-agent-note" nillable="true">
+		<xsd:annotation>
+			<xsd:documentation>Note provided by a Fulfillment Partner for HP phone/email agents.  These notes can help the agent to know more about the item status, such as when the item may be available to order/ship, etc.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="2000"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<!--HP-COPYRIGHT-NOTICE-->
+	<xsd:element name="hp-copyright-notice" nillable="true">
+		<xsd:annotation>
+			<xsd:documentation>HP Copyright notice
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="38"/>
+				<xsd:maxLength value="140"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<!--HP-CUSTOMER-NOTE-->
+	<xsd:element name="hp-customer-note" nillable="true">
+		<xsd:annotation>
+			<xsd:documentation>Note provided by a Fulfillment Partner that may be viewable or communicated directly to an HP customer (via voice, web site, email, etc.) regarding the Item.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="2000"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<xsd:element name="image-size">
+		<xsd:annotation>
+			<xsd:documentation>Value existing in Bill Of Materials.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="10"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<!-- Adding new fields for bom sequence,quantity,description-->
+	<!--BOM-SEQUENCE-->
+	<xsd:element name="bom-sequence" type="string-length-1-10">
+	</xsd:element>
+	
+		<!--BOM-QUANTITY-->
+	<xsd:element name="bom-quantity">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="2"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	
+		<!--BOM-DESCRIPTION-->
+	<xsd:element name="bom-description" type="string-length-1-50">
+	</xsd:element>
+	<!--INSTALL-FORMAT-->
+	<xsd:element name="install-format">
+		<xsd:annotation>
+			<xsd:documentation>
+
+			</xsd:documentation>
+			<xsd:documentation>oid:  Object ID value assigned to a specific reference data entry.  The OID value remains constant while the actual reference data content may change.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="string-length-1-50">
+					<xsd:attribute name="oid" type="string-length-1-10" use="required"/>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<!--INSTALL-FORMATS-->
+	<xsd:element name="install-formats" nillable="true">
+		<xsd:annotation>
+			<xsd:documentation>
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="install-format" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--INSTALLATION-FILENAME-->
+	<xsd:element name="installation-filename" nillable="true">
+		<xsd:annotation>
+			<xsd:documentation>If applicable, identifies the relative location (directory and filename) of the file installation program that the customer needs to run to install the software, after downloading and extracting it onto their system.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="255"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<!--IS-SUSPENDED-->
+	<xsd:element name="is-suspended" type="string-value-Yes-No">
+		<xsd:annotation>
+			<xsd:documentation>If 'Yes' the software item should be temporarily unavailable to HP customers.
+
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<!--ITEM-SUSPENDED-->
+	<xsd:element name="item-suspended">
+		<xsd:annotation>
+			<xsd:documentation>Indication whether an item is temporarily suspended.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="is-suspended"/>
+				<xsd:element ref="suspended-reason"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--ITEM-URL-->
+	<xsd:element name="item-url" nillable="true">
+		<xsd:annotation>
+			<xsd:documentation>An optional property utilized by some web sites to "jump" to a specific hard-coded web page (URL) when this software is selected.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="500"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<!--LANGUAGE-->
+	<xsd:element name="language">
+		<xsd:annotation>
+			<xsd:documentation>A specific language entry.
+
+			</xsd:documentation>
+			<xsd:documentation>language-iso-code:  The ISO code corresponding to the LANGUAGE-IN-ENGLISH and LOCAL-LANGUAGE values.
+
+			</xsd:documentation>
+			<xsd:documentation>oid:  Object ID value assigned to a specific reference data entry.  The OID value remains constant while the actual reference data content may change.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="language-in-English"/>
+				<xsd:element ref="character-set-in-English"/>
+				<xsd:element ref="local-language"/>
+				<xsd:element ref="local-character-set"/>
+			</xsd:sequence>
+			<xsd:attribute name="oid" type="string-length-1-10" use="required"/>
+			<xsd:attribute name="language-iso-code" type="string-length-2-3" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<!--LANGUAGE-IN-ENGLISH-->
+	<xsd:element name="language-in-English">
+		<xsd:annotation>
+			<xsd:documentation>The name of the language, written in English.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="40"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<!--LANGUAGES-->
+	<xsd:element name="languages">
+		<xsd:annotation>
+			<xsd:documentation>Language information.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="language" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--LANGUAGES-IN-FILE-->
+	<xsd:element name="languages-in-file">
+		<xsd:annotation>
+			<xsd:documentation>Language information.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="language" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="is-digitally-signed" type="string-value-Yes-No">
+		<xsd:annotation>
+			<xsd:documentation>If 'Yes' the software file has to be signed.
+
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<!-- LEVEL-->
+	<xsd:element name="level">
+		<xsd:annotation>
+			<xsd:documentation>A Bill Of Materials Level.
+
+			</xsd:documentation>
+			<xsd:documentation>oid:  Object ID value assigned to a specific reference data entry.  The OID value remains constant while the actual reference data content may change.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="string-length-1-100">
+					<xsd:attribute name="oid" type="string-length-1-10" use="required"/>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<!--LINKED-CONTENT-->
+	<xsd:element name="linked-content">
+		<xsd:annotation>
+			<xsd:documentation>This element indicates the relative directory location for where the software file or attachment is located after the compressed file has been extracted.  The location is relative to where the XML file is located.
+
+			</xsd:documentation>
+			<xsd:documentation>soar-dto:  Used solely for SOAR internal and post processing for legacy file generation.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="string-length-1-n">
+					<xsd:attribute name="soar-dto" type="string-length-1-n"/>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<!--LOCAL-CHARACTER-SET-->
+	<xsd:element name="local-character-set" nillable="true">
+		<xsd:annotation>
+			<xsd:documentation>The name of the character set, written in the respective language.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="40"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<!--LOCAL-LANGUAGE-->
+	<xsd:element name="local-language">
+		<xsd:annotation>
+			<xsd:documentation>The name of the language, written in the respective language.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="40"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<!--MEDIA-TYPE-->
+	<xsd:element name="media-type">
+		<xsd:annotation>
+			<xsd:documentation>A specific media.
+
+			</xsd:documentation>
+			<xsd:documentation>oid:  Object ID value assigned to a specific reference data entry.  The OID value remains constant while the actual reference data content may change.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="string-length-1-40">
+					<xsd:attribute name="oid" type="string-length-1-10" use="required"/>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<!--MEDIA-TYPES-->
+	<xsd:element name="media-types">
+		<xsd:annotation>
+			<xsd:documentation>Defines the media via which an item may be distributed.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="media-type" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--MINIMUM-SERVICE-RELEASE-->
+	<xsd:element name="minimum-service-release">
+		<xsd:annotation>
+			<xsd:documentation>A textual value to indicate the minimum service release (if any) that is required for a specific software item to environment relationship.  For example, a specific software item may require that 'support pack 2' is installed if running on a Windows 2000 environment (operating system).  Existence of the minimum-service-release element is entirely optional, and only included if a minimum service release is applicable.
+
+			</xsd:documentation>
+			<xsd:documentation>oid:  Object ID value assigned to a specific reference data entry.  The OID value remains constant while the actual reference data content may change.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="string-length-1-40">
+					<xsd:attribute name="oid" type="string-length-1-10" use="required"/>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<!--NOTIFICATION-FLAG-->
+	<xsd:element name="notification-flag" type="string-value-Yes-No">
+		<xsd:annotation>
+			<xsd:documentation>Specifies whether the Collection should be part of the HP CeS Subscription Services notification process.
+
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<!--OBSOLETE-DATE-->
+	<xsd:element name="obsolete-date" type="xsd:date" nillable="true">
+		<xsd:annotation>
+			<xsd:documentation>The date the software collection is scheduled to be, or was, obsolete to all customers.  On this date, the items associated with this collection should no longer be available to customers via the partner channel.
+
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<!-- ORDERABLE-PART-ID-->
+	<xsd:element name="orderable-part-ID">
+		<xsd:annotation>
+			<xsd:documentation>The ID used to look up in ww-class database.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="30"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<!-- ORDER-LINK-->
+	<xsd:element name="order-link">
+		<xsd:annotation>
+			<xsd:documentation>Base Url.
+			</xsd:documentation>
+			<xsd:documentation>oid:  Object ID value assigned to a specific reference data entry.  The OID value remains constant while the actual reference data content may change.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="string-length-1-n">
+					<xsd:attribute name="oid" type="string-length-1-10" use="required"/>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<!-- ORDER-LINKS-->
+	<xsd:element name="order-links">
+		<xsd:annotation>
+			<xsd:documentation>Physical regions of the world within which software is distributed.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="order-link" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--PARTNER-AVAILABILITY-->
+	<xsd:element name="partner-availability">
+		<xsd:annotation>
+			<xsd:documentation>Indication of the ability to place an order for a physical item with a specific partner.  Indicates the readiness of the partner.
+
+			<xsd:documentation>partner-id:  Unique ID to identify a partner.
+
+			</xsd:documentation>
+				<xsd:documentation>item-availability:  Indication of whether or not the physical Item is orderable by an HP customer.
+
+			</xsd:documentation>
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="hp-agent-note"/>
+				<xsd:element ref="hp-customer-note"/>
+			</xsd:sequence>
+			<xsd:attribute name="partner-id" type="string-length-1-32" use="required"/>
+			<xsd:attribute name="item-availability" type="item-availability" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<!--PARTNER-FEEDBACK-->
+	<xsd:element name="partner-feedback">
+		<xsd:annotation>
+			<xsd:documentation>Information received from SOAR partners regarding the Item.  Each feedback record includes a Partner-ID attribute to identify the partner providing the information.  This information is shared with other partners to allow coordination of a united customer experience.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="web-access"/>
+				<xsd:element ref="physical-availability"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--PHYSICAL-AVAILABILITY-->
+	<xsd:element name="physical-availability">
+		<xsd:annotation>
+			<xsd:documentation>Indication of the ability to place an order for a physical item.  Indicates the readiness of the partner.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="partner-availability" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--PHYSICAL-FULFILLMENT-->
+	<xsd:element name="physical-fulfillment">
+		<xsd:annotation>
+			<xsd:documentation>If applicable, contains information specific to physical fulfillment partners.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="fulfillment-method"/>
+				<xsd:element ref="fulfillment-dock-date"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--PRICE-->
+	<xsd:element name="price">
+		<xsd:annotation>
+			<xsd:documentation>The value and currency.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="price-value"/>
+				<xsd:element ref="price-currency"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--PRICE-COMMENT-->
+	<xsd:element name="price-comment" nillable="true">
+		<xsd:annotation>
+			<xsd:documentation>A comment entered by the HP Item manager regarding the pricing.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="255"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<!--PRICE-CURRENCY-->
+	<xsd:element name="price-currency">
+		<xsd:annotation>
+			<xsd:documentation>The currency associated with the Price Value.  Typically this is US Dollar.
+
+			</xsd:documentation>
+			<xsd:documentation>oid:  Object ID value assigned to a specific reference data entry.  The OID value remains constant while the actual reference data content may change.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="string-length-1-30">
+					<xsd:attribute name="oid" type="string-length-1-10" use="required"/>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<!--PRICE-TYPE-->
+	<xsd:element name="price-type">
+		<xsd:annotation>
+			<xsd:documentation>The type of pricing scheme utilized for this Item.
+
+			</xsd:documentation>
+			<xsd:documentation>oid:  Object ID value assigned to a specific reference data entry.  The OID value remains constant while the actual reference data content may change.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="string-length-1-10">
+					<xsd:attribute name="oid" type="string-length-1-10" use="required"/>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<!--PRICE-VALUE-->
+	<xsd:element name="price-value">
+		<xsd:annotation>
+			<xsd:documentation>The price of the item.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:decimal">
+				<xsd:minInclusive value="0"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<!--PRICING-->
+	<xsd:element name="pricing">
+		<xsd:annotation>
+			<xsd:documentation>Pricing information.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="price-type"/>
+				<xsd:element ref="price-comment"/>
+				<xsd:element ref="price"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--PRODUCT-->
+	<xsd:element name="product">
+		<xsd:annotation>
+			<xsd:documentation>Indicates the product set to the item.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="string-length-1-300">
+					<xsd:attribute name="type" type="product-type" use="required"/>
+					<xsd:attribute name="oid" type="string-length-1-10" use="required"/>
+					<xsd:attribute name="deleted-product" type="string-value-Yes-No" use="optional"/>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<!--PRODUCT-OID-->
+	<xsd:element name="product-oid">
+		<xsd:annotation>
+			<xsd:documentation>Indicates the product set to the item.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="string-length-1-300">
+					<xsd:attribute name="type" type="product-type" use="required"/>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<!--PRODUCT-ENVIRONMENTS-RELATION-->
+	<xsd:element name="product-environments-relation">
+		<xsd:annotation>
+			<xsd:documentation>A specific product (product number), and related environment values, that the software item is linked to.  Multiple environment values may exist for each product number.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="product-oid"/>
+				<xsd:element ref="environments" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--PRODUCT-LINE-->
+	<xsd:element name="product-line">
+		<xsd:annotation>
+			<xsd:documentation>The HP Product Line code associated with the HP organization responsible for the collection.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="2"/>
+				<xsd:maxLength value="2"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<!--PRODUCTS-ENVIRONMENTS-SUPPORTED-->
+	<xsd:element name="products-environments-supported">
+		<xsd:annotation>
+			<xsd:documentation>The products, and related environments, that the software item is applicable to.  Links are to specific Product Number and Environments combinations.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="product-environments-relation" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--PRODUCTS-SUPPORTED-->
+	<xsd:element name="products-supported">
+		<xsd:annotation>
+			<xsd:documentation>The products, and related environments, that the software item is applicable to.  Links are to specific Product Number and Environments combinations.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="product" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--PROTOCOL-->
+	<xsd:element name="protocol">
+		<xsd:annotation>
+			<xsd:documentation>Protocol of the server, such as ftp or http.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="5"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<!--REGISTRATION-FLAG-->
+	<xsd:element name="registration-flag" type="string-value-Yes-No">
+		<xsd:annotation>
+			<xsd:documentation>Specifies whether the Collection should have a registration requirement before a customer can receive the software.
+
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<!--RELATED-COLLECTION-->
+	<xsd:element name="related-collection">
+		<xsd:annotation>
+			<xsd:documentation>Identifies a collection that is related to the given collection.
+
+			</xsd:documentation>
+			<xsd:documentation>collection-ID:  A unique ID assigned to a collection within SOAR.				</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="relationship"/>
+			</xsd:sequence>
+			<xsd:attribute name="collection-ID" type="string-length-1-20" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<!--RELATED-COLLECTIONS-->
+	<xsd:element name="related-collections">
+		<xsd:annotation>
+			<xsd:documentation>Allows for zero or more collections to be related to the given collection.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="related-collection" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--RELATIONSHIP-->
+	<xsd:element name="relationship">
+		<xsd:annotation>
+			<xsd:documentation>Indicates the type of relationship the related collection has to the given collection  Examples of a relationship include prerequisite, upsell, etc.
+
+			</xsd:documentation>
+			<xsd:documentation>oid:  Object ID value assigned to a specific reference data entry.  The OID value remains constant while the actual reference data content may change.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="string-length-1-40">
+					<xsd:attribute name="oid" type="string-length-1-10" use="required"/>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<!--REPLACES-ITEM-ID-->
+	<xsd:element name="replaces-item-ID" nillable="true">
+		<xsd:annotation>
+			<xsd:documentation>The Item ID being replaced by this item.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="30"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<!--REVIEW-FLAG-->
+	<xsd:element name="review-flag" type="string-value-Yes-No">
+		<xsd:annotation>
+			<xsd:documentation>Indication of whether or not it is recommended that the HP customer review the content of the attachment before retrieving/ordering the software.
+
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<!--SERVER-->
+	<xsd:element name="server">
+		<xsd:annotation>
+			<xsd:documentation>The Server information.
+
+			</xsd:documentation>
+			<xsd:documentation>oid:  Object ID value assigned to a specific reference data entry.  The OID value remains constant while the actual reference data content may change.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="protocol"/>
+				<xsd:element ref="server-name"/>
+			</xsd:sequence>
+			<xsd:attribute name="oid" type="string-length-1-10" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<!--SERVER-DIRECTORY-->
+	<xsd:element name="server-directory">
+		<xsd:annotation>
+			<xsd:documentation>Server and directory definition.
+
+			</xsd:documentation>
+			<xsd:documentation>file-delivery-confirmation:  Indication of whether the server partner has confirmed that the file is actually at the indicated location.  If the partner does not provide a confirmation service, the value will be "No".  If the partner does provide a confirmation service the value will indicate whether the file is there.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="server"/>
+				<xsd:element ref="directory" maxOccurs="unbounded"/>
+			</xsd:sequence>
+			<xsd:attribute name="file-delivery-confirmation" type="string-value-Yes-No" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<!--SERVER-LOCATIONS-->
+	<xsd:element name="server-locations">
+		<xsd:annotation>
+			<xsd:documentation>Indication of where the file is located on hp servers.  The file may be retrieved from these location(s) or simply pointed to by the partner application.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="server-directory" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--SERVER-NAME-->
+	<xsd:element name="server-name">
+		<xsd:annotation>
+			<xsd:documentation>Server identification, such as ftp.hp.com.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="40"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<!--SEVERITY-->
+	<xsd:element name="severity">
+		<xsd:annotation>
+			<xsd:documentation>
+
+			</xsd:documentation>
+			<xsd:documentation>oid:  Object ID value assigned to a specific reference data entry.  The OID value remains constant while the actual reference data content may change.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="string-length-1-50">
+					<xsd:attribute name="oid" type="string-length-1-10" use="required"/>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<!--SOAR-ACCESS-URL-->
+	<xsd:element name="soar-access-url">
+		<xsd:annotation>
+			<xsd:documentation>A URL to access the SOAR application directly to retrieve the file.  Specific permission is required for the partner to access SOAR directly.  [Access to SOAR is NOT intended for direct, real-time access by applications utilized by HP customers.]  [Server information must precede the information contained in this element to complete the URL.  Contact the SOAR team for the correct server information.]
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="2000"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<!--SOFTWARE-FILE-->
+	<xsd:element name="software-file">
+		<xsd:annotation>
+			<xsd:documentation>Information about an individual software file.
+
+			</xsd:documentation>
+			<xsd:documentation>file-sequence:  The number, in sequence, assigned to each file in a software set.
+
+			</xsd:documentation>
+			<xsd:documentation>partner-update-type:  Indicates why the metadata is being sent to the partner.  The value applies to this software file.  This element indicates whether this software file has changed since the last data feed to this partner, and if so, how it has changed.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="checkvalue"/>
+				<xsd:element ref="cmdline"/>
+				<xsd:element ref="filename"/>
+				<xsd:element ref="filesize"/>
+				<xsd:element ref="server-locations"/>
+				<xsd:element ref="soar-access-url"/>
+				<xsd:element ref="flags"/>
+				<xsd:element ref="languages-in-file"/>
+				<xsd:element ref="is-digitally-signed"/>
+				<xsd:element ref="linked-content" minOccurs="0"/>
+			</xsd:sequence>
+			<xsd:attribute name="file-sequence" type="integer-min-value-1" use="required"/>
+			<xsd:attribute name="partner-update-type" type="partner-update-type" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<!--SOFTWARE-FILES-->
+	<xsd:element name="software-files">
+		<xsd:annotation>
+			<xsd:documentation>Information about a set of software files.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="software-set" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--SOFTWARE-ITEM-->
+	<xsd:element name="software-item">
+		<xsd:annotation>
+			<xsd:documentation>Defines specific software.
+
+			</xsd:documentation>
+			<xsd:documentation>item-ID:  A unique ID assigned to a software item within SOAR.  Values may be valid HP product / assembly / part numbers, or may be assigned by SOAR.  An Item is composed of set(s) of software that provide a specific function for an HP product.  [Individual sets within an Item are distinguished by file type.]
+
+			</xsd:documentation>
+			<xsd:documentation>state:  The state of a specific version of an Item within SOAR.
+
+			</xsd:documentation>
+			<xsd:documentation>partner-update-type:  Indicates why the metadata is being sent to the partner.  The value applies to this Item.  This element indicates whether this Item has changed since the last data feed to this partner, and if so, how it has changed.
+
+			</xsd:documentation>
+			<xsd:documentation>from-toad:  A value solely used for SOAR internal and post processing purposes.
+
+			</xsd:documentation>
+			<xsd:documentation>toad-OID:  The ID assigned by TOAD to a software item that was migrated to SOAR.  This is a temporary value that will only be available until the Subscription Services partner transitions to using the chronicle-ID value.  No partner should start to use this value!
+
+			</xsd:documentation>
+			<xsd:documentation>chronicle-ID:  An ID assigned to a software item within SOAR.  This value is automatically assigned by the SOAR application, and remains constant for a given item, even as Item-ID is changed.
+
+			</xsd:documentation>
+			<xsd:documentation>soar-description-overriden:  A value solely used for SOAR internal and post processing purposes.
+
+			</xsd:documentation>
+			<xsd:documentation>soar-distinct-environments: A text-based field that contains a list of the distinct environment values for the software item; each environment value is comma separated.  This is a temporary solution, that may yield undesirable results (due to implications of using actual text values rather than oid values) and may be discontinued in the future.  Delivery partners should derive this information themselves from the information already in the XML file.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="version"/>
+				<xsd:element ref="orderable-part-ID" minOccurs="0"/>
+				<xsd:element ref="customs-approved" minOccurs="0"/>
+				<xsd:element ref="boms" minOccurs="0"/>
+				<xsd:element ref="install-formats"/>
+				<xsd:element ref="replaces-item-ID"/>
+				<xsd:element ref="supersede-info"/>
+				<xsd:element ref="disclosure-level"/>
+				<xsd:element ref="media-types"/>
+				<xsd:element ref="update-types"/>
+				<xsd:element ref="severity"/>
+				<xsd:element ref="update-date"/>
+				<xsd:element ref="customer-available-date"/>
+				<xsd:element ref="obsolete-date"/>
+				<xsd:element ref="products-supported"/>
+				<xsd:element ref="products-environments-supported"/>
+				<xsd:element ref="taxonomy-categorizations"/>
+				<xsd:element ref="item-suspended"/>
+				<xsd:element ref="flags"/>
+				<xsd:element ref="languages"/>
+				<xsd:element ref="distribution-regions" minOccurs="0"/>
+				<xsd:element ref="pricing"/>
+				<xsd:element ref="software-password"/>
+				<xsd:element ref="installation-filename"/>
+				<xsd:element ref="physical-fulfillment" minOccurs="0"/>
+				<xsd:element ref="bundled-items"/>
+				<xsd:element ref="cd-checkvalues" minOccurs="0"/>
+				<xsd:element ref="order-links" minOccurs="0"/>
+				<xsd:element ref="item-url"/>
+				<xsd:element ref="partner-feedback"/>
+				<xsd:element ref="iadd-properties"/>
+				<xsd:element ref="software-files"/>
+				<xsd:element ref="attachments"/>
+			</xsd:sequence>
+			<xsd:attribute name="item-ID" type="string-length-1-30" use="required"/>
+			<xsd:attribute name="state" type="state" use="required"/>
+			<xsd:attribute name="partner-update-type" type="partner-update-type" use="required"/>
+			<xsd:attribute name="from-toad" type="string-value-Yes-No"/>
+			<xsd:attribute name="toad-OID" type="string-length-1-11"/>
+			<xsd:attribute name="chronicle-ID" type="string-length-1-16" use="required"/>
+			<xsd:attribute name="soar-description-overridden" type="string-value-Yes-No"/>
+			<xsd:attribute name="languages-at-file-level" type="string-value-Yes-No"/>
+			<xsd:attribute name="product-level-sensitive" type="string-value-Yes-No"/>
+			<xsd:attribute name="soar-distinct-environments" type="string-length-1-n"/>
+		</xsd:complexType>
+	</xsd:element>
+	<!--SOFTWARE-ITEMS-->
+	<xsd:element name="software-items">
+		<xsd:annotation>
+			<xsd:documentation>A group of software items.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="software-item" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--SOFTWARE-PASSWORD-->
+	<xsd:element name="software-password" nillable="true">
+		<xsd:annotation>
+			<xsd:documentation>Password, if any, required for the customer to access/download/operate the software.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="40"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<!--SOFTWARE-SET-->
+	<xsd:element name="software-set">
+		<xsd:annotation>
+			<xsd:documentation>Grouping of 1 to N files that go together to be complete.
+
+			</xsd:documentation>
+			<xsd:documentation>total-number-of-files:  The total number of files in a software set.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="file-type"/>
+				<xsd:element ref="software-file" maxOccurs="unbounded"/>
+			</xsd:sequence>
+			<xsd:attribute name="total-number-of-files" type="integer-min-value-1" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<!--SOFTWARE-SUB-TYPE-->
+	<xsd:element name="software-sub-type">
+		<xsd:annotation>
+			<xsd:documentation>An optional, further clarification regarding the software type.
+
+			</xsd:documentation>
+			<xsd:documentation>oid:  Object ID value assigned to a specific reference data entry.  The OID value remains constant while the actual reference data content may change.
+
+			</xsd:documentation>
+			<xsd:documentation>hovertext: Hover text for Software Sub type.
+			</xsd:documentation>
+
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+
+				<xsd:extension base="string-length-1-256">
+
+					<xsd:attribute name="oid" type="string-length-1-10" use="required"/>
+					
+					<xsd:attribute name="hovertext" type="string-length-1-250" use="optional"/>
+
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<!--SOFTWARE-TYPE-->
+	<xsd:element name="software-type">
+		<xsd:annotation>
+			<xsd:documentation>The type of software contained in the collection, such as driver, BIOS, firmware, etc.
+
+			</xsd:documentation>
+			<xsd:documentation>publish-software-type:  An indicator for partners regarding whether the items in the Collection are better classified by Software Type or Environment.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="sw-type"/>
+				<xsd:element ref="software-sub-type" minOccurs="0"/>
+			</xsd:sequence>
+			<xsd:attribute name="publish-software-type" type="string-value-Yes-No" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<!--SUPERSEDE-INFO-->
+	<xsd:element name="supersede-info">
+		<xsd:annotation>
+			<xsd:documentation>This element contains information related to whether this item supersedes any other item, or is superseded by any other item.  Supersede indicates simply that a more recent version has been created.  Multiple versions may all be available to a customer.
+
+			</xsd:documentation>
+			<xsd:documentation>superseded:  A 'Yes"-"No" value to indicate if this item has been superseded by another item.  Superseded means that a newer version of the item is available for the customer, even though this item may still be available also.
+
+			</xsd:documentation>
+			<xsd:documentation>software-item-group:  This attribute identifies items within the collection that are part of the same versioning sequence; meaning one item superseded another.  A common value in this attribute is how to identify items in the same group.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="supersedes-item-ID" minOccurs="0"/>
+				<xsd:element ref="superseded-by-item-ID" minOccurs="0"/>
+			</xsd:sequence>
+			<xsd:attribute name="superseded" type="string-value-Yes-No" use="required"/>
+			<xsd:attribute name="software-item-group" type="string-length-1-30" use="required"/>
+		</xsd:complexType>
+	</xsd:element>
+	<!--SUPERSEDED-BY-ITEM-ID-->
+	<xsd:element name="superseded-by-item-ID">
+		<xsd:annotation>
+			<xsd:documentation>The Item ID that superseded this item.
+
+			</xsd:documentation>
+			<xsd:documentation>superseded-on-date:  The date that this item was superseded by the referenced item-ID.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="string-length-1-30">
+					<xsd:attribute name="superseded-on-date" type="xsd:date" use="required"/>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<!--SUPERSEDES-ITEM-ID-->
+	<xsd:element name="supersedes-item-ID">
+		<xsd:annotation>
+			<xsd:documentation>The Item ID that this item superseded.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="30"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<!--SUSPENDED-REASON-->
+	<xsd:element name="suspended-reason" nillable="true">
+		<xsd:annotation>
+			<xsd:documentation>Textual explanation of why the software item is suspended, if applicable.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="255"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<!--SW-TYPE-->
+	<xsd:element name="sw-type">
+		<xsd:annotation>
+			<xsd:documentation>A specific software type.
+
+			</xsd:documentation>
+			<xsd:documentation>oid:  Object ID value assigned to a specific reference data entry.  The OID value remains constant while the actual reference data content may change.
+
+			</xsd:documentation>
+			<xsd:documentation>hovertext: Hover text for Software Type.
+			</xsd:documentation>
+
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+
+				<xsd:extension base="string-length-1-256">
+
+					<xsd:attribute name="oid" type="string-length-1-10" use="required"/>
+					
+					<xsd:attribute name="hovertext" type="string-length-1-250" use="optional"/>
+
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<!--UPDATE-DATE-->
+	<xsd:element name="update-date" type="xsd:dateTime">
+		<xsd:annotation>
+			<xsd:documentation>The latest date that changes were made to this Collection / Item.
+
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<!--UPDATE-PRIORITY-->
+	<xsd:element name="update-priority">
+		<xsd:annotation>
+			<xsd:documentation>The priority assigned by the HP Collection manager regarding the urgency to get this collection processed and the information available to HP customers.
+
+			</xsd:documentation>
+			<xsd:documentation>oid:  Object ID value assigned to a specific reference data entry.  The OID value remains constant while the actual reference data content may change.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="string-length-1-40">
+					<xsd:attribute name="oid" type="string-length-1-10" use="required"/>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<!--UPDATE-TYPE-->
+	<xsd:element name="update-type" nillable="true">
+		<xsd:annotation>
+			<xsd:documentation>An indication, provided by the HP Collection manager, regarding why/what has changed about this Collection.
+
+			</xsd:documentation>
+			<xsd:documentation>oid:  Object ID value assigned to a specific reference data entry.  The OID value remains constant while the actual reference data content may change.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="string-length-1-40">
+					<xsd:attribute name="oid" type="string-length-1-10" use="required"/>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<!--UPDATE-TYPES-->
+	<xsd:element name="update-types">
+		<xsd:annotation>
+			<xsd:documentation>One or more indications, provided by the HP Collection manager, regarding why/what has changed about this Collection.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="update-type" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--VERSION-->
+	<xsd:element name="version">
+		<xsd:annotation>
+			<xsd:documentation>The software version of the Item as defined by the respective HP software generation organization.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="25"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<!--WEB-ACCESS-->
+	<xsd:element name="web-access">
+		<xsd:annotation>
+			<xsd:documentation>The URL for a web site containing reference to the Software Item.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="web-access-url" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--WEB-ACCESS-URL-->
+	<xsd:element name="web-access-url">
+		<xsd:annotation>
+			<xsd:documentation>The URL(s) for web sites containing reference to the Software Item.
+
+			</xsd:documentation>
+			<xsd:documentation>partner-id:  Unique ID to identify a partner.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="string-length-1-2000">
+					<xsd:attribute name="partner-id" type="string-length-1-32" use="required"/>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<!--IADD-PROPERTIES-->
+	<xsd:element name="iadd-properties" nillable="true">
+		<xsd:annotation>
+			<xsd:documentation>Defines specific iadd Properties.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="driver-name"/>
+				<xsd:element ref="driver-models"/>
+				<xsd:element ref="driver-release-date"/>
+				<xsd:element ref="driver-installation-method"/>
+				<xsd:element ref="primary-inf-file"/>
+				<xsd:element ref="driver-network-compatible"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--DRIVER-NAME-->
+	<xsd:element name="driver-name">
+		<xsd:annotation>
+			<xsd:documentation>iADD specific. Driver name taken from primary INF file.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="50"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<!--DRIVER-MODELS-->
+	<xsd:element name="driver-models">
+		<xsd:annotation>
+			<xsd:documentation>iADD specific. A group of driver models.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="driver-model" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!--DRIVER-MODEL-->
+	<xsd:element name="driver-model">
+		<xsd:annotation>
+			<xsd:documentation>iADD specific. Identification string returned by the printer firmware.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="string-length-1-50">
+					<xsd:attribute name="oid" type="string-length-1-10" use="required"/>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<!--DRIVER-RELEASE-DATE-->
+	<xsd:element name="driver-release-date" type="xsd:date">
+		<xsd:annotation>
+			<xsd:documentation>iADD specific. Date that a driver was released by the lab.
+
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<!--DRIVER-INSTALLATION-METHOD-->
+	<xsd:element name="driver-installation-method">
+		<xsd:annotation>
+			<xsd:documentation>iADD specific. How the driver will be installed.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:simpleContent>
+				<xsd:extension base="string-length-1-50">
+					<xsd:attribute name="oid" type="string-length-1-10" use="required"/>
+				</xsd:extension>
+			</xsd:simpleContent>
+		</xsd:complexType>
+	</xsd:element>
+	<!--PRIMARY-INF-FILE-->
+	<xsd:element name="primary-inf-file">
+		<xsd:annotation>
+			<xsd:documentation>iADD specific. Name of the INF file that should be used to install printer driver software.
+
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"/>
+				<xsd:maxLength value="50"/>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:element>
+	<!--DRIVER-NETWORK-COMPATIBLE-->
+	<xsd:element name="driver-network-compatible" type="string-value-Yes-No">
+		<xsd:annotation>
+			<xsd:documentation>Driver installation file/method can be used over a network.
+
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<!--ZZ-simpleTYPE definitions-->
+	<xsd:simpleType name="contact-type">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Software Generation Contact"/>
+			<xsd:enumeration value="SOAR Collection Contact"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="integer-min-value-1">
+		<xsd:restriction base="xsd:integer">
+			<xsd:minInclusive value="1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="item-availability">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Orderable"/>
+			<xsd:enumeration value="Unorderable"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="partner-update-type">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="DELETED"/>
+			<xsd:enumeration value="MODIFIED"/>
+			<xsd:enumeration value="NEW"/>
+			<xsd:enumeration value="UPTODATE"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="state">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="APPROVED"/>
+			<xsd:enumeration value="OBSOLETE"/>
+			<xsd:enumeration value="DRAFT"/>
+			<xsd:enumeration value="REVIEW"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="string-length-1-10">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="10"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="string-length-1-11">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="11"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="string-length-1-16">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="16"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="string-length-1-20">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="20"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="string-length-1-30">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="30"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="string-length-1-32">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="32"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="string-length-1-40">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="40"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="string-length-1-80">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="80"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="string-length-1-50">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="50"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="string-length-1-100">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="100"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="string-length-1-200">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="200"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="string-length-1-255">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="255"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="string-length-1-300">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="300"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="string-length-1-2000">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+			<xsd:maxLength value="2000"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="string-length-1-n">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="string-length-2-2">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="2"/>
+			<xsd:maxLength value="2"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="string-length-2-3">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="2"/>
+			<xsd:maxLength value="3"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="string-value-Yes-No">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Yes"/>
+			<xsd:enumeration value="No"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="product-type">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="PMSC"/>
+			<xsd:enumeration value="PMSF"/>
+			<xsd:enumeration value="PMS"/>
+			<xsd:enumeration value="PMM"/>
+			<xsd:enumeration value="PMN"/>
+			<xsd:enumeration value="PMPI"/>
+			<!--Support Product Category-->
+			<!--Support Product Sub-Category (Family)-->
+			<!--Product Series-->
+			<!--Product Name (Model)-->
+			<!--Product Number-->
+			<!--Platform ID-->
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:simpleType name="string-length-1-250">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"></xsd:minLength>
+			<xsd:maxLength value="250"></xsd:maxLength>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	
+		<xsd:simpleType name="string-length-1-256">
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="1"></xsd:minLength>
+			<xsd:maxLength value="256"></xsd:maxLength>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<!-- For TAXONOMY -->
+	<xsd:element name="categorization-key" type="xsd:string"/>
+	<xsd:element name="categorization-value" type="xsd:string"/>
+	<xsd:element name="taxonomy-categorization">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="categorization-key"/>
+				<xsd:element ref="categorization-value"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="taxonomy-categorizations">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="taxonomy-categorization" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

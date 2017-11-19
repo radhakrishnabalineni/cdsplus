@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:proj="http://www.hp.com/cdsplus" xmlns:sel="java:com.hp.cdsplus.wds.workItem.CDSPSelection" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sub="java:com.hp.cdsplus.wds.workItem.CDSPSubscription" xmlns:xutils="com.hp.cdsplus.util.xml.XMLUtils">
+	
+<sub limit="50"
+                manualRepub="manual_republish.txt"
+                server="http://cdsplus.austin.hp.com/cadence/app/"
+                subscription="manual/hpcom_201"
+                workingDir="/opt/ais/app/applications/reference_client/data/hp_manuals/">
+                <namedDestination name="ReleaseManager"
+                                        class="com.hp.cdsplus.wds.destination.ReleaseManagerDestination"
+                                        contentArea="ctg"
+                                        maxPackageCount="100"
+                                        maxPackageSize="100"
+                                        username="ctg3"
+                                        dest_path="/var/opt/web/whp-web/rlsmgr/ftp-dropoff/"
+                                        password="KT1OtRI?"
+                                        dir="releaseManager"
+                                        server="sftp://rlsmgr.corp.hp.com"
+                                        verify="some $x in sub:headers( concat( 'http://h10032.www1.hp.com/ctg/Manual/',$dest ))/headers/header[ @name = 'content-length' ] satisfies $x/text() = $size"
+                                        prefix="Manual/"
+                                        job="UPDATE PROD"/>
+
+                <selection select="/document/file_name/proj:ref"
+                           source="concat( /node()/@*:base, @xlink:href )">
+                  <destination name="ReleaseManager" />
+                </selection>
+        </sub>
+</config>

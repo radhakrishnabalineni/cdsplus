@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" xmlns:proj="http://www.hp.com/cdsplus" xmlns:dctm="http://www.documentum.com" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <xs:import namespace="http://www.hp.com/cdsplus" schemaLocation="marketinghhocontent_proj.xsd"/>
+  <xs:import namespace="http://www.w3.org/1999/xlink" schemaLocation="common_xlink.xsd"/>
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="common_xml.xsd"/>
+  <xs:element name="result">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="proj:ref"/>
+      </xs:sequence>
+      <xs:attribute name="considered" use="required" type="xs:integer"/>
+      <xs:attribute name="count" use="required" type="xs:integer"/>
+      <xs:attribute ref="xml:base" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="content">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="c_hho_marketing_doc"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+<xs:element name="projectref">
+    <xs:complexType>
+      <xs:attribute ref="xlink:type" use="required"/>
+      <xs:attribute ref="xlink:href" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="c_hho_marketing_doc">
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:element ref="title"/>
+        <xs:element ref="generic"/>
+        <xs:element ref="customizable"/>
+        <xs:element ref="how.to"/>
+        <xs:element ref="print.go"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="title" type="xs:NCName"/>
+  <xs:element name="generic" type="section"/>
+  <xs:element name="customizable">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="get.started.link"/>
+        <xs:element ref="activity.description"/>
+        <xs:element ref="activity.instructions"/>
+        <xs:element ref="activity.materials"/>
+        <xs:element ref="media.type"/>
+        <xs:element ref="finished.size"/>
+        <xs:element ref="artist"/>
+        <xs:element ref="supplier"/>
+        <xs:element ref="feature.thumbnail"/>
+        <xs:element ref="graphic.thumbnail"/>
+        <xs:element ref="graphic.large"/>
+        <xs:element ref="source.artwork"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="how.to" >
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="activity.description"/>
+        <xs:element ref="section"/>
+        <xs:element ref="downloadable.art"/>
+        <xs:element ref="feature.thumbnail"/>
+        <xs:element ref="graphic.thumbnail"/>
+        <xs:element ref="graphic.large"/>
+        <xs:element ref="source.artwork"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="print.go" >
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="activity.description"/>
+        <xs:element ref="activity.materials"/>
+        <xs:element ref="activity.instructions"/>
+        <xs:element ref="media.type"/>
+        <xs:element ref="finished.size"/>
+        <xs:element ref="artist"/>
+        <xs:element ref="supplier"/>
+        <xs:element ref="downloadable.art"/>
+        <xs:element ref="feature.thumbnail"/>
+        <xs:element ref="graphic.thumbnail"/>
+        <xs:element ref="graphic.large"/>
+        <xs:element ref="source.artwork"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="get.started.link" type="section"/>
+  <xs:element name="activity.description" type="section"/>
+  <xs:element name="downloadable.art" type="section"/>
+  <xs:element name="activity.instructions" type="section"/>
+  <xs:element name="activity.materials" type="section"/>
+  <xs:element name="media.type" type="section"/>
+  <xs:element name="finished.size" type="section"/>
+  <xs:element name="artist" type="section"/>
+  <xs:element name="supplier" type="section"/>
+  <xs:element name="feature.thumbnail" type="section"/>
+  <xs:element name="graphic.thumbnail" type="section"/>
+  <xs:element name="graphic.large" type="section"/>
+  <xs:element name="source.artwork" type="section"/>
+  <xs:element name="section" type="section"/>
+  <xs:complexType name="section">
+    <xs:sequence>
+            <xs:element ref="para"/>
+      <xs:element ref="heading"/>
+    </xs:sequence>
+    <xs:attribute name="is-link" use="required" type="xs:NCName"/>
+    <xs:attribute name="reuse" use="required" type="xs:NCName"/>
+  </xs:complexType>
+ 
+  <xs:element name="para">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="heading">
+    <xs:complexType>
+      <xs:attribute name="toc" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

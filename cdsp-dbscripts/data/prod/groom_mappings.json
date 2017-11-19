@@ -1,0 +1,7 @@
+{ "_id" : { "$oid" : "52ca49505553a74c27e767e6" }, "contentType" : "supportcontent", "subscription" : "odsxml", "groomName" : "ods_grooms" }
+{ "_id" : { "$oid" : "52ca49515553a74c27e767e7" }, "contentType" : "supportcontent", "subscription" : "hpgtxml", "groomName" : "wc-astro_grooms" }
+{ "_id" : { "$oid" : "52ca49525553a74c27e767e8" }, "contentType" : "supportcontent", "subscription" : "xml", "groomName" : "wc-astro_grooms" }
+{ "_id" : { "$oid" : "52ca49525553a74c27e767e9" }, "contentType" : "supportcontent", "subscription" : "xml_hpconnected", "groomName" : "wc-astro_grooms" }
+{ "_id" : { "$oid" : "52ca49535553a74c27e767ea" }, "contentType" : "supportcontent", "subscription" : "bscxml", "groomName" : "bsc_grooms" }
+{ "_id" : { "$oid" : "52ca49535553a74c27e767eb" }, "contentType" : "supportcontent", "subscription" : "xml_supportcontent_properties", "groomName" : "wc-astro_grooms" }
+{ "_id" : { "$oid" : "52ca49545553a74c27e767ec" }, "contentType" : "marketinghhocontent", "subscription" : "xml", "groomName" : "wc-astro_grooms" }

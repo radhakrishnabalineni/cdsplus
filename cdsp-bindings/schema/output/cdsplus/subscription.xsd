@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:app1="http://www.w3.org/1999/xlink" xmlns:app2="http://www.hp.com/cdsplus">
+  <xs:import namespace="http://www.w3.org/1999/xlink" schemaLocation="subscription1.xsd" />
+  <xs:import namespace="http://www.hp.com/cdsplus" schemaLocation="subscription2.xsd" />
+   <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd" />
+  <xs:element name="result">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="app2:ref" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:attribute name="considered" type="xs:string" />
+      <xs:attribute name="count" type="xs:string" />
+      <xs:attribute ref="xml:base" />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="result" />
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

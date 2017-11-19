@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="cdsp-bindings" basedir="." default="all">
+
+	<property environment="env" />
+	<property name="dist.dir" value="dist" />
+	<property name="input.concentra.jar" value="${dist.dir}/concentra-input-schema-bindings.jar" />
+	<property name="input.soar.jar" value="${dist.dir}/soar-input-schema-bindings.jar" />
+	<property name="input.msc.jar" value="${dist.dir}/msc-input-schema-bindings.jar"/>
+	<property name="output.msc.jar" value="${dist.dir}/msc-output-schema-bindings.jar" />
+	<property name="output.concentra.jar" value="${dist.dir}/concentra-output-schema-bindings.jar" />
+	<property name="output.soar.jar" value="${dist.dir}/soar-output-schema-bindings.jar" />
+	<property name="output.cdsplus.jar" value="${dist.dir}/cdsplus-output-schema-bindings.jar" />
+	<property name="lib.dir" value="${basedir}/lib" />
+	<property name="src.dir" value="${basedir}/src" />
+	<property name="src.concentra.dir" value="${basedir}/src/com/hp/concentra" />
+	<property name="src.soar.dir" value="${basedir}/src/com/hp/soar" />
+	<property name="src.cdsplus.dir" value="${basedir}/src/com/hp/cdsplus" />
+	<property name="build.dir" value="${basedir}/build" />
+	<property name="build.concentra.classes.dir" value="${build.dir}/concentra" />
+	<property name="build.soar.classes.dir" value="${build.dir}/soar" />
+	<property name="build.cdsplus.classes.dir" value="${build.dir}/cdsplus" />
+	<property name="build.msc.classes.dir" value="${build.dir}/richmedia" />
+	<property name="concentra.input.schema.dir" value="${basedir}/schema/input/concentra" />
+	<property name="concentra.input.schema.pkg.dir" value="com.hp.concentra.bindings.input.schema" />
+	<property name="soar.input.schema.dir" value="${basedir}/schema/input/soar/" />
+	<property name="soar.input.schema.pkg.dir" value="com.hp.soar.bindings.input.schema" />
+	<property name="concentra.output.schema.dir" value="${basedir}/schema/output/concentra" />
+	<property name="concentra.output.schema.pkg.dir" value="com.hp.concentra.bindings.output.schema" />
+	<property name="soar.output.schema.dir" value="${basedir}/schema/output/soar/" />
+	<property name="soar.output.schema.pkg.dir" value="com.hp.soar.bindings.output.schema" />
+	<property name="cdsplus.output.schema.dir" value="${basedir}/schema/output/cdsplus" />
+	<property name="cdsplus.output.schema.pkg.dir" value="com.hp.cdsplus.bindings.output.schema" />
+	<property name="msc.input.schema.dir" value="${basedir}/schema/input/richmedia"/>
+	<property name="msc.input.schema.pkg.dir" value="com.hp.msc.bindings.input.schema"/>
+	<property name="msc.output.schema.dir" value="${basedir}/schema/output/richmedia" />
+	<property name="msc.output.schema.pkg.dir" value="com.hp.msc.bindings.output.schema" />
+	<property name="src.msc.dir" value="${basedir}/src/com/hp/msc" />
+
+
+
+	<path id="lib.class.path">
+		<fileset dir="${lib.dir}">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+
+	<taskdef name="xjc" classname="com.sun.tools.xjc.XJCTask">
+		<classpath>
+			<fileset dir="${lib.dir}" includes="*.jar" />
+		</classpath>
+	</taskdef>
+
+	<target name="Soarjaxbclasses">
+			<delete dir="${soar.input.schema.pkg.dir}" />
+			<mkdir dir="${soar.input.schema.pkg.dir}/soar" />
+			<delete dir="${soar.output.schema.pkg.dir}" />
+			<mkdir dir="${soar.output.schema.pkg.dir}/soar" />
+			<xjc schema="${soar.input.schema.dir}/soar-software-feed-vE4.xsd" destdir="src" package="${soar.input.schema.pkg.dir}.soar"/>
+			<xjc schema="${soar.output.schema.dir}/soar-software-feed.xsd" destdir="src" package="${soar.output.schema.pkg.dir}.soar"/>
+	</target>
+
+	<target name="Concentrajaxbclasses">
+			<delete dir="${concentra.input.schema.pkg.dir}" />
+			<mkdir dir="${concentra.input.schema.pkg.dir}/library" />
+		    <mkdir dir="${concentra.input.schema.pkg.dir}/contentfeedback" />
+		    <mkdir dir="${concentra.input.schema.pkg.dir}/generalpurpose" />
+		    <mkdir dir="${concentra.input.schema.pkg.dir}/manual" />
+		    <mkdir dir="${concentra.input.schema.pkg.dir}/marketingconsumer" />
+		    <mkdir dir="${concentra.input.schema.pkg.dir}/marketinghho" />
+		    <mkdir dir="${concentra.input.schema.pkg.dir}/marketingstandard" />
+		    <mkdir dir="${concentra.input.schema.pkg.dir}/support" />
+		    <mkdir dir="${concentra.input.schema.pkg.dir}/productsetup" />
+		
+			<xjc schema="${concentra.input.schema.dir}/library.xsd" destdir="src" package="${concentra.input.schema.pkg.dir}.library"/>
+			<xjc schema="${concentra.input.schema.dir}/contentfeedback.xsd" destdir="src" package="${concentra.input.schema.pkg.dir}.contentfeedback"/>
+			<xjc schema="${concentra.input.schema.dir}/generalpurpose.xsd" destdir="src" package="${concentra.input.schema.pkg.dir}.generalpurpose"/>
+			<xjc schema="${concentra.input.schema.dir}/manual.xsd" destdir="src" package="${concentra.input.schema.pkg.dir}.manual"/>
+			<xjc schema="${concentra.input.schema.dir}/marketingconsumer.xsd" destdir="src" package="${concentra.input.schema.pkg.dir}.marketingconsumer"/>
+			<xjc schema="${concentra.input.schema.dir}/marketinghho.xsd" destdir="src" package="${concentra.input.schema.pkg.dir}.marketinghho"/>
+			<xjc schema="${concentra.input.schema.dir}/marketingstandard.xsd" destdir="src" package="${concentra.input.schema.pkg.dir}.marketingstandard"/>
+			<xjc schema="${concentra.input.schema.dir}/support.xsd" destdir="src" package="${concentra.input.schema.pkg.dir}.support"/>
+			<xjc schema="${concentra.input.schema.dir}/productsetup.xsd" destdir="src" package="${concentra.input.schema.pkg.dir}.productsetup"/>
+
+			<delete dir="${concentra.output.schema.pkg.dir}" />
+			<mkdir dir="${concentra.output.schema.pkg.dir}/marketingstandard" />
+			<mkdir dir="${concentra.output.schema.pkg.dir}/library" />
+		    <mkdir dir="${concentra.output.schema.pkg.dir}/manual" />
+	    	<mkdir dir="${concentra.output.schema.pkg.dir}/marketingnaconsumer" />
+			<mkdir dir="${concentra.output.schema.pkg.dir}/support" /> 
+		    <mkdir dir="${concentra.output.schema.pkg.dir}/contentfeedback" />
+	        <mkdir dir="${concentra.output.schema.pkg.dir}/generalpurpose" /> 
+			<mkdir dir="${concentra.output.schema.pkg.dir}/productsetup" /> 
+			<mkdir dir="${concentra.output.schema.pkg.dir}/marketinghho" />
+	
+			<xjc schema="${concentra.output.schema.dir}/marketingstandard.xsd" destdir="src" package="${concentra.output.schema.pkg.dir}.marketingstandard"/>
+			<xjc schema="${concentra.output.schema.dir}/library.xsd" destdir="src" package="${concentra.output.schema.pkg.dir}.library"/>
+			<xjc schema="${concentra.output.schema.dir}/manual.xsd" destdir="src" package="${concentra.output.schema.pkg.dir}.manual"/>
+		    <xjc schema="${concentra.output.schema.dir}/marketingnaconsumer.xsd" destdir="src" package="${concentra.output.schema.pkg.dir}.marketingnaconsumer"/>
+	        <xjc schema="${concentra.output.schema.dir}/support.xsd" destdir="src" package="${concentra.output.schema.pkg.dir}.support" /> 
+			<xjc schema="${concentra.output.schema.dir}/contentfeedback.xsd" destdir="src" package="${concentra.output.schema.pkg.dir}.contentfeedback" /> 
+		    <xjc schema="${concentra.output.schema.dir}/generalpurpose.xsd" destdir="src" package="${concentra.output.schema.pkg.dir}.generalpurpose" /> 
+			<xjc schema="${concentra.output.schema.dir}/productsetup.xsd" destdir="src" package="${concentra.output.schema.pkg.dir}.productsetup" /> 
+			<xjc schema="${concentra.output.schema.dir}/marketinghho.xsd" destdir="src" package="${concentra.output.schema.pkg.dir}.marketinghho" /> 
+
+	</target>
+
+	<target name="cdsplusjaxbclasses">
+			<delete dir="${cdsplus.output.schema.pkg.dir}" />
+			<mkdir dir="${cdsplus.output.schema.pkg.dir}/cadence" />
+			<mkdir dir="${cdsplus.output.schema.pkg.dir}/subscription" />
+			<mkdir dir="${cdsplus.output.schema.pkg.dir}/expattachment" />
+			<mkdir dir="${cdsplus.output.schema.pkg.dir}/expattachmentlist" />
+			<mkdir dir="${cdsplus.output.schema.pkg.dir}/expversions" />
+			<mkdir dir="${cdsplus.output.schema.pkg.dir}/subcheck" />
+			<mkdir dir="${cdsplus.output.schema.pkg.dir}/expandtrue" />
+			<mkdir dir="${cdsplus.output.schema.pkg.dir}/regions" />
+			<mkdir dir="${cdsplus.output.schema.pkg.dir}/productmaster" />
+			<mkdir dir="${cdsplus.output.schema.pkg.dir}/librarycontent" />
+			<mkdir dir="${cdsplus.output.schema.pkg.dir}/productmastercache" />
+			<mkdir dir="${cdsplus.output.schema.pkg.dir}/stylesheetsubscription" />
+			
+			<xjc schema="${cdsplus.output.schema.dir}/cadence_app.xsd" destdir="src" package="${cdsplus.output.schema.pkg.dir}.cadence"/>
+			<xjc schema="${cdsplus.output.schema.dir}/subscription.xsd" destdir="src" package="${cdsplus.output.schema.pkg.dir}.subscription"/>
+			<xjc schema="${cdsplus.output.schema.dir}/exp_attachment.xsd" destdir="src" package="${cdsplus.output.schema.pkg.dir}.expattachment"/>
+			<xjc schema="${cdsplus.output.schema.dir}/exp_attachment_list.xsd" destdir="src" package="${cdsplus.output.schema.pkg.dir}.expattachmentlist"/>
+			<xjc schema="${cdsplus.output.schema.dir}/Exp-versions.xsd" destdir="src" package="${cdsplus.output.schema.pkg.dir}.expversions"/>
+			<xjc schema="${cdsplus.output.schema.dir}/subcheck.xsd" destdir="src" package="${cdsplus.output.schema.pkg.dir}.subcheck"/>
+			<xjc schema="${cdsplus.output.schema.dir}/regions.xsd" destdir="src" package="${cdsplus.output.schema.pkg.dir}.regions"/>
+			<xjc schema="${cdsplus.output.schema.dir}/productmaster.xsd" destdir="src" package="${cdsplus.output.schema.pkg.dir}.productmaster"/>
+			<xjc schema="${cdsplus.output.schema.dir}/librarycontent.xsd" destdir="src" package="${cdsplus.output.schema.pkg.dir}.librarycontent"/>
+			<xjc schema="${cdsplus.output.schema.dir}/PMasterCache.xsd" destdir="src" package="${cdsplus.output.schema.pkg.dir}.productmastercache"/>
+			<xjc schema="${cdsplus.output.schema.dir}/stylesheetsubscription.xsd" destdir="src" package="${cdsplus.output.schema.pkg.dir}.stylesheetsubscription"/>
+ 
+	</target>
+
+	<target name="Mscjaxbclasses">
+				<delete dir="${msc.input.schema.pkg.dir}" />
+				<mkdir dir="${msc.input.schema.pkg.dir}/richmedia" />
+				<delete dir="${msc.output.schema.pkg.dir}" />
+				<mkdir dir="${msc.output.schema.pkg.dir}/richmedia" />
+				<xjc schema="${msc.input.schema.dir}/richmedia.xsd" destdir="src" package="${msc.input.schema.pkg.dir}.richmedia"/>
+				<xjc schema="${msc.output.schema.dir}/richmedia.xsd" destdir="src" package="${msc.output.schema.pkg.dir}.richmedia"/>
+	</target>
+
+	<target name="all" depends="clean,init,Soarjaxbclasses,Concentrajaxbclasses,cdsplusjaxbclasses,Mscjaxbclasses,compile.concentra.bindings,compile.soar.bindings,compile.cdsplus.bindings,compile.msc.bindings,prepareJar,cleanup,package" />
+
+	<target name="clean">
+		<delete dir="${build.dir}" />
+		<delete dir="${build.concetra.classes.dir}" />
+		<delete dir="${build.soar.classes.dir}" />
+		<delete dir="${build.cdsplus.classes.dir}" />
+		<delete file="${dist.dir}/${input.concentra.jar}" />
+		<delete file="${dist.dir}/${output.concentra.jar}" />
+		<delete file="${dist.dir}/${input.soar.jar}" />
+		<delete file="${dist.dir}/${output.soar.jar}" />
+		<delete file="${dist.dir}/${output.cdsplus.jar}" />
+		<delete dir="${build.msc.classes.dir}"/>
+		<delete file="${dist.dir}/${input.msc.jar}" />
+		<delete file="${dist.dir}/${output.msc.jar}" />
+		<delete dir="${src.dir}" /> 
+	</target>
+
+	<target name="init">
+		<mkdir dir="${build.concentra.classes.dir}" />
+		<mkdir dir="${build.soar.classes.dir}" />
+		<mkdir dir="${build.cdsplus.classes.dir}" />
+		<mkdir dir="${build.msc.classes.dir}" />
+		<mkdir dir="${src.dir}" />
+	</target>
+		
+	<target name="cleanup">
+		<delete dir="${soar.output.schema.pkg.dir}" />
+		<delete dir="${soar.input.schema.pkg.dir}" />
+		<delete dir="${concentra.output.schema.pkg.dir}" />
+		<delete dir="${concentra.input.schema.pkg.dir}" />
+		<delete dir="${cdsplus.output.schema.pkg.dir}" /> 
+		<delete dir="${msc.output.schema.pkg.dir}" />
+		<delete dir="${msc.input.schema.pkg.dir}" />
+		<delete dir="${build.dir}" />
+	</target>
+
+	<target name="compile.concentra.bindings">
+		<copy file="${basedir}/schema/output/package-info.java" tofile="${src.concentra.dir}/bindings/output/schema/library/package-info.java" overwrite="true"/>
+		<replace file="${src.concentra.dir}/bindings/output/schema/library/package-info.java" token="packagename" value="com.hp.concentra.bindings.output.schema.library"/>
+
+		<copy file="${basedir}/schema/output/package-info.java" tofile="${src.concentra.dir}/bindings/output/schema/marketingstandard/package-info.java" overwrite="true"/>
+		<replace file="${src.concentra.dir}/bindings/output/schema/marketingstandard/package-info.java" token="packagename" value="com.hp.concentra.bindings.output.schema.marketingstandard"/>
+		
+		<copy file="${basedir}/schema/output/package-info.java" tofile="${src.concentra.dir}/bindings/output/schema/manual/package-info.java" overwrite="true"/>
+		<replace file="${src.concentra.dir}/bindings/output/schema/manual/package-info.java" token="packagename" value="com.hp.concentra.bindings.output.schema.manual"/>
+		
+		<copy file="${basedir}/schema/output/package-info.java" tofile="${src.concentra.dir}/bindings/output/schema/marketingnaconsumer/package-info.java" overwrite="true"/>
+	    <replace file="${src.concentra.dir}/bindings/output/schema/marketingnaconsumer/package-info.java" token="packagename" value="com.hp.concentra.bindings.output.schema.marketingnaconsumer"/>
+
+		<copy file="${basedir}/schema/output/package-info.java" tofile="${src.concentra.dir}/bindings/output/schema/generalpurpose/package-info.java" overwrite="true"/>
+		<replace file="${src.concentra.dir}/bindings/output/schema/generalpurpose/package-info.java" token="packagename" value="com.hp.concentra.bindings.output.schema.generalpurpose"/>
+
+		<copy file="${basedir}/schema/output/package-info.java" tofile="${src.concentra.dir}/bindings/output/schema/contentfeedback/package-info.java" overwrite="true"/>
+		<replace file="${src.concentra.dir}/bindings/output/schema/contentfeedback/package-info.java" token="packagename" value="com.hp.concentra.bindings.output.schema.contentfeedback"/>
+
+		<copy file="${basedir}/schema/output/package-info.java" tofile="${src.concentra.dir}/bindings/output/schema/support/package-info.java" overwrite="true"/>
+		<replace file="${src.concentra.dir}/bindings/output/schema/support/package-info.java" token="packagename" value="com.hp.concentra.bindings.output.schema.support"/>
+
+		<copy file="${basedir}/schema/output/package-info.java" tofile="${src.concentra.dir}/bindings/output/schema/productsetup/package-info.java" overwrite="true"/>
+		<replace file="${src.concentra.dir}/bindings/output/schema/productsetup/package-info.java" token="packagename" value="com.hp.concentra.bindings.output.schema.productsetup"/>
+
+		<copy file="${basedir}/schema/output/package-info.java" tofile="${src.concentra.dir}/bindings/output/schema/marketinghho/package-info.java" overwrite="true"/>
+		<replace file="${src.concentra.dir}/bindings/output/schema/marketinghho/package-info.java" token="packagename" value="com.hp.concentra.bindings.output.schema.marketinghho"/>
+		
+		<javac srcdir="${src.concentra.dir}" destdir="${build.concentra.classes.dir}" debug="on" fork="true">
+			<classpath refid="lib.class.path" />
+		</javac>
+	</target>
+
+	<target name="compile.soar.bindings">
+		<copy file="${basedir}/schema/output/soar/package-info.java" tofile="${src.soar.dir}/bindings/output/schema/soar/package-info.java" overwrite="true"/>
+		<replace file="${src.soar.dir}/bindings/output/schema/soar/package-info.java" token="packagename" value="com.hp.soar.bindings.output.schema.soar"/>
+
+		<javac srcdir="${src.soar.dir}" destdir="${build.soar.classes.dir}" debug="on" fork="true">
+			<classpath refid="lib.class.path" />
+		</javac>
+	</target>
+
+	<target name="compile.cdsplus.bindings">
+		<copy file="${basedir}/schema/output/package-info.java" tofile="${src.cdsplus.dir}/bindings/output/schema/cadence/package-info.java" overwrite="true"/>
+		<replace file="${src.cdsplus.dir}/bindings/output/schema/cadence/package-info.java" token="packagename" value="com.hp.cdsplus.bindings.output.schema.cadence"/>
+		<copy file="${basedir}/schema/output/package-info.java" tofile="${src.cdsplus.dir}/bindings/output/schema/subscription/package-info.java" overwrite="true"/>
+		<replace file="${src.cdsplus.dir}/bindings/output/schema/subscription/package-info.java" token="packagename" value="com.hp.cdsplus.bindings.output.schema.subscription"/>
+		<copy file="${basedir}/schema/output/package-info.java" tofile="${src.cdsplus.dir}/bindings/output/schema/expattachment/package-info.java" overwrite="true"/>
+		<replace file="${src.cdsplus.dir}/bindings/output/schema/expattachment/package-info.java" token="packagename" value="com.hp.cdsplus.bindings.output.schema.expattachment"/>
+		<copy file="${basedir}/schema/output/package-info.java" tofile="${src.cdsplus.dir}/bindings/output/schema/expattachmentlist/package-info.java" overwrite="true"/>
+		<replace file="${src.cdsplus.dir}/bindings/output/schema/expattachmentlist/package-info.java" token="packagename" value="com.hp.cdsplus.bindings.output.schema.expattachmentlist"/>
+		<copy file="${basedir}/schema/output/package-info.java" tofile="${src.cdsplus.dir}/bindings/output/schema/expversions/package-info.java" overwrite="true"/>
+		<replace file="${src.cdsplus.dir}/bindings/output/schema/expversions/package-info.java" token="packagename" value="com.hp.cdsplus.bindings.output.schema.expversions"/>
+		<copy file="${basedir}/schema/output/package-info.java" tofile="${src.cdsplus.dir}/bindings/output/schema/subcheck/package-info.java" overwrite="true"/>
+		<replace file="${src.cdsplus.dir}/bindings/output/schema/subcheck/package-info.java" token="packagename" value="com.hp.cdsplus.bindings.output.schema.subcheck"/>
+		<copy file="${basedir}/schema/output/package-info.java" tofile="${src.cdsplus.dir}/bindings/output/schema/expandtrue/package-info.java" overwrite="true"/>
+		<replace file="${src.cdsplus.dir}/bindings/output/schema/expandtrue/package-info.java" token="packagename" value="com.hp.cdsplus.bindings.output.schema.expandtrue"/>
+		<copy file="${basedir}/schema/output/package-info.java" tofile="${src.cdsplus.dir}/bindings/output/schema/regions/package-info.java" overwrite="true"/>
+		<replace file="${src.cdsplus.dir}/bindings/output/schema/regions/package-info.java" token="packagename" value="com.hp.cdsplus.bindings.output.schema.regions"/>
+
+		<copy file="${basedir}/schema/output/package-info.java" tofile="${src.cdsplus.dir}/bindings/output/schema/productmaster/package-info.java" overwrite="true"/>
+		<replace file="${src.cdsplus.dir}/bindings/output/schema/productmaster/package-info.java" token="packagename" value="com.hp.cdsplus.bindings.output.schema.productmaster"/>
+
+		<copy file="${basedir}/schema/output/package-info.java" tofile="${src.cdsplus.dir}/bindings/output/schema/productmastercache/package-info.java" overwrite="true"/>
+		<replace file="${src.cdsplus.dir}/bindings/output/schema/productmastercache/package-info.java" token="packagename" value="com.hp.cdsplus.bindings.output.schema.productmastercache"/>
+
+		<copy file="${basedir}/schema/output/package-info.java" tofile="${src.cdsplus.dir}/bindings/output/schema/stylesheetsubscription/package-info.java" overwrite="true"/>
+		<replace file="${src.cdsplus.dir}/bindings/output/schema/stylesheetsubscription/package-info.java" token="packagename" value="com.hp.cdsplus.bindings.output.schema.stylesheetsubscription"/>
+		
+		<javac srcdir="${src.cdsplus.dir}" destdir="${build.cdsplus.classes.dir}" debug="on" fork="true">
+			<classpath refid="lib.class.path" />
+		</javac>
+	</target>
+
+	<target name="compile.msc.bindings">
+			<copy file="${basedir}/schema/output/package-info.java" tofile="${src.msc.dir}/bindings/output/schema/richmedia/package-info.java" overwrite="true"/>
+			<replace file="${src.msc.dir}/bindings/output/schema/richmedia/package-info.java" token="packagename" value="com.hp.msc.bindings.output.schema.richmedia"/>
+			<javac srcdir="${src.msc.dir}" destdir="${build.msc.classes.dir}" debug="on" fork="true">
+				<classpath refid="lib.class.path" />
+			</javac>
+	</target>
+
+	<target name="prepareJar" description="Creating jar File">
+		<jar jarfile="${input.concentra.jar}" basedir="${build.concentra.classes.dir}" includes="com/hp/concentra/bindings/input/**/*.class"/>
+		<jar jarfile="${input.soar.jar}" basedir="${build.soar.classes.dir}" includes="com/hp/soar/bindings/input/**/*.class" />
+		<jar jarfile="${output.concentra.jar}" basedir="${build.concentra.classes.dir}" includes="com/hp/concentra/bindings/output/**/*.class"/>
+		<jar jarfile="${output.soar.jar}" basedir="${build.soar.classes.dir}" includes="com/hp/soar/bindings/output/**/*.class" />
+		<jar jarfile="${output.cdsplus.jar}" basedir="${build.cdsplus.classes.dir}" includes="com/hp/cdsplus/bindings/output/**/*.class" />
+		<jar jarfile="${input.msc.jar}" basedir="${build.msc.classes.dir}" includes="com/hp/msc/bindings/input/**/*.class"/>
+		<jar jarfile="${output.msc.jar}" basedir="${build.msc.classes.dir}" includes="com/hp/msc/bindings/output/**/*.class"/>
+	</target>
+
+
+	<target name="package" description="Packaging the application jars">
+		<zip destfile="${dist.dir}/Bindings.zip">
+			<zipfileset file="${input.concentra.jar}" prefix="bindings/lib"/>
+			<zipfileset file="${input.soar.jar}" prefix="bindings/lib"/>
+			<zipfileset file="${output.concentra.jar}" prefix="bindings/lib"/>
+			<zipfileset file="${output.soar.jar}" prefix="bindings/lib"/>
+			<zipfileset file="${output.cdsplus.jar}" prefix="bindings/lib"/>
+			<zipfileset file="${input.msc.jar}" prefix="bindings/lib"/>
+			<zipfileset file="${output.msc.jar}" prefix="bindings/lib"/>
+			<zipfileset dir="${lib.dir}" prefix="bindings/lib"/>
+		</zip>
+	</target>
+
+</project>

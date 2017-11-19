@@ -1,0 +1,38 @@
+## APPLICATION CONFIG PROPERTIES
+## republish mode configuration property
+IS_REPUBLISH_MODE=false
+REPUBLISH_FILE=oids.txt
+## delta mode configuration property
+
+IS_DELTA_MODE=true
+## LOG4J CONFIG LOCATION
+LOG4J_LOCATION=config/log4j.xml
+
+## SQL QUERIES FILE LOCATION
+SQL_FILE_LOCATION=config/pmloader-sql.properties
+
+## HPSM PROPERTIES
+HPSM_PROPERTIES_LOCATION=config/Hpsm-Ticket.properties
+
+##
+## ITG ENV
+##DB_URL=jdbc:oracle:thin:@(DESCRIPTION =(ADDRESS_LIST =(ADDRESS = (PROTOCOL = TCP)(HOST = gvu0599.austin.hp.com)(PORT = 1525))(ADDRESS = (PROTOCOL = TCP)(HOST = gvu0600.austin.hp.com)(PORT = 1525)) (LOAD_BALANCE = yes))(CONNECT_DATA =(SERVER = DEDICATED)(SERVICE_NAME = XMLDMSI))(FAILOVER_MODE = (TYPE = SELECT)(METHOD = BASIC)(RETRIES = 3)(DELAY = 15)))
+DB_URL=jdbc:oracle:thin:@gcu12341.austin.hp.com:1526/XMLDMSI
+DB_USERNAME=xdmsdoc
+DB_PASSWORD=Itg1-Concentra
+## PROD ENV
+##DB_URL=jdbc:oracle:thin:@(DESCRIPTION =(ADDRESS_LIST =(ADDRESS = (PROTOCOL = TCP)(HOST = gvu0611.austin.hp.com)(PORT = 1525))(ADDRESS = (PROTOCOL = TCP)(HOST = gvu0612.austin.hp.com)(PORT = 1525)) (LOAD_BALANCE = yes))(CONNECT_DATA =(SERVER = DEDICATED)(SERVICE_NAME = XMLDMSP))(FAILOVER_MODE = (TYPE = SELECT)(METHOD = BASIC)(RETRIES = 3)(DELAY = 15)))
+##DB_USERNAME=xdmsdoc
+##DB_PASSWORD=Concentra-prod1
+
+
+WORKER_THREAD_COUNT=6
+mongo.configuration=config/mongo.properties
+
+BATCH_MODE=false
+## Sleep Time for loader
+##SLEEP_TIME=3600000
+
+##SMO:User Story #7850 
+COMPANY_INFO=hpi
+

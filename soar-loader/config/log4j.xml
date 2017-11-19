@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<!-- Log4j Configuration --> 
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="true"> 
+
+<!-- right now all items are logged to spacedog.log and items of the various logging levels
+     are also logged to their respective files.  The priority value in the <logger> section 
+     determines the current logging level -->
+
+  <!-- =================Appenders =================--> 
+
+    <!-- Root Logger Log Appender -->
+  <appender name="rootLogger" class="org.apache.log4j.DailyRollingFileAppender"> 
+    <param name="File" value="${log4j.log.location}${log4j.loader_type}Root.log"/>
+    <param name="DatePattern" value="'.'yyyy-ww'.log'"/>
+    <layout class="org.apache.log4j.PatternLayout"> 
+      <param name="ConversionPattern" value="%d{yyyy-MM-dd'T'HH:mm:ssz} [%t] %-5p %m%n"/> 
+    </layout> 
+  </appender> 
+    <!-- VirusScanner Logger Log Appender -->
+  <appender name="VirusScannerLogger" class="org.apache.log4j.DailyRollingFileAppender"> 
+    <param name="File" value="${log4j.log.location}${log4j.loader_type}VirusScan.log"/>
+    <param name="DatePattern" value="'.'yyyy-ww'.log'"/>
+    <layout class="org.apache.log4j.PatternLayout"> 
+      <param name="ConversionPattern" value="%d{yyyy-MM-dd'T'HH:mm:ssz} %m%n"/> 
+    </layout> 
+  </appender> 
+    <!-- Extractor Logger Log Appender -->
+  <appender name="ExtractorLogger" class="org.apache.log4j.DailyRollingFileAppender"> 
+    <param name="File" value="${log4j.log.location}${log4j.loader_type}Extractor.log"/>
+    <param name="DatePattern" value="'.'yyyy-ww'.log'"/>
+    <layout class="org.apache.log4j.PatternLayout"> 
+      <param name="ConversionPattern" value="%d{yyyy-MM-dd'T'HH:mm:ssz} [%t] %-5p %m%n"/> 
+    </layout> 
+  </appender> 
+  <!-- Soar Loader Log Appender -->
+  <appender name="SoarLoader" class="org.apache.log4j.DailyRollingFileAppender"> 
+    <param name="File" value="${log4j.log.location}${log4j.loader_type}Loader.log"/> 
+    <param name="DatePattern" value="'.'yyyy-ww'.log'"/>
+    <layout class="org.apache.log4j.PatternLayout"> 
+      <param name="ConversionPattern" value="%d{yyyy-MM-dd'T'HH:mm:ssz} %-5p %m%n"/> 
+    </layout> 
+  </appender> 
+  <!-- Configure Loggers -->
+  <logger name="com.hp.soar.priorityLoader.utils.VirusScanner">
+    <level value="INFO"/>
+    <param name="additivity" value="false"/>
+    <appender-ref ref="VirusScannerLogger"/>
+  </logger>
+  
+  <logger name="com.hp.soar.priorityLoader.utils.LoaderLog">
+    <level value="${log4j.extractorLevel}"/>
+    <param name="additivity" value="false"/>
+    <appender-ref ref="ExtractorLogger"/>
+  </logger>
+  
+  <logger name="com.hp.loader.utils.Log">
+    <level value="${log4j.loaderLevel}"/>
+    <param name="additivity" value="false"/>
+    <appender-ref ref="SoarLoader"/>
+  </logger>
+
+  <root>
+    <level value="INFO"/>
+    <param name="additivity" value="false"/>
+    <appender-ref ref="rootLogger"/>
+  </root>
+
+</log4j:configuration> 

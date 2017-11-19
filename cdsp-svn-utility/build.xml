@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+
+<project name="svn-utility" basedir="." default="checkoutTrunk">
+
+	<!--  all properties are in build.properties -->
+	<property file="build.properties" />
+
+
+
+	<!-- path to the svnant libraries -->
+	<path id="svnant.classpath">
+		<fileset dir="lib">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<!-- load the svn task -->
+	<typedef resource="org/tigris/subversion/svnant/svnantlib.xml" classpathref="svnant.classpath" />
+	<!-- load the svn task -->
+	<typedef resource="net/sf/antcontrib/antcontrib.properties" classpathref="svnant.classpath"/>
+
+	<svnSetting svnkit="false" javahl="false" username="${svn.user}" password="${svn.passwd}" id="svn.settings" />
+
+	<target name="cleanVersion">
+		<delete dir="${svn.checkout.dir}/${svn.project.name}/${svn.project.version}" />
+	</target>
+
+	<target name="cleanTrunk">
+		<delete dir="${svn.checkout.dir}/${svn.project.name}/trunk" />
+	</target>
+	<target name="checkoutTrunk">
+		<svn refid="svn.settings">
+			<checkout url="${svn.trunk.url}" revision="HEAD" destPath="${svn.checkout.dir}/${svn.project.name}/trunk" />
+		</svn>
+	</target>
+
+	<target name="checkoutVersion">
+		<echo message="${svn.repository.url}/${svn.project.name}/branches/${svn.project.version}"/>
+		<echo message="${svn.project.name}"/>
+		<echo message="${svn.project.version}"/>
+		<svn refid="svn.settings">
+			<checkout url="${svn.repository.url}/${svn.project.name}/branches/${svn.project.version}" revision="HEAD" destPath="${svn.checkout.dir}/${svn.project.name}/" />
+		</svn>
+	</target>
+
+	<!-- ================================= 
+          target: checkoutAllProjects              
+         ================================= -->
+	<target name="checkoutAllProjects" description="check out all projects one after the other">
+		<for list="${project.count}" param="index">
+			<sequential>
+				<echo message="checking out project - ${project.name.@{index}} , version - ${project.version.@{index}}"/>
+				<antcall target="checkoutVersion">
+					<param name="svn.project.name" value="${project.name.@{index}}"/>
+					<param name="svn.project.version" value="${project.version.@{index}}"/>
+				</antcall>
+				<echo message="${project.name.@{index}} (version ${project.version.@{index}})  checkout complete"/>
+			</sequential>		
+		</for>
+    </target>
+</project>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<!-- Log4j Configuration -->
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="true">
+
+<!-- right now all items are logged to spacedog.log and items of the various logging levels
+     are also logged to their respective files.  The priority value in the <logger> section
+     determines the current logging level -->
+
+  <!-- =================Appenders =================-->
+
+    <!-- Root Logger Log Appender -->
+  <appender name="rootLogger" class="org.apache.log4j.DailyRollingFileAppender">
+    <param name="File" value="${log4j.log.location}/${log4j.wds_type}WDSRoot.log"/>
+    <param name="DatePattern" value="'.'yyyy-MM-dd'.log'"/>
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%d{yyyy-MM-dd'T'HH:mm:ssz} [%t] %-5p %m%n"/>
+    </layout>
+  </appender>
+    <!-- Extractor Logger Log Appender -->
+  <appender name="ThreadLogger" class="org.apache.log4j.DailyRollingFileAppender">
+    <param name="File" value="${log4j.log.location}/${log4j.wds_type}Threads.log"/>
+    <param name="DatePattern" value="'.'yyyy-MM-dd'.log'"/>
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%d{yyyy-MM-dd'T'HH:mm:ssz} [%t] %-5p %m%n"/>
+    </layout>
+  </appender>
+  <!-- Priority Loader Log Appender -->
+  <appender name="PriorityLogger" class="org.apache.log4j.DailyRollingFileAppender">
+    <param name="File" value="${log4j.log.location}/${log4j.wds_type}Loader.log"/>
+    <param name="DatePattern" value="'.'yyyy-MM-dd'.log'"/>
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%d{yyyy-MM-dd'T'HH:mm:ssz} %-5p %m%n"/>
+    </layout>
+  </appender>
+  <appender name="ErrorLogs" class="org.apache.log4j.DailyRollingFileAppender"> 
+    <param name="File" value="${log4j.log.location}/Error.log"/> 
+    <param name="DatePattern" value="'.'yyyy-MM-dd'.log'"/>
+    <layout class="org.apache.log4j.PatternLayout"> 
+      <param name="ConversionPattern" value="%d{yyyy-MM-dd'T'HH:mm:ssz} %-5p %m%n"/> 
+    </layout> 
+   </appender> 
+
+  <!-- Configure Loggers -->
+  <logger name="com.hp.loader.utils.Log">
+   <level value="${log4j.loaderLevel}"/>
+   	<param name="additivity" value="false"/>
+    <appender-ref ref="PriorityLogger"/>
+  </logger>
+
+  <logger name="com.hp.loader.utils.ThreadLog">
+    <level value="${log4j.threadLogLevel}"/>
+    <param name="additivity" value="false"/>
+    <appender-ref ref="ThreadLogger"/>
+  </logger>
+
+<logger name="com.hp.loader.utils.ErrorLog">
+    <level value="Error"/>
+    <param name="additivity" value="false"/>
+    <appender-ref ref="ErrorLogs"/>
+ </logger>
+
+  <root>
+    <level value="INFO"/>
+    <param name="additivity" value="false"/>
+    <appender-ref ref="rootLogger"/>
+  </root>
+
+</log4j:configuration>

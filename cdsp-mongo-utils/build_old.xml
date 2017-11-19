@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+====================================================================== 
+	Sep 13, 2012 2:22:33 PM castor description kashyaks 
+======================================================================
+-->
+<project name="cdsp-mongo-utils" default="all" basedir=".">
+	<property environment="env" />
+	<property name="dist.dir" value="${env.DIST_DIR}" />
+	<property name="lib.dir" value="${basedir}/lib" />
+	<!--<property name="dist.dir" value="${basedir}/dist" />-->
+	<property name="src.dir" value="${basedir}/src" />
+	<property name="conf.dir" value="${basedir}/config" />
+
+	<property name="build.dir" value="${basedir}/build" />
+	<property name="build.classes.dir" value="${build.dir}/classes" />
+	<property name="logs.dir" value="${basedir}/logs" />
+
+	<path id="lib.class.path">
+		<fileset dir="${lib.dir}">
+			<include name="log4j-1.2.14.jar" />
+			<include name="mongo-java-driver-2.11.2.jar" />
+		</fileset>
+	</path>
+
+	<!-- ================================= 
+	          target: all              
+	         ================================= -->
+	<target name="all" depends="clean, init, compile, package" description="default target to do a clean build"/>
+
+	<!-- ================================= 
+	          target: clean              
+	         ================================= -->
+	<target name="clean" description="deletes the build and dist directories">
+		<delete dir="${dist.dir}" />
+		<delete dir="${build.dir}" />
+	</target>
+
+	<!-- ================================= 
+	          target: init              
+	         ================================= -->
+	<target name="init" description="creates dist and build dir">
+		<mkdir dir="${build.classes.dir}" />
+		<mkdir dir="${dist.dir}" />
+	</target>
+	<!-- ================================= target: compile ================================= -->
+
+	<target name="compile" description="description">
+		<mkdir dir="${basedir}/build/classes"/>
+		<javac srcdir="${src.dir}" destdir="${build.classes.dir}">
+			<classpath refid="lib.class.path" />
+		</javac>
+	</target>
+
+	<!-- ================================= 
+          target: package              
+         ================================= -->
+	<target name="package" description="creates jar file">
+		<jar destfile="${dist.dir}/cdsp-dao.jar">
+			<fileset dir="${build.classes.dir}">
+				<include name="com/hp/cdsplus/dao/**/*.*" />
+			</fileset>
+		</jar>
+		<jar destfile="${dist.dir}/cdsp-mongo-api.jar">
+			<fileset dir="${build.classes.dir}">
+				<include name="com/hp/cdsplus/mongo/**/*.*" />
+			</fileset>
+		</jar>
+	</target>
+
+</project>

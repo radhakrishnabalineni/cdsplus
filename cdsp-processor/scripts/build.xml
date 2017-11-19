@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="cdsp-processor" default="start" basedir=".">
+
+	<property name="lib.dir" value="${basedir}/lib" />
+
+	<property name="src.dir" value="${basedir}/src" />
+	<property name="conf.dir" value="${basedir}/config" />
+
+	<property name="build.dir" value="${basedir}/build" />
+	<property name="build.class.dir" value="${build.dir}/classes" />
+
+	<property name="scripts.dir" value="${basedir}/scripts" />
+
+	<property name="logs.dir" value="${basedir}/logs" />
+	<property name="dist.dir" value="${basedir}/dist" />
+
+	<path id="java.class.path">
+		<fileset dir="${lib.dir}">
+			<include name="*.*" />
+		</fileset>
+	</path>
+	<target name="start" description="used to start the processor">
+	<java classname="com.hp.cdsplus.processor.Processor"
+			maxmemory="2048m" fork="true" output="${logs.dir}/ProcessorStdout.log"
+			classpathref="java.class.path">
+			<jvmarg line="-XX:MaxPermSize=256m -XX:+UseParallelGC -XX:ParallelGCThreads=4 -XX:SurvivorRatio=8" />
+
+			<sysproperty key="log.file.location" value="${logs.dir}" />
+			<sysproperty key="root.logger.level" value="DEBUG" />
+			<sysproperty key="thread.logger.level" value="DEBUG" />
+			<sysproperty key="extractor.logger.level" value="DEBUG" />
+
+			<sysproperty key="log4j.configurationFile" value="${conf.dir}/log4j.xml" />
+			<!-- CONFIG_LOCATION -->
+			<!-- /cdsp-processor/config/processor.properties -->
+			<sysproperty key="CONFIG_LOCATION" value="${conf.dir}/processor.properties" />
+			<sysproperty key="instance_name" value="DefaultProcessor" />
+		</java>
+	</target>
+
+	<target name="stop">
+		<touch file="processor.stop" />
+	</target>
+	<target name="clearLogs">
+		<delete>
+			<fileset dir="${logs.dir}">
+				<include name="*.log" />
+			</fileset>
+		</delete>
+
+	</target>
+</project>

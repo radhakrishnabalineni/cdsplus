@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/cdsp-priority-wds/lib/cdsp-commons-utils-13.4.jar"/>
+	<classpathentry kind="src" path="/cdsp-priority-loader-spacedog"/>
+	<classpathentry kind="src" path="/wds-destination"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
